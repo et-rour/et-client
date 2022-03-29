@@ -1,0 +1,193 @@
+{
+  "validations": {
+    "messages": {
+      "required": "Este campo no es válido",
+      "email": "Este campo no es una dirección de correo electrónico válida"
+    }
+  },
+  "general": {},
+  "navbar": {
+    "owner": "Dueños",
+    "tenants": "Arrendatarios",
+    "howWorks": "¿Comó funciona?",
+    "us": "Nosotros",
+    "admin": "Admin",
+    "login": "Iniciar"
+  },
+  "login": {
+    "welcome": "Bienvenido a Espacio Temporal",
+    "login": "INICIAR SESIÓN",
+    "register": "REGISTRATE",
+    "email": "Email",
+    "password": "Contraseña",
+    "firstName": "Primer nombre",
+    "lastName": "Apellido",
+    "birth": "Fecha de nacimiento",
+    "day": "Dia",
+    "month": "Mes",
+    "year": "Años",
+    "succesModal": {
+      "title": "!Todo listo!",
+      "subtitle": "Bienvenido a Espacio Temporal"
+    }
+  },
+  "landing": {
+    "hero": {
+      "title": "BUSCAMOS PROPIEDADES EN DESUSO Y LAS TRANSFORMAMOS EN ESPACIOS DE TRABAJO",
+      "searchProperty": "BUSCO UNA PROPIEDAD",
+      "openProperty": "ABRIENDO MI PROPIEDAD"
+    },
+    "video": {
+      "title": "Administramos todo tipo de inmuebles en desuso",
+      "description": "¿No has podido arrendar tu propiedad? Nosotros nos encargamos de administrar tu propiedad con contratos flexibles y de corta.¿Buscas un espacio flexible de trabajo? Tenemos espacios en excelentes ubicaciones para emprendedores y artistas.",
+      "ver": "VER VIDEO"
+    },
+    "hero_2": {
+      "title": "ENCUENTRA UN ESPACIO FLEXIBLE PARA TU NEGOCIO",
+      "ver": "VER ESPACIOS DISPONIBLES",
+      "commune": "Comuna",
+      "private": "Espacio privado",
+      "complete": "Propiedad completa"
+    },
+    "spaces": {
+      "title": "Espacios disponibles cerca de ti",
+      "notFound": "No hay espacios disponibles",
+      "seeMore": "VER MÁS ESPACIOS"
+    },
+    "hero_3": {
+      "title_1": "PUBLICA TU PROPIEDAD",
+      "title_2": "CON NOSOTROS",
+      "load": "CARGAR PROPIEDAD"
+    },
+    "details": {
+      "title": "Grandes organizaciones confían en nosotros",
+      "description": "Administramos todo tipo de inmuebles durante el periodo anterior a la demolicion, con contratos flexibles y de corta duracion. De esta forma generamos valor a partir de un recurso congelado."
+    },
+    "hero_4": {
+      "title_1": "TRABAJA CON",
+      "title_2": "NOSOTROS",
+      "see": "VER OFERTAS DE TRABAJO"
+    },
+    "propertyCard": {
+      "from": "Desde",
+      "montly": "mensual",
+      "noValue": "No cuenta con valor asignado"
+    }
+  },
+  "owners": {
+    "title": "Administramos",
+    "subtitle": "¿No has podido arrendar tu propiedad? Nosotros nos encargamos de administrar tu propiedad con contratos flexibles y de corta duración. De esta forma generamos VALOR a partir de un recurso congelado.",
+    "description_1": "Cuidar y evitar malos usos de la propiedad: acceso de okupas o de delincuentes para robar a vecinos (foco delictual), etc.",
+    "description_2": "Generar un ingreso monetario mensual extra para el dueño de la propiedad a partir de un recurso congelado.",
+    "description_3": "Entregar una oportunidad económica de espacios para emprendedoresy centros de desarrollo de arte en diversos puntos de la capital.",
+    "load": "CARGAR PROPIEDAD"
+  },
+  "createForm": {
+    "title": "Carga tu propiedad",
+    "nombre": "Nombre",
+    "email": "Email",
+    "telefono": "Telefono",
+    "dirección": "Dirección",
+    "descripción": "Descripción",
+    "zona": "Zona",
+    "habitaciones": "Numero de habitaciones",
+    "banios": "Numero de baños",
+    "pintura": "Estado de pintura",
+    "suelo": "Estado de suelo",
+    "image": "Selecciona una imagen",
+    "options": {
+      "reallyBad": "Muy Malo",
+      "bad": "Malo",
+      "regular": "Regular",
+      "good": "Bueno",
+      "reallyGood": "Excelente"
+    },
+    "arriendo": "Valor de arriendo",
+    "time": "Tiempo disponible",
+    "submit": "CARGAR PROPIEDAD"
+  },
+  "createResult": {
+    "title": "El valor de arriendo aproximado por tu propiedad es",
+    "periodicity": "mensuales",
+    "vistit": "AGENDA UNA VISITA TECNICA",
+    "description_1": "La visita tecnica consiste en la verificacion del domicilio ",
+    "description_2": "y los datos entregados, ademas de una revision de las ",
+    "description_3": "condiciones de la propiedad y la factibilidad de uso"
+  },
+  "schedule": {
+    "title": "Selecciona la fecha para tu visita",
+    "descriprion": "Agendar visita para el día",
+    "schedule": "Horario",
+    "vistit": "AGENDA UNA VISITA TECNICA"
+  },
+  "scheduleResult": {
+    "title": "¡Todo listo!",
+    "descriprion": "Recibirás la visita de nuestro inspector el día",
+    "vistit": "El inspector tomará fotos para posteriormente realizar la oferta de arriendo. Si la aceptas te contactaremos para firmar contrato y darte acceso al panel de control de tu propiedad."
+  },
+  "tenants": {
+    "index": {
+      "hero": {
+        "title": "ESPACIOS PARA EMPRENDEDORES EN SANTIAGO",
+        "find": "ENCUENTRA UN ESPACIO"
+      },
+      "details": {
+        "title": "Espacios de uso flexible con contratos simples y a plazos cortos",
+        "description": "¿Tienes una PYME y necesitas un espacio flexible para trabajar? ¿Eres artista y necesitas un taller?",
+        "monthly": "Contratos mensuales",
+        "flexible": "Uso flexible",
+        "community": "Trabaja en comunidad"
+      },
+      "avalibleSpaces": {
+        "title": "Espacios disponibles cerca de ti"
+      }
+    },
+    "details": {
+      "3d": "vista en 3d",
+      "contacts": "Ver contactos",
+      "description": "Esta propiedad está ubicada en el centro de Providencia. Los plazos mínimos de arriendo son de 3 meses y no se permite el uso de maquinaria ni labores ruidosas.",
+      "subtitle": "Espacios disponibles",
+      "vistit": "AGENDA UNA VISITA TECNICA"
+    },
+    "schedule": {
+      "title": "Selecciona la fecha para tu visita",
+      "descriprion": "Agendar visita para el día",
+      "schedule": "Horario",
+      "vistit": "AGENDA UNA VISITA TECNICA"
+    }
+  },
+
+  "footer": {
+    "nav": {
+      "owner": "Dueños",
+      "tenants": "Arrendatarios",
+      "howWorks": "¿Comó funciona?",
+      "us": "Nosotros",
+      "terms": "TÉRMINOS Y CONDICIONES"
+    },
+    "form": {
+      "Contact": "Contacto",
+      "name": "Nombre",
+      "email": "Email",
+      "message": "Mensaje",
+      "send": "Enviar"
+    }
+  },
+  "admin": {
+    "locations": {
+      "title": "Todas las localizaciones",
+      "notFound": "Aún no hay ubicaciones"
+    },
+    "image3d": {
+      "title": "Añade imagen 3d a ",
+      "name": "Nombre",
+      "image": "Imagen",
+      "longitude": "Longitud",
+      "latitude": "Latitud",
+      "options": "Optiones",
+      "addImage": "Añadir imagen",
+      "seeDetails": "Ver detalles",
+      "validImage": "Selecciona una imagen"
+    }
+  }
+}

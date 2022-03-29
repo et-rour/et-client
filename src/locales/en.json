@@ -1,0 +1,193 @@
+{
+  "validations": {
+    "messages": {
+      "required": "This fiel is not valid",
+      "email": "This field is not a valid e-mail adress"
+    }
+  },
+  "general": {},
+  "navbar": {
+    "owner": "Owners",
+    "tenants": "tenants",
+    "howWorks": "How does it work?",
+    "us": "About us",
+    "admin": "Admin",
+    "login": "Log in"
+  },
+  "login": {
+    "welcome": "Welcome to Temporary Space",
+    "login": "LOG IN",
+    "register": "SIGN UP",
+    "email": "E-mail",
+    "password": "Password",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "birth": "Date of birth",
+    "day": "Day",
+    "month": "Month",
+    "year": "Years",
+    "succesModal": {
+      "title": "!All ready!",
+      "subtitle": "Welcome to Temporary Space"
+    }
+  },
+  "landing": {
+    "hero": {
+      "title": "WE LOOK FOR UNUSED PROPERTIES AND TRANSFORM THEM INTO WORK SPACES",
+      "searchProperty": "I'M LOOKING FOR A PROPERTY",
+      "openProperty": "OPENING MY PROPERTY"
+    },
+    "video": {
+      "title": "We manage all types of unused properties",
+      "description": "Have you not been able to rent your property? We take care of managing your property with flexible and short-term contracts. Are you looking for a flexible work space? We have spaces in excellent locations for entrepreneurs and artists.",
+      "ver": "WATCH VIDEO"
+    },
+    "hero_2": {
+      "title": "FIND A FLEXIBLE SPACE FOR YOUR BUSINESS",
+      "ver": "SEE AVAILABLE SPACES",
+      "commune": "Commune",
+      "private": "private space",
+      "complete": "full property"
+    },
+    "spaces": {
+      "title": "Available spaces near you",
+      "notFound": "No spaces available",
+      "seeMore": "SEE MORE SPACES"
+    },
+    "hero_3": {
+      "title_1": "PUBLISH YOUR PROPERTY",
+      "title_2": "WITH US",
+      "load": "LOAD PROPERTY"
+    },
+    "details": {
+      "title": "Large organizations trust us",
+      "description": "We manage all types of real estate during the period prior to demolition, with flexible and short-term contracts. In this way we generate valor from a frozen resource."
+    },
+    "hero_4": {
+      "title_1": "WORKS WITH",
+      "title_2": "US",
+      "see": "SEE JOB OFFERS"
+    },
+    "propertyCard": {
+      "from": "From",
+      "montly": "montly",
+      "noValue": "Not value asigned"
+    }
+  },
+  "owners": {
+    "title": "We manage",
+    "subtitle": "Have you not been able to rent your property? We take care of managing your property with flexible and short-term contracts. In this way we generate VALUE from a frozen resource.",
+    "description_1": "Take care of and avoid misuse of the property: access by squatters or criminals to steal from neighbors (focus of crime), etc.",
+    "description_2": "Generate an extra monthly monetary income for the property owner from a frozen resource.",
+    "description_3": "Provide an economic opportunity for spaces for entrepreneurs and art development centers in various parts of the capital.",
+    "load": "LOAD PROPERTY"
+  },
+  "createForm": {
+    "title": "upload your property",
+    "nombre": "Name",
+    "email": "E-mail",
+    "telefono": "Phone",
+    "dirección": "Direction",
+    "descripción": "Description",
+    "zona": "Zone",
+    "habitaciones": "Number of rooms",
+    "banios": "Number of bathrooms",
+    "pintura": "paint condition",
+    "suelo": "ground state",
+    "image": "Select a image",
+    "options": {
+      "reallyBad": "Really Malo",
+      "bad": "Bad",
+      "regular": "Regular",
+      "good": "Okay",
+      "reallyGood": "Excelente"
+    },
+    "arriendo": "rental value",
+    "time": "Available time",
+    "submit": "LOAD PROPERTY"
+  },
+  "createResult": {
+    "title": "The approximate rental value for your property is",
+    "periodicity": "monthly",
+    "vistit": "SCHEDULE A TECHNICAL VISIT",
+    "description_1": "The technical visit consists of the verification of the address ",
+    "description_2": "and the data delivered, in addition to a review of the ",
+    "description_3": "property conditions and feasibility of use"
+  },
+  "schedule": {
+    "title": "Select the date for your visit",
+    "descriprion": "Schedule visit for the day",
+    "schedule": "Schedule",
+    "vistit": "SCHEDULE A TECHNICAL VISIT"
+  },
+  "scheduleResult": {
+    "title": "All ready!",
+    "descriprion": "You will receive a visit from our inspector on the day",
+    "vistit": "The inspector will take photos to later make the lease offer. If you accept it, we will contact you to sign a contract and give you access to your property's control panel."
+  },
+  "tenants": {
+    "index": {
+      "hero": {
+        "title": "SPACES FOR ENTREPRENEURS IN SANTIAGO",
+        "find": "FIND A SPACE"
+      },
+      "details": {
+        "title": "Flexible use spaces with simple and short-term contracts",
+        "description": "Do you have an SME and need a flexible space to work? Are you an artist and need a workshop?",
+        "monthly": "monthly contracts",
+        "flexible": "flex use",
+        "community": "Work in community"
+      },
+      "avalibleSpaces": {
+        "title": "Available spaces near you"
+      }
+    },
+    "details": {
+      "3d": "3d view",
+      "contacts": "See contacts",
+      "description": "This property is located in downtown Providencia. The minimum rental terms are 3 months and the use of machinery or noisy work is not allowed.",
+      "subtitle": "Spaces available",
+      "vistit": "SCHEDULE A TECHNICAL VISIT"
+    },
+    "schedule": {
+      "title": "Select the date for your visit",
+      "descriprion": "Schedule visit for the day",
+      "schedule": "Schedule",
+      "vistit": "SCHEDULE A TECHNICAL VISIT"
+    }
+  },
+
+  "footer": {
+    "nav": {
+      "owner": "Owners",
+      "tenants": "tenants",
+      "howWorks": "How does it work?",
+      "us": "About us",
+      "terms": "TERMS AND CONDITIONS"
+    },
+    "form": {
+      "Contact": "Contact",
+      "name": "Name",
+      "email": "E-mail",
+      "message": "Message",
+      "send": "Send"
+    }
+  },
+  "admin": {
+    "locations": {
+      "title": "All locations",
+      "notFound": "No locations yet"
+    },
+    "image3d": {
+      "title": "Add 3d image to",
+      "name": "Name",
+      "image": "Image",
+      "longitude": "Length",
+      "latitude": "Latitude",
+      "options": "Options",
+      "addImage": "Add image",
+      "seeDetails": "See details",
+      "validImage": "Select an image"
+    }
+  }
+}

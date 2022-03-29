@@ -1,0 +1,95 @@
+import EspacioAPI from "../../../Api/index";
+import {
+  auth,
+  signInWithCustomToken,
+  onAuthStateChanged,
+  signOut,
+} from "../../../Firebase/index";
+
+export const login = async ({ commit }, data) => {
+  EspacioAPI.post("/auth/login", data).then((response) => {
+    console.log({ token: response.data.token });
+    signInWithCustomToken(auth, response.data.storageTokenAuthFirebase)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        console.log({ user });
+        commit("login", response.data);
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log({ errorCode, errorMessage });
+        // ...
+      });
+  });
+};
+
+export const loadSession = async ({ commit }) => {
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      // User is signed in, see docs for a list of available properties
+      // https://firebase.google.com/docs/reference/js/firebase.User
+      const uid = user.uid;
+      console.log({ uid });
+      commit("changeAccessToken", user.accessToken);
+      // ...
+    }
+  });
+};
+
+// export const refresh = async ({ commit }) => {
+//   console.log(commit);
+//   auth.currentUser
+//     .getIdToken(/* forceRefresh */ true)
+//     .then(function (idToken) {
+//       // Send token to your backend via HTTPS
+//       // ...
+//       console.log(idToken);
+//     })
+//     .catch(function (error) {
+//       // Handle error
+//       console.log(error);
+//     });
+// };
+
+export const loginInfirebaseStorage = async (_, customTokenAuthFirebase) => {
+  // console.log(commit);
+  let userAuthFirebase;
+  try {
+    userAuthFirebase = await signInWithCustomToken(
+      auth,
+      customTokenAuthFirebase
+    );
+
+    console.log(userAuthFirebase);
+    return true;
+  } catch (error) {
+    console.log(`You are not allowed to do that error:${error}`);
+    throw new Error(`${error}`);
+  }
+};
+
+export const register = ({ commit }, credentials) => {
+  EspacioAPI.post("/auth/register", credentials).then((response) => {
+    if (response.data && response.data.token)
+      window.localStorage.setItem(
+        process.env.VUE_APP_API_BASE,
+        response.data.token
+      );
+    commit("register", response.data);
+  });
+};
+
+export const logout = async ({ commit }) => {
+  signOut(auth)
+    .then(() => {
+      // Sign-out successful.
+      commit("logout");
+    })
+    .catch((error) => {
+      // An error happened.
+      console.log(error);
+    });
+};
