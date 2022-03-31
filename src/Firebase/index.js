@@ -15,12 +15,12 @@ import {
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyDaroAJnDRLEKc_hbI_ZJaWnhCIM3QqVvM",
-  authDomain: "espacio-temporal-9a372.firebaseapp.com",
-  projectId: "espacio-temporal-9a372",
-  storageBucket: "espacio-temporal-9a372.appspot.com",
-  messagingSenderId: "653454338816",
-  appId: "1:653454338816:web:b6a1645be58774251c21e5",
+  apiKey: "AIzaSyCryHLTZQo-8ZruB_Fb9SCkAZR351rPdPA",
+  authDomain: "espaciotemporal-153a1.firebaseapp.com",
+  projectId: "espaciotemporal-153a1",
+  storageBucket: "espaciotemporal-153a1.appspot.com",
+  messagingSenderId: "151262089514",
+  appId: "1:151262089514:web:ac01268130fc10901a4e53",
   measurementId: "G-6V07RG64PP",
 };
 
