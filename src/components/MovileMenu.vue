@@ -1,31 +1,40 @@
 <template>
   <div
-    class="fixed bottom-0 left-0 w-screen h-24 grid grid-cols-3 md:hidden bg-white"
+    class="fixed bottom-0 left-0 w-screen h-24 grid grid-cols-3 md:hidden bg-white z-40"
   >
-    <div class="flex justify-center flex-col items-center">
+    <router-link
+      :to="{ name: 'owner' }"
+      class="flex justify-center flex-col items-center"
+    >
       <img
         src="@/assets/icons/keys.png"
         alt="Dueños icon"
         class="w-10 h-10 object-contain"
       />
-      <router-link to="#">Dueños</router-link>
-    </div>
-    <div class="flex justify-center flex-col items-center">
+      <p>Dueños</p>
+    </router-link>
+    <router-link
+      :to="{ name: 'tenants' }"
+      class="flex justify-center flex-col items-center"
+    >
       <img
         src="@/assets/icons/user.png"
         alt="Arrendatarios icon"
         class="w-10 h-10 object-contain"
       />
-      <router-link :to="{ name: 'tenants' }">Arrendatarios</router-link>
-    </div>
-    <div class="flex justify-center flex-col items-center">
+      <p>Arrendatarios</p>
+    </router-link>
+    <router-link
+      :to="{ name: 'home' }"
+      class="flex justify-center flex-col items-center"
+    >
       <img
         src="@/assets/icons/aboutUs.png"
         alt="Nosotros icon"
         class="w-10 h-10 object-contain"
       />
-      <router-link to="#">Nosotros</router-link>
-    </div>
+      <p>Nosotros</p>
+    </router-link>
   </div>
 </template>
 

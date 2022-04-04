@@ -6,7 +6,11 @@ import store from "./store";
 import "./assets/tailwind.css";
 import i18n from "./i18n";
 import "./veeValidateRules";
+import VCalendar from "v-calendar";
 
+Vue.use(VCalendar, {
+  componentPrefix: "vc", // Use <vc-calendar /> instead of <v-calendar />
+});
 Vue.config.productionTip = false;
 // Fontawesome
 import FontAwesomeIcon from "./fontAwesomeIcons";

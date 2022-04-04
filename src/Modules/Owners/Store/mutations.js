@@ -14,6 +14,11 @@ export const imageUploaded = (state, url) => {
 export const imageUploadedState = (state, progress) => {
   state.imageUploadedState = progress;
 };
+
+export const cleanImageInfo = (state) => {
+  state.imageUploaded = null;
+  state.imageUploadedState = null;
+};
 export const createNewProperty = (state, { location, calculatorData }) => {
   state.creatingProperty = {
     location,
@@ -29,5 +34,18 @@ export const createNewImage = (state, image) => {
     property.images3D.unshift(image);
     const newProperty = property;
     return newProperty;
+  });
+};
+
+export const updateLocationLease = (state, newLocationInfo) => {
+  state.properties = state.properties.map((property) => {
+    if (newLocationInfo.id !== property.id) {
+      return property;
+    }
+    return {
+      ...property,
+      startLease: newLocationInfo.startLease,
+      endLease: newLocationInfo.endLease,
+    };
   });
 };

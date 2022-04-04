@@ -58,6 +58,12 @@
           $t("tenants.details.vistit")
         }}</router-link>
       </button>
+      <button
+        class="w-full bg-green-500 mt-2 text-white font-bold my-btn"
+        @click="goToCheckoutSession"
+      >
+        <a>{{ $t("tenants.details.pay") }}</a>
+      </button>
       <!-- <p>{{ validMarker }}</p> -->
     </div>
 
@@ -77,13 +83,14 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 import { Viewer } from "photo-sphere-viewer";
 import { MarkersPlugin } from "photo-sphere-viewer/dist/plugins/markers";
 import "photo-sphere-viewer/dist/photo-sphere-viewer.css";
 import "photo-sphere-viewer/dist/plugins/markers.css";
 import RoomCard from "../Components/RoomCard.vue";
 import ModelGlobal from "../../../components/ModelGlobal.vue";
+import EspacioTemporalAPI from "@/Api/index.js";
 
 export default {
   components: { ModelGlobal, RoomCard },
@@ -107,9 +114,27 @@ export default {
     };
   },
   methods: {
+    ...mapMutations("authStore", ["changeShowLoginModal"]),
     goToSchedule(e) {
       e.preventDefault();
       this.$router.push({ name: "tenants-schedule" });
+    },
+    async goToCheckoutSession() {
+      if (!this.isAuth) {
+        this.changeShowLoginModal(true);
+        return;
+      }
+
+      const res = await EspacioTemporalAPI.post(
+        "/locations/create-checkout-session",
+        {
+          locationId: this.idProperty,
+          userId: this.user.user.id,
+        }
+      );
+      // console.log("%cTest.vue line:22 res", "color: #007acc;", res);
+      // window.location.href = res.url;
+      window.open(res.data.url, "_blank");
     },
     show3d() {
       let onlyMarkers = [];
@@ -187,6 +212,7 @@ export default {
   },
   computed: {
     ...mapGetters("propertiesStore", ["propertiesById"]),
+    ...mapGetters("authStore", ["user", "isAuth"]),
     zoom() {
       return this.property.coords.lat !== "" && this.property.coords.long !== ""
         ? 15

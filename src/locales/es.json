@@ -2,15 +2,19 @@
   "validations": {
     "messages": {
       "required": "Este campo no es válido",
-      "email": "Este campo no es una dirección de correo electrónico válida"
+      "email": "Este campo no es una dirección de correo electrónico válida",
+      "minValue": "Este campo debe ser mayor de {min}"
     }
   },
-  "general": {},
+  "general": {
+    "seeImage": "Ver imagen"
+  },
   "navbar": {
     "owner": "Dueños",
     "tenants": "Arrendatarios",
     "howWorks": "¿Comó funciona?",
     "us": "Nosotros",
+    "posts": "Publicaciónes",
     "admin": "Admin",
     "login": "Iniciar"
   },
@@ -18,6 +22,7 @@
     "welcome": "Bienvenido a Espacio Temporal",
     "login": "INICIAR SESIÓN",
     "register": "REGISTRATE",
+    "isOwner": "¿Eres propietario?",
     "email": "Email",
     "password": "Contraseña",
     "firstName": "Primer nombre",
@@ -104,6 +109,8 @@
     },
     "arriendo": "Valor de arriendo",
     "time": "Tiempo disponible",
+    "garage": "Numero de garajes",
+    "more": "o mas",
     "submit": "CARGAR PROPIEDAD"
   },
   "createResult": {
@@ -147,13 +154,24 @@
       "contacts": "Ver contactos",
       "description": "Esta propiedad está ubicada en el centro de Providencia. Los plazos mínimos de arriendo son de 3 meses y no se permite el uso de maquinaria ni labores ruidosas.",
       "subtitle": "Espacios disponibles",
-      "vistit": "AGENDA UNA VISITA TECNICA"
+      "vistit": "AGENDA UNA VISITA TECNICA",
+      "pay": "Pagar"
     },
     "schedule": {
       "title": "Selecciona la fecha para tu visita",
       "descriprion": "Agendar visita para el día",
       "schedule": "Horario",
       "vistit": "AGENDA UNA VISITA TECNICA"
+    },
+    "stripe": {
+      "success": {
+        "title": "Todo listo",
+        "subtitle": "¡¡¡Gracias por tu consideración!!!"
+      },
+      "error": {
+        "title": "¡¡Perdón, algo salió mal!!!",
+        "subtitle": "No pudimos completar la tarea."
+      }
     }
   },
 
@@ -176,7 +194,30 @@
   "admin": {
     "locations": {
       "title": "Todas las localizaciones",
-      "notFound": "Aún no hay ubicaciones"
+      "notFound": "Aún no hay ubicaciones",
+      "owner": "PROPIETARIO",
+      "properties": "Propiedades",
+      "payment": "Pagos",
+      "property": {
+        "leaseTerm": "plazo arriendo",
+        "address": "dirección",
+        "images3d": "Imagenes 3d",
+        "until": "hasta",
+        "download": "Descargar contrato",
+        "extend": "Extender contrato",
+        "finish": "Finalizar período de arrendamiento"
+      },
+      "payments": {
+        "title": "Actividad de pagos"
+      },
+      "calendar": {
+        "title": "Extiende el plazo de tu arriendo",
+        "descriptionPart1": "Tu propiedad",
+        "descriptionPart2": "está en arriendo hasta el día",
+        "select": "Selecciona una fecha para extender tu arriendo",
+        "extendInfo": "Tu arriendo se extenderá hasta el día",
+        "btn": "CONFIRMAR EXTENSIÓN DE PLAZO"
+      }
     },
     "image3d": {
       "title": "Añade imagen 3d a ",
@@ -188,6 +229,21 @@
       "addImage": "Añadir imagen",
       "seeDetails": "Ver detalles",
       "validImage": "Selecciona una imagen"
+    }
+  },
+  "posts": {
+    "title": "MERCADO EMPRENDEDORES",
+    "post": "PUBLICA TU NEGOCIO",
+    "createPost": {
+      "title": "Publica tu negocio",
+      "description": "Déjanos un review de tu experiencia junto a ESPACIO TEMPORAL y publica tu negocio en nuestro MERCADO DE EMPRENDEDORES",
+      "name": "Nombre del negocio",
+      "site": "Sitio web",
+      "social": "Instagram",
+      "review": "Reseña de tu experiencia",
+      "addImage": "AGREGAR IMÁGEN",
+      "post": "PUBLICAR",
+      "success": "Gracias por compartir"
     }
   }
 }

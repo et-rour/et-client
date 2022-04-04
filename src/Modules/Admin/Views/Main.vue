@@ -1,16 +1,15 @@
 <template>
-  <div class="my-container">
-    <!-- <h1 class="my-title">{{ $t("admin.locations.title") }}</h1>
+  <div class="">
+    <!-- <h1 class="my-title">{{ $t("admin.locations.title") }}</h1> -->
     <div class="flex flex-col">
       <div v-if="propertiesList.length < 1">
         <h2 class="my-subtitle">{{ $t("admin.locations.notFound") }}</h2>
       </div>
       <div v-else v-for="location in propertiesList" :key="location.id">
-        <RoomCard :property="location"></RoomCard>
-        <router-link
-          :to="{ name: 'create-image-3d', params: { id: location.id } }"
-          >Images 3d</router-link
-        >
+        <PropertyToogleVue
+          :locationNumber="1"
+          :location="location"
+        ></PropertyToogleVue>
       </div>
     </div> -->
     <h1 class="my-title">Panel de Administrador</h1>
@@ -40,19 +39,10 @@
 
 <script>
 import { mapGetters } from "vuex";
-// import RoomCard from "../../Tenants/Components/InfoCard.vue";
-
+import PropertyToogleVue from "../Components/PropertyToogle.vue";
 export default {
   components: {
-    // RoomCard,
-  },
-  data() {
-    return {
-      userBox: true,
-      zoneBox: false,
-      locationBox: false,
-      roomBox: false,
-    }
+    PropertyToogleVue,
   },
   computed: {
     ...mapGetters("propertiesStore", ["propertiesList", "zonesList"]),

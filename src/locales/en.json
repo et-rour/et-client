@@ -2,15 +2,19 @@
   "validations": {
     "messages": {
       "required": "This fiel is not valid",
-      "email": "This field is not a valid e-mail adress"
+      "email": "This field is not a valid e-mail adress",
+      "minValue": "This field must be greater than {min}"
     }
   },
-  "general": {},
+  "general": {
+    "seeImage": "See image"
+  },
   "navbar": {
     "owner": "Owners",
     "tenants": "tenants",
     "howWorks": "How does it work?",
     "us": "About us",
+    "posts": "posts",
     "admin": "Admin",
     "login": "Log in"
   },
@@ -18,6 +22,7 @@
     "welcome": "Welcome to Temporary Space",
     "login": "LOG IN",
     "register": "SIGN UP",
+    "isOwner": "Are you owner?",
     "email": "E-mail",
     "password": "Password",
     "firstName": "First name",
@@ -104,6 +109,8 @@
     },
     "arriendo": "rental value",
     "time": "Available time",
+    "garage": "Number of garages",
+    "more": "or more",
     "submit": "LOAD PROPERTY"
   },
   "createResult": {
@@ -147,13 +154,24 @@
       "contacts": "See contacts",
       "description": "This property is located in downtown Providencia. The minimum rental terms are 3 months and the use of machinery or noisy work is not allowed.",
       "subtitle": "Spaces available",
-      "vistit": "SCHEDULE A TECHNICAL VISIT"
+      "vistit": "SCHEDULE A TECHNICAL VISIT",
+      "pay": "Pay"
     },
     "schedule": {
       "title": "Select the date for your visit",
       "descriprion": "Schedule visit for the day",
       "schedule": "Schedule",
       "vistit": "SCHEDULE A TECHNICAL VISIT"
+    },
+    "stripe": {
+      "success": {
+        "title": "Everything ready",
+        "subtitle": "Thanks for your consideration!!!"
+      },
+      "error": {
+        "title": "Sorry, Something went wrong!!!",
+        "subtitle": "We weren't been able to complete the task"
+      }
     }
   },
 
@@ -176,7 +194,30 @@
   "admin": {
     "locations": {
       "title": "All locations",
-      "notFound": "No locations yet"
+      "notFound": "No locations yet",
+      "owner": "OWNER",
+      "properties": "Properties",
+      "payment": "Payments",
+      "property": {
+        "leaseTerm": "lease term",
+        "address": "address",
+        "images3d": "Images 3d",
+        "until": "until",
+        "download": "Download contract",
+        "extend": "Extend contract",
+        "finish": "End lease period"
+      },
+      "payments": {
+        "title": "payment activity"
+      },
+      "calendar": {
+        "title": "Extend the term of your lease",
+        "descriptionPart1": "Your property",
+        "descriptionPart2": "is for rent until",
+        "select": "Select a date to extend your lease",
+        "extendInfo": "Your lease will be extended until the day",
+        "btn": "CONFIRM TERM EXTENSION"
+      }
     },
     "image3d": {
       "title": "Add 3d image to",
@@ -188,6 +229,21 @@
       "addImage": "Add image",
       "seeDetails": "See details",
       "validImage": "Select an image"
+    }
+  },
+  "posts": {
+    "title": "ENTREPRENEURS MARKET",
+    "post": "PUBLISH YOUR BUSINESS",
+    "createPost": {
+      "title": "Post your business",
+      "description": "Leave us a review of your experience with ESPACIO TEMPORAL and publish your business in our ENTREPRENEURS MARKET",
+      "name": "business name",
+      "site": "Website",
+      "social": "Instagram",
+      "review": "Review of your experience",
+      "addImage": "ADD IMAGE",
+      "post": "POST",
+      "success": "Thanks for sharing"
     }
   }
 }

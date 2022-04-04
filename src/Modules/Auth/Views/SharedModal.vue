@@ -2,7 +2,7 @@
   <!-- LOGIN MODAL -->
   <div
     v-if="isModalOpen"
-    class="w-screen h-screen fixed top-0 left-0 flex justify-center items-center bg-black bg-opacity-50 z-30"
+    class="w-screen h-screen fixed top-0 left-0 flex justify-center items-center bg-black bg-opacity-50 z-50"
     @click="toogleLoginModalOpen"
   >
     <div

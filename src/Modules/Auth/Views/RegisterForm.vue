@@ -14,6 +14,7 @@
         />
         <span class="my-error">{{ errors[0] }}</span>
       </ValidationProvider>
+
       <div class="w-full flex justify-between">
         <ValidationProvider
           v-slot="{ errors }"
@@ -42,6 +43,7 @@
           <span class="my-error">{{ errors[0] }}</span>
         </ValidationProvider>
       </div>
+
       <ValidationProvider v-slot="{ errors }" rules="required" class="relative">
         <input
           v-model="registerPassword"
@@ -213,6 +215,16 @@
           </ValidationProvider>
         </div>
       </div>
+
+      <div class="flex justify-end items-center w-full mt-2">
+        <input
+          type="checkbox"
+          class="checkbox mr-2 p-6 bg-black"
+          v-model="isOwner"
+        />
+        <label for="checkbox"> {{ $t("login.isOwner") }}</label>
+      </div>
+
       <button
         class="my-btn w-full py-4 my-4 bg-blue-800"
         type="submit"
@@ -237,6 +249,7 @@ export default {
       day: "",
       month: "",
       year: "",
+      isOwner: false,
     };
   },
   components: {
@@ -251,6 +264,7 @@ export default {
         email: this.registerEmail,
         password: this.registerPassword,
         country: "Mexico",
+        isOwner: this.isOwner,
       };
       this.register(userData).catch((err) => {
         alert(err);
@@ -259,5 +273,3 @@ export default {
   },
 };
 </script>
-
-<style></style>

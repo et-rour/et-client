@@ -4,7 +4,7 @@ import {
   configure,
   localeChanged,
 } from "vee-validate";
-import { email, required } from "vee-validate/dist/rules";
+import { email, required, min_value } from "vee-validate/dist/rules";
 import i18n from "./i18n";
 
 configure({
@@ -25,6 +25,12 @@ extend("required", {
 extend("email", {
   ...email,
   message: (_, values) => i18n.t("validations.messages.email", values),
+});
+
+extend("min_value", {
+  ...min_value,
+  message: (_, values) =>
+    i18n.t("validations.messages.minValue", { min: values.min }),
 });
 localeChanged();
 export default ValidationProvider;

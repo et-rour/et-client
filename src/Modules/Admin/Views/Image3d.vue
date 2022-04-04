@@ -90,27 +90,17 @@
                     class="hidden"
                   />
 
-                  <div>
+                  <div class="flex justify-center items-center">
                     <button
                       class="my-btn mr-4"
                       @click="$refs.imageSelector.click()"
                     >
                       {{ $t("createForm.image") }}
                     </button>
-
-                    <font-awesome-icon
-                      icon="check"
-                      class="text-green-400"
-                      v-if="propertyImageState3d === 100"
-                    />
-                    <font-awesome-icon
-                      icon="spinner"
-                      class="animate-spin"
-                      v-if="
-                        propertyImageState3d > 0 &&
-                        propertyImageState3d !== 100 &&
-                        propertyImage3d !== null
-                      "
+                    <ProgesBarVue
+                      :value="propertyImageState3d"
+                      :imageUrl="propertyImage3d"
+                      class=""
                     />
                   </div>
                 </div>
@@ -230,8 +220,10 @@ import "photo-sphere-viewer/dist/photo-sphere-viewer.css";
 import "photo-sphere-viewer/dist/plugins/markers.css";
 import { mapGetters, mapActions } from "vuex";
 import { ValidationObserver } from "vee-validate";
+import ProgesBarVue from "../../../components/ProgesBarImage.vue";
+
 export default {
-  components: { ValidationObserver },
+  components: { ValidationObserver, ProgesBarVue },
   props: {
     idProperty: {
       type: Number,

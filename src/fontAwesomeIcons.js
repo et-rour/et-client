@@ -13,6 +13,11 @@ import {
   faFloppyDisk,
   faQuestionCircle,
   faInfoCircle,
+  faMinus,
+  faPlus,
+  faPanorama,
+  faCircleCheck,
+  faTimesCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import { faUser } from "@fortawesome/free-regular-svg-icons";
 
@@ -30,7 +35,12 @@ library.add(
   faTrashCan,
   faFloppyDisk,
   faQuestionCircle,
-  faInfoCircle
+  faInfoCircle,
+  faMinus,
+  faPlus,
+  faPanorama,
+  faCircleCheck,
+  faTimesCircle
 );
 
 Vue.config.productionTip = false;

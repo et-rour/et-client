@@ -25,22 +25,14 @@
             ref="imageSelector"
             class="hidden"
           />
-          <div>
-            <button class="my-btn mr-4" @click="$refs.imageSelector.click()">
-              {{ $t("createForm.image") }}
-            </button>
-
-            <font-awesome-icon
-              icon="check"
-              class="text-green-400"
-              v-if="propertyImageState === 100"
-            />
-            <font-awesome-icon
-              icon="spinner"
-              class="animate-spin"
-              v-if="propertyImageState > 0 && propertyImageState !== 100"
-            />
-          </div>
+          <button class="my-btn" @click="$refs.imageSelector.click()">
+            {{ $t("createForm.image") }}
+          </button>
+          <ProgesBarVue
+            :value="propertyImageState"
+            :imageUrl="propertyImage"
+            class=""
+          />
         </div>
 
         <div class="flex items-center justify-between mb-2">
@@ -167,13 +159,14 @@
           }}</label>
           <ValidationProvider
             v-slot="{ errors }"
-            rules="required"
+            rules="required|min_value:1"
             class="w-1/5"
           >
             <input
               class="bg-gray-200 w-full my-input"
               type="number"
               name="num_de_habitaciones"
+              min="0"
               v-model="rooms"
             />
             <span class="my-error relative top-0 left-0 block">{{
@@ -181,19 +174,21 @@
             }}</span>
           </ValidationProvider>
         </div>
+
         <div class="flex items-center justify-between">
           <label class="text-lg" for="num_de_baños">{{
             $t("createForm.banios")
           }}</label>
           <ValidationProvider
             v-slot="{ errors }"
-            rules="required"
+            rules="required|min_value:1"
             class="w-1/5"
           >
             <input
               class="bg-gray-200 w-full my-input"
               type="number"
               name="num_de_baños"
+              min="0"
               v-model="bathrooms"
             />
             <span class="my-error relative top-0 left-0 block">{{
@@ -304,13 +299,14 @@
           }}</label>
           <ValidationProvider
             v-slot="{ errors }"
-            rules="required"
+            rules="required|min_value:1"
             class="w-1/5"
           >
             <input
               class="bg-gray-200 my-input w-full"
               type="number"
               name="valor_de_arriendo"
+              min="0"
               v-model="value"
             />
             <span class="my-error relative top-0 left-0 block">{{
@@ -325,19 +321,51 @@
           }}</label>
           <ValidationProvider
             v-slot="{ errors }"
-            rules="required"
+            rules="required|min_value:1"
             class="w-1/5"
           >
             <input
               class="bg-gray-200 my-input w-full"
               type="number"
               name="time"
+              min="0"
               v-model="time"
             />
             <span class="my-error relative top-0 left-0 block">{{
               errors[0]
             }}</span>
           </ValidationProvider>
+        </div>
+
+        <div class="flex items-center justify-between my-4">
+          <label class="text-lg">{{ $t("createForm.garage") }}</label>
+          <div class="flex gap-4">
+            <div class="flex flex-col items-center">
+              <input
+                class="w-6 h-6"
+                type="radio"
+                v-model="garage"
+                value="0"
+                checked
+              />
+              <label>{{ 0 }}</label>
+            </div>
+
+            <div class="flex flex-col items-center">
+              <input class="w-6 h-6" type="radio" v-model="garage" value="1" />
+              <label>{{ 1 }}</label>
+            </div>
+
+            <div class="flex flex-col items-center">
+              <input class="w-6 h-6" type="radio" v-model="garage" value="2" />
+              <label>{{ 2 }}</label>
+            </div>
+
+            <div class="flex flex-col items-center">
+              <input class="w-6 h-6" type="radio" v-model="garage" value="3" />
+              <label>3 {{ $t("createForm.more") }}</label>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -354,10 +382,11 @@
 <script>
 import { mapActions, mapGetters, mapMutations } from "vuex";
 import { ValidationObserver } from "vee-validate";
-
+import ProgesBarVue from "@/components/ProgesBarImage.vue";
 export default {
   components: {
     ValidationObserver,
+    ProgesBarVue,
   },
   data() {
     return {
@@ -373,6 +402,7 @@ export default {
       value: "",
       zone: "",
       time: "",
+      garage: "0",
       image: null,
 
       localImage: null,
@@ -401,6 +431,7 @@ export default {
           floor: this.floor,
           imageUrl: this.propertyImage,
           user: this.user.user.id,
+          garage: this.garage,
         };
         const calculatorData = {
           expectedValue: this.value,

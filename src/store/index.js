@@ -3,6 +3,8 @@ import Vuex from "vuex";
 import authStore from "../Modules/Auth/Store/index";
 import propertiesStore from "../Modules/Owners/Store/index";
 import adminStore from "../Modules/Admin/Store/index";
+import postsStore from "../Modules/Posts/Store/index";
+
 import VuexPersistence from "vuex-persist";
 
 const vuexLocal = new VuexPersistence({
@@ -17,6 +19,7 @@ export default new Vuex.Store({
     authStore,
     propertiesStore,
     adminStore,
+    postsStore,
   },
   plugins: [vuexLocal.plugin],
 });

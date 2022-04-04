@@ -34,18 +34,18 @@
           :to="{ name: 'tenants' }"
           >{{ $t("navbar.tenants") }}</router-link
         >
-        <router-link
+        <!-- <router-link
           class="w-full py-2 text-center md:w-auto uppercase font-sans"
           to="/"
           >{{ $t("navbar.howWorks") }}</router-link
-        >
+        > -->
         <router-link
           class="w-full py-2 text-center md:w-auto uppercase font-sans"
-          to="/"
-          >{{ $t("navbar.us") }}</router-link
+          :to="{ name: 'posts' }"
+          >{{ $t("navbar.posts") }}</router-link
         >
         <router-link
-          v-if="isAuth"
+          v-if="user.user && user.user.isOwner"
           class="w-full py-2 text-center md:w-auto uppercase font-sans"
           :to="{ name: 'locations-list' }"
           >{{ $t("navbar.admin") }}</router-link
@@ -105,7 +105,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters("authStore", ["isAuth"]),
+    ...mapGetters("authStore", ["isAuth", "user"]),
     movileMenuClasses() {
       return this.movileMenuOpen ? "left-0" : "right-full";
     },

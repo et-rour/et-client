@@ -1,7 +1,7 @@
 import AdminLayout from "../../Admin/Layouts/AdminLayout.vue";
 import Main from "../../Admin/Views/Main.vue";
 import Image3d from "../../Admin/Views/Image3d.vue";
-
+import Payment from "../Views/Payments.vue";
 export default [
   {
     name: "admin",
@@ -22,6 +22,11 @@ export default [
             idProperty: route.params.id,
           };
         },
+      },
+      {
+        name: "locations-payment",
+        path: "/payment",
+        component: Payment,
       },
     ],
   },

@@ -1,5 +1,7 @@
 <template>
-  <div class="loader" :style="cssVars">Loading...</div>
+  <div class="w-full h-28 overflow-hidden flex justify-center items-center">
+    <div class="loader" :style="cssVars">Loading...</div>
+  </div>
 </template>
 
 <script>

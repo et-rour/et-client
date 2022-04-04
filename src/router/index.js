@@ -4,6 +4,8 @@ import Landing from "../Modules/Main/Main.vue";
 import OwnerRoutes from "../Modules/Owners/Router/index";
 import TenantsRouter from "../Modules/Tenants/Router/index";
 import AdminRouter from "../Modules/Admin/Router/index";
+import PostsRouter from "../Modules/Posts/Router/index";
+import StripeRouter from "../Modules/Stripe/Router/index";
 Vue.use(VueRouter);
 
 const routes = [
@@ -15,6 +17,8 @@ const routes = [
   ...OwnerRoutes,
   ...TenantsRouter,
   ...AdminRouter,
+  ...PostsRouter,
+  ...StripeRouter,
 ];
 
 const router = new VueRouter({

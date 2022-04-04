@@ -18,7 +18,7 @@ export const loadZones = ({ commit }) => {
 };
 
 export const uploadfile = async ({ commit }, { user, file }) => {
-  console.log(file);
+  commit("cleanImageInfo");
 
   const dateSaved = new Date().getTime();
   const storageRef = ref(storage, `${user}/${dateSaved}_${file.name}`);
@@ -77,5 +77,6 @@ export const createNewProperty = async (
 ) => {
   const res = await EspacioAPI.post("/locations/", propertyData);
   const location = res.data;
+  commit("cleanImageInfo");
   commit("createNewProperty", { location, calculatorData });
 };
