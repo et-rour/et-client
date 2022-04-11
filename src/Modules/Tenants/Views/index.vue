@@ -1,7 +1,7 @@
 <template>
   <div class="w-full mx-auto mb-32 lg:mb-2">
     <!-- hero -->
-    <div class="my-container h-screen rounded-3xl overflow-hidden relative">
+    <div class="hero my-container rounded-3xl overflow-hidden relative">
       <img
         src="@/assets/images/womanStanding.png"
         alt="Hero image"
@@ -125,4 +125,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.hero {
+  height: calc(100vh - 190px);
+}
+</style>

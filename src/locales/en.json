@@ -119,7 +119,8 @@
     "vistit": "SCHEDULE A TECHNICAL VISIT",
     "description_1": "The technical visit consists of the verification of the address ",
     "description_2": "and the data delivered, in addition to a review of the ",
-    "description_3": "property conditions and feasibility of use"
+    "description_3": "property conditions and feasibility of use",
+    "confirm": "confirm the rental value through a technical visit by our inspectors"
   },
   "schedule": {
     "title": "Select the date for your visit",

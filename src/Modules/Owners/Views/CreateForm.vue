@@ -131,13 +131,38 @@
         </div>
 
         <div class="flex items-center justify-between mb-4">
+          <!-- <label class="text-lg" for="zona">{{ $t("createForm.ciudad") }}</label> -->
+          <label class="text-lg" for="zona">Ciudad</label>
+          <ValidationProvider
+            v-slot="{ errors }"
+            rules="required"
+            class="w-1/5"
+          >
+            <select class="bg-gray-200 px-12 w-full" name="ciudad" v-model="ciudad">
+              <!-- <option selected value="">{{ $t("createForm.ciudad") }}</option> -->
+              <option selected value="">Ciudad</option>
+              <option
+                v-for="item in cities"
+                :value="item"
+                :key="item"
+              >
+                {{ item }}
+              </option>
+            </select>
+            <span class="my-error relative top-0 left-0 block">{{
+              errors[0]
+            }}</span>
+          </ValidationProvider>
+        </div>
+
+        <div class="flex items-center justify-between mb-4">
           <label class="text-lg" for="zona">{{ $t("createForm.zona") }}</label>
           <ValidationProvider
             v-slot="{ errors }"
             rules="required"
             class="w-1/5"
           >
-            <select class="bg-gray-200 px-12 w-full" name="zona" v-model="zone">
+            <select class="bg-gray-200 px-12 w-full" name="zona" v-model="zone" :disabled="ciudad === 'Ciudad' || ciudad === ''">
               <option selected value="">{{ $t("createForm.zona") }}</option>
               <option
                 v-for="item in zonesList"
@@ -401,10 +426,10 @@ export default {
       floor: "3",
       value: "",
       zone: "",
+      ciudad: "",
       time: "",
       garage: "0",
       image: null,
-
       localImage: null,
       file: null,
     };
@@ -469,12 +494,28 @@ export default {
       "propertyImageState",
     ]),
     ...mapGetters("authStore", ["user"]),
+    cities() {
+      let cities = [];
+      for (let i = 0; i < this.zonesList.length; i++) {
+        if (cities.indexOf(this.zonesList[i].data.city) === -1) {
+          cities.push(this.zonesList[i].data.city)
+        } 
+      }
+      return cities;
+    },
   },
   mounted() {
     // if (this.zonesList.length < 1) {
     this.loadZones();
     // }
   },
+  watch: {
+    ciudad(value) {
+      if(value === 'Ciudad' || value === '') {
+        this.zone = ''
+      }
+    }
+  }
 };
 </script>
 

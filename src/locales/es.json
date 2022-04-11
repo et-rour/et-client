@@ -119,7 +119,8 @@
     "vistit": "AGENDA UNA VISITA TECNICA",
     "description_1": "La visita tecnica consiste en la verificacion del domicilio ",
     "description_2": "y los datos entregados, ademas de una revision de las ",
-    "description_3": "condiciones de la propiedad y la factibilidad de uso"
+    "description_3": "condiciones de la propiedad y la factibilidad de uso.",
+    "confirm": "Confirma el valor de arriendo mediante una visita técnica de nuestros inspectores."
   },
   "schedule": {
     "title": "Selecciona la fecha para tu visita",
