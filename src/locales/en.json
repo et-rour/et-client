@@ -33,7 +33,9 @@
     "year": "Years",
     "succesModal": {
       "title": "!All ready!",
-      "subtitle": "Welcome to Temporary Space"
+      "subtitle": "Welcome to Temporary Space",
+      "buttonOpcion1": "FIND A SPACE",
+      "buttonOpcion2": "MANAGE YOUR SPACES"
     }
   },
   "landing": {

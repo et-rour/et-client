@@ -64,9 +64,14 @@
             {{ $t("login.succesModal.subtitle") }}
           </h2>
 
-          <div class="flex gap-2 w-full justify-center">
+          <div class="flex gap-2 w-full justify-center" v-if="user">
             <button class="my-btn w-3/4 font-normal" @click="goToOwners">
-              {{ $t("tenants.index.hero.find") }}
+              <span v-if="!user.user.isOwner">
+                {{ $t("login.succesModal.buttonOpcion1") }}
+              </span>
+              <span v-else>
+                {{ $t("login.succesModal.buttonOpcion2") }}
+              </span>
             </button>
           </div>
         </div>
@@ -108,6 +113,7 @@ export default {
   },
   computed: {
     ...mapGetters("authStore", ["isModalOpen", "isWelcomeModalOpen"]),
+    ...mapGetters("authStore", ["user"]),
   },
 };
 </script>

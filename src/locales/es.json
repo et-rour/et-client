@@ -10,7 +10,7 @@
     "seeImage": "Ver imagen"
   },
   "navbar": {
-    "owner": "Dueño",
+    "owner": "Dueños",
     "tenants": "Arrendatarios",
     "howWorks": "¿Comó funciona?",
     "us": "Nosotros",
@@ -33,7 +33,9 @@
     "year": "Años",
     "succesModal": {
       "title": "!Todo listo!",
-      "subtitle": "Bienvenido a Espacio Temporal"
+      "subtitle": "Bienvenido a Espacio Temporal",
+      "buttonOpcion1": "ENCUENTRA UN ESPACIO",
+      "buttonOpcion2": "GESTIONA TUS ESPACIOS"
     }
   },
   "landing": {
@@ -98,6 +100,7 @@
     "habitaciones": "Numero de habitaciones",
     "banios": "Numero de baños",
     "pintura": "Estado de pintura",
+    "opcionDefault": "Seleccionar",
     "suelo": "Estado de suelo",
     "image": "Selecciona una imagen",
     "options": {
@@ -109,8 +112,8 @@
     },
     "arriendo": "Valor de arriendo",
     "time": "Tiempo disponible",
-    "garage": "Numero de garajes",
-    "more": "o mas",
+    "garage": "Estacionamiento",
+    "more": "o más",
     "submit": "CARGAR PROPIEDAD"
   },
   "createResult": {
