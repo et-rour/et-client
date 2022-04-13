@@ -162,14 +162,19 @@
             rules="required"
             class="w-1/5"
           >
-            <select class="bg-gray-200 px-12 w-full" name="zona" v-model="zone" :disabled="ciudad === 'Ciudad' || ciudad === ''">
+            <select
+              class="bg-gray-200 px-12 w-full"
+              name="zona"
+              v-model="zone"
+              :disabled="ciudad === 'Ciudad' || ciudad === ''"
+            >
               <option selected value="">{{ $t("createForm.zona") }}</option>
               <option
-                v-for="item in zonesList"
+                v-for="item in filteredZones"
                 :value="item"
-                :key="item.data.id"
+                :key="item"
               >
-                {{ item.data.zone }}
+                {{ item }}
               </option>
             </select>
             <span class="my-error relative top-0 left-0 block">{{
@@ -678,6 +683,15 @@ export default {
       }
       return cities;
     },
+    filteredZones() {
+      let filtered = [];
+      for (let i = 0; i < this.zonesList.length; i++) {
+        if(this.zonesList[i].data.city === this.ciudad) {
+          filtered.push(this.zonesList[i].data.zone);
+        }
+      }
+      return filtered;
+    }
   },
   mounted() {
     // if (this.zonesList.length < 1) {
@@ -689,6 +703,7 @@ export default {
       if(value === 'Ciudad' || value === '') {
         this.zone = ''
       }
+      console.log(this.filteredZones)
     }
   }
 };
