@@ -2,21 +2,26 @@
   <div class="w-full mx-auto mb-24 md:mb-2">
     <!-- hero -->
     <div
-      class="w-11/12 md:w-10/12 mx-auto h-screen rounded-3xl overflow-hidden relative"
+      class="w-11/12 md:w-8/12 h-screen mx-auto relative overflow-hidden"
     >
       <img
         src="@/assets/images/homeImage.png"
         alt="Hero image"
-        class="w-full h-full object-cover"
+        class="w-full h-full
+         object-cover rounded-3xl"
       />
       <div
-        class="bg-black bg-opacity-20 w-full h-full px-4 absolute top-0 left-0 flex flex-col justify-end gap-3 py-4 rounded-3xl overflow-hidden"
+        class="w-full h-full px-4 absolute top-0 left-0 flex flex-col justify-end gap-3 py-4 rounded-b-3xl overflow-hidden bg-gradient-to-b from-white via-gray-999 to-black opacity-25"
       >
-        <h1 class="my-title text-white">
+      </div>
+      <div
+        class="w-full h-full px-4 absolute top-0 left-0 flex flex-col justify-end gap-3 py-4 rounded-3xl overflow-hidden bg-transparent"
+      >
+        <h1 class="my-title text-white md:px-36 w-8/12 md:w-8/12">
           {{ $t("landing.hero.title") }}
         </h1>
 
-        <div class="flex gap-2 flex-wrap">
+        <div class="flex gap-2 flex-wrap md:px-36 mb-24">
           <button class="bg-white w-64 py-2 rounded-md font-bold text-blue-600">
             {{ $t("landing.hero.searchProperty") }}
           </button>
@@ -28,8 +33,8 @@
     </div>
 
     <!-- video -->
-    <div class="my-container mt-4 mb-12">
-      <h2 class="my-subtitle">
+    <div class="my-container mt-4 mb-12 w-11/12 md:w-8/12">
+      <h2 class="my-subtitle text-center">
         {{ $t("landing.video.title") }}
       </h2>
       <p class="text-center my-4">
@@ -44,7 +49,7 @@
 
     <!-- hero_2 -->
     <div
-      class="w-11/12 md:w-10/12 mx-auto h-screen rounded-3xl overflow-hidden relative"
+      class="w-11/12 md:w-8/12 mx-auto h-screen rounded-3xl overflow-hidden relative"
     >
       <img
         src="@/assets/images/womanWorking.png"
@@ -122,7 +127,7 @@
     </div>
 
     <!-- Spaces -->
-    <div class="w-11/12 md:w-10/12 mx-auto">
+    <div class="w-11/12 md:w-8/12 mx-auto">
       <h2 class="my-title my-8 mt-12 text-center">
         {{ $t("landing.spaces.title") }}
       </h2>
@@ -155,7 +160,7 @@
 
     <!-- hero_3 -->
     <div
-      class="w-11/12 md:w-10/12 mx-auto h-screen rounded-3xl overflow-hidden relative my-8"
+      class="w-11/12 md:w-8/12 mx-auto h-screen rounded-3xl overflow-hidden relative my-8"
     >
       <img
         src="@/assets/images/location.png"
@@ -181,7 +186,7 @@
 
     <!-- details -->
     <div class="bg-blue-700 w-full relative px-2 py-5 text-white text-center">
-      <div class="w-11/12 md:w-10/12 mx-auto">
+      <div class="w-11/12 md:w-8/12 mx-auto">
         <h2 class="my-subtitle">{{ $t("landing.details.title") }}</h2>
         <p>
           {{ $t("landing.details.description") }}
@@ -235,7 +240,7 @@
 
     <!-- hero -->
     <div
-      class="w-11/12 md:w-10/12 mx-auto h-screen rounded-3xl overflow-hidden relative mt-6"
+      class="w-11/12 md:w-8/12 mx-auto h-screen rounded-3xl overflow-hidden relative mt-6"
     >
       <img
         src="@/assets/images/workWithUsImage.png"

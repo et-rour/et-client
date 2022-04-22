@@ -1,5 +1,5 @@
 <template>
-  <div class="my-container mb-24">
+  <div class="my-container mb-24 md:w-8/12">
     <h1 class="text-center my-title my-4">
       {{ $t("owners.title") }}
     </h1>

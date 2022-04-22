@@ -1,7 +1,7 @@
 <template>
   <div>
     <div
-      class="bg-white w-11/12 flex justify-center md:justify-between items-center md:w-10/12 mx-auto"
+      class="bg-white w-8/12 flex justify-center md:justify-between items-center md:w-8/12 mx-auto h-24"
     >
       <div @click="toogleMovileMenuOpen" class="md:hidden cursor-pointer">
         <font-awesome-icon icon="bars" class="text-3xl" />
@@ -12,7 +12,7 @@
         @click="$router.push({ name: 'home' })"
       >
         <img
-          class="w-28 h-9"
+          class="md:w-48 md:h-10 w-28 h-9"
           src="@/assets/icons/logoHeader.png"
           alt="logo espacio temporal"
         />

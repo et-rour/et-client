@@ -2,7 +2,7 @@
   <div
     class="w-full h-96 bg-gray-900 flex-col justify-center items-center text-white hidden md:flex"
   >
-    <div class="w-9/12 grid grid-cols-3 grid-rows-2">
+    <div class="w-9/12 grid grid-cols-3 grid-rows-2 px-20">
       <img src="@/assets/icons/logoFooter.png" alt="logotipo footer" />
       <ul>
         <li>FAQS</li>

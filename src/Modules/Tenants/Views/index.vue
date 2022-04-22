@@ -1,7 +1,7 @@
 <template>
   <div class="w-full mx-auto mb-32 lg:mb-2">
     <!-- hero -->
-    <div class="hero my-container rounded-3xl overflow-hidden relative">
+    <div class="hero my-container rounded-3xl overflow-hidden relative md:w-8/12">
       <img
         src="@/assets/images/womanStanding.png"
         alt="Hero image"
@@ -24,7 +24,7 @@
 
     <!-- details -->
     <div class="bg-blue-700 w-full relative px-2 py-5 text-white mt-8">
-      <div class="w-11/12 md:w-10/12 mx-auto">
+      <div class="w-11/12 md:w-8/12 mx-auto">
         <h2 class="my-title">
           {{ $t("tenants.index.details.title") }}
         </h2>
@@ -62,7 +62,7 @@
     </div>
 
     <!-- avalible spaces -->
-    <div class="my-container">
+    <div class="my-container md:w-8/12">
       <h2 class="my-title">{{ $t("tenants.index.avalibleSpaces.title") }}</h2>
       <div class="w-full relative">
         <input
