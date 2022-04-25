@@ -3,7 +3,8 @@ import VueRouter from "vue-router";
 import Landing from "../Modules/Main/Main.vue";
 import OwnerRoutes from "../Modules/Owners/Router/index";
 import TenantsRouter from "../Modules/Tenants/Router/index";
-import AdminRouter from "../Modules/Admin/Router/index";
+import ownerPanel from "../Modules/OwnerPanel/Router/index";
+import adminPanel from "../Modules/AdminPanel/Router/index";
 import PostsRouter from "../Modules/Posts/Router/index";
 import StripeRouter from "../Modules/Stripe/Router/index";
 Vue.use(VueRouter);
@@ -16,7 +17,8 @@ const routes = [
   },
   ...OwnerRoutes,
   ...TenantsRouter,
-  ...AdminRouter,
+  ...ownerPanel,
+  ...adminPanel,
   ...PostsRouter,
   ...StripeRouter,
 ];

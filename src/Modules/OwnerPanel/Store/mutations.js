@@ -1,3 +1,6 @@
+export const getOwnersLocations = (state, ownersLocations) => {
+  state.ownersLocations = ownersLocations;
+};
 export const image3dUploaded = (state, url) => {
   state.image3dUploaded = url;
 };

@@ -48,6 +48,12 @@
           v-if="user.user && user.user.isOwner"
           class="w-full py-2 text-center md:w-auto uppercase font-sans"
           :to="{ name: 'locations-list' }"
+          >{{ $t("navbar.myProperties") }}</router-link
+        >
+        <router-link
+          v-if="user.user && user.user.isAdmin"
+          class="w-full py-2 text-center md:w-auto uppercase font-sans"
+          :to="{ name: 'admin' }"
           >{{ $t("navbar.admin") }}</router-link
         >
         <button

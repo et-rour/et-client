@@ -142,9 +142,9 @@
               <!-- <option selected value="">{{ $t("createForm.ciudad") }}</option> -->
               <option selected value="">Ciudad</option>
               <option
-                v-for="item in cities"
+                v-for="(item, index) in filteredCities"
                 :value="item"
-                :key="item"
+                :key="index+index+'city'"
               >
                 {{ item }}
               </option>
@@ -154,8 +154,7 @@
             }}</span>
           </ValidationProvider>
         </div>
-
-        <div class="flex items-center justify-between mb-4">
+        <div class="flex items-center justify-between mb-4" :class="ciudad === 'Ciudad' || ciudad === '' ? 'hidden' : null">
           <label class="text-lg" for="zona">{{ $t("createForm.zona") }}</label>
           <ValidationProvider
             v-slot="{ errors }"
@@ -170,11 +169,11 @@
             >
               <option selected value="">{{ $t("createForm.zona") }}</option>
               <option
-                v-for="item in filteredZones"
-                :value="item"
-                :key="item"
+                v-for="(item, index) in filteredZones"
+                :value="item.id"
+                :key="index+index+'zone'"
               >
-                {{ item }}
+                {{ item.zone }}
               </option>
             </select>
             <span class="my-error relative top-0 left-0 block">{{
@@ -182,28 +181,6 @@
             }}</span>
           </ValidationProvider>
         </div>
-
-        <!-- <div class="flex items-center justify-between mb-2">
-          <label class="text-lg" for="num_de_habitaciones">{{
-            
-          }}</label>
-          <ValidationProvider
-            v-slot="{ errors }"
-            rules="required|min_value:1"
-            class="w-1/5"
-          >
-            <input
-              class="bg-gray-200 w-full my-input"
-              type="number"
-              name="num_de_habitaciones"
-              min="0"
-              v-model="rooms"
-            />
-            <span class="my-error relative top-0 left-0 block">{{
-              errors[0]
-            }}</span>
-          </ValidationProvider>
-        </div> -->
 
         <div class="flex items-center justify-between mb-4">
           <!-- <label class="text-lg" for="zona">{{ $t("createForm.ciudad") }}</label> -->
@@ -216,9 +193,9 @@
             <select class="bg-gray-200 px-12 w-full" name="tiempo" v-model="rooms">
               <option selected value="">{{ $t("createForm.opcionDefault") }}</option>
               <option
-                v-for="item in roomsOptions"
+                v-for="(item, index) in roomsOptions"
                 :value="item.value"
-                :key="item"
+                :key="index+item.value+'room'"
               >
                 {{ item.name }}
               </option>
@@ -228,28 +205,6 @@
             }}</span>
           </ValidationProvider>
         </div>
-
-        <!-- <div class="flex items-center justify-between">
-          <label class="text-lg" for="num_de_baños">{{
-            $t("createForm.banios")
-          }}</label>
-          <ValidationProvider
-            v-slot="{ errors }"
-            rules="required|min_value:1"
-            class="w-1/5"
-          >
-            <input
-              class="bg-gray-200 w-full my-input"
-              type="number"
-              name="num_de_baños"
-              min="0"
-              v-model="bathrooms"
-            />
-            <span class="my-error relative top-0 left-0 block">{{
-              errors[0]
-            }}</span>
-          </ValidationProvider>
-        </div> -->
 
         <div class="flex items-center justify-between mb-4">
           <!-- <label class="text-lg" for="zona">{{ $t("createForm.ciudad") }}</label> -->
@@ -262,9 +217,9 @@
             <select class="bg-gray-200 px-12 w-full" name="bathrooms" v-model="bathrooms">
               <option selected value="">{{ $t("createForm.opcionDefault") }}</option>
               <option
-                v-for="item in garageOptions"
+                v-for="(item, index) in garageOptions"
                 :value="item.value"
-                :key="item"
+                :key="index+item.value+'garage'"
               >
                 {{ item.name }}
               </option>
@@ -286,9 +241,9 @@
             <select class="bg-gray-200 px-12 w-full" name="pintura" v-model="painting">
               <option selected value="">{{ $t("createForm.opcionDefault") }}</option>
               <option
-                v-for="item in stateOptions"
+                v-for="(item, index) in stateOptions"
                 :value="item.value"
-                :key="item"
+                :key="index+item.value+'painting'"
               >
                 {{ item.name }}
               </option>
@@ -298,64 +253,6 @@
             }}</span>
           </ValidationProvider>
         </div>
-
-        <!-- <div class="flex items-center justify-between my-4">
-          <label class="text-lg" for="estado_de_pintura">{{
-            $t("createForm.pintura")
-          }}</label>
-          <div class="flex gap-4">
-            <div class="flex flex-col items-center">
-              <input
-                class="w-6 h-6"
-                type="radio"
-                v-model="painting"
-                value="1"
-              />
-              <label>{{ $t("createForm.options.reallyBad") }}</label>
-            </div>
-
-            <div class="flex flex-col items-center">
-              <input
-                class="w-6 h-6"
-                type="radio"
-                v-model="painting"
-                value="2"
-              />
-              <label>{{ $t("createForm.options.bad") }}</label>
-            </div>
-
-            <div class="flex flex-col items-center">
-              <input
-                class="w-6 h-6"
-                type="radio"
-                v-model="painting"
-                value="3"
-                checked
-              />
-              <label>{{ $t("createForm.options.regular") }}</label>
-            </div>
-
-            <div class="flex flex-col items-center">
-              <input
-                class="w-6 h-6"
-                type="radio"
-                v-model="painting"
-                value="4"
-              />
-              <label>{{ $t("createForm.options.good") }}</label>
-            </div>
-
-            <div class="flex flex-col items-center">
-              <input
-                class="w-6 h-6"
-                type="radio"
-                v-model="painting"
-                value="5"
-              />
-              <label>{{ $t("createForm.options.reallyGood") }}</label>
-            </div>
-          </div>
-        </div> -->
 
         <div class="flex items-center justify-between mb-4">
           <!-- <label class="text-lg" for="zona">{{ $t("createForm.ciudad") }}</label> -->
@@ -368,9 +265,9 @@
             <select class="bg-gray-200 px-12 w-full" name="suelo" v-model="floor">
               <option selected value="">{{ $t("createForm.opcionDefault") }}</option>
               <option
-                v-for="item in stateOptions"
+                v-for="(item, index) in stateOptions"
                 :value="item.value"
-                :key="item"
+                :key="index+item+'ground'"
               >
                 {{ item.name }}
               </option>
@@ -380,44 +277,6 @@
             }}</span>
           </ValidationProvider>
         </div>
-
-        <!-- <div class="flex items-center justify-between my-4">
-          <label class="text-lg" for="estado_de_suelo">{{
-            $t("createForm.suelo")
-          }}</label>
-          <div class="flex gap-4">
-            <div class="flex flex-col items-center">
-              <input class="w-6 h-6" type="radio" v-model="floor" value="1" />
-              <label>{{ $t("createForm.options.reallyBad") }}</label>
-            </div>
-
-            <div class="flex flex-col items-center">
-              <input class="w-6 h-6" type="radio" v-model="floor" value="2" />
-              <label>{{ $t("createForm.options.bad") }}</label>
-            </div>
-
-            <div class="flex flex-col items-center">
-              <input
-                class="w-6 h-6"
-                type="radio"
-                v-model="floor"
-                value="3"
-                checked
-              />
-              <label>{{ $t("createForm.options.regular") }}</label>
-            </div>
-
-            <div class="flex flex-col items-center">
-              <input class="w-6 h-6" type="radio" v-model="floor" value="4" />
-              <label>{{ $t("createForm.options.good") }}</label>
-            </div>
-
-            <div class="flex flex-col items-center">
-              <input class="w-6 h-6" type="radio" v-model="floor" value="5" />
-              <label>{{ $t("createForm.options.reallyGood") }}</label>
-            </div>
-          </div>
-        </div> -->
 
         <div class="flex items-center justify-between my-1">
           <label class="text-lg" for="valor_de_arriendo">{{
@@ -441,28 +300,6 @@
           </ValidationProvider>
         </div>
 
-        <!-- <div class="flex items-center justify-between my-2">
-          <label class="text-lg" for="valor_de_arriendo">{{
-            $t("createForm.time")
-          }}</label>
-          <ValidationProvider
-            v-slot="{ errors }"
-            rules="required|min_value:1"
-            class="w-1/5"
-          >
-            <input
-              class="bg-gray-200 my-input w-full"
-              type="number"
-              name="time"
-              min="0"
-              v-model="time"
-            />
-            <span class="my-error relative top-0 left-0 block">{{
-              errors[0]
-            }}</span>
-          </ValidationProvider>
-        </div> -->
-
         <div class="flex items-center justify-between mb-4">
           <!-- <label class="text-lg" for="zona">{{ $t("createForm.ciudad") }}</label> -->
           <label class="text-lg" for="zona">{{$t("createForm.time")}}</label>
@@ -474,9 +311,9 @@
             <select class="bg-gray-200 px-12 w-full" name="tiempo" v-model="time">
               <option selected value="">{{ $t("createForm.opcionDefault") }}</option>
               <option
-                v-for="item in timeOptions"
+                v-for="(item, index) in timeOptions"
                 :value="item.value"
-                :key="item"
+                :key="index+item.name+'time'"
               >
                 {{ item.name }}
               </option>
@@ -486,37 +323,6 @@
             }}</span>
           </ValidationProvider>
         </div>
-
-        <!-- <div class="flex items-center justify-between my-4">
-          <label class="text-lg">{{ $t("createForm.garage") }}</label>
-          <div class="flex gap-4">
-            <div class="flex flex-col items-center">
-              <input
-                class="w-6 h-6"
-                type="radio"
-                v-model="garage"
-                value="0"
-                checked
-              />
-              <label>{{ 0 }}</label>
-            </div>
-
-            <div class="flex flex-col items-center">
-              <input class="w-6 h-6" type="radio" v-model="garage" value="1" />
-              <label>{{ 1 }}</label>
-            </div>
-
-            <div class="flex flex-col items-center">
-              <input class="w-6 h-6" type="radio" v-model="garage" value="2" />
-              <label>{{ 2 }}</label>
-            </div>
-
-            <div class="flex flex-col items-center">
-              <input class="w-6 h-6" type="radio" v-model="garage" value="3" />
-              <label>3 {{ $t("createForm.more") }}</label>
-            </div>
-          </div>
-        </div> -->
 
         <div class="flex items-center justify-between mb-4">
           <!-- <label class="text-lg" for="zona">{{ $t("createForm.ciudad") }}</label> -->
@@ -529,9 +335,9 @@
             <select class="bg-gray-200 px-12 w-full" name="garage" v-model="garage">
               <option selected value="">{{ $t("createForm.opcionDefault") }}</option>
               <option
-                v-for="item in garageOptions"
+                v-for="(item, index) in garageOptions"
                 :value="item.value"
-                :key="item"
+                :key="index+item.value"
               >
                 {{ item.name }}
               </option>
@@ -611,7 +417,7 @@ export default {
         { name: "13 a 18 meses", value: 5 },
         { name: "19 a 24 meses", value: 6 },
         { name: "Más de 24 meses", value: 7 }
-      ]
+      ],
     };
   },
   methods: {
@@ -663,7 +469,6 @@ export default {
       const fr = new FileReader();
       fr.onload = () => (this.localImage = fr.result);
       fr.readAsDataURL(image);
-
       this.uploadfile({ user: this.user.user.email, file: this.file });
     },
   },
@@ -674,39 +479,33 @@ export default {
       "propertyImageState",
     ]),
     ...mapGetters("authStore", ["user"]),
-    cities() {
-      let cities = [];
-      for (let i = 0; i < this.zonesList.length; i++) {
-        if (cities.indexOf(this.zonesList[i].data.city) === -1) {
-          cities.push(this.zonesList[i].data.city)
-        } 
+    filteredCities() {
+      if(this.zonesList.length) {
+        let mappedZones = this.zonesList.map(element => {
+          return element.city;
+        })
+        return mappedZones.filter((element, index)=> mappedZones.indexOf(element) === index)
+      } else {
+        return [];
       }
-      return cities;
     },
     filteredZones() {
-      let filtered = [];
-      for (let i = 0; i < this.zonesList.length; i++) {
-        if(this.zonesList[i].data.city === this.ciudad) {
-          filtered.push(this.zonesList[i].data.zone);
-        }
+      if(this.zonesList.length) {
+        return this.zonesList.filter(element => element.city === this.ciudad)
+      } else {
+        return [];
       }
-      return filtered;
     }
   },
   mounted() {
-    // if (this.zonesList.length < 1) {
     this.loadZones();
-    // }
   },
   watch: {
     ciudad(value) {
       if(value === 'Ciudad' || value === '') {
         this.zone = ''
       }
-      console.log(this.filteredZones)
-    }
-  }
+    },
+  },
 };
 </script>
-
-<style></style>

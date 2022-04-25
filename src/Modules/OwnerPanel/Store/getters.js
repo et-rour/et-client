@@ -1,3 +1,6 @@
+export const ownersLocations = (state) => {
+  return state.ownersLocations;
+};
 export const propertyImage3d = (state) => {
   return state.image3dUploaded;
 };

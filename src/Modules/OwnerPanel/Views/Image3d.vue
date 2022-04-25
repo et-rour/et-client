@@ -345,7 +345,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 @media (min-width: 640px) {
   table {
     display: inline-table !important;

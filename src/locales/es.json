@@ -15,6 +15,7 @@
     "howWorks": "¿Cómo funciona?",
     "us": "Nosotros",
     "posts": "Publicaciónes",
+    "myProperties": "Mis propiedades",
     "admin": "Admin",
     "login": "Iniciar"
   },
@@ -248,6 +249,47 @@
       "addImage": "AGREGAR IMÁGEN",
       "post": "PUBLICAR",
       "success": "Gracias por compartir"
+    }
+  },
+  "adminPanel": {
+    "title": "Panel de Administrador",
+    "navbar": {
+      "users": "Usuarios",
+      "zones": "Zonas",
+      "locations": "Locaciones",
+      "rooms": "Cuartos"
+    },
+    "users": {
+      "name": "Nombre",
+      "email": "Email",
+      "actions": "Acciónes",
+      "options": {
+        "activate": "Activar",
+        "desactivate": "Desactivar"
+      }
+    },
+    "zones": {
+      "city": "Ciudad",
+      "rate": "Velocidad",
+      "zone": "Área",
+      "state": "Estado",
+      "country": "País",
+      "averageValue": "Valor promedio",
+      "centerCoordinates": "Coordenadas Centro"
+    },
+    "locations": {
+      "name": "Nombre",
+      "address": "Dirección",
+      "coords": "Coordenadas",
+      "rooms": "Cuartos",
+      "bathrooms": "Baños",
+      "painting": "Pintura",
+      "floor": "Suelo",
+      "actions": "Acciónes",
+      "options": {
+        "activate": "Activar",
+        "desactivate": "Desactivar"
+      }
     }
   }
 }

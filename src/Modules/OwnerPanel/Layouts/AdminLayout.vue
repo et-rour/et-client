@@ -27,7 +27,23 @@
 </template>
 
 <script>
-export default {};
+import { mapActions, mapGetters } from "vuex";
+export default {
+  methods: {
+    ...mapActions("ownerPanelStore", ["getOwnerslocations"]),
+  },
+  computed: {
+    ...mapGetters("authStore", ["user"]),
+  },
+  mounted() {
+    console.log(
+      "%cAdminLayout.vue line:39 this.user.user.id",
+      "color: #007acc;",
+      this.user.user.id
+    );
+    this.getOwnerslocations(this.user.user.id);
+  },
+};
 </script>
 
 <style scoped>
