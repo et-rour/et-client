@@ -33,8 +33,8 @@
     </div>
 
     <!-- video -->
-    <div class="my-container mt-4 mb-12 w-11/12 md:w-8/12">
-      <h2 class="my-subtitle text-center">
+    <div class="my-container mt-12 mb-12 w-11/12 md:w-8/12">
+      <h2 class="my-title text-center">
         {{ $t("landing.video.title") }}
       </h2>
       <p class="text-center my-4">
