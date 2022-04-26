@@ -55,13 +55,14 @@ export default {
   async mounted() {
     const requestData = {
       locationId: this.createdProperty.location.id,
-      zoneId: this.createdProperty.location.zone.id,
+      zoneId: this.createdProperty.location.zone,
       time: this.createdProperty.calculatorData.time,
       expectedValue: this.createdProperty.calculatorData.expectedValue,
     };
     console.log(requestData);
     console.log(this.createdProperty);
     try {
+      console.log('DATA', requestData)
       const response = await EspacioTemporalAPI.post(
         "/calculator/",
         requestData
