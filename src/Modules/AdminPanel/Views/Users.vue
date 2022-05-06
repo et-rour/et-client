@@ -56,11 +56,18 @@
 
 <script>
 import { mapActions, mapGetters } from "vuex";
+import { CustomErrorToast } from "@/sweetAlert";
 export default {
   methods: {
     ...mapActions("adminPanelStore", ["getUsers", "changeIsActiveProperty"]),
     async changeIsActive(idUser, activeProperty) {
-      await this.changeIsActiveProperty({ idUser, isActive: activeProperty });
+      try {
+        await this.changeIsActiveProperty({ idUser, isActive: activeProperty });
+      } catch (error) {
+        CustomErrorToast.fire({
+          text: error.response.data.message,
+        });
+      }
     },
   },
   computed: {
@@ -70,7 +77,9 @@ export default {
     try {
       await this.getUsers();
     } catch (error) {
-      alert(error.response.data.message);
+      CustomErrorToast.fire({
+        text: error.response.data.message,
+      });
     }
   },
 };

@@ -1,12 +1,13 @@
 <template>
-  <div class="w-full mx-auto mb-32 lg:mb-2">
+  <div class="w-full mb-32 lg:mb-2">
     <!-- hero -->
-    <div class="hero my-container rounded-3xl overflow-hidden relative md:w-8/12">
+    <div class="hero my-container rounded-3xl overflow-hidden relative">
       <img
         src="@/assets/images/womanStanding.png"
         alt="Hero image"
         class="w-full h-full object-cover"
       />
+
       <div
         class="bg-black bg-opacity-20 w-full h-full px-4 absolute top-0 left-0 flex flex-col justify-end gap-3 py-4 rounded-3xl overflow-hidden"
       >
@@ -15,7 +16,10 @@
         </h1>
 
         <div class="flex gap-2 flex-wrap">
-          <button class="bg-white w-64 py-2 rounded-md font-bold text-blue-600">
+          <button
+            class="bg-white w-64 py-2 rounded-md font-bold text-blue-600"
+            v-scroll-to="'#spaces'"
+          >
             {{ $t("tenants.index.hero.find") }}
           </button>
         </div>
@@ -23,8 +27,8 @@
     </div>
 
     <!-- details -->
-    <div class="bg-blue-700 w-full relative px-2 py-5 text-white mt-8">
-      <div class="w-11/12 md:w-8/12 mx-auto">
+    <div class="bg-my-blue-primary w-full relative px-2 py-5 text-white mt-8">
+      <div class="my-container mx-auto">
         <h2 class="my-title">
           {{ $t("tenants.index.details.title") }}
         </h2>
@@ -62,7 +66,7 @@
     </div>
 
     <!-- avalible spaces -->
-    <div class="my-container md:w-8/12">
+    <div class="my-container mt-6" id="spaces">
       <h2 class="my-title">{{ $t("tenants.index.avalibleSpaces.title") }}</h2>
       <div class="w-full relative">
         <input
@@ -79,7 +83,7 @@
         <Spiner></Spiner>
       </div>
       <div
-        class="w-full flex flex-col gap-4"
+        class="w-full grid grid-cols-1 md:grid-cols-2 gap-4"
         v-else-if="filteredPropertiesList(search).length > 0"
       >
         <InfoCard
@@ -88,7 +92,7 @@
           :property="property"
         ></InfoCard>
       </div>
-      <h3 class="my-subtitle text-center text-gray-400" v-else>
+      <h3 class="my-title-2 text-center text-gray-400" v-else>
         {{ $t("landing.spaces.notFound") }}
       </h3>
     </div>
@@ -116,17 +120,18 @@ export default {
   },
   methods: {
     ...mapActions("propertiesStore", ["loadProperties"]),
+    goto(refName) {
+      var element = this.$refs[refName];
+      var top = element.offsetTop;
+      window.scrollTo(0, top);
+    }
   },
   mounted() {
-    if (this.propertiesList.length < 1) {
-      this.loadProperties();
-    }
+    // if (this.propertiesList.length < 1) {
+    //   this.loadProperties();
+    // }
   },
 };
 </script>
 
-<style scoped>
-.hero {
-  height: calc(100vh - 190px);
-}
-</style>
+<style scoped></style>

@@ -1,9 +1,9 @@
 <template>
   <div>
     <div
-      class="w-full h-48 bg-blue-800 flex justify-center items-center relative"
+      class="w-full h-48 bg-my-blue-primary flex justify-center items-center relative"
     >
-      <h2 class="text-center text-white font-bold my-subtitle">
+      <h2 class="text-center text-white font-bold my-title-2">
         <font-awesome-icon icon="fa-regular fa-user"></font-awesome-icon>
         {{ $t("admin.locations.owner") }}
       </h2>
@@ -28,6 +28,7 @@
 
 <script>
 import { mapActions, mapGetters } from "vuex";
+import { CustomErrorToast } from "@/sweetAlert";
 export default {
   methods: {
     ...mapActions("ownerPanelStore", ["getOwnerslocations"]),
@@ -35,13 +36,14 @@ export default {
   computed: {
     ...mapGetters("authStore", ["user"]),
   },
-  mounted() {
-    console.log(
-      "%cAdminLayout.vue line:39 this.user.user.id",
-      "color: #007acc;",
-      this.user.user.id
-    );
-    this.getOwnerslocations(this.user.user.id);
+  async mounted() {
+    try {
+      await this.getOwnerslocations(this.user.user.id);
+    } catch (error) {
+      CustomErrorToast.fire({
+        text: error.response.data.message,
+      });
+    }
   },
 };
 </script>

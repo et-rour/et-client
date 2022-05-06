@@ -7,7 +7,7 @@
       class="text-green-500 text-9xl mb-3"
     ></font-awesome-icon>
     <h1 class="my-title block">{{ $t("tenants.stripe.success.title") }}</h1>
-    <p class="my-subtitle block">{{ $t("tenants.stripe.success.subtitle") }}</p>
+    <p class="my-title-2 block">{{ $t("tenants.stripe.success.subtitle") }}</p>
   </div>
 </template>
 

@@ -1,6 +1,7 @@
 <template>
-  <ModelGlobal v-show="showModal">
+  <ModelGlobal :showModal="showModal" v-on:toogle="closeModal">
     <div
+      @click.stop
       v-if="!successCreatingPost"
       class="bg-white w-3/4 md:w-6/12 h-5/6 text-center px-4 py-4 overflow-y-auto relative z-40"
     >
@@ -76,7 +77,9 @@
             :disabled="invalid"
             type="submit"
             class="my-btn w-full rounded-none py-4"
-            :class="!invalid ? 'bg-blue-800' : 'bg-gray-400 cursor-not-allowed'"
+            :class="
+              !invalid ? 'bg-my-blue-primary' : 'bg-gray-400 cursor-not-allowed'
+            "
           >
             {{ $t("posts.createPost.post") }}
           </button>
@@ -119,6 +122,7 @@ import ModelGlobal from "../../../components/ModelGlobal.vue";
 import { ValidationObserver } from "vee-validate";
 import { mapActions, mapGetters, mapMutations } from "vuex";
 import ProgesBarVue from "../../../components/ProgesBarImage.vue";
+import { CustomErrorToast } from "@/sweetAlert";
 
 export default {
   components: {
@@ -169,7 +173,9 @@ export default {
 
         this.successCreatingPost = true;
       } catch (error) {
-        alert(error.response.data.message);
+        CustomErrorToast.fire({
+          text: error.response.data.message,
+        });
       }
     },
     async uploadPostImage(event) {
@@ -178,7 +184,13 @@ export default {
         return;
       }
 
-      this.uploadfile({ user: this.user.user.email, file: image });
+      try {
+        this.uploadfile({ user: this.user.user.email, file: image });
+      } catch (error) {
+        CustomErrorToast.fire({
+          text: error.response.data.message,
+        });
+      }
     },
   },
   computed: {

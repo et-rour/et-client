@@ -30,3 +30,6 @@ export const logout = (state) => {
   state.isAuth = false;
   state.showWelcomeModal = false;
 };
+export const updateUser = (state, newUser) => {
+  state.user = newUser;
+};

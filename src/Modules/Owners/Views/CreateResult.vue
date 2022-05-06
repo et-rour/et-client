@@ -5,7 +5,7 @@
     <div class="flex flex-col items-center justify-evenly w-full h-4/5">
       <h1 class="my-title text-center my-3">{{ $t("createResult.title") }}:</h1>
       <div class="w-full flex flex-col items-center justify-evenly">
-        <div class="text-white bg-blue-800 text-4xl font-sans p-4">
+        <div class="text-white bg-my-blue-primary text-4xl font-sans p-4">
           <Spiner
             spinerColor="#ffffff"
             bgColor="rgb(30, 64, 175 )"
@@ -16,7 +16,7 @@
         <div class="text-2xl">{{ $t("createResult.periodicity") }}</div>
       </div>
       <div class="flex flex-col items-center justify-evenly">
-        <button class="bg-blue-800 text-white p-2 rounded-lg">
+        <button class="bg-my-blue-primary text-white p-2 rounded-lg">
           <router-link :to="{ name: 'schedule' }">{{
             $t("createResult.vistit")
           }}</router-link>
@@ -62,7 +62,7 @@ export default {
     console.log(requestData);
     console.log(this.createdProperty);
     try {
-      console.log('DATA', requestData)
+      console.log("DATA", requestData);
       const response = await EspacioTemporalAPI.post(
         "/calculator/",
         requestData

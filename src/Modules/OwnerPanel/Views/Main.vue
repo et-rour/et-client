@@ -3,7 +3,7 @@
     <!-- <h1 class="my-title">{{ $t("admin.locations.title") }}</h1> -->
     <div class="flex flex-col" v-if="ownersLocations">
       <div v-if="ownersLocations.length < 1">
-        <h2 class="my-subtitle">{{ $t("admin.locations.notFound") }}</h2>
+        <h2 class="my-title-2">{{ $t("admin.locations.notFound") }}</h2>
       </div>
       <div v-else v-for="location in ownersLocations" :key="location.id">
         <PropertyToogleVue

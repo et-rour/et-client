@@ -5,6 +5,10 @@
       <span v-if="property">{{ property.name }}</span>
     </h1>
 
+    <p class="my-5">
+      {{ $t("admin.image3d.app") }}
+    </p>
+
     <div class="w-full lg:w-1/2 h-72 mx-auto">
       <div id="viewer" class="w-full h-full"></div>
     </div>
@@ -221,6 +225,7 @@ import "photo-sphere-viewer/dist/plugins/markers.css";
 import { mapGetters, mapActions } from "vuex";
 import { ValidationObserver } from "vee-validate";
 import ProgesBarVue from "../../../components/ProgesBarImage.vue";
+import { CustomErrorToast } from "@/sweetAlert";
 
 export default {
   components: { ValidationObserver, ProgesBarVue },
@@ -274,7 +279,9 @@ export default {
         this.localImage = null;
         this.showMarker();
       } catch (error) {
-        alert(error);
+        CustomErrorToast.fire({
+          text: error.response.data.message,
+        });
       }
     },
     showMarker() {
@@ -330,7 +337,13 @@ export default {
       fr.onload = () => (this.localImage = fr.result);
       fr.readAsDataURL(image);
 
-      this.uploadfile({ user: this.user.user.email, file: this.file });
+      try {
+        await this.uploadfile({ user: this.user.user.email, file: this.file });
+      } catch (error) {
+        CustomErrorToast.fire({
+          text: error.response.data.message,
+        });
+      }
     },
   },
   computed: {

@@ -9,7 +9,7 @@ export const propertyImageState = (state) => {
 };
 export const filteredPropertiesList = (state) => (search) => {
   return state.properties.filter((word) => {
-    if (word.name.toLowerCase().indexOf(search) > -1) {
+    if (word.name.toLowerCase().indexOf(search.toLowerCase()) > -1) {
       return word;
     } else {
       return;

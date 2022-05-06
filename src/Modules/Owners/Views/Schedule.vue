@@ -25,7 +25,7 @@ export default {
   },
   computed: {
     urlCalendly() {
-      return `${process.env.VUE_APP_VISIT}?primary_color=1d4ed8`;
+      return `${process.env.VUE_APP_VISIT}?text_color=807e7e&primary_color=2323d5`;
     },
   },
   mounted() {

@@ -18,10 +18,10 @@
           class="text-2xl"
         ></font-awesome-icon>
       </div>
-      <h2 class="my-subtitle my-4 text-center">
+      <h2 class="my-title-2 my-4 text-center">
         {{ $t("login.welcome") }}
       </h2>
-      <div>
+      <div class="h-5/6">
         <!-- login -->
         <Login v-if="showLogin" />
         <!-- register -->
@@ -44,36 +44,44 @@
           </button>
         </div>
       </div>
-      <!-- succes modal -->
-      <div
-        class="h-full w-full overflow-hidden absolute left-0 top-0 text-center"
-        v-if="isWelcomeModalOpen"
-      >
-        <img
-          src="@/assets/images/womanStanding.png"
-          alt="Hero image"
-          class="w-full h-full object-cover"
-        />
-        <div
-          class="bg-black bg-opacity-40 w-full h-full absolute top-0 left-0 flex flex-col items-center justify-end gap-3 py-8"
-        >
-          <h2 class="my-subtitle text-white m-0 font-normal">
-            {{ $t("login.succesModal.title") }}
-          </h2>
-          <h2 class="my-subtitle text-white m-0 font-normal">
-            {{ $t("login.succesModal.subtitle") }}
-          </h2>
+    </div>
 
-          <div class="flex gap-2 w-full justify-center" v-if="user">
-            <button class="my-btn w-3/4 font-normal" @click="goToOwners">
-              <span v-if="!user.user.isOwner">
-                {{ $t("login.succesModal.buttonOpcion1") }}
-              </span>
-              <span v-else>
-                {{ $t("login.succesModal.buttonOpcion2") }}
-              </span>
-            </button>
-          </div>
+    <!-- succes modal -->
+    <div
+      class="w-2/3 h-5/6 overflow-hidden absolute text-center"
+      v-if="isWelcomeModalOpen"
+    >
+      <img
+        src="@/assets/images/womanStanding.png"
+        alt="Hero image"
+        class="w-full h-full object-cover"
+      />
+      <div
+        class="bg-black bg-opacity-40 w-full h-full absolute top-0 left-0 flex flex-col items-center justify-end gap-3 py-8"
+      >
+        <h2 class="my-title-2 text-white m-0 font-normal">
+          {{ $t("login.succesModal.title") }}
+        </h2>
+        <h2 class="my-title-2 text-white m-0 font-normal">
+          {{ $t("login.succesModal.subtitle") }}
+        </h2>
+
+        <div class="flex gap-2 w-full justify-center px-10" v-if="user">
+          <button
+            class="my-btn w-3/4 font-normal"
+            @click="redirectTo('tenants')"
+          >
+            {{ $t("login.succesModal.buttonOpcion1") }}
+          </button>
+          <button
+            class="my-btn w-3/4 font-normal"
+            @click="redirectTo('locations-list')"
+          >
+            {{ $t("login.succesModal.buttonOpcion2") }}
+          </button>
+          <button class="my-btn w-3/4 font-normal" @click="redirectTo('home')">
+            {{ $t("login.succesModal.buttonOpcion3") }}
+          </button>
         </div>
       </div>
     </div>
@@ -103,9 +111,9 @@ export default {
     stopPropagation(e) {
       e.stopPropagation();
     },
-    goToOwners() {
+    redirectTo(link) {
       this.changeShowLoginModal(false);
-      this.$router.push({ name: "owner" });
+      this.$router.push({ name: link });
     },
     toogleShowLoginForm() {
       this.showLogin = !this.showLogin;

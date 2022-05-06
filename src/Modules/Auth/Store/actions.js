@@ -93,3 +93,21 @@ export const logout = async ({ commit }) => {
       console.log(error);
     });
 };
+
+export const updateUser = async ({ commit }, currentUser) => {
+  const newUserPayload = {
+    ...currentUser,
+    firstname: currentUser.firstName,
+    lastname: currentUser.lastName,
+  };
+  const res = await EspacioAPI.put("/auth/update", newUserPayload);
+  console.log("%cactions.js line:102 res", "color: #007acc;", res);
+  const newUser = {
+    id: res.data.id,
+    firstName: res.data.firstName,
+    lastName: res.data.lastName,
+    country: res.data.country,
+    isOwner: res.data.isOwner,
+  };
+  commit("updateUser", newUser);
+};

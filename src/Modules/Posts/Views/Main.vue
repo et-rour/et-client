@@ -2,7 +2,7 @@
   <div class="mb-36 md:mb-5">
     <!-- hero -->
     <div
-      class="w-11/12 md:w-8/12 mx-auto h-screen rounded-3xl overflow-hidden relative"
+      class="my-container mx-auto hero rounded-3xl overflow-hidden relative mb-8"
     >
       <img
         src="@/assets/images/Bartalent.jpg"
@@ -10,18 +10,24 @@
         class="w-full h-full object-cover"
       />
       <div
-        class="bg-black bg-opacity-20 w-full h-full px-4 absolute top-0 left-0 flex flex-col justify-end gap-3 py-4 rounded-3xl overflow-hidden"
+        class="w-full h-full absolute top-0 left-0 flex flex-col justify-end gap-3 py-4 rounded-b-3xl mask"
+      ></div>
+
+      <div
+        class="w-full h-full absolute top-0 left-0 flex flex-col justify-end items-center pb-16"
       >
-        <h1 class="my-title text-white">
-          {{ $t("posts.title") }}
-        </h1>
-        <div class="flex gap-2 flex-wrap">
-          <button
-            class="bg-white w-64 py-2 rounded-md font-bold text-blue-600"
-            @click="toogleshowCreatePostModal"
-          >
-            {{ $t("posts.post") }}
-          </button>
+        <div class="w-10/12 lg:w-9/12">
+          <h1 class="my-title text-white">
+            {{ $t("posts.title") }}
+          </h1>
+          <div class="flex gap-2 flex-wrap">
+            <button
+              class="bg-white w-64 py-2 rounded-md font-bold text-blue-600"
+              @click="toogleshowCreatePostModal"
+            >
+              {{ $t("posts.post") }}
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -30,6 +36,7 @@
     <Spiner v-if="isLoading"></Spiner>
     <div class="my-container flex flex-col">
       <Post v-for="post in postList" :key="post.id" :post="post" />
+      <hr />
     </div>
 
     <CreatePost :showModal="showCreatePostModal" />
@@ -41,6 +48,7 @@ import CreatePost from "../Components/CreatePost.vue";
 import Post from "../Components/Post.vue";
 import { mapActions, mapGetters, mapMutations } from "vuex";
 import Spiner from "../../../components/Spiner.vue";
+import { CustomErrorToast } from "@/sweetAlert";
 
 export default {
   components: { Post, CreatePost, Spiner },
@@ -69,8 +77,14 @@ export default {
       this.showCreatePostModal = false;
     });
   },
-  mounted() {
-    this.loadPosts();
+  async mounted() {
+    try {
+      this.loadPosts();
+    } catch (error) {
+      CustomErrorToast.fire({
+        text: error.response.data.message,
+      });
+    }
   },
 };
 </script>

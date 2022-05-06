@@ -36,7 +36,7 @@
     </div>
     <div class="w-full flex justify-center">
       <button
-        class="bg-blue-800 my-btn text-white font-bold"
+        class="bg-my-blue-primary my-btn text-white font-bold"
         @click="submitSchedule"
       >
         <a>{{ $t("tenants.schedule.vistit") }}</a>

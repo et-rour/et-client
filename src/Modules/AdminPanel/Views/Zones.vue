@@ -60,6 +60,7 @@
 
 <script>
 import { mapActions, mapGetters } from "vuex";
+import { CustomErrorToast } from "@/sweetAlert";
 export default {
   methods: {
     ...mapActions("adminPanelStore", ["getZones"]),
@@ -71,7 +72,9 @@ export default {
     try {
       await this.getZones();
     } catch (error) {
-      alert(error.response.data.message);
+      CustomErrorToast.fire({
+        text: error.response.data.message,
+      });
     }
   },
 };

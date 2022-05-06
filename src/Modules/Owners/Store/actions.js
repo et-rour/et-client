@@ -2,12 +2,11 @@ import EspacioAPI from "../../../Api/index";
 import { storage } from "../../../Firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
-export const loadProperties = ({ commit }) => {
+export const loadProperties = async ({ commit }) => {
   commit("changeLoading", true);
-  EspacioAPI.get("/locations/").then((response) => {
-    console.log({ responsePorperties: response });
-    commit("loadProperties", response.data.locations);
-  });
+  const response = await EspacioAPI.get("/locations/");
+  console.log({ responsePorperties: response });
+  commit("loadProperties", response.data.locations);
 };
 
 export const loadZones = ({ commit }) => {

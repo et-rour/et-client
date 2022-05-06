@@ -226,9 +226,11 @@
       </div>
 
       <button
-        class="my-btn w-full py-4 my-4 bg-blue-800"
+        class="my-btn w-full py-4 my-4 bg-my-blue-primary"
         type="submit"
-        :class="invalid ? 'bg-blue-800 bg-opacity-70' : 'bg-blue-800'"
+        :class="
+          invalid ? 'bg-my-blue-primary bg-opacity-70' : 'bg-my-blue-primary'
+        "
       >
         {{ $t("login.register") }}
       </button>
@@ -239,6 +241,7 @@
 <script>
 import { ValidationObserver } from "vee-validate";
 import { mapActions } from "vuex";
+import { CustomErrorToast } from "@/sweetAlert";
 export default {
   data() {
     return {
@@ -257,7 +260,7 @@ export default {
   },
   methods: {
     ...mapActions("authStore", ["register"]),
-    onSubmitRegister() {
+    async onSubmitRegister() {
       const userData = {
         firstname: this.firstName,
         lastname: this.lastName,
@@ -266,9 +269,13 @@ export default {
         country: "Mexico",
         isOwner: this.isOwner,
       };
-      this.register(userData).catch((err) => {
-        alert(err);
-      });
+      try {
+        this.register(userData);
+      } catch (error) {
+        CustomErrorToast.fire({
+          text: error.response.data.message,
+        });
+      }
     },
   },
 };

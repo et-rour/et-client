@@ -1,4 +1,8 @@
 {
+  "sweetAlertMessages": {
+    "saved": "Saved",
+    "error": "Oops.. something went wrong"
+  },
   "validations": {
     "messages": {
       "required": "This fiel is not valid",
@@ -17,7 +21,9 @@
     "posts": "posts",
     "myProperties": "My properties",
     "admin": "Admin",
-    "login": "Log in"
+    "login": "Log in",
+    "profile": "Profile",
+    "editProfile": "Edit profile"
   },
   "login": {
     "welcome": "Welcome to Temporary Space",
@@ -36,13 +42,14 @@
       "title": "!All ready!",
       "subtitle": "Welcome to Temporary Space",
       "buttonOpcion1": "FIND A SPACE",
-      "buttonOpcion2": "MANAGE YOUR SPACES"
+      "buttonOpcion2": "MANAGE YOUR SPACES",
+      "buttonOpcion3": "HOME"
     }
   },
   "landing": {
     "hero": {
       "title": "WE LOOK FOR UNUSED PROPERTIES AND TRANSFORM THEM INTO WORK SPACES",
-      "searchProperty": "I'M LOOKING FOR A PROPERTY",
+      "searchProperty": "LEASE A SPACE",
       "openProperty": "OPENING MY PROPERTY"
     },
     "video": {
@@ -83,7 +90,7 @@
     }
   },
   "owners": {
-    "title": "We manage",
+    "title": "We manage all types of unused properties",
     "subtitle": "Have you not been able to rent your property? We take care of managing your property with flexible and short-term contracts. In this way we generate VALUE from a frozen resource.",
     "description_1": "Take care of and avoid misuse of the property: access by squatters or criminals to steal from neighbors (focus of crime), etc.",
     "description_2": "Generate an extra monthly monetary income for the property owner from a frozen resource.",
@@ -114,7 +121,10 @@
     "time": "Available time",
     "garage": "Number of garages",
     "more": "or more",
-    "submit": "LOAD PROPERTY"
+    "submit": "LOAD PROPERTY",
+    "ciudad": "City",
+    "tipoPropiedad": "Property type",
+    "propiedadParcial": "Room"
   },
   "createResult": {
     "title": "The approximate rental value for your property is",
@@ -232,7 +242,8 @@
       "options": "Options",
       "addImage": "Add image",
       "seeDetails": "See details",
-      "validImage": "Select an image"
+      "validImage": "Select an image",
+      "app": "We recommend using the Google Street View application to take your 3d photos"
     }
   },
   "posts": {
@@ -289,6 +300,24 @@
         "activate": "Activate",
         "desactivate": "Deactivate"
       }
+    }
+  },
+  "profile": {
+    "layout": {
+      "title": "Settings",
+      "profile": "Profile",
+      "properties": "Properties",
+      "logout": "Sign off"
+    },
+    "profile": {
+      "myProfile": "My profile",
+      "description": "Update your personal data.",
+      "firstName": "fist name",
+      "lastName": "Last name",
+      "isOwner": "Are you a ower?",
+      "country": "Country",
+      "current": "current",
+      "save": "Save"
     }
   }
 }
