@@ -31,10 +31,10 @@ html {
   } */
 
   .my-title {
-    @apply text-myheader1 font-bold;
+    @apply font-bold;
   }
   .my-title-2 {
-    @apply text-myheader2 font-bold;
+    @apply font-bold;
   }
   .my-input {
     @apply bg-white py-1 px-2 rounded;
@@ -43,7 +43,7 @@ html {
     @apply container w-11/12 md:w-9/12 mx-auto;
   }
   .my-btn {
-    @apply bg-my-blue-primary w-64 py-3 rounded-2xl text-white;
+    @apply w-64 py-3 rounded-2xl text-white;
   }
   .my-error {
     @apply text-red-300 absolute top-0 left-1/3;
