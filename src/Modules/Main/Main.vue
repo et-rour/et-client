@@ -102,7 +102,7 @@
                   {{ $t("landing.hero_2.commune") }}
                 </option>
                 <option
-                  v-for="zone in zonesList.sort(this.sortArray)"
+                  v-for="zone in sortedZones"
                   :key="zone.id"
                   :value="zone.id"
                 >
@@ -316,16 +316,16 @@ export default {
     ]),
     propertiesData() {
       let arr = this.filteredPropertiesList(this.search)
-
       if (this.type !== "") {
         arr = arr.filter(el => el.propertyType === this.type);
       }
-
       if(this.zone !== "") {
         arr = arr.filter(el => el.zone.id === this.zone);
       }
-
       return arr;
+    },
+    sortedZones() {
+      return this.zonesList
     }
   },
   methods: {
@@ -351,7 +351,7 @@ export default {
       if (x.city > y.city) {return 1;}
       return 0;
     },
-     showWorkWithUsModal() {
+    showWorkWithUsModal() {
       // Use sweetalert2
       this.$swal({
         title: "<strong>Espacio en construcción</strong>",
@@ -361,6 +361,7 @@ export default {
           '<a style="color: #2323D5; " href = "mailto: espacio@rour.dev">espacio@rour.dev</a> ',
         focusConfirm: false,
       });
+      return;
     },
   },
   mounted() {
@@ -372,7 +373,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
   .selectedField {
     background-color: #2463EB;
     color: #FFF;
