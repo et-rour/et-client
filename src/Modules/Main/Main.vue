@@ -80,12 +80,12 @@
             >
               <font-awesome-icon
                 icon="search"
-                class="text-2xl text-gray-400 block"
+                class="text-2xl text-gray-400 block md:mt-4"
               />
               <input
                 type="text"
                 placeholder="Santiago"
-                class="block w-full py-4"
+                class="block w-full py-4 border-r border md:border-0 md:border-r"
                 v-model="search"
               />
             </div>
@@ -102,7 +102,7 @@
                   {{ $t("landing.hero_2.commune") }}
                 </option>
                 <option
-                  v-for="zone in sortedZones"
+                  v-for="zone in zonesList.sort(this.sortArray)"
                   :key="zone.id"
                   :value="zone.id"
                 >
@@ -316,16 +316,16 @@ export default {
     ]),
     propertiesData() {
       let arr = this.filteredPropertiesList(this.search)
+
       if (this.type !== "") {
         arr = arr.filter(el => el.propertyType === this.type);
       }
+
       if(this.zone !== "") {
         arr = arr.filter(el => el.zone.id === this.zone);
       }
+
       return arr;
-    },
-    sortedZones() {
-      return this.zonesList
     }
   },
   methods: {
@@ -351,7 +351,7 @@ export default {
       if (x.city > y.city) {return 1;}
       return 0;
     },
-    showWorkWithUsModal() {
+     showWorkWithUsModal() {
       // Use sweetalert2
       this.$swal({
         title: "<strong>Espacio en construcción</strong>",
@@ -361,7 +361,6 @@ export default {
           '<a style="color: #2323D5; " href = "mailto: espacio@rour.dev">espacio@rour.dev</a> ',
         focusConfirm: false,
       });
-      return;
     },
   },
   mounted() {
@@ -373,9 +372,9 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
   .selectedField {
-    background-color: #2463EB;
+    background-color: #2323D5;
     color: #FFF;
   }
   .hero {

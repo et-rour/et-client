@@ -2,11 +2,11 @@
   <div>
     <div class="my-container mb-32 lg:mb-2" v-if="property">
       <h1 class="my-title">{{ property.name }}</h1>
-      <p>{{ property.name }}</p>
-      <p>{{ property.address }}</p>
+      <p>{{ property.address }}, {{ property.zone.zone }} - {{ property.zone.city }} ({{ property.zone.state }}), {{ property.zone.country }}.</p>
+      <p>{{ property.description }}</p>
 
       <img
-        src="@/assets/images/location.png"
+        :src="property.image"
         alt="location image detail"
         class="w-full h-44 sm:h-64 md:h-80 lg:h-96 mb-4 object-cover"
       />
@@ -31,9 +31,9 @@
         {{ $t("tenants.details.contacts") }}
       </button>
 
-      <p>
+      <!-- <p>
         {{ $t("tenants.details.description") }}
-      </p>
+      </p> -->
 
       <h3 class="my-title-2 my-4 mt-8">{{ $t("tenants.details.subtitle") }}</h3>
       <hr class="solid my-4" />

@@ -26,14 +26,15 @@ html {
   opacity: 0.8;
 }
 @layer components {
-  .btn-primary {
-    @apply py-2 px-4 bg-blue-500 text-white font-semibold rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75;
-  }
+  /* .btn-primary {
+    @apply py-2 px-4 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-my-blue-primary focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75;
+  } */
+
   .my-title {
-    @apply font-bold;
+    @apply text-myheader1 font-bold;
   }
   .my-title-2 {
-    @apply font-bold;
+    @apply text-myheader2 font-bold;
   }
   .my-input {
     @apply bg-white py-1 px-2 rounded;
@@ -42,7 +43,7 @@ html {
     @apply container w-11/12 md:w-9/12 mx-auto;
   }
   .my-btn {
-    @apply w-64 py-3 rounded-2xl text-white;
+    @apply bg-my-blue-primary w-64 py-3 rounded-2xl text-white;
   }
   .my-error {
     @apply text-red-300 absolute top-0 left-1/3;
