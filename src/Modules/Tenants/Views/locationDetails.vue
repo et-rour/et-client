@@ -27,6 +27,7 @@
       <!-- <div id="viewer" class="w-full h-96"></div> -->
       <button
         class="relative border border-my-blue-primary rounded-lg w-full py-9 px-2 flex justify-center items-center mb-4 hover:bg-my-blue-primary hover:text-white"
+        @click="showContactModalFunc"
       >
         {{ $t("tenants.details.contacts") }}
       </button>
@@ -79,6 +80,12 @@
         </button>
       </div>
     </ModelGlobal>
+    <ContactModal
+      :isModalOpen="showContactModal"
+      :locationName="property.name"
+      :locationAddress="`${property.address}, ${property.zone.zone} - ${property.zone.city} (${property.zone.state}), ${property.zone.country}`"
+      v-on:closePopup="closeContactModal"
+      ></ContactModal>
   </div>
 </template>
 
@@ -89,11 +96,12 @@ import { MarkersPlugin } from "photo-sphere-viewer/dist/plugins/markers";
 import "photo-sphere-viewer/dist/photo-sphere-viewer.css";
 import "photo-sphere-viewer/dist/plugins/markers.css";
 import RoomCard from "../Components/RoomCard.vue";
+import ContactModal from "../Components/ContactModal.vue"
 import ModelGlobal from "../../../components/ModelGlobal.vue";
 import EspacioTemporalAPI from "@/Api/index.js";
 
 export default {
-  components: { ModelGlobal, RoomCard },
+  components: { ModelGlobal, RoomCard, ContactModal },
   props: {
     idProperty: {
       type: Number,
@@ -111,6 +119,7 @@ export default {
       // 3D IMAGES
       showModal: false,
       viewer: "",
+      showContactModal: false,
     };
   },
   methods: {
@@ -135,6 +144,12 @@ export default {
       // console.log("%cTest.vue line:22 res", "color: #007acc;", res);
       // window.location.href = res.url;
       window.open(res.data.url, "_blank");
+    },
+    closeContactModal() {
+      this.showContactModal = false;
+    },
+    showContactModalFunc() {
+      this.showContactModal = true;
     },
     show3d() {
       let onlyMarkers = [];

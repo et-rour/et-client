@@ -172,7 +172,11 @@
       "description": "Esta propiedad está ubicada en el centro de Providencia. Los plazos mínimos de arriendo son de 3 meses y no se permite el uso de maquinaria ni labores ruidosas.",
       "subtitle": "Espacios disponibles",
       "vistit": "AGENDA UNA VISITA TECNICA",
-      "pay": "Pagar"
+      "pay": "Pagar",
+      "modalTitle": "Información de contacto",
+      "modalText1": "Para recibir información acerca de",
+      "modalText2": ", ubicado en",
+      "modalText3": "Puedes comunicarte a"
     },
     "schedule": {
       "title": "Selecciona la fecha para tu visita",

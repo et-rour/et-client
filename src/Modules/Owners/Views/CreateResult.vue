@@ -62,7 +62,6 @@ export default {
     console.log(requestData);
     console.log(this.createdProperty);
     try {
-      console.log("DATA", requestData);
       const response = await EspacioTemporalAPI.post(
         "/calculator/",
         requestData

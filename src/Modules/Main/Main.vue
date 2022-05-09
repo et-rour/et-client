@@ -122,12 +122,19 @@
             </div>
             <button
               class="my-btn w-12 h-12 rounded-full flex justify-center items-center flex-shrink-0"
+              @click="resetFilters"
             >
               <font-awesome-icon
-                icon="search"
+                icon="undo"
                 class="text-2xl text-white block"
               />
             </button>
+            <!-- <div
+              class="my-btn w-24 h-12 flex justify-center items-center absolute right-24 mb-16 rounded-tl-lg rounded-tr-lg rounded-br-lg rounded-bl-none"
+              :class="resetVisible ? 'hidden' : ''"
+            >
+              <p>Reset filters</p>
+            </div> -->
           </div>
         </div>
       </div>
@@ -305,6 +312,7 @@ export default {
       search: "",
       zone: "",
       type: "",
+      resetVisible: true,
     };
   },
   computed: {
@@ -368,7 +376,15 @@ export default {
           '<a style="color: #2323D5; " href = "mailto: espacio@rour.dev">espacio@rour.dev</a> ',
         focusConfirm: false,
       });
-  },
+    },
+    resetFilters() {
+      this.search = "";
+      this.zone = "";
+      this.type = "";
+    },
+    setResetVisible() {
+      this.resetVisible = !this.resetVisible;
+    }
   },
   mounted() {
     if (this.propertiesList.length < 1) {

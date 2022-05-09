@@ -170,7 +170,12 @@
       "description": "This property is located in downtown Providencia. The minimum rental terms are 3 months and the use of machinery or noisy work is not allowed.",
       "subtitle": "Spaces available",
       "vistit": "SCHEDULE A TECHNICAL VISIT",
-      "pay": "Pay"
+      "pay": "Pay",
+      "modalTitle": "Contact information",
+      "modalText1": "To receive more information about",
+      "modalText2": ", located at",
+      "modalText3": "You can send an e-email to"
+
     },
     "schedule": {
       "title": "Select the date for your visit",
