@@ -229,16 +229,16 @@ export default {
     ...mapGetters("propertiesStore", ["propertiesById"]),
     ...mapGetters("authStore", ["user", "isAuth"]),
     zoom() {
-      return this.property.coords.lat !== "" && this.property.coords.long !== ""
+      return this.property.lat !== "" && this.property.long !== ""
         ? 15
         : 2;
     },
     markerLatLng() {
-      return [this.property.coords.lat, this.property.coords.long];
+      return [this.property.lat, this.property.long];
     },
     validMarker() {
       return (
-        this.property.coords.lat !== "" && this.property.coords.long !== ""
+        this.property.lat !== "" && this.property.long !== ""
       );
     },
   },
