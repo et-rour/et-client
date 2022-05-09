@@ -48,7 +48,7 @@
             {{ startLease }}
             {{ $t("admin.locations.property.until") }} {{ endLease }}
           </p>
-          <button class="bg-blue-700 px-3 py-1 rounded-none text-white">
+          <button class="bg-my-blue-primary px-3 py-1 rounded-none text-white">
             {{ $t("admin.locations.property.download") }}
           </button>
         </div>
@@ -74,7 +74,7 @@
       <div
         class="w-11/12 h-5/6 bg-white text-center px-4 text-sm overflow-y-auto relative md:w-6/12"
       >
-        <h2 class="my-subtitle">{{ $t("admin.locations.calendar.title") }}</h2>
+        <h2 class="my-title-2">{{ $t("admin.locations.calendar.title") }}</h2>
         <p class="my-1">
           {{ $t("admin.locations.calendar.descriptionPart1") }}
           <span class="font-bold">{{ location.name }}</span>
@@ -101,7 +101,7 @@
         />
         <br />
         <button
-          class="my-btn bg-blue-700 rounded-none w-full md:w-6/12"
+          class="my-btn bg-my-blue-primary rounded-none w-full md:w-6/12"
           @click="submitNewLeaseRange"
         >
           {{ $t("admin.locations.calendar.btn") }}
@@ -127,6 +127,7 @@
 import ModelGlobalVue from "../../../components/ModelGlobal.vue";
 import moment from "moment";
 import { mapActions } from "vuex";
+import { CustomErrorToast } from "@/sweetAlert";
 export default {
   props: {
     locationNumber: {
@@ -183,7 +184,13 @@ export default {
         end: moment(this.newLeaseRange.end).format(""),
         locationId: this.location.id,
       };
-      await this.updateLocationLease(data);
+      try {
+        await this.updateLocationLease(data);
+      } catch (error) {
+        CustomErrorToast.fire({
+          text: error.response.data.message,
+        });
+      }
     },
   },
   computed: {

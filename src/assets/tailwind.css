@@ -2,25 +2,48 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  font-family: "Roboto", sans-serif;
+  scroll-behavior: smooth !important;
+}
+.withe-space {
+  white-space: pre-line;
+}
+.mask {
+  background: linear-gradient(
+    180deg,
+    #ffffff 0%,
+    #f8f8f8 9%,
+    #e3e3e3 22%,
+    #c2c2c2 37%,
+    #939393 55%,
+    #585858 75%,
+    #101010 96%,
+    #000000 100%
+  );
+  background-blend-mode: multiply;
+  mix-blend-mode: multiply;
+  opacity: 0.8;
+}
 @layer components {
   /* .btn-primary {
-    @apply py-2 px-4 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75;
+    @apply py-2 px-4 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-my-blue-primary focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75;
   } */
 
   .my-title {
-    @apply font-bold text-4xl font-sans mt-4;
+    @apply text-myheader1 font-bold;
   }
-  .my-subtitle {
-    @apply font-bold text-2xl font-sans mt-4;
+  .my-title-2 {
+    @apply text-myheader2 font-bold;
   }
   .my-input {
     @apply bg-white py-1 px-2 rounded;
   }
   .my-container {
-    @apply container w-11/12 md:w-10/12 mx-auto;
+    @apply container w-11/12 md:w-9/12 mx-auto;
   }
   .my-btn {
-    @apply bg-blue-600 w-64 py-2 rounded-md font-bold text-white;
+    @apply bg-my-blue-primary w-64 py-3 rounded-2xl text-white;
   }
   .my-error {
     @apply text-red-300 absolute top-0 left-1/3;

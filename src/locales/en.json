@@ -1,4 +1,8 @@
 {
+  "sweetAlertMessages": {
+    "saved": "Saved",
+    "error": "Oops.. something went wrong"
+  },
   "validations": {
     "messages": {
       "required": "This fiel is not valid",
@@ -15,8 +19,11 @@
     "howWorks": "How does it work?",
     "us": "About us",
     "posts": "posts",
+    "myProperties": "My properties",
     "admin": "Admin",
-    "login": "Log in"
+    "login": "Log in",
+    "profile": "Profile",
+    "editProfile": "Edit profile"
   },
   "login": {
     "welcome": "Welcome to Temporary Space",
@@ -33,13 +40,17 @@
     "year": "Years",
     "succesModal": {
       "title": "!All ready!",
-      "subtitle": "Welcome to Temporary Space"
+      "subtitle": "Welcome to Temporary Space",
+      "buttonOpcion1": "FIND A SPACE",
+      "buttonOpcion2": "MANAGE YOUR SPACES",
+      "buttonOpcion3": "HOME"
     }
   },
   "landing": {
     "hero": {
       "title": "WE LOOK FOR UNUSED PROPERTIES AND TRANSFORM THEM INTO WORK SPACES",
-      "searchProperty": "I'M LOOKING FOR A PROPERTY",
+      "titleMovile": "FIND A FLEXIBLE SPACE FOR YOUR BUSINESS",
+      "searchProperty": "LEASE A SPACE",
       "openProperty": "OPENING MY PROPERTY"
     },
     "video": {
@@ -80,7 +91,7 @@
     }
   },
   "owners": {
-    "title": "We manage",
+    "title": "We manage all types of unused properties",
     "subtitle": "Have you not been able to rent your property? We take care of managing your property with flexible and short-term contracts. In this way we generate VALUE from a frozen resource.",
     "description_1": "Take care of and avoid misuse of the property: access by squatters or criminals to steal from neighbors (focus of crime), etc.",
     "description_2": "Generate an extra monthly monetary income for the property owner from a frozen resource.",
@@ -111,7 +122,10 @@
     "time": "Available time",
     "garage": "Number of garages",
     "more": "or more",
-    "submit": "LOAD PROPERTY"
+    "submit": "LOAD PROPERTY",
+    "ciudad": "City",
+    "tipoPropiedad": "Property type",
+    "propiedadParcial": "Room"
   },
   "createResult": {
     "title": "The approximate rental value for your property is",
@@ -119,7 +133,8 @@
     "vistit": "SCHEDULE A TECHNICAL VISIT",
     "description_1": "The technical visit consists of the verification of the address ",
     "description_2": "and the data delivered, in addition to a review of the ",
-    "description_3": "property conditions and feasibility of use"
+    "description_3": "property conditions and feasibility of use",
+    "confirm": "confirm the rental value through a technical visit by our inspectors"
   },
   "schedule": {
     "title": "Select the date for your visit",
@@ -155,7 +170,12 @@
       "description": "This property is located in downtown Providencia. The minimum rental terms are 3 months and the use of machinery or noisy work is not allowed.",
       "subtitle": "Spaces available",
       "vistit": "SCHEDULE A TECHNICAL VISIT",
-      "pay": "Pay"
+      "pay": "Pay",
+      "modalTitle": "Contact information",
+      "modalText1": "To receive more information about",
+      "modalText2": ", located at",
+      "modalText3": "You can send an e-email to"
+
     },
     "schedule": {
       "title": "Select the date for your visit",
@@ -228,7 +248,8 @@
       "options": "Options",
       "addImage": "Add image",
       "seeDetails": "See details",
-      "validImage": "Select an image"
+      "validImage": "Select an image",
+      "app": "We recommend using the Google Street View application to take your 3d photos"
     }
   },
   "posts": {
@@ -244,6 +265,65 @@
       "addImage": "ADD IMAGE",
       "post": "POST",
       "success": "Thanks for sharing"
+    }
+  },
+  "adminPanel": {
+    "title": "Administrator Dashboard",
+    "navbar": {
+      "users": "Users",
+      "zones": "Zones",
+      "locations": "locations",
+      "rooms": "Rooms"
+    },
+    "users": {
+      "name": "Name",
+      "email": "E-mail",
+      "actions": "Actions",
+      "options": {
+        "activate": "Activate",
+        "desactivate": "Deactivate"
+      }
+    },
+    "zones": {
+      "city": "Town",
+      "rate": "Velocity",
+      "zone": "Area",
+      "state": "Condition",
+      "country": "Country",
+      "averageValue": "Average value",
+      "centerCoordinates": "Center Coordinates"
+    },
+    "locations": {
+      "name": "Name",
+      "address": "Direction",
+      "coords": "Coordinates",
+      "rooms": "Rooms",
+      "bathrooms": "Bathrooms",
+      "painting": "Paintwork",
+      "floor": "Floor",
+      "actions": "Actions",
+      "options": {
+        "activate": "Activate",
+        "desactivate": "Deactivate"
+      }
+    }
+  },
+  "profile": {
+    "layout": {
+      "title": "Settings",
+      "profile": "Profile",
+      "properties": "Properties",
+      "logout": "Sign off"
+    },
+    "profile": {
+      "myProfile": "My profile",
+      "description": "Update your personal data.",
+      "firstName": "fist name",
+      "lastName": "Last name",
+      "isOwner": "Are you a ower?",
+      "country": "Country",
+      "current": "current",
+      "save": "Save"
     }
   }
 }

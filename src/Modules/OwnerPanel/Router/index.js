@@ -1,11 +1,11 @@
-import AdminLayout from "../../Admin/Layouts/AdminLayout.vue";
-import Main from "../../Admin/Views/Main.vue";
-import Image3d from "../../Admin/Views/Image3d.vue";
+import AdminLayout from "../../OwnerPanel/Layouts/AdminLayout.vue";
+import Main from "../../OwnerPanel/Views/Main.vue";
+import Image3d from "../../OwnerPanel/Views/Image3d.vue";
 import Payment from "../Views/Payments.vue";
 export default [
   {
-    name: "admin",
-    path: "/admin",
+    name: "my-locations",
+    path: "/my-locations",
     component: AdminLayout,
     children: [
       {

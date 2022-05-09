@@ -1,6 +1,6 @@
 <template>
   <div class="w-full">
-    <h1 class="my-subtitle">{{ $t("admin.locations.payments.title") }}</h1>
+    <h1 class="my-title-2">{{ $t("admin.locations.payments.title") }}</h1>
     <table
       class="w-full flex flex-row flex-no-wrap xs:bg-white rounded-lg overflow-hidden my-5"
     >
@@ -21,7 +21,9 @@
           <td
             class="border-grey-light border-b hover:bg-gray-100 p-3 text-center sm:text-left"
           >
-            <p class="bg-blue-800 inline-block text-white p-1 px-3">$500.00</p>
+            <p class="bg-my-blue-primary inline-block text-white p-1 px-3">
+              $500.00
+            </p>
           </td>
         </tr>
         <tr
@@ -40,7 +42,9 @@
           <td
             class="border-grey-light border-b hover:bg-gray-100 p-3 text-center sm:text-left"
           >
-            <p class="bg-blue-800 inline-block text-white p-1 px-3">$500.00</p>
+            <p class="bg-my-blue-primary inline-block text-white p-1 px-3">
+              $500.00
+            </p>
           </td>
         </tr>
         <tr
@@ -59,7 +63,9 @@
           <td
             class="border-grey-light border-b hover:bg-gray-100 p-3 text-center sm:text-left"
           >
-            <p class="bg-blue-800 inline-block text-white p-1 px-3">$500.00</p>
+            <p class="bg-my-blue-primary inline-block text-white p-1 px-3">
+              $500.00
+            </p>
           </td>
         </tr>
         <tr
@@ -78,7 +84,9 @@
           <td
             class="border-grey-light border-b hover:bg-gray-100 p-3 text-center sm:text-left"
           >
-            <p class="bg-blue-800 inline-block text-white p-1 px-3">$500.00</p>
+            <p class="bg-my-blue-primary inline-block text-white p-1 px-3">
+              $500.00
+            </p>
           </td>
         </tr>
       </tbody>
@@ -90,7 +98,7 @@
 export default {};
 </script>
 
-<style>
+<style scoped>
 @media (min-width: 475px) {
   table {
     display: inline-table !important;

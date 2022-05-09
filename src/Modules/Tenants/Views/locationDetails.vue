@@ -2,22 +2,22 @@
   <div>
     <div class="my-container mb-32 lg:mb-2" v-if="property">
       <h1 class="my-title">{{ property.name }}</h1>
-      <p>{{ property.name }}</p>
-      <p>{{ property.address }}</p>
+      <p>{{ property.address }}, {{ property.zone.zone }} - {{ property.zone.city }} ({{ property.zone.state }}), {{ property.zone.country }}.</p>
+      <p>{{ property.description }}</p>
 
       <img
-        src="@/assets/images/location.png"
+        :src="property.image"
         alt="location image detail"
         class="w-full h-44 sm:h-64 md:h-80 lg:h-96 mb-4 object-cover"
       />
 
       <button
-        class="relative border border-blue-800 rounded-lg w-full py-5 px-2 flex justify-center items-center mb-4 hover:text-white"
+        class="relative border border-my-blue-primary rounded-lg w-full py-5 px-2 flex justify-center items-center mb-4 hover:text-white"
         @click="toggleShowModal"
         :class="
           property.images3D.length === 0
             ? 'hover:bg-gray-400 cursor-not-allowed'
-            : 'hover:bg-blue-800'
+            : 'hover:bg-my-blue-primary'
         "
         :disabled="property.images3D.length === 0"
       >
@@ -26,16 +26,17 @@
       </button>
       <!-- <div id="viewer" class="w-full h-96"></div> -->
       <button
-        class="relative border border-blue-800 rounded-lg w-full py-9 px-2 flex justify-center items-center mb-4 hover:bg-blue-800 hover:text-white"
+        class="relative border border-my-blue-primary rounded-lg w-full py-9 px-2 flex justify-center items-center mb-4 hover:bg-my-blue-primary hover:text-white"
+        @click="showContactModalFunc"
       >
         {{ $t("tenants.details.contacts") }}
       </button>
 
-      <p>
+      <!-- <p>
         {{ $t("tenants.details.description") }}
-      </p>
+      </p> -->
 
-      <h3 class="my-title my-4 mt-8">{{ $t("tenants.details.subtitle") }}</h3>
+      <h3 class="my-title-2 my-4 mt-8">{{ $t("tenants.details.subtitle") }}</h3>
       <hr class="solid my-4" />
       <RoomCard
         v-for="room in property.roomsDetails"
@@ -51,7 +52,7 @@
       </div>
 
       <button
-        class="w-full bg-blue-800 text-white font-bold my-btn"
+        class="w-full bg-my-blue-primary text-white font-bold my-btn"
         @click="goToSchedule"
       >
         <router-link :to="{ name: 'tenants-schedule' }">{{
@@ -68,8 +69,8 @@
     </div>
 
     <!-- MODAL 3D PICTURES -->
-    <ModelGlobal v-show="showModal">
-      <div class="w-2/3 h-96 bg-white relative">
+    <ModelGlobal :showModal="showModal" v-on:toogle="toggleShowModal">
+      <div class="w-2/3 h-96 bg-white relative" @click.stop>
         <div id="viewer" class="w-full h-full"></div>
         <button
           class="bg-gray-500 w-10 h-10 absolute top-0 right-0 z-50"
@@ -79,6 +80,12 @@
         </button>
       </div>
     </ModelGlobal>
+    <ContactModal
+      :isModalOpen="showContactModal"
+      :locationName="property.name"
+      :locationAddress="`${property.address}, ${property.zone.zone} - ${property.zone.city} (${property.zone.state}), ${property.zone.country}`"
+      v-on:closePopup="closeContactModal"
+      ></ContactModal>
   </div>
 </template>
 
@@ -89,11 +96,12 @@ import { MarkersPlugin } from "photo-sphere-viewer/dist/plugins/markers";
 import "photo-sphere-viewer/dist/photo-sphere-viewer.css";
 import "photo-sphere-viewer/dist/plugins/markers.css";
 import RoomCard from "../Components/RoomCard.vue";
+import ContactModal from "../Components/ContactModal.vue"
 import ModelGlobal from "../../../components/ModelGlobal.vue";
 import EspacioTemporalAPI from "@/Api/index.js";
 
 export default {
-  components: { ModelGlobal, RoomCard },
+  components: { ModelGlobal, RoomCard, ContactModal },
   props: {
     idProperty: {
       type: Number,
@@ -111,6 +119,7 @@ export default {
       // 3D IMAGES
       showModal: false,
       viewer: "",
+      showContactModal: false,
     };
   },
   methods: {
@@ -135,6 +144,12 @@ export default {
       // console.log("%cTest.vue line:22 res", "color: #007acc;", res);
       // window.location.href = res.url;
       window.open(res.data.url, "_blank");
+    },
+    closeContactModal() {
+      this.showContactModal = false;
+    },
+    showContactModalFunc() {
+      this.showContactModal = true;
     },
     show3d() {
       let onlyMarkers = [];
@@ -214,16 +229,16 @@ export default {
     ...mapGetters("propertiesStore", ["propertiesById"]),
     ...mapGetters("authStore", ["user", "isAuth"]),
     zoom() {
-      return this.property.coords.lat !== "" && this.property.coords.long !== ""
+      return this.property.lat !== "" && this.property.long !== ""
         ? 15
         : 2;
     },
     markerLatLng() {
-      return [this.property.coords.lat, this.property.coords.long];
+      return [this.property.lat, this.property.long];
     },
     validMarker() {
       return (
-        this.property.coords.lat !== "" && this.property.coords.long !== ""
+        this.property.lat !== "" && this.property.long !== ""
       );
     },
   },

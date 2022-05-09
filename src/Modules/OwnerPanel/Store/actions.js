@@ -2,6 +2,17 @@ import EspacioAPI from "../../../Api/index";
 import { storage } from "../../../Firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
+export const getOwnerslocations = async ({ commit }, idOwner) => {
+  const res = await EspacioAPI.get(`/locations/${idOwner}`);
+  const ownersLocations = res.data.locations;
+  console.log(
+    "%cactions.js line:8 ownersLocations",
+    "color: #007acc;",
+    ownersLocations
+  );
+  commit("getOwnersLocations", ownersLocations);
+};
+
 export const uploadfile = async ({ commit }, { user, file }) => {
   commit("resetImageInfo");
 

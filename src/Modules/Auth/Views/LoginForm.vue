@@ -28,7 +28,9 @@
       <button
         class="my-btn w-full py-4 my-4"
         type="submit"
-        :class="invalid ? 'bg-blue-800 bg-opacity-70' : 'bg-blue-800'"
+        :class="
+          invalid ? 'bg-my-blue-primary bg-opacity-70' : 'bg-my-blue-primary'
+        "
       >
         {{ $t("login.login") }}
       </button>
@@ -38,7 +40,8 @@
 
 <script>
 import { ValidationObserver } from "vee-validate";
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
+import { CustomErrorToast } from "@/sweetAlert";
 export default {
   components: {
     ValidationObserver,
@@ -50,16 +53,33 @@ export default {
     };
   },
   methods: {
-    ...mapActions("authStore", ["login"]),
-    onSubmitLogin() {
+    ...mapActions("authStore", ["login", "changeShowLoginModal"]),
+    async onSubmitLogin() {
       const userData = {
         email: this.loginEmail,
         password: this.loginPassword,
       };
-      this.login(userData).catch((err) => {
-        alert(err);
-      });
+      try {
+        await this.login(userData);
+
+        setTimeout(() => {
+          this.changeShowLoginModal(false);
+          console.log("%cLoginForm.vue line:67 closeModal", "color: #007acc;");
+          if (this.user.user.isOwner) {
+            this.$router.push({ name: "owner" });
+          } else {
+            this.$router.push({ name: "profile-main" });
+          }
+        }, 2000);
+      } catch (error) {
+        CustomErrorToast.fire({
+          text: error.response.data.message,
+        });
+      }
     },
+  },
+  computed: {
+    ...mapGetters("authStore", ["user"]),
   },
 };
 </script>

@@ -2,7 +2,8 @@ import Vue from "vue";
 import Vuex from "vuex";
 import authStore from "../Modules/Auth/Store/index";
 import propertiesStore from "../Modules/Owners/Store/index";
-import adminStore from "../Modules/Admin/Store/index";
+import ownerPanelStore from "../Modules/OwnerPanel/Store/index";
+import adminPanelStore from "../Modules/AdminPanel/Store/index";
 import postsStore from "../Modules/Posts/Store/index";
 
 import VuexPersistence from "vuex-persist";
@@ -18,7 +19,8 @@ export default new Vuex.Store({
   modules: {
     authStore,
     propertiesStore,
-    adminStore,
+    ownerPanelStore,
+    adminPanelStore,
     postsStore,
   },
   plugins: [vuexLocal.plugin],
