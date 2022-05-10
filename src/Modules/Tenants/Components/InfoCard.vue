@@ -1,6 +1,9 @@
 <template>
   <div class="w-full h-60 lg:h-80 border">
     <img
+      @click="
+        $router.push({ name: 'tenants-detail', params: { id: property.id } })
+      "
       :src="property.image"
       alt="location image"
       class="h-32 lg:h-48 w-full object-cover"

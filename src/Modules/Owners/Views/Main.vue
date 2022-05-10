@@ -1,6 +1,8 @@
 <template>
   <div class="my-container mb-24">
-    <div class="h-screen rounded-3xl overflow-hidden relative mb-8">
+    <div
+      class="rounded-3xl overflow-hidden relative mb-8 my-container w-full hero-main"
+    >
       <img
         src="@/assets/images/location.png"
         alt="Hero image"
@@ -37,16 +39,16 @@
       <h1 class="text-center my-title-2 my-4">
         {{ $t("owners.title") }}
       </h1>
-      <p class="md:text-center text-left">
+      <p class="md:text-center text-left w-10/12 mx-auto">
         {{ $t("owners.subtitle") }}
       </p>
 
-      <div class="w-full my-5 flex flex-col gap-2">
+      <div class="w-10/12 my-5 flex flex-col gap-10 mx-auto mt-20">
         <div class="flex flex-row justify-between items-center gap-6">
           <img
             src="@/assets/icons/thief.png"
             alt="ladron icon"
-            class="w-40 h-36 object-contain"
+            class="w-20 object-contain"
           />
           <p class="text-left flex-1">
             {{ $t("owners.description_1") }}
@@ -57,7 +59,7 @@
           <img
             src="@/assets/icons/house.png"
             alt="ladron icon"
-            class="w-40 h-36 object-contain"
+            class="w-20 object-contain"
           />
 
           <p class="text-left flex-1">
@@ -68,7 +70,7 @@
           <img
             src="@/assets/icons/bed.png"
             alt="ladron icon"
-            class="w-40 h-36 object-contain"
+            class="w-20 object-contain"
           />
 
           <p class="text-left flex-1">
@@ -77,9 +79,9 @@
         </div>
       </div>
 
-      <div class="w-full flex justify-center">
+      <div class="w-full flex justify-center my-10">
         <button
-          class="w-11/12 md:w-2/3 bg-my-blue-primary py-2 rounded-lg border text-white font-bold"
+          class="w-11/12 md:w-auto my-btn px-12 text-white font-bold"
           @click="goToCreateProperty"
         >
           {{ $t("owners.load") }}

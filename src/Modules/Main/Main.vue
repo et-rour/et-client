@@ -1,7 +1,7 @@
 <template>
   <div class="w-full mx-auto mb-24 md:mb-2">
     <!-- hero -->
-    <div class="my-container hero mx-auto relative overflow-hidden">
+    <div class="my-container hero-main mx-auto relative overflow-hidden">
       <img
         src="@/assets/images/homeImage.png"
         alt="Hero image"
@@ -45,7 +45,7 @@
 
     <!-- find space -->
     <div
-      class="my-container mx-auto hero rounded-3xl overflow-hidden relative"
+      class="my-container mx-auto h-screen rounded-3xl overflow-hidden relative"
       id="find"
     >
       <img
@@ -73,54 +73,72 @@
           </h1>
 
           <div
-            class="flex flex-col gap-2 w-full rounded-md lg:rounded-full py-3 bg-white justify-center items-center px-8 md:flex-row"
+            class="w-full rounded-md lg:rounded-full bg-white justify-center items-center px-0 lg:px-8 pb-4 lg:py-4"
           >
-            <div
-              class="lg:border lg:border-l-0 lg:border-r-0 w-full lg:border-x-0 flex flex-col gap-2 md:flex-row"
-            >
-              <font-awesome-icon
-                icon="search"
-                class="text-2xl text-gray-400 block md:mt-4"
-              />
-              <input
-                type="text"
-                placeholder="Santiago"
-                class="block w-full py-4 border-r border md:border-0 md:border-r"
-                v-model="search"
-              />
-            </div>
-            <div
-              class="flex justify-center items-center border-r gap-1 w-full md:w-40 py-1 border md:border-0 md:border-r px-4 lg:px-0"
-            >
-              <select
-                name="pets"
-                id="pet-select"
-                class="w-full text-center py-4"
-                v-model="zone"
-              >
-                <option value="" selected>
-                  {{ $t("landing.hero_2.commune") }}
-                </option>
-                <option
-                  v-for="zone in sortedZones"
-                  :key="zone.id"
-                  :value="zone.id"
+            <div class="flex flex-col lg:flex-row">
+              <!-- search -->
+              <div class="flex justify-center items-center gap-2 border">
+                <font-awesome-icon
+                  icon="search"
+                  class="text-2xl text-gray-400 block"
+                />
+                <input
+                  type="text"
+                  placeholder="Santiago"
+                  class="block w-full h-full py-3"
+                  v-model="search"
+                />
+              </div>
+              <!-- select -->
+              <div class="">
+                <select
+                  name="pets"
+                  id="pet-select"
+                  class="w-full text-center border h-full py-3"
+                  v-model="zone"
                 >
-                  {{zone.city}} - {{zone.zone}}
-                </option>
-              </select>
-            </div>
-            <div
-              class="flex flex-grow justify-center items-center gap-2 flex-nowrap py-2 text-center border md:border-0 px-4 lg:px-0"
-            >
-              <button class="px-4 border rounded-full cursor-pointer" @click="toggleType('room')" :class="this.type === 'room' ? 'selectedField' : ''">
-                <p>{{ $t("landing.hero_2.private") }}</p>
-              </button>
-              <button class="px-4 border rounded-full cursor-pointer" @click="toggleType('entire')" :class="this.type === 'entire' ? 'selectedField' : ''">
-                <p>{{ $t("landing.hero_2.complete") }}</p>
-              </button>
-            </div>
-            <button
+                  <option value="" selected>
+                    {{ $t("landing.hero_2.commune") }}
+                  </option>
+                  <option
+                    v-for="zone in sortedZones"
+                    :key="zone.id"
+                    :value="zone.id"
+                  >
+                    {{ zone.city }} - {{ zone.zone }}
+                  </option>
+                </select>
+              </div>
+              <!-- buttons -->
+              <div
+                class="flex justify-center items-center gap-2 flex-nowrap py-4 px-2 text-center border flex-shrink-0"
+              >
+                <button
+                  class="px-4 border rounded-full cursor-pointer w-44"
+                  @click="toggleType('room')"
+                  :class="this.type === 'room' ? 'selectedField' : ''"
+                >
+                  <p>{{ $t("landing.hero_2.private") }}</p>
+                </button>
+                <button
+                  class="px-4 border rounded-full cursor-pointer w-48"
+                  @click="toggleType('entire')"
+                  :class="this.type === 'entire' ? 'selectedField' : ''"
+                >
+                  <p>{{ $t("landing.hero_2.complete") }}</p>
+                </button>
+              </div>
+              <!-- find -->
+              <div class="flex justify-center items-center">
+                <!-- <button
+                  class="my-btn w-12 h-12 rounded-full flex justify-center items-center flex-shrink-0"
+                >
+                  <font-awesome-icon
+                    icon="search"
+                    class="text-2xl text-white block"
+                  />
+                </button>-->
+                 <button
               class="my-btn w-12 h-12 rounded-full flex justify-center items-center flex-shrink-0"
               @click="resetFilters"
             >
@@ -129,6 +147,8 @@
                 class="text-2xl text-white block"
               />
             </button>
+              </div>
+            </div>
             <!-- <div
               class="my-btn w-24 h-12 flex justify-center items-center absolute right-24 mb-16 rounded-tl-lg rounded-tr-lg rounded-br-lg rounded-bl-none"
               :class="resetVisible ? 'hidden' : ''"
@@ -323,14 +343,14 @@ export default {
       "zonesList",
     ]),
     propertiesData() {
-      let arr = this.filteredPropertiesList(this.search)
+      let arr = this.filteredPropertiesList(this.search);
 
       if (this.type !== "") {
-        arr = arr.filter(el => el.propertyType === this.type);
+        arr = arr.filter((el) => el.propertyType === this.type);
       }
 
-      if(this.zone !== "") {
-        arr = arr.filter(el => el.zone.id === this.zone);
+      if (this.zone !== "") {
+        arr = arr.filter((el) => el.zone.id === this.zone);
       }
 
       return arr;
@@ -338,29 +358,33 @@ export default {
     sortedZones() {
       let res = this.sortZones(this.zonesList);
       return res;
-    }
+    },
   },
   methods: {
-    ...mapActions("propertiesStore", ["loadProperties", "loadZones",]),
+    ...mapActions("propertiesStore", ["loadProperties", "loadZones"]),
     toggleType(option) {
-      if(option === "room") {
-        if(this.type === "room") {
-          this.type = ""
+      if (option === "room") {
+        if (this.type === "room") {
+          this.type = "";
         } else {
-          this.type = "room"
+          this.type = "room";
         }
       }
-      if(option === "entire") {
-        if(this.type === "entire") {
-          this.type = ""
+      if (option === "entire") {
+        if (this.type === "entire") {
+          this.type = "";
         } else {
-          this.type = "entire"
+          this.type = "entire";
         }
       }
     },
-    sortArray(x, y){
-      if (x.city < y.city) {return -1;}
-      if (x.city > y.city) {return 1;}
+    sortArray(x, y) {
+      if (x.city < y.city) {
+        return -1;
+      }
+      if (x.city > y.city) {
+        return 1;
+      }
       return 0;
     },
     sortZones(arr) {
@@ -384,28 +408,37 @@ export default {
     },
     setResetVisible() {
       this.resetVisible = !this.resetVisible;
-    }
+    },
   },
   mounted() {
     if (this.propertiesList.length < 1) {
       this.loadProperties();
       this.loadZones();
     }
-  }
+  },
 };
 </script>
 
-<style scoped>
-  .selectedField {
-    background-color: #2323D5;
-    color: #FFF;
+<style>
+.selectedField {
+  background-color: #2323d5;
+  color: #fff;
+}
+.hero-main {
+  height: calc(100vh - 190px);
+}
+@media (min-width: 768px) {
+  .hero-main {
+    height: calc(100vh - 100px);
   }
+}
+
+.hero {
+  height: calc(100vh - 190px);
+}
+@media (min-width: 768px) {
   .hero {
-    height: calc(100vh - 190px);
+    height: calc(100vh);
   }
-  @media (min-width: 768px) {
-    .hero {
-      height: 100vh;
-    }
-  }
+}
 </style>
