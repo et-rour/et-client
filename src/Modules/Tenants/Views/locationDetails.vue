@@ -2,7 +2,11 @@
   <div>
     <div class="my-container mb-32 lg:mb-2" v-if="property">
       <h1 class="my-title">{{ property.name }}</h1>
-      <p>{{ property.address }}, {{ property.zone.zone }} - {{ property.zone.city }} ({{ property.zone.state }}), {{ property.zone.country }}.</p>
+      <p>
+        {{ property.address }}, {{ property.zone.zone }} -
+        {{ property.zone.city }} ({{ property.zone.state }}),
+        {{ property.zone.country }}.
+      </p>
       <p>{{ property.description }}</p>
 
       <img
@@ -85,7 +89,7 @@
       :locationName="property.name"
       :locationAddress="`${property.address}, ${property.zone.zone} - ${property.zone.city} (${property.zone.state}), ${property.zone.country}`"
       v-on:closePopup="closeContactModal"
-      ></ContactModal>
+    ></ContactModal>
   </div>
 </template>
 
@@ -96,7 +100,7 @@ import { MarkersPlugin } from "photo-sphere-viewer/dist/plugins/markers";
 import "photo-sphere-viewer/dist/photo-sphere-viewer.css";
 import "photo-sphere-viewer/dist/plugins/markers.css";
 import RoomCard from "../Components/RoomCard.vue";
-import ContactModal from "../Components/ContactModal.vue"
+import ContactModal from "../Components/ContactModal.vue";
 import ModelGlobal from "../../../components/ModelGlobal.vue";
 import EspacioTemporalAPI from "@/Api/index.js";
 
@@ -229,17 +233,13 @@ export default {
     ...mapGetters("propertiesStore", ["propertiesById"]),
     ...mapGetters("authStore", ["user", "isAuth"]),
     zoom() {
-      return this.property.lat !== "" && this.property.long !== ""
-        ? 15
-        : 2;
+      return this.property.lat !== "" && this.property.long !== "" ? 15 : 2;
     },
     markerLatLng() {
       return [this.property.lat, this.property.long];
     },
     validMarker() {
-      return (
-        this.property.lat !== "" && this.property.long !== ""
-      );
+      return this.property.lat !== "" && this.property.long !== "";
     },
   },
   mounted() {

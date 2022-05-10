@@ -2,7 +2,7 @@
   <div class="mb-36 md:mb-5">
     <!-- hero -->
     <div
-      class="my-container mx-auto hero rounded-3xl overflow-hidden relative mb-8"
+      class="my-container mx-auto hero-main rounded-3xl overflow-hidden relative mb-8"
     >
       <img
         src="@/assets/images/Bartalent.jpg"

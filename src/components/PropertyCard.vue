@@ -2,9 +2,12 @@
   <div class="flex flex-col h-80">
     <div class="h-2/3 w-full">
       <img
+        @click="
+          $router.push({ name: 'tenants-detail', params: { id: property.id } })
+        "
         :src="property.image"
         alt="location_image"
-        class="object-cover h-full w-full"
+        class="object-cover h-full w-full cursor-pointer"
       />
     </div>
     <div class="bg-white p-3 pr-12 h-1/3 w-full border">

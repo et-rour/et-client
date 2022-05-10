@@ -1,27 +1,34 @@
 <template>
   <div class="w-full mb-32 lg:mb-2">
     <!-- hero -->
-    <div class="hero my-container rounded-3xl overflow-hidden relative">
+    <div class="my-container hero-main rounded-3xl overflow-hidden relative">
       <img
         src="@/assets/images/womanStanding.png"
         alt="Hero image"
         class="w-full h-full object-cover"
       />
 
+      <!-- MASK -->
       <div
-        class="bg-black bg-opacity-20 w-full h-full px-4 absolute top-0 left-0 flex flex-col justify-end gap-3 py-4 rounded-3xl overflow-hidden"
-      >
-        <h1 class="my-title text-white">
-          {{ $t("tenants.index.hero.title") }}
-        </h1>
+        class="w-full h-full absolute top-0 left-0 flex flex-col justify-end gap-3 py-4 rounded-b-3xl mask"
+      ></div>
 
-        <div class="flex gap-2 flex-wrap">
-          <button
-            class="bg-white w-64 py-2 rounded-md font-bold text-blue-600"
-            v-scroll-to="'#spaces'"
-          >
-            {{ $t("tenants.index.hero.find") }}
-          </button>
+      <div
+        class="w-full h-full absolute top-0 left-0 flex flex-col justify-end items-center pb-16"
+      >
+        <div class="w-10/12 lg:w-9/12">
+          <h1 class="my-title text-white">
+            {{ $t("tenants.index.hero.title") }}
+          </h1>
+
+          <div class="flex gap-2 flex-wrap">
+            <button
+              class="bg-white w-64 py-2 rounded-md font-bold text-blue-600"
+              v-scroll-to="'#spaces'"
+            >
+              {{ $t("tenants.index.hero.find") }}
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -124,7 +131,7 @@ export default {
       var element = this.$refs[refName];
       var top = element.offsetTop;
       window.scrollTo(0, top);
-    }
+    },
   },
   mounted() {
     // if (this.propertiesList.length < 1) {

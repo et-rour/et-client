@@ -8,11 +8,11 @@
       </div>
       <!-- Logo -->
       <div
-        class="py-2 flex-grow md:flex-grow-0 flex justify-center cursor-pointer"
+        class="py-2 flex-grow md:flex-grow-0 flex justify-center cursor-pointer flex-shrink-0"
         @click="$router.push({ name: 'home' })"
       >
         <img
-          class="md:w-48 md:h-10 w-28 h-9 object-fill"
+          class="md:w-32 md:h-10 w-28 h-9 object-contain"
           src="@/assets/icons/logoHeader.png"
           alt="logo espacio temporal"
         />

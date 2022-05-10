@@ -8,10 +8,7 @@
       {{ $t("landing.video.description") }}
     </p>
     <div class="w-full flex justify-center">
-      <button
-        class="my-btn w-64 rounded-md text-white"
-        @click="toogleShowModal"
-      >
+      <button class="my-btn w-64 mt-6 text-white" @click="toogleShowModal">
         {{ $t("landing.video.ver") }}
       </button>
     </div>

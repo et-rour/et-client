@@ -126,4 +126,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+div {
+  z-index: 1000;
+}
+</style>
