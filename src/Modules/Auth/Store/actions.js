@@ -108,6 +108,11 @@ export const updateUser = async ({ commit }, currentUser) => {
     lastName: res.data.lastName,
     country: res.data.country,
     isOwner: res.data.isOwner,
+    phone: res.data.phone,
   };
   commit("updateUser", newUser);
 };
+
+export const setSiteCountry = ({ commit }, country) => {
+  commit("setSiteCountry", country);
+}

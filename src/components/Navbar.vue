@@ -35,17 +35,24 @@
           :to="{ name: 'tenants' }"
           >{{ $t("navbar.tenants") }}</router-link
         >
-        <router-link
+        <!-- <router-link
           class="w-full py-2 text-center md:w-auto uppercase font-sans"
           to="/"
           >{{ $t("navbar.howWorks") }}</router-link
-        >
+        > -->
         <router-link
           active-class="text-my-blue-primary "
           class="w-full py-2 text-center md:w-auto uppercase font-sans"
           :to="{ name: 'posts' }"
           >{{ $t("navbar.us") }}</router-link
         >
+        <select
+          class="w-20 h-10 flex justify-center items-center text-center rounded-full border border-black relative cursor-pointer"
+          v-model="localSiteCountry"
+        >
+          <option selected value="Chile">Chile</option>
+          <option value="Perú">Perú</option>
+        </select>
         <!-- <router-link
           active-class="text-my-blue-primary "
           v-if="user.user && user.user.isOwner"
@@ -142,13 +149,14 @@ export default {
       movileMenuOpen: false,
       showAccoutOptions: false,
       langs: ["es", "en"],
+      localSiteCountry: "",
     };
   },
   methods: {
     ...mapMutations({
       changeModel: "authStore/changeShowLoginModal",
     }),
-    ...mapActions("authStore", ["logout"]),
+    ...mapActions("authStore", ["logout", "setSiteCountry"]),
     toogleLoginModalOpen() {
       this.changeModel(true);
     },
@@ -158,11 +166,25 @@ export default {
     },
   },
   computed: {
-    ...mapGetters("authStore", ["isAuth", "user"]),
+    ...mapGetters("authStore", ["isAuth", "user", "siteCountry"]),
     movileMenuClasses() {
       return this.movileMenuOpen ? "left-0" : "right-full";
     },
+    country() {
+      return this.siteCountry;
+    }
   },
+  watch: {
+    country() {
+      this.localSiteCountry = this.country;
+    },
+    localSiteCountry() {
+      this.setSiteCountry(this.localSiteCountry);
+    }
+  },
+  mounted() {
+    this.localSiteCountry = this.siteCountry;
+  }
 };
 </script>
 

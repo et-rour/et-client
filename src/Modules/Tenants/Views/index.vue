@@ -74,7 +74,25 @@
 
     <!-- avalible spaces -->
     <div class="my-container mt-6" id="spaces">
-      <h2 class="my-title">{{ $t("tenants.index.avalibleSpaces.title") }}</h2>
+      <div class="flex justify-between">
+        <h2 class="my-title">{{ $t("tenants.index.avalibleSpaces.title") }}</h2>
+        <div>
+          <button
+            class="px-4 border rounded-full cursor-pointer w-44"
+            @click="toggleType('room')"
+            :class="this.type === 'room' ? 'selectedField' : ''"
+          >
+          <p>{{ $t("landing.hero_2.private") }}</p>
+          </button>
+          <button
+            class="px-4 border rounded-full cursor-pointer w-48"
+            @click="toggleType('entire')"
+            :class="this.type === 'entire' ? 'selectedField' : ''"
+          >
+            <p>{{ $t("landing.hero_2.complete") }}</p>
+          </button>
+        </div>   
+      </div>
       <div class="w-full relative">
         <input
           type="text"
@@ -89,19 +107,34 @@
       <div class="w-full" v-if="isLoading">
         <Spiner></Spiner>
       </div>
-      <div
+      <paginate
+        name="propertiesData"
+        :list="propertiesData"
+        :per="8"
         class="w-full grid grid-cols-1 md:grid-cols-2 gap-4"
-        v-else-if="filteredPropertiesList(search).length > 0"
+        v-else-if="propertiesData.length > 0"
       >
         <InfoCard
-          v-for="property in filteredPropertiesList(search)"
+          v-for="property in paginated('propertiesData')"
           :key="property.id"
           :property="property"
         ></InfoCard>
-      </div>
+      </paginate>
       <h3 class="my-title-2 text-center text-gray-400" v-else>
         {{ $t("landing.spaces.notFound") }}
       </h3>
+      <paginate-links
+        for="propertiesData"
+        class="flex justify-center p-2"
+        :simple="{
+          prev: '<<',
+          next: '>>'
+        }"
+        :classes="{
+          '.next > a': 'next-link',
+          '.prev > a': 'prev-link',
+        }"
+        ></paginate-links>
     </div>
   </div>
 </template>
@@ -116,6 +149,9 @@ export default {
   data() {
     return {
       search: "",
+      type: "",
+      localSiteCountry: "",
+      paginate: ['propertiesData']
     };
   },
   computed: {
@@ -124,6 +160,20 @@ export default {
       "isLoading",
       "propertiesList",
     ]),
+    ...mapGetters("authStore", ["siteCountry"]),
+    propertiesData() {
+      let arr = this.filteredPropertiesList(this.search);
+
+      if (this.type !== "") {
+        arr = arr.filter((el) => el.propertyType === this.type);
+      }
+
+      if (this.localSiteCountry !== "") {
+        arr = arr.filter((el) => el.zone.country === this.localSiteCountry);
+      }
+
+      return arr;
+    },
   },
   methods: {
     ...mapActions("propertiesStore", ["loadProperties"]),
@@ -132,13 +182,37 @@ export default {
       var top = element.offsetTop;
       window.scrollTo(0, top);
     },
+    toggleType(option) {
+      if (option === "room") {
+        if (this.type === "room") {
+          this.type = "";
+        } else {
+          this.type = "room";
+        }
+      }
+      if (option === "entire") {
+        if (this.type === "entire") {
+          this.type = "";
+        } else {
+          this.type = "entire";
+        }
+      }
+    },
   },
   mounted() {
-    // if (this.propertiesList.length < 1) {
-    //   this.loadProperties();
-    // }
+    this.localSiteCountry = this.siteCountry;
   },
+  watch: {
+    siteCountry() {
+      this.localSiteCountry = this.siteCountry;
+    }
+  }
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.selectedField {
+  background-color: #2323d5;
+  color: #fff;
+}
+</style>

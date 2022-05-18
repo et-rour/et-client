@@ -171,13 +171,37 @@
       </div>
       <!-- cards -->
       <div v-else-if="propertiesList.length > 0">
-        <div class="w-full gap-5 grid grid-cols-2 lg:grid-cols-3">
-          <PropertyCard
+        <!-- <div class="w-full gap-5 grid grid-cols-2 lg:grid-cols-3"> -->
+          <!-- <PropertyCard
             v-for="property in propertiesData"
             :key="property.id"
             :property="property"
+          ></PropertyCard> -->
+        <!-- </div> -->
+        <paginate
+          name="propertiesData"
+          :list="propertiesData"
+          :per="9"
+          class="w-full gap-5 grid grid-cols-2 lg:grid-cols-3"
+        >
+          <PropertyCard
+            v-for="property in paginated('propertiesData')"
+            :key="property.id"
+            :property="property"
           ></PropertyCard>
-        </div>
+        </paginate>
+        <paginate-links
+        for="propertiesData"
+        class="flex justify-center p-2"
+        :simple="{
+          prev: '<<',
+          next: '>>'
+        }"
+        :classes="{
+          '.next > a': 'next-link',
+          '.prev > a': 'prev-link',
+        }"
+        ></paginate-links>
         <div class="w-full flex justify-end">
           <router-link
             :to="{ name: 'tenants' }"
@@ -332,7 +356,9 @@ export default {
       search: "",
       zone: "",
       type: "",
+      localSiteCountry: "",
       resetVisible: true,
+      paginate: ['propertiesData']
     };
   },
   computed: {
@@ -342,6 +368,7 @@ export default {
       "filteredPropertiesList",
       "zonesList",
     ]),
+    ...mapGetters("authStore", ["siteCountry"]),
     propertiesData() {
       let arr = this.filteredPropertiesList(this.search);
 
@@ -351,6 +378,10 @@ export default {
 
       if (this.zone !== "") {
         arr = arr.filter((el) => el.zone.id === this.zone);
+      }
+
+      if (this.localSiteCountry !== "") {
+        arr = arr.filter((el) => el.zone.country === this.localSiteCountry);
       }
 
       return arr;
@@ -415,7 +446,13 @@ export default {
       this.loadProperties();
       this.loadZones();
     }
+    this.localSiteCountry = this.siteCountry;
   },
+  watch: {
+    siteCountry() {
+      this.localSiteCountry = this.siteCountry;
+    }
+  }
 };
 </script>
 

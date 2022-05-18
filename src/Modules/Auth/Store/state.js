@@ -5,4 +5,5 @@ export default () => ({
   isAuth: false,
   token: null,
   firebaseStoratgeToken: null,
+  siteCountry: "Chile",
 });

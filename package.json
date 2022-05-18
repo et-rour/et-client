@@ -1,6 +1,6 @@
 {
   "name": "espacio-temporal-vue",
-  "version": "20.0.1",
+  "version": "2.1.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -28,6 +28,7 @@
     "vee-validate": "^3.4.14",
     "vue": "^2.6.11",
     "vue-i18n": "^8.26.3",
+    "vue-paginate": "^3.6.0",
     "vue-recaptcha": "^2.0.2",
     "vue-router": "^3.2.0",
     "vue-scrollto": "^2.20.0",

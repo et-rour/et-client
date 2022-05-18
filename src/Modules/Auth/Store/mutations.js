@@ -33,3 +33,6 @@ export const logout = (state) => {
 export const updateUser = (state, newUser) => {
   state.user = newUser;
 };
+export const setSiteCountry = (state, country) => {
+  state.siteCountry = country;
+}

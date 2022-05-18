@@ -9,10 +9,21 @@
         <input
           v-model="registerEmail"
           type="text"
-          :placeholder="$t('login.email')"
+          :placeholder="$t('login.emailRegister')"
           class="my-input border border-gray-400 w-full py-3 rounded-t-md rounded-b-none border-b-0 mt-5"
         />
         <span class="my-error">{{ errors[0] }}</span>
+      </ValidationProvider>
+
+      <ValidationProvider
+        class="relative"
+      >
+        <input
+          v-model="registerPhone"
+          type="number"
+          :placeholder="$t('login.phone')"
+          class="my-input border border-gray-400 w-full py-3 border-b rounded-t-none rounded-b-none"
+        />
       </ValidationProvider>
 
       <div class="w-full flex justify-between">
@@ -48,11 +59,31 @@
         <input
           v-model="registerPassword"
           type="password"
-          :placeholder="$t('login.password')"
+          :placeholder="$t('login.passwordRegister')"
           class="my-input border border-gray-400 w-full py-3 rounded-b-md border-t-0 rounded-t-none"
         />
         <span class="my-error">{{ errors[0] }}</span>
       </ValidationProvider>
+
+      <div>
+        <p class="my-2">{{ $t("login.country") }}</p>
+        <div class="grid grid-cols-3 gap-5">
+        <ValidationProvider class="relative" rules="required">
+          <select
+            name="day"
+            class="border text-center py-2 w-full"
+            v-model="registerCountry" 
+          >
+            <option disabled selected value="">{{ $t("login.countryPlaceholder") }}</option>
+            <option value="Chile">Chile</option>
+            <option value="Perú">Perú</option>
+          </select>
+        </ValidationProvider>
+        <div></div>
+        <div></div>
+        </div>
+      </div>
+
       <div>
         <p class="my-2">{{ $t("login.birth") }}</p>
         <div class="grid grid-cols-3 gap-5">
@@ -246,6 +277,8 @@ export default {
   data() {
     return {
       registerEmail: "",
+      registerPhone: "",
+      registerCountry: "",
       firstName: "",
       lastName: "",
       registerPassword: "",
@@ -266,12 +299,14 @@ export default {
         lastname: this.lastName,
         email: this.registerEmail,
         password: this.registerPassword,
-        country: "Mexico",
+        country: this.registerCountry,
         isOwner: this.isOwner,
+        phone: (this.registerPhone).toString(),
       };
       try {
         this.register(userData);
       } catch (error) {
+        console.log(error)
         CustomErrorToast.fire({
           text: error.response.data.message,
         });

@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import { mapActions, mapMutations } from "vuex";
+import { mapActions, mapMutations, mapGetters } from "vuex";
 import Footer from "./components/Footer.vue";
 import MovileMenu from "./components/MovileMenu.vue";
 import Navbar from "./components/Navbar.vue";
@@ -16,9 +16,15 @@ import { CustomErrorToast } from "@/sweetAlert";
 export default {
   components: { Navbar, MovileMenu, Footer },
   methods: {
-    ...mapActions("authStore", ["loadSession"]),
+    ...mapActions("authStore", ["loadSession", "user", "setSiteCountry"]),
     ...mapActions("propertiesStore", ["loadProperties"]),
     ...mapMutations({ loadCustomProperties: "propertiesStore/loadProperties" }),
+  },
+  computed: {
+    ...mapGetters("authStore", ["user"]),
+    userCountry() {
+      return this.user.user.country;
+    }
   },
   async created() {
     try {
@@ -33,5 +39,21 @@ export default {
       this.loadCustomProperties([]);
     }
   },
+  watch: {
+    userCountry() {
+      this.setSiteCountry(this.user.user.country);
+    }
+  }
 };
 </script>
+
+<style>
+.next-link {
+  cursor: pointer !important;
+  padding-left: 10px;
+}
+.prev-link {  
+  cursor: pointer !important;
+  padding-right: 10px;
+}
+</style>
