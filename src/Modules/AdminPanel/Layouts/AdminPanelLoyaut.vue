@@ -1,32 +1,38 @@
 <template>
-  <div class="my-container">
-    <h1 class="my-title">{{ $t("adminPanel.title") }}</h1>
-
-    <ul class="flex justify-center items-center gap-4">
-      <li>
-        <router-link :to="{ name: 'admin-users' }">{{
-          $t("adminPanel.navbar.users")
-        }}</router-link>
-      </li>
-      <li>
-        <router-link :to="{ name: 'admin-zones' }">{{
-          $t("adminPanel.navbar.zones")
-        }}</router-link>
-      </li>
-      <li>
-        <router-link :to="{ name: 'admin-locations' }">{{
-          $t("adminPanel.navbar.locations")
-        }}</router-link>
-      </li>
-      <li>
-        <router-link :to="{ name: 'admin-cuartos' }">{{
-          $t("adminPanel.navbar.rooms")
-        }}</router-link>
-      </li>
-    </ul>
-
-    <div class="w-full">
-      <router-view></router-view>
+  <div class="w-full mb-10">
+    <div class="w-full h-screen flex flex-col md:flex-row">
+      <ul
+        class="flex flex-col md:h-full md:w-40 gap-2 bg-my-blue-primary text-white text-center md:text-left px-2 py-4"
+      >
+        <li>
+          <router-link :to="{ name: 'admin-users', hash: '#details' }">{{
+            $t("adminPanel.navbar.users")
+          }}</router-link>
+        </li>
+        <li>
+          <router-link :to="{ name: 'admin-zones', hash: '#details' }">{{
+            $t("adminPanel.navbar.zones")
+          }}</router-link>
+        </li>
+        <li>
+          <router-link :to="{ name: 'admin-locations', hash: '#details' }">{{
+            $t("adminPanel.navbar.locations")
+          }}</router-link>
+        </li>
+        <li>
+          <router-link :to="{ name: 'admin-reviews', hash: '#details' }">{{
+            $t("adminPanel.navbar.review")
+          }}</router-link>
+        </li>
+        <li>
+          <router-link :to="{ name: 'admin-reservations', hash: '#details' }">{{
+            $t("adminPanel.navbar.reservation")
+          }}</router-link>
+        </li>
+      </ul>
+      <div class="flex-grow">
+        <router-view></router-view>
+      </div>
     </div>
   </div>
 </template>
@@ -35,4 +41,16 @@
 export default {};
 </script>
 
-<style></style>
+<style>
+.active-class-admin {
+  background: rgb(206, 206, 206);
+  position: relative;
+}
+.active-class-admin::after {
+  content: ">";
+  position: absolute;
+  top: 30%;
+  right: 10px;
+  font-weight: 800;
+}
+</style>

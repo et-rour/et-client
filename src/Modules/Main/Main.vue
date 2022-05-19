@@ -31,7 +31,7 @@
               {{ $t("landing.hero.searchProperty") }}
             </button>
             <button
-              class="my-btn w-full md:w-64 text-white"
+              class="my-btn w-full md:w-64 text-white p-2 p-1"
               @click="$router.push({ name: 'owner' })"
             >
               {{ $t("landing.hero.openProperty") }}
@@ -171,17 +171,12 @@
       </div>
       <!-- cards -->
       <div v-else-if="propertiesList.length > 0">
-        <!-- <div class="w-full gap-5 grid grid-cols-2 lg:grid-cols-3"> -->
-          <!-- <PropertyCard
-            v-for="property in propertiesData"
-            :key="property.id"
-            :property="property"
-          ></PropertyCard> -->
-        <!-- </div> -->
         <paginate
+          ref="paginator"
           name="propertiesData"
           :list="propertiesData"
           :per="9"
+          :key="siteCountry"
           class="w-full gap-5 grid grid-cols-2 lg:grid-cols-3"
         >
           <PropertyCard
@@ -193,6 +188,8 @@
         <paginate-links
         for="propertiesData"
         class="flex justify-center p-2"
+        :hide-single-page="true"
+        :key="siteCountry"
         :simple="{
           prev: '<<',
           next: '>>'
@@ -427,8 +424,8 @@ export default {
         title: "<strong>Espacio en construcción</strong>",
         icon: "info",
         html:
-          "puede enviarnos su cv a  " +
-          '<a style="color: #2323D5; " href = "mailto: espacio@rour.dev">espacio@rour.dev</a> ',
+          "Puede enviarnos su CV a  " +
+          '<a style="color: #2323D5; " href = "mailto: info@espaciotemporal.cl">info@espaciotemporal.cl</a> ',
         focusConfirm: false,
       });
     },
@@ -451,6 +448,7 @@ export default {
   watch: {
     siteCountry() {
       this.localSiteCountry = this.siteCountry;
+      this.$refs.paginator.goToPage(1);
     }
   }
 };

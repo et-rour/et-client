@@ -55,7 +55,7 @@ export default {
   async mounted() {
     const requestData = {
       locationId: this.createdProperty.location.id,
-      zoneId: this.createdProperty.location.zone,
+      zoneId: this.createdProperty.location.zone.id,
       time: this.createdProperty.calculatorData.time,
       expectedValue: this.createdProperty.calculatorData.expectedValue,
     };

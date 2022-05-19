@@ -64,7 +64,7 @@
           active-class="text-my-blue-primary "
           v-if="user.user && user.user.isAdmin"
           class="w-full py-2 text-center md:w-auto uppercase font-sans"
-          :to="{ name: 'admin' }"
+          :to="{ name: 'admin-users' }"
           >{{ $t("navbar.admin") }}</router-link
         >
         <button
@@ -94,6 +94,12 @@
             <div
               class="bg-white rounded-4xl options-shadow px-6 py-6 w-64 h-64"
             >
+              <p class="font-normal text-center">
+                {{ user.user.firstName }} {{ user.user.lastName }}
+              </p>
+              <p class="font-normal text-center text-sm">
+                {{ user.user.email }}
+              </p>
               <router-link :to="{ name: 'profile-main' }" class="my-2 block">{{
                 $t("navbar.profile")
               }}</router-link>
@@ -172,19 +178,22 @@ export default {
     },
     country() {
       return this.siteCountry;
-    }
+    },
   },
   watch: {
-    country() {
-      this.localSiteCountry = this.country;
+    siteCountry() {
+      this.localSiteCountry = this.siteCountry;
     },
     localSiteCountry() {
+      if (this.localSiteCountry !== this.siteCountry) {
+        this.setSiteCountry(this.localSiteCountry);
+      }
       this.setSiteCountry(this.localSiteCountry);
-    }
+    },
   },
   mounted() {
     this.localSiteCountry = this.siteCountry;
-  }
+  },
 };
 </script>
 

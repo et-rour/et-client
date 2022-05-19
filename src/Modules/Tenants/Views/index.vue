@@ -108,6 +108,7 @@
         <Spiner></Spiner>
       </div>
       <paginate
+        ref="paginator"
         name="propertiesData"
         :list="propertiesData"
         :per="8"
@@ -126,6 +127,8 @@
       <paginate-links
         for="propertiesData"
         class="flex justify-center p-2"
+        :hide-single-page="true"
+        v-if="propertiesData.length > 0"
         :simple="{
           prev: '<<',
           next: '>>'
@@ -205,6 +208,7 @@ export default {
   watch: {
     siteCountry() {
       this.localSiteCountry = this.siteCountry;
+      this.$refs.paginator.goToPage(1);
     }
   }
 };

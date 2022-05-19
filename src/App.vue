@@ -16,7 +16,7 @@ import { CustomErrorToast } from "@/sweetAlert";
 export default {
   components: { Navbar, MovileMenu, Footer },
   methods: {
-    ...mapActions("authStore", ["loadSession", "user", "setSiteCountry"]),
+    ...mapActions("authStore", ["loadSession", "setSiteCountry"]),
     ...mapActions("propertiesStore", ["loadProperties"]),
     ...mapMutations({ loadCustomProperties: "propertiesStore/loadProperties" }),
   },
@@ -24,7 +24,7 @@ export default {
     ...mapGetters("authStore", ["user"]),
     userCountry() {
       return this.user.user.country;
-    }
+    },
   },
   async created() {
     try {
@@ -42,8 +42,8 @@ export default {
   watch: {
     userCountry() {
       this.setSiteCountry(this.user.user.country);
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -52,7 +52,7 @@ export default {
   cursor: pointer !important;
   padding-left: 10px;
 }
-.prev-link {  
+.prev-link {
   cursor: pointer !important;
   padding-right: 10px;
 }
