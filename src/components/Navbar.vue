@@ -62,6 +62,14 @@
           >{{ $t("navbar.admin") }}</router-link
         >
 
+        <select
+            class="mt-1 top-12 -left-0 px-0 z-10 text-xl	" 
+            v-model="localSiteCountry"
+        >
+          <option selected value="Chile">🇨🇱</option>
+          <option value="Perú">🇵🇪</option>
+        </select>
+
         <div class="flex flex-col justify-center items-center relative">
           <button
             class="my-btn w-20"
@@ -126,13 +134,6 @@
               </div>
             </div>
           </div>
-          <select
-            class="my-input text-black block mt-1 absolute top-12 -left-0 px-0 z-10 w-full"
-            v-model="localSiteCountry"
-          >
-            <option selected value="Chile">Chile</option>
-            <option value="Perú">Perú</option>
-          </select>
         </div>
         <button
           class="my-btn w-20 md:hidden absolute top-2 right-2 bg-gray-400 px-0"

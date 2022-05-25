@@ -385,6 +385,7 @@ export default {
     },
     sortedZones() {
       let res = this.sortZones(this.zonesList);
+      res = res.filter(zone => zone.country === this.siteCountry)
       return res;
     },
   },

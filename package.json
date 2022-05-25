@@ -1,6 +1,6 @@
 {
   "name": "espacio-temporal-vue",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -22,6 +22,7 @@
     "core-js": "^3.6.5",
     "firebase": "^9.6.7",
     "leaflet": "^1.7.1",
+    "mdb-vue-ui-kit": "^1.13.0",
     "moment": "^2.29.3",
     "photo-sphere-viewer": "^4.5.1",
     "register-service-worker": "^1.7.1",
@@ -30,8 +31,8 @@
     "vee-validate": "^3.4.14",
     "vue": "^2.6.11",
     "vue-i18n": "^8.26.3",
-    "vue-property-decorator": "^8.0.0",
     "vue-paginate": "^3.6.0",
+    "vue-property-decorator": "^8.0.0",
     "vue-recaptcha": "^2.0.2",
     "vue-router": "^3.2.0",
     "vue-scrollto": "^2.20.0",
