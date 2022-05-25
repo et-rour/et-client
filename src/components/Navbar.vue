@@ -35,11 +35,11 @@
           :to="{ name: 'tenants' }"
           >{{ $t("navbar.tenants") }}</router-link
         >
-        <router-link
+        <!-- <router-link
           class="w-full py-2 text-center md:w-auto uppercase font-sans"
           to="/"
           >{{ $t("navbar.howWorks") }}</router-link
-        >
+        > -->
         <router-link
           active-class="text-my-blue-primary "
           class="w-full py-2 text-center md:w-auto uppercase font-sans"
@@ -62,15 +62,22 @@
           >{{ $t("navbar.admin") }}</router-link
         >
 
-        <select
-            class="mt-1 top-12 -left-0 px-0 z-10 text-xl	" 
-            v-model="localSiteCountry"
-        >
-          <!-- <option selected value="Chile">🇨🇱</option> -->
-          <option selected value="Chile">&#127464;&#127473;</option>
-          <!-- <option value="Perú">🇵🇪</option> -->
-          <option value="Perú">&#127477;&#127466;</option>
-        </select>
+        <div class="flex justify-around items-center w-28 h-10 rounded-md border-gray-200 border-2">
+          <div
+            class="flex justify-around items-center w-full h-full rounded-tl-md rounded-bl-md background-red p-1 hover:bg-gray-200 cursor-pointer"
+            :class="localSiteCountry === 'Chile' ? 'bg-gray-200' : null"
+            @click="localSiteCountry = 'Chile'"
+          >
+            <img class="w-8 h-6" src="../assets/images/chile-flag-xs.png" alt="cl">
+          </div>
+          <div
+            class="flex justify-around items-center w-full h-full rounded-tr-md rounded-br-md p-1 hover:bg-gray-200 cursor-pointer"
+            :class="localSiteCountry === 'Perú' ? 'bg-gray-200' : null"
+            @click="localSiteCountry = 'Perú'"
+          >
+            <img class="w-8 h-6" src="../assets/images/peru-flag-xs.png" alt="pe">
+          </div>
+        </div>
 
         <div class="flex flex-col justify-center items-center relative">
           <button
@@ -162,6 +169,7 @@ export default {
     return {
       movileMenuOpen: false,
       showAccoutOptions: false,
+      showCountryOptions: false,
       langs: ["es", "en"],
       localSiteCountry: "",
     };
@@ -209,4 +217,9 @@ export default {
 .options-shadow {
   box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
 }
+.isActive {
+  background-color: #e1dbdb;
+}
 </style>
+
+<style>
