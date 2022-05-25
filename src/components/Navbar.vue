@@ -66,8 +66,10 @@
             class="mt-1 top-12 -left-0 px-0 z-10 text-xl	" 
             v-model="localSiteCountry"
         >
-          <option selected value="Chile">🇨🇱</option>
-          <option value="Perú">🇵🇪</option>
+          <!-- <option selected value="Chile">🇨🇱</option> -->
+          <option selected value="Chile">&#127464;&#127473;</option>
+          <!-- <option value="Perú">🇵🇪</option> -->
+          <option value="Perú">&#127477;&#127466;</option>
         </select>
 
         <div class="flex flex-col justify-center items-center relative">
