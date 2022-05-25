@@ -42,7 +42,7 @@ export default {
 
     if (window.Calendly) {
       window.Calendly.initInlineWidget({
-        url: `${process.env.VUE_APP_VISIT}/?primary_color=1d4ed8`,
+        url: `${process.env.VUE_APP_VISIT}/?utm_campaign=tecnica`,
         parentElement: document.getElementById("calendly-widget"),
         prefill: {
           name: `${this.user.user.firstName} ${this.user.user.lastName}`,
@@ -51,7 +51,6 @@ export default {
             a1: `${this.createdProperty.location.name}`,
             a2: `${this.completeAddress}`,
             a3: "",
-            a4: 2,
           },
         },
       });

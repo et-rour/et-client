@@ -36,19 +36,19 @@
     <!-- details -->
     <div class="bg-my-blue-primary w-full relative px-2 py-5 text-white mt-8">
       <div class="my-container mx-auto">
-        <h2 class="my-title">
+        <h2 class="my-title-2">
           {{ $t("tenants.index.details.title") }}
         </h2>
         <p class="my-5">
           {{ $t("tenants.index.details.description") }}
         </p>
 
-        <div class="w-full pl-8">
+        <div class="w-full pl-8 md:w-2/3">
           <div class="w-full bg-lime-600 flex items-center my-3">
             <img
               src="@/assets/icons/calendar.png"
               alt="calendar icon"
-              class="w-16 h-16 object-contain mr-8"
+              class="w-10 h-10 object-contain mr-8"
             />
             <p>{{ $t("tenants.index.details.monthly") }}</p>
           </div>
@@ -56,7 +56,7 @@
             <img
               src="@/assets/icons/links.png"
               alt="calendar icon"
-              class="w-16 h-16 object-contain mr-8"
+              class="w-10 h-10 object-contain mr-8"
             />
             <p>{{ $t("tenants.index.details.flexible") }}</p>
           </div>
@@ -64,7 +64,7 @@
             <img
               src="@/assets/icons/people.png"
               alt="calendar icon"
-              class="w-16 h-16 object-contain mr-8"
+              class="w-10 h-10 object-contain mr-8"
             />
             <p>{{ $t("tenants.index.details.community") }}</p>
           </div>
@@ -74,24 +74,24 @@
 
     <!-- avalible spaces -->
     <div class="my-container mt-6" id="spaces">
-      <div class="flex justify-between">
+      <div class="flex justify-between items-center">
         <h2 class="my-title">{{ $t("tenants.index.avalibleSpaces.title") }}</h2>
-        <div>
+        <div class="flex flex-col gap-3">
           <button
-            class="px-4 border rounded-full cursor-pointer w-44"
+            class="px-4 border rounded-full cursor-pointer w-full"
             @click="toggleType('room')"
             :class="this.type === 'room' ? 'selectedField' : ''"
           >
-          <p>{{ $t("landing.hero_2.private") }}</p>
+            <p>{{ $t("landing.hero_2.private") }}</p>
           </button>
           <button
-            class="px-4 border rounded-full cursor-pointer w-48"
+            class="px-4 border rounded-full cursor-pointer w-full"
             @click="toggleType('entire')"
             :class="this.type === 'entire' ? 'selectedField' : ''"
           >
             <p>{{ $t("landing.hero_2.complete") }}</p>
           </button>
-        </div>   
+        </div>
       </div>
       <div class="w-full relative">
         <input
@@ -131,13 +131,13 @@
         v-if="propertiesData.length > 0"
         :simple="{
           prev: '<<',
-          next: '>>'
+          next: '>>',
         }"
         :classes="{
           '.next > a': 'next-link',
           '.prev > a': 'prev-link',
         }"
-        ></paginate-links>
+      ></paginate-links>
     </div>
   </div>
 </template>
@@ -154,7 +154,7 @@ export default {
       search: "",
       type: "",
       localSiteCountry: "",
-      paginate: ['propertiesData']
+      paginate: ["propertiesData"],
     };
   },
   computed: {
@@ -209,8 +209,8 @@ export default {
     siteCountry() {
       this.localSiteCountry = this.siteCountry;
       this.$refs.paginator.goToPage(1);
-    }
-  }
+    },
+  },
 };
 </script>
 

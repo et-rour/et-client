@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mb-40 md:mb-4">
     <h1 class="my-title">{{ $t("profile.profile.myProfile") }}</h1>
     <p>{{ $t("profile.profile.description") }}</p>
     <!-- {{ user }} -->

@@ -36,7 +36,7 @@
     "isOwner": "¿Eres propietario?",
     "email": "Email",
     "emailRegister": "Email *",
-    "phone": "Teléfono", 
+    "phone": "Teléfono",
     "passwordRegister": "Contraseña *",
     "password": "Contraseña",
     "firstName": "Primer nombre *",
@@ -50,8 +50,8 @@
     "succesModal": {
       "title": "!Todo listo!",
       "subtitle": "Bienvenido a Espacio Temporal",
-      "buttonOpcion1": "ENCUENTRA UN ESPACIO",
-      "buttonOpcion2": "GESTIONA MIS PAGOS",
+      "buttonOpcion1": "PUBLICA TU PROPIEDAD",
+      "buttonOpcion2": "BUSCA UNA PROPIEDAD",
       "buttonOpcion3": "HOME"
     }
   },

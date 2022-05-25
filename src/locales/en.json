@@ -35,7 +35,7 @@
     "register": "SIGN UP",
     "isOwner": "Are you owner?",
     "email": "E-mail",
-    "phone": "Phone number", 
+    "phone": "Phone number",
     "password": "Password",
     "firstName": "First name",
     "lastName": "Last name",
@@ -48,8 +48,8 @@
     "succesModal": {
       "title": "!All ready!",
       "subtitle": "Welcome to Temporary Space",
-      "buttonOpcion1": "FIND A SPACE",
-      "buttonOpcion2": "MANAGE YOUR SPACES",
+      "buttonOpcion1": "PUBLISH YOUR PROPERTY",
+      "buttonOpcion2": "SEARCH A PROPERTY",
       "buttonOpcion3": "HOME"
     }
   },
