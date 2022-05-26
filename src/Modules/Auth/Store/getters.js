@@ -14,3 +14,6 @@ export const isModalOpen = (state) => {
 export const isWelcomeModalOpen = (state) => {
   return state.showWelcomeModal;
 };
+export const siteCountry = (state) => {
+  return state.siteCountry;
+}

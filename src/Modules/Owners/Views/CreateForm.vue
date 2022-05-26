@@ -228,7 +228,7 @@
               name="tiempo"
               v-model="rooms"
             >
-              <option selected value="">
+              <option disabled selected value="">
                 {{ $t("createForm.opcionDefault") }}
               </option>
               <option
@@ -260,7 +260,7 @@
               name="bathrooms"
               v-model="bathrooms"
             >
-              <option selected value="">
+              <option disabled selected value="">
                 {{ $t("createForm.opcionDefault") }}
               </option>
               <option
@@ -292,9 +292,9 @@
               name="pintura"
               v-model="painting"
             >
-              <option selected value="">
+              <!-- <option disabled selected value="">
                 {{ $t("createForm.opcionDefault") }}
-              </option>
+              </option> -->
               <option
                 v-for="(item, index) in stateOptions"
                 :value="item.value"
@@ -322,9 +322,9 @@
               name="suelo"
               v-model="floor"
             >
-              <option selected value="">
+              <!-- <option disabled selected value="">
                 {{ $t("createForm.opcionDefault") }}
-              </option>
+              </option> -->
               <option
                 v-for="(item, index) in stateOptions"
                 :value="item.value"
@@ -374,7 +374,7 @@
               name="tiempo"
               v-model="time"
             >
-              <option selected value="">
+              <option disabled selected value="">
                 {{ $t("createForm.opcionDefault") }}
               </option>
               <option
@@ -406,7 +406,7 @@
               name="garage"
               v-model="garage"
             >
-              <option selected value="">
+              <option disabled selected value="">
                 {{ $t("createForm.opcionDefault") }}
               </option>
               <option
@@ -453,8 +453,8 @@ export default {
       description: "",
       rooms: "",
       bathrooms: "",
-      painting: "",
-      floor: "",
+      painting: 3,
+      floor: 3,
       value: "",
       zone: "",
       ciudad: "",
@@ -587,6 +587,13 @@ export default {
         return [];
       }
     },
+    userData() {
+      return {
+        name: this.user.user.firstName + ' ' + this.user.user.lastName,
+        email: this.user.user.email,
+        phone: this.user.user.phone
+      };
+    }
   },
   async mounted() {
     try {
@@ -596,6 +603,9 @@ export default {
         text: error.response.data.message,
       });
     }
+    this.name = this.userData.name;
+    this.email = this.userData.email;
+    this.phoneNumber = this.userData.phone;
   },
   watch: {
     ciudad(value) {

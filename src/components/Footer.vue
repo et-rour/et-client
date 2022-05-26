@@ -2,51 +2,57 @@
   <div
     class="w-full h-96 bg-gray-900 flex-col justify-center items-center text-white hidden md:flex"
   >
-    <!-- {{ status }}
-    {{ sucessfulServerResponse }}
-    {{ serverError }} -->
     <div class="w-9/12 grid grid-cols-3 grid-rows-2 px-20">
       <img src="@/assets/icons/logoFooter.png" alt="logotipo footer" />
       <ul>
         <li>FAQS</li>
-        <li>{{ $t("footer.nav.owner") }}</li>
-        <li>{{ $t("footer.nav.tenants") }}</li>
-        <li>{{ $t("footer.nav.howWorks") }}</li>
-        <li>{{ $t("footer.nav.us") }}</li>
+        <li>
+          <router-link :to="{ name: 'owner' }">{{ $t("footer.nav.owner") }}</router-link>
+        </li>
+        <li>
+          <router-link :to="{ name: 'tenants' }">{{ $t("footer.nav.tenants") }}</router-link>
+        </li>
+        <!-- <li>
+          <router-link to="/">{{ $t("footer.nav.howWorks") }}</router-link>
+        </li> -->
+        <li>
+          <router-link :to="{ name: 'posts' }">{{ $t("footer.nav.us") }}</router-link>
+        </li>
         <li>{{ $t("footer.nav.terms") }}</li>
-        <!-- <select v-model="$i18n.locale" class="w-full text-black">
-          <option v-for="(lang, i) in langs" :key="`Lang${i}`" :value="lang">
-            {{ lang }}
-          </option>
-        </select> -->
       </ul>
       <form
-        @submit.prevent="submit"
         class="row-start-2 col-start-1 col-end-4 flex flex-col border-b"
+        action="https://formsubmit.co/info@espaciotemporal.cl"
+        method="POST"
       >
         <p>{{ $t("footer.form.Contact") }}</p>
         <div class="w-full grid grid-cols-3 gap-8">
           <div class="flex gap-2 flex-col">
+            <input type="hidden" name="_next" value="https://espaciotemporal.vercel.app/">
+            <input type="hidden" name="_captcha" value="false">
             <input
               type="text"
+              name="name"
               class="my-input text-black"
               :placeholder="$t('footer.form.name')"
             />
             <input
-              type="text"
+              type="email"
+              name="email"
               class="my-input text-black"
               :placeholder="$t('footer.form.email')"
             />
           </div>
-          <div>
-            <textarea
-              name=""
-              cols="30"
+          <div class="flex gap-2 flex-col">
+            <input
+              type="text"
+              name="message"
               class="my-input text-black h-full p-1"
               :placeholder="$t('footer.form.message')"
-            ></textarea>
+              cols="30"
+            />
           </div>
-          <div>
+          <div class="flex gap-2 flex-col">
             <VueRecaptcha
               ref="recaptcha"
               :sitekey="siteKey"
@@ -57,7 +63,7 @@
           </div>
         </div>
         <button
-          class="border border-white text-white py-1 px-12 my-2 rounded-md self-end"
+          class="border border-white text-white py-1 px-12 my-2 rounded-md self-center"
           :class="validateSendMessage ? '' : 'bg-gray-400 cursor-not-allowed'"
           type="submit"
           :disabled="status === 'submitting' || !validateSendMessage"
@@ -87,8 +93,7 @@ export default {
   },
   methods: {
     submit: function () {
-      // this.status = "submitting";
-      alert("dfs");
+      // alert("dfs");
     },
     onCaptchaExpired: function () {
       this.$refs.recaptcha.reset();

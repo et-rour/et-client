@@ -7,23 +7,22 @@ import {
 } from "../../../Firebase/index";
 
 export const login = async ({ commit }, data) => {
-  EspacioAPI.post("/auth/login", data).then((response) => {
-    console.log({ token: response.data.token });
-    signInWithCustomToken(auth, response.data.storageTokenAuthFirebase)
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-        console.log({ user });
-        commit("login", response.data);
-        // ...
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log({ errorCode, errorMessage });
-        // ...
-      });
-  });
+  const res = await EspacioAPI.post("/auth/login", data);
+  console.log({ token: res.data.token });
+  signInWithCustomToken(auth, res.data.storageTokenAuthFirebase)
+    .then((userCredential) => {
+      // Signed in
+      const user = userCredential.user;
+      console.log({ user });
+      commit("login", res.data);
+      // ...
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log({ errorCode, errorMessage });
+      // ...
+    });
 };
 
 export const loadSession = async ({ commit }) => {
@@ -108,6 +107,11 @@ export const updateUser = async ({ commit }, currentUser) => {
     lastName: res.data.lastName,
     country: res.data.country,
     isOwner: res.data.isOwner,
+    phone: res.data.phone,
   };
   commit("updateUser", newUser);
+};
+
+export const setSiteCountry = ({ commit }, country) => {
+  commit("setSiteCountry", country);
 };

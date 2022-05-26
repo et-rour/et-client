@@ -62,15 +62,12 @@ export default {
       try {
         await this.login(userData);
 
-        setTimeout(() => {
-          this.changeShowLoginModal(false);
-          console.log("%cLoginForm.vue line:67 closeModal", "color: #007acc;");
-          if (this.user.user.isOwner) {
-            this.$router.push({ name: "owner" });
-          } else {
-            this.$router.push({ name: "profile-main" });
-          }
-        }, 2000);
+        this.changeShowLoginModal(false);
+        if (this.user.user.isOwner) {
+          this.$router.push({ name: "owner" });
+        } else if (this.user.user) {
+          this.$router.push({ name: "profile-main" });
+        }
       } catch (error) {
         CustomErrorToast.fire({
           text: error.response.data.message,

@@ -33,7 +33,7 @@
         alt="Nosotros icon"
         class="w-10 h-10 object-contain"
       />
-      <p>Nosotros</p>
+      <p>Comunidad</p>
     </router-link>
   </div>
 </template>

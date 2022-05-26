@@ -4,6 +4,7 @@ module.exports = {
     extend: {
       colors: {
         "my-blue-primary": "#2323D5",
+        "my-green-primary": "#68B865",
       },
       fontSize: {
         myheader1: [

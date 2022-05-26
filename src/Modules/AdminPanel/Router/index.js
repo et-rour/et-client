@@ -1,8 +1,11 @@
 import Layout from "../Layouts/AdminPanelLoyaut.vue";
-import Users from "../Views/Users.vue";
-import Zones from "../Views/Zones.vue";
-import Locations from "../Views/Locations.vue";
 
+import userRouter from "../Modules/User/Router/index.js";
+import zonesRouter from "../Modules/Zones/Router/index.js";
+import locationsRouter from "../Modules/Locations/Router/index.js";
+import reviewRouter from "../Modules/Reviews/Router/index.js";
+
+import Reservation from "../Modules/Reservations/Views/Reservation.vue";
 export default [
   {
     name: "admin",
@@ -10,19 +13,21 @@ export default [
     component: Layout,
     children: [
       {
-        name: "admin-users",
-        path: "users",
-        component: Users,
+        ...userRouter,
       },
       {
-        name: "admin-zones",
-        path: "zones",
-        component: Zones,
+        ...zonesRouter,
       },
       {
-        name: "admin-locations",
-        path: "locations",
-        component: Locations,
+        ...locationsRouter,
+      },
+      {
+        ...reviewRouter,
+      },
+      {
+        name: "admin-reservations",
+        path: "/reservations",
+        component: Reservation,
       },
     ],
   },

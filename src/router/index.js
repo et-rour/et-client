@@ -29,7 +29,20 @@ const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
   routes,
-  scrollBehavior() {
+  scrollBehavior(to, from, savedPosition) {
+    console.log(to.hash);
+    // Exists when Browser's back/forward pressed
+    if (savedPosition) {
+      return savedPosition;
+      // For anchors
+    } else if (to.hash) {
+      return { selector: to.hash };
+      // By changing queries we are still in the same component, so "from.path" === "to.path" (new query changes just "to.fullPath", but not "to.path").
+    } else if (from.path === to.path) {
+      return { x: 0, y: 0 };
+    }
+
+    // Scroll to top
     return { x: 0, y: 0 };
   },
 });

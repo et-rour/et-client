@@ -16,14 +16,12 @@
         class="text-gray-400"
       >
         <span class="text-black" v-if="property.value !== '0'"
-          >{{ property.value }}/{{
-        }}</span>
+          >US$ {{ property.value }} / {{ $t("landing.propertyCard.montly") }}
+        </span>
         <span class="text-black" v-else
           >{{ $t("landing.propertyCard.noValue") }} /
         </span>
-        {{ $t("landing.propertyCard.montly") }}
-        {{ property.name }}
-        10 mts²
+        - {{ property.name }}
       </router-link>
     </div>
   </div>

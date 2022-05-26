@@ -21,5 +21,10 @@ export default [
     name: "tenants-schedule",
     path: "/propietario/:id/schedule",
     component: Schedule,
+    props: (route) => {
+      return {
+        idLocation: `${route.params.id}`,
+      };
+    },
   },
 ];

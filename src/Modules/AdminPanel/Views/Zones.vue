@@ -31,25 +31,25 @@
             :key="zone.id"
           >
             <td class="border-grey-light border hover:bg-gray-100 p-3">
-              {{ zone.data.city }}
+              {{ zone.city }}
             </td>
             <td class="border-grey-light border hover:bg-gray-100 p-3 truncate">
-              {{ zone.data.rate }}
+              {{ zone.rate }}
             </td>
             <td class="border-grey-light border hover:bg-gray-100 p-3 truncate">
-              {{ zone.data.zone }}
+              {{ zone.zone }}
             </td>
             <td class="border-grey-light border hover:bg-gray-100 p-3 truncate">
-              {{ zone.data.state }}
+              {{ zone.state }}
             </td>
             <td class="border-grey-light border hover:bg-gray-100 p-3 truncate">
-              {{ zone.data.country }}
+              {{ zone.country }}
             </td>
             <td class="border-grey-light border hover:bg-gray-100 p-3 truncate">
-              {{ zone.data.averageValue }}
+              {{ zone.averageValue }}
             </td>
             <td class="border-grey-light border hover:bg-gray-100 p-3 truncate">
-              {{ zone.data.centerCoordinates }}
+              {{ zone.centerCoordinates }}
             </td>
           </tr>
         </tbody>

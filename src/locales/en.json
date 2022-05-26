@@ -11,13 +11,17 @@
     }
   },
   "general": {
-    "seeImage": "See image"
+    "yes": "Yes",
+    "seeImage": "See image",
+    "cancel": "Cancel",
+    "save": "Save",
+    "update": "Update"
   },
   "navbar": {
     "owner": "Owners",
     "tenants": "tenants",
     "howWorks": "How does it work?",
-    "us": "About us",
+    "us": "Community",
     "posts": "posts",
     "myProperties": "My properties",
     "admin": "Admin",
@@ -31,9 +35,12 @@
     "register": "SIGN UP",
     "isOwner": "Are you owner?",
     "email": "E-mail",
+    "phone": "Phone number",
     "password": "Password",
     "firstName": "First name",
     "lastName": "Last name",
+    "country": "Country",
+    "countryPlaceholder": "Select country",
     "birth": "Date of birth",
     "day": "Day",
     "month": "Month",
@@ -41,8 +48,8 @@
     "succesModal": {
       "title": "!All ready!",
       "subtitle": "Welcome to Temporary Space",
-      "buttonOpcion1": "FIND A SPACE",
-      "buttonOpcion2": "MANAGE YOUR SPACES",
+      "buttonOpcion1": "PUBLISH YOUR PROPERTY",
+      "buttonOpcion2": "SEARCH A PROPERTY",
       "buttonOpcion3": "HOME"
     }
   },
@@ -175,7 +182,6 @@
       "modalText1": "To receive more information about",
       "modalText2": ", located at",
       "modalText3": "You can send an e-email to"
-
     },
     "schedule": {
       "title": "Select the date for your visit",
@@ -200,7 +206,7 @@
       "owner": "Owners",
       "tenants": "tenants",
       "howWorks": "How does it work?",
-      "us": "About us",
+      "us": "Community",
       "terms": "TERMS AND CONDITIONS"
     },
     "form": {
@@ -273,39 +279,65 @@
       "users": "Users",
       "zones": "Zones",
       "locations": "locations",
-      "rooms": "Rooms"
+      "review": "Review",
+      "reservation": "Reservation"
     },
     "users": {
-      "name": "Name",
-      "email": "E-mail",
-      "actions": "Actions",
-      "options": {
-        "activate": "Activate",
-        "desactivate": "Deactivate"
-      }
+      "select": "Selecciona un usuario",
+      "title": "Datos generales del usuario",
+      "firstname": "Name",
+      "lastName": "Last name",
+      "email": "Email",
+      "phone": "phone",
+      "noPhoneFound": "phone is not registered",
+      "verified": "Is the user verified?",
+      "active": "Is the user activated?",
+      "owner": "Is the user an owner?",
+      "client": "Is the user a customer?",
+      "admin": "Is the user an admin?",
+      "review": "Has the user completed a review??"
     },
     "zones": {
-      "city": "Town",
-      "rate": "Velocity",
-      "zone": "Area",
-      "state": "Condition",
+      "select": "Selecciona una zona",
+      "title": "General data of the ZONE",
       "country": "Country",
+      "state": "Condition",
+      "city": "Town",
+      "zone": "Area",
+      "centerCoordinates": "Center Coordinates",
+      "rate": "Qualification",
       "averageValue": "Average value",
-      "centerCoordinates": "Center Coordinates"
+      "active": "Is the zone active?"
     },
     "locations": {
+      "select": "Selecciona una ubicación",
+      "title": "Datos generales de la ubicación",
       "name": "Name",
       "address": "Direction",
-      "coords": "Coordinates",
       "rooms": "Rooms",
       "bathrooms": "Bathrooms",
       "painting": "Paintwork",
       "floor": "Floor",
-      "actions": "Actions",
-      "options": {
-        "activate": "Activate",
-        "desactivate": "Deactivate"
-      }
+      "email": "Email",
+      "phone": "Phone",
+      "description": "Description",
+      "garage": "Garage",
+      "zone": "Zone",
+      "owner": "Owner",
+      "isActive": "Is the location activated?",
+      "isverified": "Is the location verified?",
+      "value": "property value"
+    },
+    "reviews": {
+      "select": "Select a review",
+      "title": "General data of the review",
+      "reviewTitle": "Qualification",
+      "commment": "Review",
+      "calification": "Qualification",
+      "creator": "Who created it?",
+      "reciver": "Who revived her?",
+      "isActive": "Is the review activated?",
+      "isverified": "Is the review verified?"
     }
   },
   "profile": {

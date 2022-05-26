@@ -85,6 +85,7 @@
       </div>
     </ModelGlobal>
     <ContactModal
+      v-if="property"
       :isModalOpen="showContactModal"
       :locationName="property.name"
       :locationAddress="`${property.address}, ${property.zone.zone} - ${property.zone.city} (${property.zone.state}), ${property.zone.country}`"

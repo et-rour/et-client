@@ -8,9 +8,12 @@ import i18n from "./i18n";
 import "./veeValidateRules";
 import VCalendar from "v-calendar";
 import VueScrollTo from "vue-scrollto";
+import VuePaginate from 'vue-paginate'
 import "./sweetAlert";
 
 Vue.use(VueScrollTo);
+
+Vue.use(VuePaginate);
 
 Vue.use(VCalendar, {
   componentPrefix: "vc", // Use <vc-calendar /> instead of <v-calendar />

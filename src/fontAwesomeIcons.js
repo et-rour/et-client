@@ -18,9 +18,12 @@ import {
   faPanorama,
   faCircleCheck,
   faTimesCircle,
-  faUndo
+  faUndo,
+  faPhone,
+  faUserCheck,
+  faStar,
 } from "@fortawesome/free-solid-svg-icons";
-import { faUser } from "@fortawesome/free-regular-svg-icons";
+import { faEnvelope, faUser } from "@fortawesome/free-regular-svg-icons";
 
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
@@ -42,7 +45,11 @@ library.add(
   faPanorama,
   faCircleCheck,
   faTimesCircle,
-  faUndo
+  faUndo,
+  faEnvelope,
+  faPhone,
+  faUserCheck,
+  faStar
 );
 
 Vue.config.productionTip = false;
