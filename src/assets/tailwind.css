@@ -43,7 +43,7 @@ html {
     @apply container w-11/12 md:w-9/12 mx-auto;
   }
   .my-btn {
-    @apply bg-my-blue-primary w-64 py-3 rounded-2xl text-white;
+    @apply bg-my-blue-primary w-64 py-3 rounded-2xl text-white hover:bg-my-blue-primary-hover transition-colors;
   }
   .my-error {
     @apply text-red-300 absolute top-0 left-1/3;

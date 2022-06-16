@@ -15,9 +15,7 @@
         <span class="my-error">{{ errors[0] }}</span>
       </ValidationProvider>
 
-      <ValidationProvider
-        class="relative"
-      >
+      <ValidationProvider class="relative">
         <input
           v-model="registerPhone"
           type="number"
@@ -68,19 +66,21 @@
       <div>
         <p class="my-2">{{ $t("login.country") }}</p>
         <div class="grid grid-cols-3 gap-5">
-        <ValidationProvider class="relative" rules="required">
-          <select
-            name="day"
-            class="border text-center py-2 w-full"
-            v-model="registerCountry" 
-          >
-            <option disabled selected value="">{{ $t("login.countryPlaceholder") }}</option>
-            <option value="Chile">Chile</option>
-            <option value="Perú">Perú</option>
-          </select>
-        </ValidationProvider>
-        <div></div>
-        <div></div>
+          <ValidationProvider class="relative" rules="required">
+            <select
+              name="day"
+              class="border text-center py-2 w-full"
+              v-model="registerCountry"
+            >
+              <option disabled selected value="">
+                {{ $t("login.countryPlaceholder") }}
+              </option>
+              <option value="Chile">Chile</option>
+              <option value="Perú">Perú</option>
+            </select>
+          </ValidationProvider>
+          <div></div>
+          <div></div>
         </div>
       </div>
 
@@ -292,7 +292,7 @@ export default {
     ValidationObserver,
   },
   methods: {
-    ...mapActions("authStore", ["register"]),
+    ...mapActions("authStore", ["register", "changeShowLoginModal"]),
     async onSubmitRegister() {
       const userData = {
         firstname: this.firstName,
@@ -301,12 +301,14 @@ export default {
         password: this.registerPassword,
         country: this.registerCountry,
         isOwner: this.isOwner,
-        phone: (this.registerPhone).toString(),
+        phone: this.registerPhone.toString(),
       };
       try {
         this.register(userData);
+
+        this.changeShowLoginModal(false);
       } catch (error) {
-        console.log(error)
+        console.log(error);
         CustomErrorToast.fire({
           text: error.response.data.message,
         });

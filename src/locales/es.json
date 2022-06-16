@@ -1,7 +1,10 @@
 {
   "sweetAlertMessages": {
     "saved": "Guardado",
-    "error": "Opps.. Algo salio mal"
+    "error": "Opps.. Algo salio mal",
+    "confirmTitle": "¿Estás seguro?",
+    "confirmButton": "Si, hazlo",
+    "cancelButton": "Cancelar"
   },
   "validations": {
     "messages": {
@@ -99,6 +102,43 @@
       "noValue": "No cuenta con valor asignado"
     }
   },
+  "questions": {
+    "title": "Preguntas frecuentes",
+    "question1": "1. ¿Qué requisitos se exigen para arrendar una habitación?",
+    "response1": "Se exige el pago de un mes de garantía.",
+    "question2": "2. ¿Qué servicios están incluidos?",
+    "response2": "El valor del arriendo incluye todos los gastos básicos de la casa: agua,luz,gas de cañería,internet wifi y servicio de limpieza de áreas comunes. Los espacios como cocina,living y jardín,son de uso compartido.En todas nuestras propiedades vive un administrador, quien está a cargo de la residencia para ayudarte a resolver cualquier problema y gestionar una buena estadía.",
+    "question3": "3. ¿Tienen estacionamiento para auto o moto?",
+    "response3": "Algunas propiedades cuentan con estacionamiento. Hay que considerar un extra de $20.000.- mensuales a los valores normales de una habitación.",
+    "help": "¿Necesitas ayuda? Escríbenos",
+    "name": "Nombre",
+    "email": "E-mail",
+    "message": "Mensaje",
+    "send": "Enviar mensaje"
+  },
+  "terms": {
+    "title": "Términos y condiciones",
+    "gestsTitle": "Términos aplicables a los Huéspedes",
+    "gestDescription": "La misión de Airbnb es construir un mundo donde cualquier persona pueda sentirse en casa donde vaya.Hay millones de Anuncios para satisfacer los deseos de los distintos viajeros: desde cabañas hasta castillos,pasando incluso por clases de cocina. Para obtener más información sobre un Anuncio, debes consultar la descripción y las fotos,el perfil del Anfitrión y las evaluaciones de Huéspedes anteriores. Si tienes alguna pregunta, envíale un mensaje al Anfitrión.",
+    "airbnbTitle": "2. Buscar y reservar con Airbnb.",
+    "airbnbDescription": "2.1 Búsqueda. Se pueden buscar Servicios de Anfitrión aplicando parámetros de búsqueda, como el tipo de Servicio de Anfitrión, el destino, las fechas y el número de huéspedes. También se pueden utilizar filtros para acotar los resultados de la búsqueda. Los resultados de la búsqueda se basan en la coincidencia con los parámetros de búsqueda y en otros criterios. Se tienen en cuenta factores como el precio, la disponibilidad, las evaluaciones, el servicio ofrecido al clienteyel historial de cancelaciones, la popularidad, los viajes anteriores, los Anuncios guardados y los requisitos de los Anfitriones (p.ej., número mínimo o máximo de noches), entre otros. Para más información sobre los resultados de la búsqueda, consulta el Centro de ayuda de Airbnb.",
+    "airbnbDescription2": "2.2 Reserva. Al reservar un Anuncio, aceptas pagar todos los cargos correspondientes, incluidos el precio del Anuncio, las comisiones aplicables, como la comisión de servicio de Airbnb, las comisiones abonadas fuera de la plataforma en línea, los impuestos y cualquier otro concepto que figure en la página de pago (denominados, conjuntamente,<< Precio Total >>.Asimismo, aceptas que Airbnb, através de Airbnb Payments, podrá cargar al Método de Pago (definido en los Términos de Pago) utilizado para reservar el Anuncio con el objetivo de cobrar las sumas correspondientesauna Reclamación por Daños y Perjuicios (definida en estos Términos). Al recibir la confirmación de la reserva, queda formalizado un contrato de Servicios de Anfitrión (una << Reserva >>) directamente entre túyel Anfitrión. Además de los presentes Términos, te regirás por todos los términos de la Reserva y tendrás la obligación de cumplirlos, incluida la política de cancelación y cualquier otra regla,norma, política o requisito identificado en el Anuncio o durante el proceso de pago que resulten aplicables a la Reserva. Es tu responsabilidad leer y comprender estas normas, estándares, políticas y requisitos antes de reservar un Anuncio. Ten en cuenta que algunos Anfitriones trabajan con un coanfitrión o como parte de un equipo al ofrecer sus Servicios de Anfitrión.",
+    "airbnbDescription3": "2.3 Reservas de Alojamiento. Una Reserva de Alojamiento constituye una licencia limitada para acceder al Alojamiento,utilizarlo y pernoctar en él. El Anfitrión se reserva el derecho de acceder al Alojamiento durante la estancia del Huésped, siempre que: i)sea razonablemente necesario, ii)esté permitido por el contrato suscrito entre túyel Anfitrión, y iii)lo permita la legislación aplicable. Si permaneces en el Alojamiento una vez transcurrida la hora de salida, el Anfitrión podrá obligarte a salir por medios legales, incluida la imposición de penalizaciones razonables. No podrás exceder el número máximo de Huéspedes permitido.",
+    "airbnbDescription4": "2.4 Reservas de Experienciasyotros Servicios de Anfitrión.La Reserva de una Experiencia u otro Servicio de Anfitrión te da derecho a participar, asistir o disfrutar de ese Servicio de Anfitrión. Eres responsable de confirmar que tanto tú como cualquier"
+  },
+  "workWithus": {
+    "title": "Trabaja con nosotros",
+    "jobTitle": "Administrador de propiedad",
+    "jobDescription": "Descripción del trabajo.",
+    "jobTitle2": "Logística",
+    "jobDescription2": "Descripción del trabajo.",
+    "postulate": "Postular",
+
+    "earn": "Gana comisiones refiriéndonos",
+    "earnDescription": "Dale tu código de referidos a personas interesadas en arrendar con nosotros, por cada contrato firmado recibirás una comisión de X",
+    "button": "QUIERO UNIRME AL PROGRAMA DE REFERIDOS",
+    "buttonMovile": "UNIRME AL PROGRAMA DE REFERIDOS"
+  },
   "owners": {
     "title": "Administramos todo tipo de inmuebles en desuso",
     "subtitle": "¿No has podido arrendar tu propiedad? Nosotros nos encargamos de administrar tu propiedad con contratos flexibles y de corta duración. De esta forma generamos VALOR a partir de un recurso congelado.",
@@ -115,6 +155,8 @@
     "dirección": "Dirección",
     "descripción": "Descripción",
     "zona": "Zona",
+    "type": "Tipo de propiedad",
+    "city": "Ciudad",
     "habitaciones": "Numero de habitaciones",
     "banios": "Numero de baños",
     "pintura": "Estado de pintura",
@@ -185,7 +227,9 @@
       "modalTitle": "Información de contacto",
       "modalText1": "Para recibir información acerca de",
       "modalText2": ", ubicado en",
-      "modalText3": "Puedes comunicarte a"
+      "modalText3": "Puedes comunicarte a",
+      "included": "Espacio incluido",
+      "notIncluded": "Puedes arrendar por: "
     },
     "schedule": {
       "title": "Selecciona la fecha para tu visita",
@@ -259,7 +303,10 @@
       "addImage": "Añadir imagen",
       "seeDetails": "Ver detalles",
       "validImage": "Selecciona una imagen",
-      "app": "Te recomendamos usar la aplicacion Google Street View para tomar tus fotos 3d"
+      "app": "Te recomendamos usar la aplicacion Google Street View para tomar tus fotos 3d",
+      "confiramtionMessages": {
+        "update": "¿Seguro que quieres actualizar los datos de esta imagen?"
+      }
     }
   },
   "posts": {
@@ -269,8 +316,8 @@
       "title": "Publica tu negocio",
       "description": "Déjanos un review de tu experiencia junto a ESPACIO TEMPORAL y publica tu negocio en nuestro MERCADO DE EMPRENDEDORES",
       "name": "Nombre del negocio",
-      "site": "Sitio web",
-      "social": "Instagram",
+      "site": "Sitio web. ej:",
+      "social": "Instagram. ej:",
       "review": "Reseña de tu experiencia",
       "addImage": "AGREGAR IMÁGEN",
       "post": "PUBLICAR",
@@ -279,16 +326,20 @@
   },
   "adminPanel": {
     "title": "Panel de Administrador",
+    "yes": "Si",
+    "no": "No",
+    "any": "Cualquiera",
     "navbar": {
       "users": "Usuarios",
       "zones": "Zonas",
       "locations": "Locaciones",
       "review": "Reseñas",
-      "reservation": "Reservación"
+      "reservation": "Reservas",
+      "publications": "Publicaciones"
     },
     "users": {
       "select": "Selecciona un usuario",
-      "title": "Datos generales del usuario",
+      "title": "Información del usuario",
       "firstname": "Nombre",
       "lastName": "Apellidos",
       "email": "Email",
@@ -299,11 +350,38 @@
       "owner": "¿El usuario es dueño?",
       "client": "¿El usuario es cliente?",
       "admin": "¿El usuario es admin?",
-      "review": "¿El usuario ha completado una review?"
+      "review": "¿El usuario ha completado una review?",
+      "search": "Búsqueda",
+      "filters": "Filtros",
+      "isVerified": "¿Está verificado?",
+      "isActive": "¿Está activo?",
+      "isOwner": "¿Es dueño?",
+      "isAdmin": "¿Es Admin?",
+      "details": "Detalles",
+      "userLocations": "Locaciónes",
+      "createdReviews": "Reseñas creadas",
+      "receivedReviews": "Reseñas resividas",
+      "locationsList": {
+        "title": "Locaciones del usuario:",
+        "noLocationsFound": "El usuario no cuenta con propiedades"
+      },
+      "reviewsList": {
+        "createdTitle": "Reseñas creadas por el usuario:",
+        "receivedTitle": "Reseñas resividas del usuario:",
+        "noReviewsFound": "El usuario no cuenta con reviews",
+        "from": "De",
+        "to": "Para"
+      },
+      "confiramtionMessages": {
+        "activateUser": "¿Seguro que quieres activar al usuario?",
+        "desactivateUser": "¿Seguro que quieres desactivar al usuario?",
+        "makeOwner": "¿Seguro que quieres que el usuario tenga nivel de dueño?",
+        "removeOwner": "¿Seguro que quieres remover el nivel de dueño al usuario?"
+      }
     },
     "zones": {
       "select": "Selecciona una zona",
-      "title": "Datos generales de la zona",
+      "title": "Información de la zona",
       "country": "País",
       "state": "Estado",
       "city": "Ciudad",
@@ -311,11 +389,18 @@
       "centerCoordinates": "Coordenadas Centro",
       "rate": "Calificación",
       "averageValue": "Valor promedio",
-      "active": "¿La zona esta activada?"
+      "active": "¿La zona esta activada?",
+      "create": "Crear nueva zona",
+      "empty": "Aún no hay zonas cargadas",
+      "confiramtionMessages": {
+        "activateZone": "¿Seguro que quieres activar la zona?",
+        "desactivateZone": "¿Seguro que quieres desactivar la zona?",
+        "update": "¿Seguro que quieres actualizar la zona actual?"
+      }
     },
     "locations": {
       "select": "Selecciona una locación",
-      "title": "Datos generales de la locación",
+      "title": "Información de la locación",
       "name": "Nombre",
       "address": "Dirección",
       "rooms": "Cuartos",
@@ -330,7 +415,41 @@
       "owner": "Propietario",
       "isActive": "¿La locación esta activada?",
       "isverified": "¿La locación esta verificada?",
-      "value": "Valor de la propiedad"
+      "value": "Valor de la propiedad",
+      "seeRooms": "Cuartos",
+      "newRoom": "Crear cuarto",
+      "details": "Detalles",
+      "images3d": "Imagenes 3d",
+      "roomsList": {
+        "title": "Todos los cuartos",
+        "noRooms": "Esta propiedad no tiene ningun cuarto registrado",
+        "create": {
+          "link": "Crea un nuevo cuarto",
+          "title": "Crea un nuevo cuarto para propiedad #"
+        },
+        "confiramtionMessages": {
+          "update": "¿Seguro que quieres actualizar este cuarto?"
+        }
+      },
+      "create": "Crear locación",
+      "isVerified": "¿Está verificada?",
+      "isActive2": "¿Está activa?",
+      "country": "País",
+      "state": "Provincia",
+      "city": "Ciudad",
+      "newLocationForm": "Formulario de nueva locación",
+      "propertyType": "Tipo de propiedad",
+      "entire": "Entera",
+      "room": "Cuarto",
+      "selectOne": "Seleccionar opción",
+      "confiramtionMessages": {
+        "activateLocation": "¿Seguro que quieres activar la locación?",
+        "desactivateLocation": "¿Seguro que quieres desactivar la locación?",
+        "verifyLocation": "¿Seguro que quieres verificar la locación?",
+        "unverifyLocation": "¿Seguro que quieres remover la verificación de la locación?",
+        "update": "¿Seguro que quieres actualizar la locación actual?",
+        "updatePrice": "¿Seguro que quieres actualizar el precio de la locación actual?"
+      }
     },
     "reviews": {
       "select": "Selecciona una reseña",
@@ -341,7 +460,39 @@
       "creator": "¿Quién la creo?",
       "reciver": "¿Quién la resivió?",
       "isActive": "¿La reseña esta activada?",
-      "isverified": "¿La reseña esta verificada?"
+      "isVerified": "¿La reseña esta verificada?",
+      "search": "Búsqueda",
+      "filters": "Filtros",
+      "All": "Todos",
+      "isActiveFilter": "¿Está activada?",
+      "isVerifiedFilter": "¿Está verificada?",
+      "confiramtionMessages": {
+        "activate": "¿Seguro que quieres activar la reseña?",
+        "desactivate": "¿Seguro que quieres desactivar la reseña?",
+        "verify": "¿Seguro que quieres verificar la reseña?",
+        "unverify": "¿Seguro que quieres remover la verificación de la reseña?"
+      }
+    },
+    "publications": {
+      "select": "Selecciona una publicación",
+      "title": "Datos generales de la publicación",
+      "publicationTitle": "Título",
+      "description": "Descripción",
+      "user": "Dueño",
+      "isVerified": "¿La publicacion esta verificada?",
+      "image": "Imagen",
+      "webSite": "Sitio web",
+      "instagram": "Instagram",
+      "profile": "Ver perfil",
+      "search": "Búsqueda",
+      "filters": "Filtros",
+      "isActiveFilter": "¿Está activada?",
+      "isVerifiedFilter": "¿Está verificada?",
+      "notRegistered": "No registrado",
+      "confiramtionMessages": {
+        "activate": "¿Seguro que quieres activar la publicación?",
+        "desactivate": "¿Seguro que quieres desactivar la publicación?"
+      }
     }
   },
   "profile": {

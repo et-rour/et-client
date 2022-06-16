@@ -37,7 +37,9 @@
               v-for="(star, index) in 5"
               :key="index"
               class="mx-1"
-              :class="index < review.review ? 'text-yellow-400' : ''"
+              :class="
+                index < review.review ? 'text-yellow-400' : ' text-gray-400'
+              "
             />
           </span>
         </p>
@@ -53,7 +55,7 @@
         </div>
         <div class="flex items-center">
           <label for="isverified" class="mr-3"
-            >{{ $t("adminPanel.reviews.isverified") }}
+            >{{ $t("adminPanel.reviews.isVerified") }}
           </label>
           <SwitchComponentVue
             :value="review.isVerified"
@@ -74,7 +76,11 @@
 <script>
 import { mapActions, mapGetters } from "vuex";
 import SwitchComponentVue from "../../../../../components/SwitchComponent.vue";
-import { CustomErrorToast, CustomToast } from "@/sweetAlert";
+import {
+  CustomErrorToast,
+  CustomToast,
+  CustomConfirmDialog,
+} from "@/sweetAlert";
 export default {
   props: {
     idReview: {
@@ -106,39 +112,56 @@ export default {
       this.review = this.getReviewById(this.idReview);
     },
     async submitReview() {},
-    async toogleIsActive(value) {
-      try {
-        await this.changeIsActiveReview({
-          id: this.review.id,
-          activeStatus: value,
-        });
-        CustomToast.fire({
-          title: "Done",
-          icon: "success",
-        });
-        this.review.isActive = value;
-      } catch (error) {
-        CustomErrorToast.fire({
-          text: error.response.data.message,
-        });
-      }
+    toogleIsActive(value) {
+      const changeIsActiveReviewTextAcction = !this.review.isActive
+        ? this.$t("adminPanel.reviews.confiramtionMessages.activate")
+        : this.$t("adminPanel.reviews.confiramtionMessages.desactivate");
+
+      CustomConfirmDialog.fire({ text: changeIsActiveReviewTextAcction }).then(
+        async (result) => {
+          if (!result.isConfirmed) return;
+          try {
+            await this.changeIsActiveReview({
+              id: this.review.id,
+              activeStatus: value,
+            });
+            CustomToast.fire({
+              title: this.$t("sweetAlertMessages.saved"),
+              icon: "success",
+            });
+            this.review.isActive = value;
+          } catch (error) {
+            CustomErrorToast.fire({
+              text: error.response.data.message,
+            });
+          }
+        }
+      );
     },
-    async toogleIsVerified(value) {
-      try {
-        await this.changeIsVerifiedReview({
-          id: this.review.id,
-          isVerifiedStatus: value,
-        });
-        CustomToast.fire({
-          title: "Done",
-          icon: "success",
-        });
-        this.review.isVerified = value;
-      } catch (error) {
-        CustomErrorToast.fire({
-          text: error.response.data.message,
-        });
-      }
+    toogleIsVerified(value) {
+      const changeIsVerifiedReviewTextAcction = !this.review.isVerified
+        ? this.$t("adminPanel.reviews.confiramtionMessages.verify")
+        : this.$t("adminPanel.reviews.confiramtionMessages.unverify");
+      CustomConfirmDialog.fire({
+        text: changeIsVerifiedReviewTextAcction,
+      }).then(async (result) => {
+        if (!result.isConfirmed) return;
+        try {
+          await this.changeIsVerifiedReview({
+            id: this.review.id,
+            isVerifiedStatus: value,
+          });
+          CustomToast.fire({
+            title: this.$t("sweetAlertMessages.saved"),
+            icon: "success",
+          });
+          this.review.isVerified = value;
+        } catch (error) {
+          CustomErrorToast.fire({
+            text: error.response.data.message,
+          });
+        }
+      });
     },
   },
   created() {

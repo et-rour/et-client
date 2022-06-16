@@ -3,4 +3,5 @@ export default () => ({
   loadingPosts: true,
   postImage: null,
   postImageUploadingStatus: null,
+  currencies: [],
 });

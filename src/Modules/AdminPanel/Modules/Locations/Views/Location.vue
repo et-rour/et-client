@@ -1,203 +1,176 @@
 <template>
-  <div class="w-full h-full bg-gray-100 overflow-y-scroll" id="details">
-    <div v-if="!location">
-      <h1>{{ $t("adminPanel.locations.select") }}</h1>
-    </div>
+  <div class="w-2/3 mx-auto h-full">
+    <div class="w-full h-full py-4 flex flex-col gap-3">
+      <div class="flex items-center justify-between">
+        <label for="name" class="mr-3"
+          >{{ $t("adminPanel.locations.name") }}
+        </label>
+        <input
+          type="text"
+          class="my-input w-2/3"
+          v-model="location.name"
+          id="name"
+        />
+      </div>
+      <div class="flex items-center justify-between">
+        <label for="address" class="mr-3"
+          >{{ $t("adminPanel.locations.address") }}
+        </label>
+        <input
+          type="text"
+          class="my-input w-2/3"
+          v-model="location.address"
+          id="address"
+        />
+      </div>
+      <div class="flex items-center justify-between">
+        <label for="rooms" class="mr-3"
+          >{{ $t("adminPanel.locations.rooms") }}
+        </label>
+        <input
+          type="number"
+          max="5"
+          min="0"
+          class="my-input"
+          v-model="location.rooms"
+          id="country"
+        />
+      </div>
+      <div class="flex items-center justify-between">
+        <label for="bathrooms" class="mr-3"
+          >{{ $t("adminPanel.locations.bathrooms") }}
+        </label>
+        <input
+          type="number"
+          max="5"
+          min="0"
+          class="my-input"
+          v-model="location.bathrooms"
+          id="country"
+        />
+      </div>
+      <div class="flex items-center justify-between">
+        <label for="painting" class="mr-3"
+          >{{ $t("adminPanel.locations.painting") }}
+        </label>
+        <input
+          type="number"
+          max="5"
+          min="0"
+          class="my-input"
+          v-model="location.painting"
+          id="country"
+        />
+      </div>
+      <div class="flex items-center justify-between">
+        <label for="floor" class="mr-3"
+          >{{ $t("adminPanel.locations.floor") }}
+        </label>
+        <input
+          type="number"
+          max="5"
+          min="0"
+          class="my-input"
+          v-model="location.floor"
+          id="country"
+        />
+      </div>
+      <div class="flex items-center justify-between">
+        <label for="email" class="mr-3"
+          >{{ $t("adminPanel.locations.email") }}
+        </label>
+        <input
+          type="text"
+          class="my-input w-2/3"
+          v-model="location.email"
+          id="email"
+        />
+      </div>
+      <div class="flex items-center justify-between">
+        <label for="phone" class="mr-3"
+          >{{ $t("adminPanel.locations.phone") }}
+        </label>
+        <input
+          type="text"
+          class="my-input w-2/3"
+          v-model="location.phone"
+          id="phone"
+        />
+      </div>
+      <div class="flex justify-between">
+        <label for="description" class="mr-3"
+          >{{ $t("adminPanel.locations.description") }}
+        </label>
+        <textarea
+          type="text"
+          class="my-input w-2/3 h-24 w"
+          v-model="location.description"
+          id="description"
+        ></textarea>
+      </div>
+      <div class="flex items-center justify-between">
+        <label for="garage" class="mr-3"
+          >{{ $t("adminPanel.locations.garage") }}
+        </label>
+        <input
+          type="number"
+          max="5"
+          min="0"
+          class="my-input"
+          v-model="location.garage"
+          id="garage"
+        />
+      </div>
+      <div class="flex items-center justify-between">
+        <label for="isActive" class="mr-3"
+          >{{ $t("adminPanel.locations.isActive") }}
+        </label>
+        <SwitchComponentVue
+          :value="location.isActive"
+          v-on:toogle="toogleIsActive"
+        />
+      </div>
 
-    <div v-else class="flex items-center flex-col">
-      <div class="mx-auto h-full w-2/3 py-4 flex flex-col gap-3">
-        <h1 class="my-title mb-3">
-          {{ $t("adminPanel.locations.title") }}
-          <span class="text-gray-400 text-xl">#{{ location.id }}</span>
-        </h1>
+      <div class="flex items-center justify-between">
+        <label for="isverified" class="mr-3"
+          >{{ $t("adminPanel.locations.isverified") }}
+        </label>
+        <SwitchComponentVue
+          :value="location.isVerified"
+          v-on:toogle="toogleIsVerified"
+        />
+      </div>
 
-        <div class="flex items-center">
-          <label for="name" class="mr-3"
-            >{{ $t("adminPanel.locations.name") }}
-          </label>
-          <input
-            type="text"
-            class="my-input w-full"
-            v-model="location.name"
-            id="name"
-          />
-        </div>
-        <div class="flex items-center">
-          <label for="address" class="mr-3"
-            >{{ $t("adminPanel.locations.address") }}
-          </label>
-          <input
-            type="text"
-            class="my-input w-full"
-            v-model="location.address"
-            id="address"
-          />
-        </div>
-        <div class="flex items-center">
-          <label for="rooms" class="mr-3"
-            >{{ $t("adminPanel.locations.rooms") }}
-          </label>
-          <input
-            type="number"
-            max="5"
-            min="0"
-            class="my-input"
-            v-model="location.rooms"
-            id="country"
-          />
-        </div>
-        <div class="flex items-center">
-          <label for="bathrooms" class="mr-3"
-            >{{ $t("adminPanel.locations.bathrooms") }}
-          </label>
-          <input
-            type="number"
-            max="5"
-            min="0"
-            class="my-input"
-            v-model="location.bathrooms"
-            id="country"
-          />
-        </div>
-        <div class="flex items-center">
-          <label for="painting" class="mr-3"
-            >{{ $t("adminPanel.locations.painting") }}
-          </label>
-          <input
-            type="number"
-            max="5"
-            min="0"
-            class="my-input"
-            v-model="location.painting"
-            id="country"
-          />
-        </div>
-        <div class="flex items-center">
-          <label for="floor" class="mr-3"
-            >{{ $t("adminPanel.locations.floor") }}
-          </label>
-          <input
-            type="number"
-            max="5"
-            min="0"
-            class="my-input"
-            v-model="location.floor"
-            id="country"
-          />
-        </div>
-        <div class="flex items-center">
-          <label for="email" class="mr-3"
-            >{{ $t("adminPanel.locations.email") }}
-          </label>
-          <input
-            type="text"
-            class="my-input w-full"
-            v-model="location.email"
-            id="email"
-          />
-        </div>
-        <div class="flex items-center">
-          <label for="phone" class="mr-3"
-            >{{ $t("adminPanel.locations.phone") }}
-          </label>
-          <input
-            type="text"
-            class="my-input w-full"
-            v-model="location.phone"
-            id="phone"
-          />
-        </div>
-        <div class="flex">
-          <label for="description" class="mr-3"
-            >{{ $t("adminPanel.locations.description") }}
-          </label>
-          <textarea
-            type="text"
-            class="my-input w-full h-24 w"
-            v-model="location.description"
-            id="description"
-          ></textarea>
-        </div>
-        <div class="flex items-center">
-          <label for="garage" class="mr-3"
-            >{{ $t("adminPanel.locations.garage") }}
-          </label>
-          <input
-            type="number"
-            max="5"
-            min="0"
-            class="my-input"
-            v-model="location.garage"
-            id="garage"
-          />
-        </div>
-        <!-- <div class="flex items-center">
-          <label for="zone" class="mr-3"
-            >{{ $t("adminPanel.locations.zone") }}
-          </label>
-          <input
-            type="text"
-            class="my-input w-full"
-            v-model="location.zone"
-            id="zone"
-          />
-        </div>
-        <div class="flex items-center">
-          <label for="owner" class="mr-3"
-            >{{ $t("adminPanel.locations.owner") }}
-          </label>
-          <input
-            type="text"
-            class="my-input w-full"
-            v-model="location.owner"
-            id="owner"
-          />
-        </div> -->
+      <div class="flex items-center justify-between">
+        <label for="value" class="mr-3"
+          >{{ $t("adminPanel.locations.value") }}
+        </label>
+        <input
+          type="number"
+          class="my-input"
+          v-model="location.value"
+          id="value"
+        />
+        <button
+          class="my-btn w-auto px-4 py-2 ml-4"
+          v-if="fistValueLocation != location.value"
+          @click="setNewLocationValue"
+        >
+          <font-awesome-icon icon="fa-solid fa-floppy-disk" />
+        </button>
+      </div>
 
-        <div class="flex items-center">
-          <label for="isActive" class="mr-3"
-            >{{ $t("adminPanel.locations.isActive") }}
-          </label>
-          <SwitchComponentVue
-            :value="location.isActive"
-            v-on:toogle="toogleIsActive"
-          />
-        </div>
+      <!-- coords -->
+      <MapCoordsVue
+        :lat="location.lat"
+        :long="location.long"
+        v-on:changeCoords="setNewCoords"
+      ></MapCoordsVue>
 
-        <div class="flex items-center">
-          <label for="isverified" class="mr-3"
-            >{{ $t("adminPanel.locations.isverified") }}
-          </label>
-          <SwitchComponentVue
-            :value="location.isVerified"
-            v-on:toogle="toogleIsVerified"
-          />
-        </div>
-
-        <div class="flex items-center">
-          <label for="value" class="mr-3"
-            >{{ $t("adminPanel.locations.value") }}
-          </label>
-          <input
-            type="number"
-            class="my-input"
-            v-model="location.value"
-            id="value"
-          />
-          <button
-            class="my-btn w-auto px-4 py-2 ml-4"
-            v-if="fistValueLocation != location.value"
-            @click="setNewLocationValue"
-          >
-            <font-awesome-icon icon="fa-solid fa-floppy-disk" />
-          </button>
-        </div>
-
-        <div class="w-full flex justify-end">
-          <button class="my-btn" @click="submitLocation">
-            {{ $t("general.update") }}
-          </button>
-        </div>
+      <div class="w-full flex justify-center">
+        <button class="my-btn" @click="submitLocation">
+          {{ $t("general.update") }}
+        </button>
       </div>
     </div>
   </div>
@@ -206,22 +179,30 @@
 <script>
 import { mapActions, mapGetters } from "vuex";
 import SwitchComponentVue from "../../../../../components/SwitchComponent.vue";
-import { CustomErrorToast, CustomToast } from "@/sweetAlert";
+import {
+  CustomErrorToast,
+  CustomToast,
+  CustomConfirmDialog,
+} from "@/sweetAlert";
+import MapCoordsVue from "../../../../../components/MapCoords.vue";
+
 export default {
   props: {
     idLocation: {
-      type: Number,
-      requird: true,
+      type: String,
+      required: true,
     },
   },
   components: {
     SwitchComponentVue,
+    MapCoordsVue,
   },
   computed: {
-    ...mapGetters("adminPanelStore", ["getLocationById"]),
-    isNewZone() {
-      return this.$route.params.id === "new";
-    },
+    ...mapGetters("adminPanelStore", [
+      "getLocationById",
+      "getFilteredUsers",
+      "getAllZones",
+    ]),
   },
   data() {
     return {
@@ -241,30 +222,46 @@ export default {
       this.fistValueLocation = this.location.value;
     },
     async submitLocation() {
+      const { isConfirmed } = await CustomConfirmDialog.fire();
+      if (!isConfirmed) return;
+
+      const {
+        id,
+        name,
+        address,
+        rooms,
+        bathrooms,
+        painting,
+        floor,
+        email,
+        phone,
+        description,
+        garage,
+        lat,
+        long,
+      } = this.location;
       try {
         const updateLocationBody = {
-          id: this.location.id,
-          name: this.location.name,
-          address: this.location.address,
-          rooms: this.location.rooms,
-          bathrooms: this.location.bathrooms,
-          painting: this.location.painting,
-          floor: this.location.floor,
-          email: this.location.email,
-          phone: this.location.phone,
-          description: this.location.description,
-          garage: this.location.garage,
+          id: id,
+          name: name,
+          address: address,
+          rooms: rooms,
+          bathrooms: bathrooms,
+          painting: painting,
+          floor: floor,
+          email: email,
+          phone: phone,
+          description: description,
+          garage: garage,
+          lat: lat,
+          lng: long,
         };
-        console.log(
-          "%cLocation.vue line:202 updateLocationBody",
-          "color: #007acc;",
-          updateLocationBody
-        );
+
         await this.modifyLocation(updateLocationBody);
 
         console.log(this.location);
         CustomToast.fire({
-          title: "Done",
+          title: this.$t("sweetAlertMessages.saved"),
           icon: "success",
         });
       } catch (error) {
@@ -273,60 +270,95 @@ export default {
         });
       }
     },
-    async toogleIsActive(value) {
-      try {
-        await this.changeIsActiveLocation({
-          id: this.location.id,
-          activeStatus: value,
-        });
-        CustomToast.fire({
-          title: "Done",
-          icon: "success",
-        });
-        this.location.isActive = value;
-      } catch (error) {
-        CustomErrorToast.fire({
-          text: error.response.data.message,
-        });
-      }
+    toogleIsActive(value) {
+      const changeIsActiveLocationTextAcction = !this.location.isActive
+        ? this.$t("adminPanel.locations.confiramtionMessages.activateLocation")
+        : this.$t(
+            "adminPanel.locations.confiramtionMessages.desactivateLocation"
+          );
+
+      CustomConfirmDialog.fire({
+        text: changeIsActiveLocationTextAcction,
+      }).then(async (result) => {
+        if (!result.isConfirmed) return;
+
+        try {
+          await this.changeIsActiveLocation({
+            id: this.location.id,
+            activeStatus: value,
+          });
+          CustomToast.fire({
+            title: this.$t("sweetAlertMessages.saved"),
+            icon: "success",
+          });
+          this.location.isActive = value;
+        } catch (error) {
+          CustomErrorToast.fire({
+            text: error.response.data.message,
+          });
+        }
+      });
     },
-    async toogleIsVerified(value) {
-      try {
-        await this.changeIsVerifiedLocation({
-          id: this.location.id,
-          isVerifiedStatus: value,
-        });
-        CustomToast.fire({
-          title: "Done",
-          icon: "success",
-        });
-        this.location.isVerified = value;
-      } catch (error) {
-        CustomErrorToast.fire({
-          text: error.response.data.message,
-        });
-      }
+    toogleIsVerified(value) {
+      const changeIsVerifyLocationTextAcction = !this.location.isVerified
+        ? this.$t("adminPanel.locations.confiramtionMessages.verifyLocation")
+        : this.$t("adminPanel.locations.confiramtionMessages.unverifyLocation");
+
+      CustomConfirmDialog.fire({
+        text: changeIsVerifyLocationTextAcction,
+      }).then(async (result) => {
+        if (!result.isConfirmed) return;
+        try {
+          await this.changeIsVerifiedLocation({
+            id: this.location.id,
+            isVerifiedStatus: value,
+          });
+          CustomToast.fire({
+            title: this.$t("sweetAlertMessages.saved"),
+            icon: "success",
+          });
+          this.location.isVerified = value;
+        } catch (error) {
+          CustomErrorToast.fire({
+            text: error.response.data.message,
+          });
+        }
+      });
     },
-    async setNewLocationValue() {
-      try {
-        const price = await this.setLocationValue({
-          locationId: this.location.id,
-          locationValue: this.location.value,
-        });
-        CustomToast.fire({
-          title: "Done",
-          icon: "success",
-        });
-        this.fistValueLocation = price;
-      } catch (error) {
-        CustomErrorToast.fire({
-          text: error.response.data.message,
-        });
-      }
+    setNewLocationValue() {
+      CustomConfirmDialog.fire({
+        text: this.$t("adminPanel.locations.confiramtionMessages.updatePrice"),
+      }).then(async (result) => {
+        if (!result.isConfirmed) return;
+        try {
+          const price = await this.setLocationValue({
+            locationId: this.location.id,
+            locationValue: this.location.value,
+          });
+          CustomToast.fire({
+            title: this.$t("sweetAlertMessages.saved"),
+            icon: "success",
+          });
+          this.fistValueLocation = price;
+        } catch (error) {
+          CustomErrorToast.fire({
+            text: error.response.data.message,
+          });
+        }
+      });
+    },
+    setNewCoords(event) {
+      const { lat, lng } = event;
+      this.location.lat = lat.toFixed(5);
+      this.location.long = lng.toFixed(5);
     },
   },
-  created() {
-    this.loadLocation();
+  async created() {
+    try {
+      await this.loadLocation();
+    } catch (error) {
+      console.log(error);
+    }
   },
   watch: {
     idLocation() {

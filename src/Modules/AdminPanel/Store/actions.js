@@ -52,6 +52,7 @@ export const createZone = async ({ commit }, zone) => {
   const res = await EspacioAPI.post("/admin/zone", zone);
   const newZone = res.data;
   commit("createZone", newZone);
+  return newZone.id;
 };
 export const modifyZone = async ({ commit }, zone) => {
   const res = await EspacioAPI.put("/admin/zone", zone);
@@ -77,6 +78,12 @@ export const modifyLocation = async ({ commit }, location) => {
   const res = await EspacioAPI.put("/admin/modifylocation", location);
   const newLocation = res.data;
   commit("modifyLocation", newLocation);
+};
+export const createLocation = async ({ commit }, location) => {
+  const res = await EspacioAPI.post("/admin/createlocation", location);
+  const newLocation = res.data;
+  console.log("Created location", newLocation);
+  commit("createLocation", newLocation);
 };
 export const changeIsActiveLocation = async (
   { commit },
@@ -122,6 +129,48 @@ export const changeIsActivePropertyInLocation = async (
   commit("changeIsActivePropertyInLocation", location);
 };
 
+// ROOMS
+export const createRoom = async (
+  { commit },
+  { name, image, squareMeter, value, locationId }
+) => {
+  const res = await EspacioAPI.post(`room/`, {
+    name,
+    image,
+    squareMeter,
+    locationId,
+    value,
+  });
+  const newRoom = res.data;
+  commit("createRoom", newRoom);
+};
+export const updateRoom = async (
+  { commit },
+  { id, name, image, squareMeter, locationId, value }
+) => {
+  const res = await EspacioAPI.put(`room/${id}`, {
+    name,
+    image,
+    squareMeter,
+    locationId,
+    value,
+  });
+  const newRoom = res.data;
+  commit("updateRoom", newRoom);
+};
+
+export const updateRoomImage = async (
+  { commit },
+  { locationId, idRoom, imageUrl }
+) => {
+  const res = await EspacioAPI.put(`room/${idRoom}/image`, {
+    image: imageUrl,
+    locationId,
+  });
+  const newImageUrl = res.data;
+  commit("updateRoomImage", newImageUrl);
+};
+
 // REVIEWS
 export const getReviews = async ({ commit }) => {
   const res = await EspacioAPI.get("/admin/review");
@@ -162,4 +211,42 @@ export const getReservations = async ({ commit }) => {
     reservations
   );
   commit("getReservations", reservations);
+};
+
+// POSTS
+
+export const getPublications = async ({ commit }) => {
+  const res = await EspacioAPI.get("/admin/publications");
+  const publications = res.data.publications;
+  commit("getPublications", publications);
+};
+
+export const changeIsVerifiedPublication = async (
+  { commit },
+  { id, isVerifiedStatus }
+) => {
+  const res = await EspacioAPI.put(`admin/verifypublication/${id}`, {
+    isVerified: isVerifiedStatus,
+  });
+  const { idPublication, isVerified } = res.data;
+  commit("changeIsVerifiedPublication", { idPublication, isVerified });
+};
+// IMAGE3D
+export const postImage3d = async ({ commit }, { imageData, idLocation }) => {
+  const res = await EspacioAPI.post("/image3d/", imageData);
+  const savedImage = res.data;
+  console.log({ image3d: savedImage });
+  commit("postImage3d", { savedImage, idLocation });
+};
+export const updateImage3d = async (
+  { commit },
+  { imageData, locationId, idImage3d }
+) => {
+  const res = await EspacioAPI.put(`/image3d/${idImage3d}`, {
+    ...imageData,
+    locationId,
+  });
+  const updatedImage = res.data;
+  console.log({ updatedImage });
+  commit("updateImage3d", { updatedImage, locationId });
 };

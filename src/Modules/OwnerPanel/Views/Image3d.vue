@@ -210,10 +210,6 @@
         </table>
       </form>
     </ValidationObserver>
-
-    <router-link :to="{ name: 'tenants-detail', params: { id: idProperty } }">{{
-      $t("admin.image3d.seeDetails")
-    }}</router-link>
   </div>
 </template>
 
@@ -256,7 +252,7 @@ export default {
   },
   methods: {
     ...mapActions("authStore", ["loginInfirebaseStorage"]),
-    ...mapActions("adminStore", ["uploadfile", "createNewImage"]),
+    ...mapActions("ownerPanelStore", ["uploadfile", "createNewImage"]),
     async onSubmitCreateNewImage3d() {
       if (this.propertyImage3d === null) {
         alert(`${this.$t("admin.image3d.validImage")}`);
@@ -349,7 +345,10 @@ export default {
   computed: {
     ...mapGetters("authStore", ["user"]),
     ...mapGetters("propertiesStore", ["propertiesById"]),
-    ...mapGetters("adminStore", ["propertyImage3d", "propertyImageState3d"]),
+    ...mapGetters("ownerPanelStore", [
+      "propertyImage3d",
+      "propertyImageState3d",
+    ]),
   },
   mounted() {
     this.property = this.propertiesById(this.idProperty);

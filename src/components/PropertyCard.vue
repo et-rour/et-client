@@ -1,3 +1,4 @@
+import { mapGetters } from 'vuex';
 <template>
   <div class="flex flex-col h-80">
     <div class="h-2/3 w-full">
@@ -16,7 +17,7 @@
         class="text-gray-400"
       >
         <span class="text-black" v-if="property.value !== '0'"
-          >US$ {{ property.value }} / {{ $t("landing.propertyCard.montly") }}
+          >{{ currency.symbol }} {{ (property.value * currency.value).toFixed(0) }} / {{ $t("landing.propertyCard.montly") }}
         </span>
         <span class="text-black" v-else
           >{{ $t("landing.propertyCard.noValue") }} /
@@ -28,6 +29,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   props: {
     property: {
@@ -35,5 +38,17 @@ export default {
       required: true,
     },
   },
+  computed: {
+    ...mapGetters("postsStore", ["currencies"]),
+    ...mapGetters("authStore", ["siteCountry"]),
+    currency() {
+      for (let i = 0; i < this.currencies.length; i++) {
+        if (this.currencies[i].country === this.siteCountry) {
+          return {symbol: this.currencies[i].symbol, value: this.currencies[i].value};
+        }
+      }
+      return 'US$'
+    }
+  }
 };
 </script>

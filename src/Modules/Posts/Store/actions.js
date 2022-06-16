@@ -68,3 +68,8 @@ export const createNewPost = async ({ commit }, postData) => {
   // const post = res.data;
   commit("cleanImageInfo");
 };
+
+export const loadCurrencies = async ({ commit }) => {
+  const response = await EspacioAPI.get("/currency");
+  commit("loadCurrencies", response.data);
+};
