@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-center items-center">
+  <div class="flex justify-center items-center" v-if="lastUsedBy === id">
     <font-awesome-icon
       icon="spinner"
       class="animate-spin"
@@ -13,7 +13,7 @@
     </div>
     <div
       class="flex justify-center items-center"
-      v-if="value === 100 && imageUrl !== null"
+      v-if="value === 100 && imageUrl !== null && showImageLink"
     >
       <a
         @click="openImage"
@@ -27,19 +27,30 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   props: {
+    id: {
+      type: String,
+    },
     value: {
       type: Number,
     },
     imageUrl: {
       type: String,
     },
+    showImageLink: {
+      type: Boolean,
+      default: true,
+    },
   },
   methods: {
     openImage() {
       window.open(this.imageUrl, "_blank");
     },
+  },
+  computed: {
+    ...mapGetters(["lastUsedBy"]),
   },
 };
 </script>

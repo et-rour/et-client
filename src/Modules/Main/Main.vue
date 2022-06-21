@@ -385,7 +385,7 @@ export default {
     },
     sortedZones() {
       let res = this.sortZones(this.zonesList);
-      res = res.filter(zone => zone.country === this.siteCountry)
+      res = res.filter((zone) => zone.country === this.siteCountry);
       return res;
     },
   },
@@ -421,14 +421,15 @@ export default {
     },
     showWorkWithUsModal() {
       // Use sweetalert2
-      this.$swal({
-        title: "<strong>Espacio en construcción</strong>",
-        icon: "info",
-        html:
-          "Puede enviarnos su CV a  " +
-          '<a style="color: #2323D5; " href = "mailto: info@espaciotemporal.cl">info@espaciotemporal.cl</a> ',
-        focusConfirm: false,
-      });
+      // this.$swal({
+      //   title: "<strong>Espacio en construcción</strong>",
+      //   icon: "info",
+      //   html:
+      //     "Puede enviarnos su CV a  " +
+      //     '<a style="color: #2323D5; " href = "mailto: info@espaciotemporal.cl">info@espaciotemporal.cl</a> ',
+      //   focusConfirm: false,
+      // });
+      this.$router.push({ name: "workwithus" });
     },
     resetFilters() {
       this.search = "";

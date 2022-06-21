@@ -18,6 +18,7 @@ export default {
   methods: {
     ...mapActions("authStore", ["loadSession", "setSiteCountry"]),
     ...mapActions("propertiesStore", ["loadProperties"]),
+    ...mapActions("postsStore", ["loadCurrencies"]),
     ...mapMutations({ loadCustomProperties: "propertiesStore/loadProperties" }),
   },
   computed: {
@@ -30,6 +31,7 @@ export default {
     try {
       await this.loadSession();
       await this.loadProperties();
+      await this.loadCurrencies();
     } catch (error) {
       CustomErrorToast.fire({
         text: error.response.data.message || error,

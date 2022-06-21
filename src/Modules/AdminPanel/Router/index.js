@@ -4,6 +4,7 @@ import userRouter from "../Modules/User/Router/index.js";
 import zonesRouter from "../Modules/Zones/Router/index.js";
 import locationsRouter from "../Modules/Locations/Router/index.js";
 import reviewRouter from "../Modules/Reviews/Router/index.js";
+import publicationRouter from "../Modules/Publications/Router/index.js";
 
 import Reservation from "../Modules/Reservations/Views/Reservation.vue";
 export default [
@@ -23,6 +24,9 @@ export default [
       },
       {
         ...reviewRouter,
+      },
+      {
+        ...publicationRouter,
       },
       {
         name: "admin-reservations",

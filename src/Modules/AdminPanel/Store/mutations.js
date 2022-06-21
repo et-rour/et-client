@@ -92,6 +92,9 @@ export const modifyLocation = (state, newLocation) => {
   });
   state.locations = newLocations;
 };
+export const createLocation = (state, newLocation) => {
+  state.locations = [...state.locations, newLocation];
+};
 export const changeIsActiveLocation = (state, { idLocation, isActive }) => {
   const locations = state.locations.map((location) => {
     if (location.id === idLocation) {
@@ -154,6 +157,67 @@ export const changeIsActivePropertyInLocation = (state, newLocation) => {
   state.locations = locations;
 };
 
+// ROOMS
+export const createRoom = (state, room) => {
+  const locations = state.locations.map((location) => {
+    if (location.id === room.location) {
+      const newRooms = [...location.roomsDetails, room];
+      return {
+        ...location,
+        roomsDetails: newRooms,
+      };
+    }
+    return location;
+  });
+
+  state.locations = locations;
+};
+
+export const updateRoom = (state, { idLocation, room }) => {
+  const locations = state.locations.map((location) => {
+    if (location.id === idLocation) {
+      const newRooms = location.roomsDetails.map((currentRoom) => {
+        if (currentRoom.id === room.id) {
+          return room;
+        }
+        return currentRoom;
+      });
+      location.roomsDetails[room.id] = room;
+      return {
+        ...location,
+        roomsDetails: newRooms,
+      };
+    }
+    return location;
+  });
+
+  state.locations = locations;
+};
+export const updateRoomImage = (state, { idLocation, room }) => {
+  console.log("%cmutations.js line:158 mutation", "color: #007acc;", {
+    idLocation,
+    room,
+  });
+  const locations = state.locations.map((location) => {
+    if (location.id === idLocation) {
+      const newRooms = location.roomsDetails.map((currentRoom) => {
+        if (currentRoom.id === room.id) {
+          return room;
+        }
+        return currentRoom;
+      });
+      location.roomsDetails[room.id] = room;
+      return {
+        ...location,
+        roomsDetails: newRooms,
+      };
+    }
+    return location;
+  });
+
+  state.locations = locations;
+};
+
 // REVIEWS
 export const getReviews = (state, reviews) => {
   state.reviews = reviews;
@@ -194,4 +258,67 @@ export const getReservations = (state, reservations) => {
     reservations
   );
   state.reservations = reservations;
+};
+
+// PUBLICATIONS
+export const getPublications = (state, publications) => {
+  state.publications = publications;
+};
+
+export const changeIsVerifiedPublication = (
+  state,
+  { idPublication, isVerified }
+) => {
+  const publications = state.publications.map((publication) => {
+    if (publication.id === idPublication) {
+      return {
+        ...publication,
+        isVerified,
+      };
+    }
+    return publication;
+  });
+
+  state.publications = publications;
+};
+
+// IMAGE 3D
+export const postImage3d = (state, { savedImage, idLocation }) => {
+  const locations = state.locations.map((location) => {
+    if (location.id === Number(idLocation)) {
+      return {
+        ...location,
+        images3D: [savedImage, ...location.images3D],
+      };
+    }
+    return location;
+  });
+
+  state.locations = locations;
+};
+
+export const updateImage3d = (state, { updatedImage, locationId }) => {
+  const locations = state.locations.map((location) => {
+    if (location.id === Number(locationId)) {
+      let newImagenes3d = [];
+      console.log("first");
+      const findOldImage3d = location.images3D.findIndex(
+        (image) => image.id === updatedImage.id
+      );
+
+      console.log({ findOldImage3d });
+
+      if (findOldImage3d === -1) return location;
+
+      newImagenes3d = [...location.images3D];
+      newImagenes3d[findOldImage3d] = updatedImage;
+      return {
+        ...location,
+        images3D: newImagenes3d,
+      };
+    }
+    return location;
+  });
+
+  state.locations = locations;
 };

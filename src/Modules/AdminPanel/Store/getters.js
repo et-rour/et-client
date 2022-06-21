@@ -20,6 +20,12 @@ export const getZoneById = (state) => (id) => {
 export const getAllLocations = (state) => {
   return state.locations;
 };
+export const getAllLocationRooms = (state) => (idLocation) => {
+  const location = state.locations.find(
+    (location) => location.id == idLocation
+  );
+  return location.roomsDetails;
+};
 export const getFilteredLocations = (state) => (word) => {
   // console.log("%cgetters.js line:27 word", "color: #007acc;", word);
   return state.locations.filter((location) => {
@@ -35,6 +41,17 @@ export const getLocationById = (state) => (id) => {
 
 export const getAllReviews = (state) => {
   return state.reviews;
+};
+export const getFilteredReviews = (state) => (word, rating) => {
+  return state.reviews.filter((review) => {
+    if (
+      (review.comment.toLowerCase().indexOf(word.toLowerCase()) > -1 ||
+        review.title.toLowerCase().indexOf(word.toLowerCase()) > -1) &&
+      !review.review.indexOf(rating)
+    ) {
+      return review;
+    }
+  });
 };
 export const getReviewById = (state) => (id) => {
   console.log("%cgetters.js line:47 getReview", "color: #007acc;", id);
@@ -54,4 +71,22 @@ export const getAllReservationsCorrectDataStructure = (state) => {
     };
   });
   return reservationsData;
+};
+
+// PUBLICATIONS
+export const getaLLPublications = (state) => {
+  return state.publications;
+};
+export const getPublicationById = (state) => (id) => {
+  return state.publications.find((publication) => publication.id == id);
+};
+export const getFilteredPublications = (state) => (word) => {
+  return state.publications.filter((publication) => {
+    if (
+      publication.title.toLowerCase().indexOf(word.toLowerCase()) > -1 ||
+      publication.description.toLowerCase().indexOf(word.toLowerCase()) > -1
+    ) {
+      return publication;
+    }
+  });
 };

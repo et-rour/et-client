@@ -48,6 +48,7 @@
         :room="room"
       ></RoomCard>
 
+      <!-- MAP -->
       <div class="w-full bg-gray-400 my-4">
         <l-map style="height: 300px" :zoom="zoom" :center="markerLatLng">
           <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>

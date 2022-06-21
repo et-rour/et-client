@@ -19,3 +19,7 @@ export const cleanImageInfo = (state) => {
   state.postImage = null;
   state.postImageUploadingStatus = null;
 };
+
+export const loadCurrencies = (state, currencies) => {
+  state.currencies = currencies;
+};

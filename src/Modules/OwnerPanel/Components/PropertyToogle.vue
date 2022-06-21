@@ -70,7 +70,7 @@
     </div>
 
     <!-- CALENDAR MODAL -->
-    <ModelGlobalVue v-show="showModal">
+    <ModelGlobalVue v-if="showModal">
       <div
         class="w-11/12 h-5/6 bg-white text-center px-4 text-sm overflow-y-auto relative md:w-6/12"
       >
@@ -170,7 +170,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions("adminStore", ["updateLocationLease"]),
+    ...mapActions("ownerPanelStore", ["updateLocationLease"]),
     toogleIsOpen() {
       this.isOpen = !this.isOpen;
     },

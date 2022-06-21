@@ -1,6 +1,10 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Landing from "../Modules/Main/Main.vue";
+import Questions from "../Modules/Main/Questions.vue";
+import Terms from "../Modules/Main/Terms.vue";
+import WorkWithUs from "../Modules/Main/WorkWithUs.vue";
+
 import OwnerRoutes from "../Modules/Owners/Router/index";
 import TenantsRouter from "../Modules/Tenants/Router/index";
 import ownerPanel from "../Modules/OwnerPanel/Router/index";
@@ -15,6 +19,21 @@ const routes = [
     name: "home",
     path: "/",
     component: Landing,
+  },
+  {
+    name: "questions",
+    path: "/questions",
+    component: Questions,
+  },
+  {
+    name: "terms",
+    path: "/terms",
+    component: Terms,
+  },
+  {
+    name: "workwithus",
+    path: "/workwithus",
+    component: WorkWithUs,
   },
   ...OwnerRoutes,
   ...TenantsRouter,

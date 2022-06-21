@@ -5,20 +5,30 @@
     <div class="w-9/12 grid grid-cols-3 grid-rows-2 px-20">
       <img src="@/assets/icons/logoFooter.png" alt="logotipo footer" />
       <ul>
-        <li>FAQS</li>
+        <li><router-link :to="{ name: 'questions' }">FAQS</router-link></li>
         <li>
-          <router-link :to="{ name: 'owner' }">{{ $t("footer.nav.owner") }}</router-link>
+          <router-link :to="{ name: 'owner' }">{{
+            $t("footer.nav.owner")
+          }}</router-link>
         </li>
         <li>
-          <router-link :to="{ name: 'tenants' }">{{ $t("footer.nav.tenants") }}</router-link>
+          <router-link :to="{ name: 'tenants' }">{{
+            $t("footer.nav.tenants")
+          }}</router-link>
         </li>
-        <!-- <li>
+        <li>
           <router-link to="/">{{ $t("footer.nav.howWorks") }}</router-link>
-        </li> -->
-        <li>
-          <router-link :to="{ name: 'posts' }">{{ $t("footer.nav.us") }}</router-link>
         </li>
-        <li>{{ $t("footer.nav.terms") }}</li>
+        <li>
+          <router-link :to="{ name: 'posts' }">{{
+            $t("footer.nav.us")
+          }}</router-link>
+        </li>
+        <li>
+          <router-link :to="{ name: 'terms' }">
+            {{ $t("footer.nav.terms") }}
+          </router-link>
+        </li>
       </ul>
       <form
         class="row-start-2 col-start-1 col-end-4 flex flex-col border-b"
@@ -28,8 +38,12 @@
         <p>{{ $t("footer.form.Contact") }}</p>
         <div class="w-full grid grid-cols-3 gap-8">
           <div class="flex gap-2 flex-col">
-            <input type="hidden" name="_next" value="https://espaciotemporal.vercel.app/">
-            <input type="hidden" name="_captcha" value="false">
+            <input
+              type="hidden"
+              name="_next"
+              value="https://espaciotemporal.vercel.app/"
+            />
+            <input type="hidden" name="_captcha" value="false" />
             <input
               type="text"
               name="name"

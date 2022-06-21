@@ -4,160 +4,80 @@
       <h1>{{ $t("adminPanel.users.select") }}</h1>
     </div>
 
-    <div v-else class="flex items-center flex-col">
-      <div class="mx-auto h-full w-2/3 py-4">
-        <h1 class="my-title mb-6">{{ $t("adminPanel.users.title") }}</h1>
-        <div class="flex flex-col gap-4">
-          <!-- firstname -->
-          <p class="flex items-center gap-3">
-            <font-awesome-icon
-              class="p-2 border rounded-full border-black"
-              icon="fa-regular fa-user"
-            />
-            {{ $t("adminPanel.users.firstname") }}:
-            <span class="text-my-blue-primary"
-              >{{ user.firstName }} {{ user.lastName }}</span
+    <div class="h-full w-full overflow-scroll">
+      <div class="mx-auto w-2/3 flex flex-col">
+        <div class="sticky top-0 left-0 bg-gray-100 z-20">
+          <h1 class="my-title mb-6 text-center self-center">
+            {{ $t("adminPanel.users.title") }}
+          </h1>
+
+          <div class="flex justify-between mb-5">
+            <router-link
+              :to="{
+                name: 'admin-users-detail-details',
+                params: { idUser: user.id },
+                hash: '#details',
+              }"
+              active-class="text-my-blue-primary"
+              >{{ $t("adminPanel.users.details") }}</router-link
             >
-          </p>
-
-          <!-- email -->
-          <p class="flex items-center gap-3">
-            <font-awesome-icon
-              class="p-2 border rounded-full border-black"
-              icon="fa-regular fa-envelope"
-            />
-            {{ $t("adminPanel.users.email") }}:
-            <span class="text-my-blue-primary">{{ user.email }}</span>
-          </p>
-
-          <!-- phone -->
-          <p class="flex items-center gap-3">
-            <font-awesome-icon
-              class="p-2 border rounded-full border-black"
-              icon="fa-solid fa-phone"
-            />
-            {{ $t("adminPanel.users.phone") }}:
-            <span class="text-my-blue-primary">{{
-              user.phone ? user.phone : $t("adminPanel.users.noPhoneFound")
-            }}</span>
-          </p>
-
-          <!-- verified -->
-          <p class="flex items-center gap-3">
-            <label>{{ $t("adminPanel.users.verified") }}</label>
-            <span class="text-my-blue-primary">{{
-              user.isVerified ? $t("general.yes") : "No"
-            }}</span>
-          </p>
-
-          <!-- active -->
-          <div class="flex items-center">
-            <label>{{ $t("adminPanel.users.active") }}:</label>
-            <SwitchComponentVue
-              :value="user.isActive"
-              v-on:toogle="toogleIsActive"
-            />
-          </div>
-
-          <!-- owner -->
-          <div class="flex items-center">
-            <label>{{ $t("adminPanel.users.owner") }}</label>
-            <SwitchComponentVue
-              :value="user.isOwner"
-              v-on:toogle="toogleIsOwner"
-            />
-          </div>
-
-          <!-- client -->
-          <div class="flex items-center">
-            <label class="mr-2">{{ $t("adminPanel.users.client") }}</label>
-            <span class="text-my-blue-primary">{{
-              user.isClient ? $t("general.yes") : "No"
-            }}</span>
-          </div>
-          <!-- admin -->
-          <div class="flex items-center">
-            <label class="mr-2">{{ $t("adminPanel.users.admin") }}</label>
-            <span class="text-my-blue-primary">{{
-              user.isAdmin ? $t("general.yes") : "No"
-            }}</span>
-          </div>
-          <!-- review -->
-          <div class="flex items-center">
-            <label class="mr-2">{{ $t("adminPanel.users.review") }}</label>
-            <span class="text-my-blue-primary">{{
-              user.didReview ? $t("general.yes") : "No"
-            }}</span>
+            <router-link
+              :to="{
+                name: 'admin-users-detail-locations',
+                params: { idUser: user.id },
+                hash: '#details',
+              }"
+              active-class="text-my-blue-primary"
+              >{{ $t("adminPanel.users.userLocations") }}</router-link
+            >
+            <router-link
+              :to="{
+                name: 'admin-users-detail-reviews',
+                params: { idUser: user.id, CreatorOrReceiver: true },
+                hash: '#details',
+              }"
+              active-class="text-my-blue-primary"
+              >{{ $t("adminPanel.users.createdReviews") }}</router-link
+            >
+            <router-link
+              :to="{
+                name: 'admin-users-detail-reviews',
+                params: { idUser: user.id, CreatorOrReceiver: false },
+                hash: '#details',
+              }"
+              active-class="text-my-blue-primary"
+              >{{ $t("adminPanel.users.receivedReviews") }}</router-link
+            >
           </div>
         </div>
+        <router-view class="z-10"></router-view>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
-import SwitchComponentVue from "../../../../../components/SwitchComponent.vue";
-import { CustomErrorToast, CustomToast } from "@/sweetAlert";
+import { mapGetters } from "vuex";
+
 export default {
-  components: {
-    SwitchComponentVue,
-  },
   props: {
     idUser: {
       type: String,
       requird: true,
     },
   },
-  computed: {
-    ...mapGetters("adminPanelStore", ["getUserById"]),
-  },
   data() {
     return {
       user: null,
     };
   },
+  computed: {
+    ...mapGetters("adminPanelStore", ["getUserById"]),
+  },
   methods: {
-    ...mapActions("adminPanelStore", [
-      "changeIsActiveUser",
-      "changeIsOwnerStatus",
-    ]),
     loadUser() {
       this.user = this.getUserById(this.idUser);
-    },
-    async toogleIsActive(value) {
-      try {
-        await this.changeIsActiveUser({
-          id: this.user.id,
-          activeStatus: value,
-        });
-        CustomToast.fire({
-          title: "Done",
-          icon: "success",
-        });
-        this.user.isActive = value;
-      } catch (error) {
-        CustomErrorToast.fire({
-          text: error.response.data.message,
-        });
-      }
-    },
-    async toogleIsOwner(value) {
-      try {
-        await this.changeIsOwnerStatus({
-          id: this.user.id,
-          isOwnerStatus: value,
-        });
-        CustomToast.fire({
-          title: "Done",
-          icon: "success",
-        });
-        this.user.isOwner = value;
-      } catch (error) {
-        CustomErrorToast.fire({
-          text: error.response.data.message,
-        });
-      }
+      this.$router.push({ name: 'admin-users-detail-details', params: { id: this.idUser },})
     },
   },
   created() {

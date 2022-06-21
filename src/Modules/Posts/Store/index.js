@@ -6,11 +6,8 @@ import * as getters from "./getters";
 const propertiesStore = {
   namespaced: true,
   state,
-
   mutations,
-
   actions,
-  // son iguales a computed
   getters,
 };
 

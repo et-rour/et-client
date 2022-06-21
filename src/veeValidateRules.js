@@ -15,6 +15,29 @@ configure({
     return i18n.t(`validation.${values._rule_}`, values);
   },
 });
+// regular exprecion for external url.
+extend("extUrl", {
+  validate: value=>{
+    let websiteRegEx = new RegExp("(https://www|http://www)\\.[a-zA-Z]*\\.[a-zA-Z].+");
+
+    if (websiteRegEx.test(value)) {
+      return true
+    }
+    return false
+  },
+  message: (_, values) => i18n.t("validations.messages.required", values),
+});
+extend("extInstagramUrl", {
+  validate: value=>{
+    let websiteRegEx = new RegExp("https://www\\.instagram\\.com/.+");
+
+    if (websiteRegEx.test(value)) {
+      return true
+    }
+    return false
+  },
+  message: (_, values) => i18n.t("validations.messages.required", values),
+});
 // Install required rule and message.
 extend("required", {
   ...required,

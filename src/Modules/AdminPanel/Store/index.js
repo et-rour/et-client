@@ -3,7 +3,7 @@ import * as mutations from "./mutations";
 import * as actions from "./actions";
 import * as getters from "./getters";
 
-const adminStore = {
+const adminPanelStore = {
   namespaced: true,
   state,
 
@@ -14,4 +14,4 @@ const adminStore = {
   getters,
 };
 
-export default adminStore;
+export default adminPanelStore;

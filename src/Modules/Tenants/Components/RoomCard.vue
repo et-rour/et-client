@@ -13,6 +13,7 @@
           >{{ room.squareMeter }} mts&sup2;</span
         >
         <p class="align-middle text-lg font-bold">{{ room.name }}</p>
+        <p class="align-middle text-lg font-bold">{{ price }}</p>
       </div>
     </div>
     <hr class="solid my-4" />
@@ -25,6 +26,13 @@ export default {
     room: {
       type: Object,
       required: true,
+    },
+  },
+  computed: {
+    price() {
+      return this.room.value === 0
+        ? `${this.$t("tenants.details.included")}`
+        : `${this.$t("tenants.details.notIncluded")} $${this.room.value}`;
     },
   },
 };

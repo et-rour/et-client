@@ -22,6 +22,11 @@ import {
   faPhone,
   faUserCheck,
   faStar,
+  faCamera,
+  faUserPen,
+  faMapLocationDot,
+  faHouse,
+  faPen,
 } from "@fortawesome/free-solid-svg-icons";
 import { faEnvelope, faUser } from "@fortawesome/free-regular-svg-icons";
 
@@ -49,7 +54,12 @@ library.add(
   faEnvelope,
   faPhone,
   faUserCheck,
-  faStar
+  faStar,
+  faCamera,
+  faUserPen,
+  faMapLocationDot,
+  faHouse,
+  faPen,
 );
 
 Vue.config.productionTip = false;

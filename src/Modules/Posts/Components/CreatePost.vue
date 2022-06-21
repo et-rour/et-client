@@ -22,25 +22,25 @@
               :placeholder="$t('posts.createPost.name')"
               class="my-input border border-gray-500 w-full py-3 rounded-none border-b-0"
             />
-            <span class="my-error">{{ errors[0] }}</span>
+            <span class="my-error relative top-0 left-0 block w-full h-6 border-t border-black" v-if="errors[0]">{{ errors[0] }}</span>
           </ValidationProvider>
-          <ValidationProvider v-slot="{ errors }" class="relative">
+          <ValidationProvider v-slot="{ errors }" class="relative" rules="extUrl">
             <input
               v-model="site"
               type="text"
-              :placeholder="$t('posts.createPost.site')"
+              :placeholder="`${$t('posts.createPost.site')} https://www.google.com`"
               class="my-input border border-gray-500 w-full py-3 rounded-none border-b-0"
             />
-            <span class="my-error">{{ errors[0] }}</span>
+            <span class="my-error relative top-0 left-0 block w-full h-6 border-t border-black" v-if="errors[0]">{{ errors[0] }}</span>
           </ValidationProvider>
-          <ValidationProvider v-slot="{ errors }" class="relative">
+          <ValidationProvider v-slot="{ errors }" class="relative" rules="extInstagramUrl" >
             <input
               v-model="instagram"
               type="text"
-              :placeholder="$t('posts.createPost.social')"
+              :placeholder="`${$t('posts.createPost.social')} https://www.instagram.com/john_smith`"
               class="my-input border border-gray-500 w-full py-3 rounded-none border-b-0"
             />
-            <span class="my-error">{{ errors[0] }}</span>
+            <span class="my-error relative top-0 left-0 block w-full h-6 border-t border-black" v-if="errors[0]">{{ errors[0] }}</span>
           </ValidationProvider>
           <ValidationProvider
             v-slot="{ errors }"
@@ -53,7 +53,7 @@
               :placeholder="$t('posts.createPost.review')"
               class="my-input border border-gray-500 w-full py-3 rounded-none h-24"
             ></textarea>
-            <span class="my-error relative top-0 left-0">{{ errors[0] }}</span>
+            <span class="my-error relative top-0 left-0 block w-full h-6 border-black" v-if="errors[0]">{{ errors[0] }}</span>
           </ValidationProvider>
 
           <input

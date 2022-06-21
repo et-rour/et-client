@@ -13,3 +13,6 @@ export const postById = (state) => (id) => {
 export const isLoading = (state) => {
   return state.loadingPosts;
 };
+export const currencies = (state) => {
+  return state.currencies;
+};

@@ -38,8 +38,9 @@
           </div>
         </div>
 
+        <!-- name -->
         <div class="flex items-center justify-between mb-2">
-          <label class="text-lg" for="nombre">{{
+          <label class="text-lg" for="name">{{
             $t("createForm.nombre")
           }}</label>
           <ValidationProvider
@@ -56,6 +57,7 @@
           </ValidationProvider>
         </div>
 
+        <!-- email -->
         <div class="flex items-center justify-between mb-2">
           <label class="text-lg" for="email">{{
             $t("createForm.email")
@@ -75,6 +77,7 @@
           </ValidationProvider>
         </div>
 
+        <!-- telefono -->
         <div class="flex items-center justify-between mb-2">
           <label class="text-lg" for="telefono">{{
             $t("createForm.telefono")
@@ -96,6 +99,7 @@
 
         <hr class="solid my-4" />
 
+        <!-- direccion -->
         <div class="flex items-center justify-between mb-2">
           <label class="text-lg" for="direccion">{{
             $t("createForm.dirección")
@@ -114,8 +118,9 @@
           </ValidationProvider>
         </div>
 
+        <!-- description -->
         <div class="flex items-start justify-between mb-2">
-          <label class="text-lg" for="direccion">{{
+          <label class="text-lg" for="description">{{
             $t("createForm.descripción")
           }}</label>
           <ValidationProvider
@@ -133,21 +138,30 @@
           </ValidationProvider>
         </div>
 
+        <!-- type -->
         <div class="flex items-center justify-between mb-4">
-          <!-- <label class="text-lg" for="zona">{{ $t("createForm.ciudad") }}</label> -->
-          <label class="text-lg" for="zona">Tipo de propiedad</label>
+          <label class="text-lg" for="type">{{ $t("createForm.type") }}</label>
           <ValidationProvider
             v-slot="{ errors }"
             rules="required"
             class="w-1/5"
           >
-            <select class="bg-gray-200 px-12 w-full" name="ciudad" v-model="tipoPropiedad" >
-              <option disabled selected value="">{{ $t("createForm.opcionDefault") }}</option>
+            <select
+              class="bg-gray-200 px-12 w-full"
+              name="ciudad"
+              v-model="tipoPropiedad"
+            >
+              <option disabled selected value="">
+                {{ $t("createForm.opcionDefault") }}
+              </option>
               <!-- <option selected value="">Ciudad</option> -->
               <option
-                v-for="(item, index) in [{label: $t('createForm.propiedadEntera'), value: 'entire'}, {label: $t('createForm.propiedadParcial'), value: 'room'}]"
+                v-for="(item, index) in [
+                  { label: $t('createForm.propiedadEntera'), value: 'entire' },
+                  { label: $t('createForm.propiedadParcial'), value: 'room' },
+                ]"
                 :value="item.value"
-                :key="index+index+'type'"
+                :key="index + index + 'type'"
               >
                 {{ item.label }}
               </option>
@@ -158,16 +172,22 @@
           </ValidationProvider>
         </div>
 
+        <!-- city -->
         <div class="flex items-center justify-between mb-4">
-          <!-- <label class="text-lg" for="zona">{{ $t("createForm.ciudad") }}</label> -->
-          <label class="text-lg" for="zona">Ciudad</label>
+          <label class="text-lg" for="city">{{ $t("createForm.city") }}</label>
           <ValidationProvider
             v-slot="{ errors }"
             rules="required"
             class="w-1/5"
           >
-            <select class="bg-gray-200 px-12 w-full" name="ciudad" v-model="ciudad" >
-              <option disabled selected value="">{{ $t("createForm.ciudad") }}</option>
+            <select
+              class="bg-gray-200 px-12 w-full"
+              name="ciudad"
+              v-model="ciudad"
+            >
+              <option disabled selected value="">
+                {{ $t("createForm.ciudad") }}
+              </option>
               <!-- <option selected value="">Ciudad</option> -->
               <option
                 v-for="(item, index) in filteredCities"
@@ -182,6 +202,8 @@
             }}</span>
           </ValidationProvider>
         </div>
+
+        <!-- zone -->
         <div
           class="flex items-center justify-between mb-4"
           :class="ciudad === 'Ciudad' || ciudad === '' ? 'hidden' : null"
@@ -198,7 +220,9 @@
               v-model="zone"
               :disabled="ciudad === 'Ciudad' || ciudad === ''"
             >
-              <option disabled selected value="">{{ $t("createForm.zona") }}</option>
+              <option disabled selected value="">
+                {{ $t("createForm.zona") }}
+              </option>
               <option
                 v-for="(item, index) in filteredZones"
                 :value="item.id"
@@ -213,6 +237,7 @@
           </ValidationProvider>
         </div>
 
+        <!-- num_de_habitaciones -->
         <div class="flex items-center justify-between mb-4">
           <!-- <label class="text-lg" for="zona">{{ $t("createForm.ciudad") }}</label> -->
           <label class="text-lg" for="num_de_habitaciones">{{
@@ -245,8 +270,8 @@
           </ValidationProvider>
         </div>
 
+        <!-- num_de_baños -->
         <div class="flex items-center justify-between mb-4">
-          <!-- <label class="text-lg" for="zona">{{ $t("createForm.ciudad") }}</label> -->
           <label class="text-lg" for="num_de_baños">{{
             $t("createForm.banios")
           }}</label>
@@ -277,9 +302,9 @@
           </ValidationProvider>
         </div>
 
+        <!-- pintura -->
         <div class="flex items-center justify-between mb-4">
-          <!-- <label class="text-lg" for="zona">{{ $t("createForm.ciudad") }}</label> -->
-          <label class="text-lg" for="zona">{{
+          <label class="text-lg" for="pintura">{{
             $t("createForm.pintura")
           }}</label>
           <ValidationProvider
@@ -309,8 +334,8 @@
           </ValidationProvider>
         </div>
 
+        <!-- suelo -->
         <div class="flex items-center justify-between mb-4">
-          <!-- <label class="text-lg" for="zona">{{ $t("createForm.ciudad") }}</label> -->
           <label class="text-lg" for="zona">{{ $t("createForm.suelo") }}</label>
           <ValidationProvider
             v-slot="{ errors }"
@@ -339,6 +364,7 @@
           </ValidationProvider>
         </div>
 
+        <!-- valor_de_arriendo -->
         <div class="flex items-center justify-between my-1">
           <label class="text-lg" for="valor_de_arriendo">{{
             $t("createForm.arriendo")
@@ -361,8 +387,8 @@
           </ValidationProvider>
         </div>
 
+        <!-- time -->
         <div class="flex items-center justify-between mb-4">
-          <!-- <label class="text-lg" for="zona">{{ $t("createForm.ciudad") }}</label> -->
           <label class="text-lg" for="zona">{{ $t("createForm.time") }}</label>
           <ValidationProvider
             v-slot="{ errors }"
@@ -391,8 +417,8 @@
           </ValidationProvider>
         </div>
 
+        <!-- garage -->
         <div class="flex items-center justify-between mb-4">
-          <!-- <label class="text-lg" for="zona">{{ $t("createForm.ciudad") }}</label> -->
           <label class="text-lg" for="zona">{{
             $t("createForm.garage")
           }}</label>
@@ -422,6 +448,13 @@
             }}</span>
           </ValidationProvider>
         </div>
+
+        <!-- map -->
+        <MapCoordsVue
+          :lat="lat"
+          :long="lng"
+          v-on:changeCoords="setNewCoords"
+        ></MapCoordsVue>
       </div>
 
       <button
@@ -439,10 +472,12 @@ import { mapActions, mapGetters, mapMutations } from "vuex";
 import { ValidationObserver } from "vee-validate";
 import ProgesBarVue from "@/components/ProgesBarImage.vue";
 import { CustomErrorToast } from "@/sweetAlert";
+import MapCoordsVue from "../../../components/MapCoords.vue";
 export default {
   components: {
     ValidationObserver,
     ProgesBarVue,
+    MapCoordsVue,
   },
   data() {
     return {
@@ -461,6 +496,8 @@ export default {
       time: "",
       garage: "",
       tipoPropiedad: "",
+      lat: "",
+      lng: "",
       image: null,
       localImage: null,
       file: null,
@@ -523,7 +560,9 @@ export default {
           propertyType: this.tipoPropiedad,
           email: this.email,
           phone: this.phoneNumber,
-          description: this.description
+          description: this.description,
+          lat: this.lat,
+          lng: this.lng,
         };
         const calculatorData = {
           expectedValue: this.value,
@@ -560,6 +599,11 @@ export default {
         });
       }
     },
+    setNewCoords(event) {
+      const { lat, lng } = event;
+      this.lat = lat.toFixed(5);
+      this.lng = lng.toFixed(5);
+    },
   },
   computed: {
     ...mapGetters("propertiesStore", [
@@ -589,11 +633,11 @@ export default {
     },
     userData() {
       return {
-        name: this.user.user.firstName + ' ' + this.user.user.lastName,
+        name: this.user.user.firstName + " " + this.user.user.lastName,
         email: this.user.user.email,
-        phone: this.user.user.phone
+        phone: this.user.user.phone,
       };
-    }
+    },
   },
   async mounted() {
     try {

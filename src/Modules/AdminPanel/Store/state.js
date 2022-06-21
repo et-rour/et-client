@@ -4,4 +4,5 @@ export default () => ({
   locations: [],
   reviews: [],
   reservations: [],
+  publications: [],
 });
