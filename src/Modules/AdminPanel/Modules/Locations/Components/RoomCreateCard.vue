@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-40 my-4 flex gap-4 bg-transparent">
+  <div class="w-full h-40 my-4 flex gap-4">
     <div class="w-9/12 sm:w-6/12 lg:w-1/3 h-full bg-gray-200 relative">
       <img
         v-if="!localImage"
