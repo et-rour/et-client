@@ -55,7 +55,8 @@
       "subtitle": "Bienvenido a Espacio Temporal",
       "buttonOpcion1": "PUBLICA TU PROPIEDAD",
       "buttonOpcion2": "BUSCA UNA PROPIEDAD",
-      "buttonOpcion3": "HOME"
+      "buttonOpcion1Admin": "Explorar la aplicación",
+      "buttonOpcion2Admin": "Ir al panel de administrador"
     }
   },
   "landing": {
@@ -178,7 +179,8 @@
     "ciudad": "Ciudad",
     "tipoPropiedad": "Tipo de propiedad",
     "propiedadEntera": "Propiedad completa",
-    "propiedadParcial": "Habitación/Cuarto"
+    "propiedadParcial": "Habitación/Cuarto",
+    "metros": "Area (metros cuadrados)"
   },
   "createResult": {
     "title": "El valor de arriendo aproximado por tu propiedad es",
@@ -218,6 +220,7 @@
       }
     },
     "details": {
+      "title": "Información sobre la ubicación",
       "3d": "vista en 3d",
       "contacts": "Ver contactos",
       "description": "Esta propiedad está ubicada en el centro de Providencia. Los plazos mínimos de arriendo son de 3 meses y no se permite el uso de maquinaria ni labores ruidosas.",
@@ -423,7 +426,12 @@
       "roomsList": {
         "title": "Todos los cuartos",
         "noRooms": "Esta propiedad no tiene ningun cuarto registrado",
+        "buyLink": "Link de compra",
         "create": {
+          "meters": "Metros cuadrados",
+          "name": "Nombre",
+          "description": "Descripción",
+          "isIncluded": "¿Cuarto incluido con la propiedad?",
           "link": "Crea un nuevo cuarto",
           "title": "Crea un nuevo cuarto para propiedad #"
         },

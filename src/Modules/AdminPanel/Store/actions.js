@@ -132,7 +132,7 @@ export const changeIsActivePropertyInLocation = async (
 // ROOMS
 export const createRoom = async (
   { commit },
-  { name, image, squareMeter, value, locationId }
+  { name, image, squareMeter, value, locationId, description }
 ) => {
   const res = await EspacioAPI.post(`room/`, {
     name,
@@ -140,13 +140,14 @@ export const createRoom = async (
     squareMeter,
     locationId,
     value,
+    description,
   });
   const newRoom = res.data;
   commit("createRoom", newRoom);
 };
 export const updateRoom = async (
   { commit },
-  { id, name, image, squareMeter, locationId, value }
+  { id, name, image, squareMeter, locationId, value, description }
 ) => {
   const res = await EspacioAPI.put(`room/${id}`, {
     name,
@@ -154,6 +155,7 @@ export const updateRoom = async (
     squareMeter,
     locationId,
     value,
+    description,
   });
   const newRoom = res.data;
   commit("updateRoom", newRoom);

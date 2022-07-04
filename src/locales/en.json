@@ -53,7 +53,8 @@
       "subtitle": "Welcome to Temporary Space",
       "buttonOpcion1": "PUBLISH YOUR PROPERTY",
       "buttonOpcion2": "SEARCH A PROPERTY",
-      "buttonOpcion3": "HOME"
+      "buttonOpcion1Admin": "Explore the app",
+      "buttonOpcion2Admin": "Go to admin panel"
     }
   },
   "landing": {
@@ -174,7 +175,8 @@
     "submit": "LOAD PROPERTY",
     "ciudad": "City",
     "tipoPropiedad": "Property type",
-    "propiedadParcial": "Room"
+    "propiedadParcial": "Room",
+    "metros": "Area (square meters)"
   },
   "createResult": {
     "title": "The approximate rental value for your property is",
@@ -214,6 +216,7 @@
       }
     },
     "details": {
+      "title": "Location information",
       "3d": "3d view",
       "contacts": "See contacts",
       "description": "This property is located in downtown Providencia. The minimum rental terms are 3 months and the use of machinery or noisy work is not allowed.",
@@ -419,7 +422,12 @@
       "roomsList": {
         "title": "all rooms",
         "noRooms": "This property doesn't have any room registered",
+        "buyLink": "Buy link",
         "create": {
+          "meters": "Square meter",
+          "name": "Name",
+          "description": "Description",
+          "isIncluded": "Room included with the property?",
           "link": "Create a new room",
           "title": "Create a new room for property #"
         },

@@ -21,8 +21,9 @@
             name: 'admin-locations-detail-rooms',
             params: { id: idLocation },
             hash: '#details',
+            exact,
           }"
-          active-class="text-my-blue-primary"
+          exact-active-class="text-my-blue-primary"
           >{{ $t("adminPanel.locations.seeRooms") }}</router-link
         >
         <router-link

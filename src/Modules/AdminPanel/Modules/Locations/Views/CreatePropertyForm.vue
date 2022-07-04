@@ -249,6 +249,21 @@
           />
         </div>
 
+        <!-- meters -->
+        <div class="flex items-center justify-between">
+          <label for="garage" class="mr-3">
+            <!-- {{ $t("adminPanel.locations.garage") }} -->
+            Area (metros cuadrados)
+          </label>
+          <input
+            type="number"
+            min="1"
+            class="my-input"
+            v-model="location.meters"
+            id="meters"
+          />
+        </div>
+
         <!-- isActive -->
         <!-- <div class="flex items-center justify-between">
         <label for="isActive" class="mr-3"
@@ -341,6 +356,7 @@ export default {
         value: 0,
         zone: 0,
         owner: 0,
+        meters: 0,
       },
       country: "unselect",
       state: "unselect",
@@ -372,6 +388,7 @@ export default {
           value: this.location.value,
           lat: this.location.lat,
           lng: this.location.long,
+          meters: this.location.meters,
         };
         await this.createLocation(body);
 

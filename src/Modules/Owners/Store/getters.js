@@ -28,3 +28,6 @@ export const zonesList = (state) => {
 export const isLoading = (state) => {
   return state.loadingProperties;
 };
+export const getPropertyDetails = (state) => {
+  return state.propertyDetails;
+};

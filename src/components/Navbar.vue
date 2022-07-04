@@ -54,13 +54,13 @@
           :to="{ name: 'locations-list' }"
           >{{ $t("navbar.myProperties") }}</router-link
         > -->
-        <router-link
+        <!-- <router-link
           active-class="text-my-blue-primary "
           v-if="user.user && user.user.isAdmin"
           class="w-full py-2 text-center md:w-auto uppercase font-sans"
           :to="{ name: 'admin-users' }"
           >{{ $t("navbar.admin") }}</router-link
-        >
+        > -->
 
         <div class="flex justify-around items-center w-28 h-10 rounded-md border-gray-200 border-2">
           <div
@@ -95,7 +95,7 @@
           >
             <font-awesome-icon
               icon="fa-regular fa-user"
-              @click="$router.push({ name: 'profile-main' })"
+              @click="goToProfileDetails"
               class="p-3 text-white md:text-black"
             ></font-awesome-icon>
 
@@ -118,9 +118,12 @@
                   class="my-2 block"
                   >{{ $t("navbar.profile") }}</router-link
                 >
-                <router-link to="#" class="my-2 mb-4 block">{{
+                <router-link to="#" class="my-2  block">{{
                   $t("navbar.editProfile")
                 }}</router-link>
+                <p @click="logoutApp" class="cursor-pointer mb-4">
+                  {{ $t("profile.layout.logout") }}
+                </p>
                 <hr />
                 <router-link
                   :to="{ name: 'locations-list' }"
@@ -160,7 +163,7 @@
 <script>
 import { mapMutations, mapGetters, mapActions } from "vuex";
 import Login from "../Modules/Auth/Views/SharedModal.vue";
-
+import { CustomErrorToast } from "@/sweetAlert"
 export default {
   components: {
     Login,
@@ -186,7 +189,24 @@ export default {
       e.stopPropagation();
       this.movileMenuOpen = !this.movileMenuOpen;
     },
-  },
+    goToProfileDetails(){
+      if (this.user.user.isAdmin) {
+        this.$router.push({ name: 'admin-locations' })
+      }else{
+        this.$router.push({ name: 'profile-main' })
+      }
+    },
+    async logoutApp() {
+        try {
+          await this.logout();
+          this.$router.push({ name: "home" });
+        } catch (error) {
+          CustomErrorToast.fire({
+            text: error.response.data.message,
+          });
+        }
+      },
+    },
   computed: {
     ...mapGetters("authStore", ["isAuth", "user", "siteCountry"]),
     movileMenuClasses() {

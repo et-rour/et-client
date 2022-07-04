@@ -1,5 +1,6 @@
 import { storage } from "../Firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import EspacioTemporalAPI from "../Api/index";
 
 export const uploadImageTofirebase = async (
   { commit },
@@ -60,4 +61,20 @@ export const uploadImageTofirebase = async (
   console.log("File available at", downloadURL);
   commit("imageUploaded", { id, downloadURL });
   return downloadURL;
+};
+export const goToCheckoutSession = async (
+  _,
+  { locationId, userId, isLocation }
+) => {
+  const res = await EspacioTemporalAPI.post(
+    "/locations/create-checkout-session",
+    {
+      locationId,
+      userId,
+      isLocation,
+    }
+  );
+  // console.log("%cTest.vue line:22 res", "color: #007acc;", res);
+  // window.location.href = res.url;
+  window.open(res.data.url, "_blank");
 };

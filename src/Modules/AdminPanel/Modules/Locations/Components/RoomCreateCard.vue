@@ -1,6 +1,6 @@
 <template>
-  <div class="w-full h-40 my-4 flex gap-4">
-    <div class="w-9/12 sm:w-6/12 lg:w-1/3 h-full bg-gray-200 relative">
+  <div class="w-full flex flex-col">
+    <div class="w-9/12 sm:w-6/12 lg:w-1/3 mx-auto h-full bg-gray-200 relative">
       <img
         v-if="!localImage"
         src="@/assets/icons/image.png"
@@ -32,26 +32,90 @@
         class="w-full h-5"
       />
     </div>
-    <div class="flex flex-col justify-center relative gap-2">
-      <div class="text-gray-400">
-        <input type="number" class="my-input w-20" v-model="squareMeter" />
-        mts&sup2;
-      </div>
-      <div class="align-middle text-lg font-bold">
-        <input type="text" class="my-input" v-model="name" />
-      </div>
-      <div class="align-middle text-lg">
-        $ <input type="number" class="my-input w-28" v-model="value" />
-      </div>
-      <button
-        class="my-btn w-24 px-1 py-1 self-end"
-        @click="createNewRoom"
-        :disabled="isSaving"
-        :class="isSaving ? 'bg-gray-400' : ''"
-      >
-        {{ $t("general.save") }}
-      </button>
-    </div>
+
+    <ValidationObserver v-slot="{ invalid }">
+      <form @submit.prevent="createNewRoom" class="flex flex-col gap-2">
+        <!-- meters -->
+        <div class="flex justify-between">
+          <label for="meters">{{
+            $t("adminPanel.locations.roomsList.create.meters")
+          }}</label>
+          <ValidationProvider
+            rules="required"
+            class="text-right"
+            v-slot="{ errors }"
+          >
+            <input
+              type="number"
+              class="my-input w-28"
+              min="0"
+              max="200"
+              v-model="squareMeter"
+            />
+            <span class="block text-red-400">{{ errors[0] }}</span>
+          </ValidationProvider>
+        </div>
+        <!-- name -->
+        <div class="flex justify-between">
+          <label for="meters">{{
+            $t("adminPanel.locations.roomsList.create.name")
+          }}</label>
+          <ValidationProvider
+            rules="required"
+            class="text-right w-80"
+            v-slot="{ errors }"
+          >
+            <input type="text" class="my-input w-full" v-model="name" />
+            <span class="block text-red-400">{{ errors[0] }}</span>
+          </ValidationProvider>
+        </div>
+        <!-- description -->
+        <div class="flex justify-between">
+          <label for="description">{{
+            $t("adminPanel.locations.roomsList.create.description")
+          }}</label>
+          <textarea
+            name="description"
+            v-model="description"
+            class="my-input w-80 h-40"
+          ></textarea>
+        </div>
+
+        <!-- value -->
+        <div class="flex justify-between">
+          <div>
+            <label for="isIncluded">{{
+              $t("adminPanel.locations.roomsList.create.isIncluded")
+            }}</label>
+            <input
+              type="checkbox"
+              class="ml-2"
+              name="isIncluded"
+              v-model="isIncluded"
+              checked
+            />
+          </div>
+
+          <span class="ml-2 block">
+            $
+            <input
+              type="number"
+              class="my-input w-28"
+              v-model="value"
+              :disabled="isIncluded"
+              :class="isIncluded ? 'bg-gray-300' : ''"
+            />
+          </span>
+        </div>
+        <button
+          class="my-btn w-24 px-1 py-1 self-end"
+          :disabled="isSaving || invalid"
+          :class="isSaving || invalid ? 'bg-gray-400' : ''"
+        >
+          {{ $t("general.save") }}
+        </button>
+      </form>
+    </ValidationObserver>
   </div>
 </template>
 
@@ -59,9 +123,11 @@
 import { mapActions, mapGetters } from "vuex";
 import { CustomErrorToast, CustomToast } from "@/sweetAlert";
 import ProgesBarImage from "../../../../../components/ProgesBarImage.vue";
+import { ValidationObserver } from "vee-validate";
 export default {
   components: {
     ProgesBarImage,
+    ValidationObserver,
   },
   props: {
     idLocation: {
@@ -72,9 +138,11 @@ export default {
   data() {
     return {
       name: "",
+      description: "",
       image: "",
       value: 0,
-      squareMeter: 0,
+      squareMeter: "",
+      isIncluded: true,
 
       isSaving: false,
       showProgresBar: false,
@@ -116,6 +184,7 @@ export default {
 
         await this.createRoom({
           name: this.name,
+          description: this.description,
           image: uploadedImage,
           value: this.value,
           squareMeter: this.squareMeter,
@@ -127,7 +196,9 @@ export default {
           icon: "success",
         });
         this.name = "";
+        this.description = "";
         this.image = "";
+        this.isIncluded = true;
         this.value = 0;
         this.squareMeter = 0;
         this.isSaving = false;
@@ -137,6 +208,13 @@ export default {
         CustomErrorToast.fire({
           text: error.response.data.message,
         });
+      }
+    },
+  },
+  watch: {
+    isIncluded(isIncludedNewValue) {
+      if (isIncludedNewValue) {
+        this.value = 0;
       }
     },
   },

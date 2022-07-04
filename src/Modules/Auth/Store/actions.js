@@ -9,20 +9,11 @@ import {
 export const login = async ({ commit }, data) => {
   const res = await EspacioAPI.post("/auth/login", data);
   console.log({ token: res.data.token });
-  signInWithCustomToken(auth, res.data.storageTokenAuthFirebase)
-    .then((userCredential) => {
-      // Signed in
-      const user = userCredential.user;
-      console.log({ user });
-      commit("login", res.data);
-      // ...
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.log({ errorCode, errorMessage });
-      // ...
-    });
+  const {user} =  await signInWithCustomToken(auth, res.data.storageTokenAuthFirebase)
+  
+  console.log({ user });
+  commit("login", res.data);
+   
 };
 
 export const loadSession = async ({ commit }) => {

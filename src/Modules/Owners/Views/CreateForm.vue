@@ -369,22 +369,41 @@
           <label class="text-lg" for="valor_de_arriendo">{{
             $t("createForm.arriendo")
           }}</label>
-          <ValidationProvider
-            v-slot="{ errors }"
-            rules="required|min_value:1"
-            class="w-1/5"
-          >
-            <input
-              class="bg-gray-200 my-input w-full"
-              type="number"
-              name="valor_de_arriendo"
-              min="0"
-              v-model="value"
-            />
-            <span class="my-error relative top-0 left-0 block">{{
-              errors[0]
-            }}</span>
-          </ValidationProvider>
+          <div class="flex row items-center justify-between w-1/5">
+            <ValidationProvider
+              v-slot="{ errors }"
+              rules="required|min_value:1"
+            >
+              <input
+                class="bg-gray-200 my-input w-full"
+                type="number"
+                name="valor_de_arriendo"
+                min="0"
+                v-model="valueMin"
+              />
+              <span class="my-error relative top-0 left-0 block">{{
+                errors[0]
+              }}</span>
+            </ValidationProvider>
+            <div class="mx-8">
+              <p>a</p>
+            </div>
+            <ValidationProvider
+              v-slot="{ errors }"
+              rules="required|min_value:1"
+            >
+              <input
+                class="bg-gray-200 my-input w-full"
+                type="number"
+                name="valor_de_arriendo"
+                min="0"
+                v-model="valueMax"
+              />
+              <span class="my-error relative top-0 left-0 block">{{
+                errors[0]
+              }}</span>
+            </ValidationProvider>
+          </div>
         </div>
 
         <!-- time -->
@@ -449,6 +468,29 @@
           </ValidationProvider>
         </div>
 
+         <!-- metros_cuadrados -->
+        <div class="flex items-center justify-between my-1">
+          <label class="text-lg" for="metros">{{
+            $t("createForm.metros")
+          }}</label>
+          <ValidationProvider
+            v-slot="{ errors }"
+            rules="required|min_value:1"
+            class="w-1/5"
+          >
+            <input
+              class="bg-gray-200 my-input w-full"
+              type="number"
+              name="metros"
+              min="1"
+              v-model="meters"
+            />
+            <span class="my-error relative top-0 left-0 block">{{
+              errors[0]
+            }}</span>
+          </ValidationProvider>
+        </div>
+
         <!-- map -->
         <MapCoordsVue
           :lat="lat"
@@ -490,7 +532,8 @@ export default {
       bathrooms: "",
       painting: 3,
       floor: 3,
-      value: "",
+      valueMin: "",
+      valueMax: "",
       zone: "",
       ciudad: "",
       time: "",
@@ -498,6 +541,7 @@ export default {
       tipoPropiedad: "",
       lat: "",
       lng: "",
+      meters: 0,
       image: null,
       localImage: null,
       file: null,
@@ -563,9 +607,10 @@ export default {
           description: this.description,
           lat: this.lat,
           lng: this.lng,
+          meters: this.meters,
         };
         const calculatorData = {
-          expectedValue: this.value,
+          expectedValue: (parseInt(this.valueMin) + parseInt(this.valueMax)) / 2,
           time: this.time,
         };
         try {

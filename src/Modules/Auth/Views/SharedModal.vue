@@ -29,23 +29,13 @@
           {{ $t("login.succesModal.subtitle") }}
         </h2>
 
-        <div
-          class="flex flex-col gap-2 w-full justify-center px-10"
-          v-if="user"
-        >
-          <button
-            class="my-btn w-full font-medium tracking-widest"
-            @click="redirectTo('owner')"
-          >
-            {{ $t("login.succesModal.buttonOpcion1") }}
-          </button>
-          <button
-            class="my-btn w-full font-medium tracking-widest"
-            @click="redirectTo('tenants')"
-          >
-            {{ $t("login.succesModal.buttonOpcion2") }}
-          </button>
-        </div>
+        <template v-if="user.user">
+          <AdminLinksVue
+            v-if="user.user.isAdmin"
+            v-on:redirectTo="redirectTo"
+          />
+          <UserLinksVue v-else v-on:redirectTo="redirectTo" />
+        </template>
       </div>
     </div>
     <!-- LOGIN MODAL -->
@@ -94,12 +84,16 @@ import { mapGetters, mapMutations } from "vuex";
 import Register from "./RegisterForm.vue";
 import Login from "./LoginForm.vue";
 import ModelGlobal from "../../../components/ModelGlobal.vue";
+import AdminLinksVue from "../Components/AdminLinks.vue";
+import UserLinksVue from "../Components/UserLinks.vue";
 
 export default {
   components: {
     Register,
     Login,
     ModelGlobal,
+    UserLinksVue,
+    AdminLinksVue,
   },
   data() {
     return {
@@ -123,8 +117,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters("authStore", ["isModalOpen", "isWelcomeModalOpen"]),
-    ...mapGetters("authStore", ["user"]),
+    ...mapGetters("authStore", ["isModalOpen", "isWelcomeModalOpen", "user"]),
   },
 };
 </script>

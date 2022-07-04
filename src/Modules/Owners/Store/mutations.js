@@ -6,6 +6,9 @@ export const loadProperties = (state, properties) => {
   state.properties = properties;
   state.loadingProperties = false;
 };
+export const fetchPropertyDetails = (state, property) => {
+  state.propertyDetails = property;
+};
 export const loadZones = (state, zones) => {
   state.zones = zones;
 };

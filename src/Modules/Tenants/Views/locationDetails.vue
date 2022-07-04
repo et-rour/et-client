@@ -1,6 +1,13 @@
 <template>
   <div>
-    <div class="my-container mb-32 lg:mb-2" v-if="property">
+    <div
+      class="flex flex-col justify-center items-center h-80"
+      v-if="!property"
+    >
+      <h2 class="my-title">{{ $t("tenants.details.title") }}</h2>
+      <SpinerVue />
+    </div>
+    <div class="my-container mb-32 lg:mb-2" v-else>
       <h1 class="my-title">{{ property.name }}</h1>
       <p>
         {{ property.address }}, {{ property.zone.zone }} -
@@ -66,7 +73,7 @@
       </button>
       <button
         class="w-full bg-green-500 mt-2 text-white font-bold my-btn"
-        @click="goToCheckoutSession"
+        @click="goToBuyLink"
       >
         <a>{{ $t("tenants.details.pay") }}</a>
       </button>
@@ -96,7 +103,7 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations } from "vuex";
+import { mapActions, mapGetters, mapMutations } from "vuex";
 import { Viewer } from "photo-sphere-viewer";
 import { MarkersPlugin } from "photo-sphere-viewer/dist/plugins/markers";
 import "photo-sphere-viewer/dist/photo-sphere-viewer.css";
@@ -104,13 +111,12 @@ import "photo-sphere-viewer/dist/plugins/markers.css";
 import RoomCard from "../Components/RoomCard.vue";
 import ContactModal from "../Components/ContactModal.vue";
 import ModelGlobal from "../../../components/ModelGlobal.vue";
-import EspacioTemporalAPI from "@/Api/index.js";
+import SpinerVue from "../../../components/Spiner.vue";
 
 export default {
-  components: { ModelGlobal, RoomCard, ContactModal },
+  components: { ModelGlobal, RoomCard, ContactModal, SpinerVue },
   props: {
     idProperty: {
-      type: Number,
       requird: true,
     },
   },
@@ -130,26 +136,23 @@ export default {
   },
   methods: {
     ...mapMutations("authStore", ["changeShowLoginModal"]),
+    ...mapActions("propertiesStore", ["fetchPropertyDetails"]),
+    ...mapActions(["goToCheckoutSession"]),
     goToSchedule(e) {
       e.preventDefault();
       this.$router.push({ name: "tenants-schedule" });
     },
-    async goToCheckoutSession() {
+    goToBuyLink() {
       if (!this.isAuth) {
         this.changeShowLoginModal(true);
         return;
       }
 
-      const res = await EspacioTemporalAPI.post(
-        "/locations/create-checkout-session",
-        {
-          locationId: this.idProperty,
-          userId: this.user.user.id,
-        }
-      );
-      // console.log("%cTest.vue line:22 res", "color: #007acc;", res);
-      // window.location.href = res.url;
-      window.open(res.data.url, "_blank");
+      this.goToCheckoutSession({
+        locationId: this.idProperty,
+        userId: this.user.user.id,
+        isLocation: true,
+      });
     },
     closeContactModal() {
       this.showContactModal = false;
@@ -232,6 +235,7 @@ export default {
     },
   },
   computed: {
+    ...mapGetters("propertiesStore", ["getPropertyDetails"]),
     ...mapGetters("propertiesStore", ["propertiesById"]),
     ...mapGetters("authStore", ["user", "isAuth"]),
     zoom() {
@@ -244,8 +248,9 @@ export default {
       return this.property.lat !== "" && this.property.long !== "";
     },
   },
-  mounted() {
-    this.property = this.propertiesById(this.idProperty);
+  async mounted() {
+    await this.fetchPropertyDetails(this.idProperty);
+    this.property = this.getPropertyDetails;
   },
 };
 </script>

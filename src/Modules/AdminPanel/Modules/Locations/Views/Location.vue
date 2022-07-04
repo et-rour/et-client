@@ -122,6 +122,19 @@
         />
       </div>
       <div class="flex items-center justify-between">
+        <label for="garage" class="mr-3">
+          <!-- {{ $t("adminPanel.locations.garage") }} -->
+          Area (metros cuadrados)
+        </label>
+        <input
+          type="number"
+          min="1"
+          class="my-input"
+          v-model="location.squareMeters"
+          id="meters"
+        />
+      </div>
+      <div class="flex items-center justify-between">
         <label for="isActive" class="mr-3"
           >{{ $t("adminPanel.locations.isActive") }}
         </label>
@@ -239,6 +252,7 @@ export default {
         garage,
         lat,
         long,
+        squareMeters,
       } = this.location;
       try {
         const updateLocationBody = {
@@ -255,6 +269,7 @@ export default {
           garage: garage,
           lat: lat,
           lng: long,
+          meters: squareMeters,
         };
 
         await this.modifyLocation(updateLocationBody);
