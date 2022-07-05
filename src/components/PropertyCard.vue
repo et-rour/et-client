@@ -17,7 +17,7 @@ import { mapGetters } from 'vuex';
         class="text-gray-400"
       >
         <span class="text-black" v-if="property.value !== '0'"
-          >{{ currency.symbol }} {{ (property.value * currency.value).toFixed(0) }} / {{ $t("landing.propertyCard.montly") }}
+          >{{ currency.symbol }} {{ (parseInt(property.value) * parseInt(currency.value)).toFixed(0) }} / {{ $t("landing.propertyCard.montly") }}
         </span>
         <span class="text-black" v-else
           >{{ $t("landing.propertyCard.noValue") }} /
