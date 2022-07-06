@@ -94,27 +94,9 @@
           </select>
         </div>
       </div>
-      <ul class="flex flex-col h-40 md:h-auto relative">
-        <router-link
-          v-for="location in filteredData"
-          :to="{
-            name: 'admin-locations-detail-info',
-            params: { id: location.id },
-            hash: '#details',
-          }"
-          :key="location.id"
-          active-class="active-class-admin "
-        >
-          <div
-            class="cursor-pointer p-1 hover:bg-my-blue-primary hover:text-white"
-          >
-            <span class="block"
-              ><b>{{ location.name }}</b></span
-            >
-            <span>{{ location.zone.city }} ({{ location.zone.country }})</span>
-          </div>
-        </router-link>
-      </ul>
+
+      <SpinerComponent v-if="isloadingLocationsList" />
+      <LocationsListComponent v-else :locationsList="filteredData" />
     </template>
     <template v-slot:main>
       <p
@@ -132,13 +114,18 @@
 import { mapActions, mapGetters } from "vuex";
 import { CustomErrorToast } from "@/sweetAlert";
 import GeneralLayoutVue from "../../../Layouts/GeneralLayout.vue";
+import LocationsListComponent from "../Components/LocationsList.vue";
+import SpinerComponent from "../../../../../components/Spiner.vue";
 
 export default {
   components: {
     GeneralLayoutVue,
+    LocationsListComponent,
+    SpinerComponent,
   },
   data() {
     return {
+      isloadingLocationsList: true,
       filterWord: "",
       isVerified: "unselect",
       isActive: "unselect",
@@ -148,23 +135,12 @@ export default {
     };
   },
   methods: {
-    ...mapActions("adminPanelStore", [
-      "getLocations",
-      "getZones",
-      "changeIsActiveProperty",
-    ]),
-    async changeIsActive(idUser, activeProperty) {
-      try {
-        await this.changeIsActiveProperty({ idUser, isActive: activeProperty });
-      } catch (error) {
-        CustomErrorToast.fire({
-          text: error.response.data.message,
-        });
-      }
-    },
+    ...mapActions("adminPanelStore/locations", ["getLocations"]),
+    ...mapActions("adminPanelStore/zones", ["getZones"]),
   },
   computed: {
-    ...mapGetters("adminPanelStore", ["getFilteredLocations", "getAllZones"]),
+    ...mapGetters("adminPanelStore/locations", ["getFilteredLocations"]),
+    ...mapGetters("adminPanelStore/zones", ["getAllZones"]),
     filteredData() {
       let filtered = this.getFilteredLocations(this.filterWord);
       if (this.isVerified !== "unselect") {
@@ -228,9 +204,12 @@ export default {
   },
   async mounted() {
     try {
+      this.isloadingLocationsList = true;
       await this.getLocations();
       await this.getZones();
+      this.isloadingLocationsList = false;
     } catch (error) {
+      this.isloadingLocationsList = false;
       CustomErrorToast.fire({
         text: error.response.data.message,
       });

@@ -93,10 +93,6 @@ export default {
       type: Object,
       required: true,
     },
-    idLocation: {
-      type: String,
-      requird: true,
-    },
   },
   data() {
     return {
@@ -106,10 +102,14 @@ export default {
   computed: {
     ...mapGetters(["imageUrl", "ImageUploadingState"]),
     ...mapGetters("authStore", ["user"]),
+    ...mapGetters("adminPanelStore/locations", ["getLocationDetails"]),
   },
   methods: {
     ...mapActions(["uploadImageTofirebase", "goToCheckoutSession"]),
-    ...mapActions("adminPanelStore", ["updateRoomImage", "updateRoom"]),
+    ...mapActions("adminPanelStore/locations", [
+      "updateRoomImage",
+      "updateRoom",
+    ]),
     async uploadRoomImage(event, idRoom) {
       const image = event.target.files[0];
       if (!image) {
@@ -130,7 +130,7 @@ export default {
         });
 
         await this.updateRoomImage({
-          locationId: this.idLocation,
+          locationId: this.getLocationDetails.id,
           idRoom: idRoom,
           imageUrl: res,
         });
@@ -160,8 +160,8 @@ export default {
             image: this.room.image,
             value: this.room.value,
             squareMeter: this.room.squareMeter,
-            locationId: this.idLocation,
             description: this.room.description,
+            locationId: this.getLocationDetails.id,
           });
 
           CustomToast.fire({
@@ -170,6 +170,7 @@ export default {
           });
           this.isSaving = false;
         } catch (error) {
+          this.isSaving = false;
           CustomErrorToast.fire({
             text: error.response.data.message,
           });

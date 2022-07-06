@@ -38,7 +38,9 @@
     "register": "SIGN UP",
     "isOwner": "Are you owner?",
     "email": "E-mail",
+    "emailRegister": "Email *",
     "phone": "Phone number",
+    "passwordRegister": "Password *",
     "password": "Password",
     "firstName": "First name",
     "lastName": "Last name",
@@ -159,6 +161,7 @@
     "habitaciones": "Number of rooms",
     "banios": "Number of bathrooms",
     "pintura": "paint condition",
+    "opcionDefault": "Select",
     "suelo": "ground state",
     "image": "Select a image",
     "options": {
@@ -175,6 +178,7 @@
     "submit": "LOAD PROPERTY",
     "ciudad": "City",
     "tipoPropiedad": "Property type",
+    "propiedadEntera": "Property complete",
     "propiedadParcial": "Room",
     "metros": "Area (square meters)"
   },
@@ -334,7 +338,8 @@
       "locations": "locations",
       "review": "Review",
       "reservation": "Reservation",
-      "publications": "Publications"
+      "publications": "Publications",
+      "payments": "Payments"
     },
     "users": {
       "select": "Select a user",
@@ -360,6 +365,7 @@
       "userLocations": "Locations",
       "createdReviews": "Created reviews",
       "receivedReviews": "Received reviews",
+      "payments": "Payments",
       "locationsList": {
         "title": "locations for user:",
         "noLocationsFound": "The user does not have properties"
@@ -370,6 +376,10 @@
         "noReviewsFound": "The user has no reviews",
         "from": "From",
         "to": "To"
+      },
+      "reservations": {
+        "created": "Creadas",
+        "received": "Recibidas"
       },
       "confiramtionMessages": {
         "activateUser": "Are you sure you want to activate the user?",
@@ -496,6 +506,15 @@
       "confiramtionMessages": {
         "activate": "Are you sure you want to enable publishing?",
         "desactivate": "Are you sure you want to disable publishing?"
+      }
+    },
+    "payments": {
+      "next": "Next",
+      "prev": "Previus",
+      "excel": "Create report",
+      "download": "Download",
+      "sweetAlert": {
+        "confirmation": "Do you want to create a report of the last 100 payments?"
       }
     }
   },

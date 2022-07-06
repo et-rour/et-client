@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-full">
+  <div class="w-full h-full overflow-y-scroll bg-gray-100">
     <div class="w-2/3 mx-auto">
       <div class="py-4 flex flex-col gap-3">
         <h2 class="my-title-2 text-center my-2">
@@ -366,7 +366,8 @@ export default {
     };
   },
   methods: {
-    ...mapActions("adminPanelStore", ["createLocation", "getUsers"]),
+    ...mapActions("adminPanelStore/locations", ["createLocation"]),
+    ...mapActions("adminPanelStore/users", ["getUsers"]),
     async submitLocation() {
       try {
         const body = {
@@ -409,11 +410,9 @@ export default {
     },
   },
   computed: {
-    ...mapGetters("adminPanelStore", [
-      "getLocationById",
-      "getFilteredUsers",
-      "getAllZones",
-    ]),
+    ...mapGetters("adminPanelStore/locations", ["getLocationById"]),
+    ...mapGetters("adminPanelStore/zones", ["getAllZones"]),
+    ...mapGetters("adminPanelStore/users", ["getFilteredUsers"]),
     filteredData() {
       let filtered = this.getAllZones;
       if (this.country !== "unselect") {

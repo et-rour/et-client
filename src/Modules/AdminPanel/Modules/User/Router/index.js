@@ -3,6 +3,7 @@ import User from "../Views/User.vue";
 import Locations from "../Views/Locations.vue";
 import Reviews from "../Views/Reviews.vue";
 import Details from "../Views/Details.vue";
+import Payments from "../Views/Payments.vue";
 
 export default {
   name: "admin-users",
@@ -47,6 +48,16 @@ export default {
             return {
               idUser: `${route.params.id}`,
               isCreator: route.params.CreatorOrReceiver,
+            };
+          },
+        },
+        {
+          name: "admin-users-detail-payments",
+          path: "/users/detail/:id/payments",
+          component: Payments,
+          props: (route) => {
+            return {
+              idUser: `${route.params.id}`,
             };
           },
         },

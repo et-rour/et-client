@@ -1,10 +1,16 @@
 <template>
-  <div>
-    <div class="w-full my-4 flex gap-4 items-center">
-      <div class="w-9/12 sm:w-6/12 lg:w-1/3 h-40 bg-gray-200 flex-shrink-0">
+  <div :id="`room_${room.id}`">
+    <div
+      class="w-full my-4 flex gap-4 items-center"
+      :class="isSelectedRoom ? 'bg-green-300' : ''"
+    >
+      <div
+        class="w-9/12 sm:w-6/12 lg:w-1/3 h-40 bg-gray-200 flex-shrink-0"
+        :class="isSelectedRoom ? 'bg-green-300' : 'bg-gray-200'"
+      >
         <img
           :src="room.image"
-          class="w-full h-full object-contain"
+          class="w-80 h-full object-contain"
           alt="project"
         />
       </div>
@@ -51,6 +57,9 @@ export default {
       return this.room.value === 0
         ? `${this.$t("tenants.details.included")}`
         : `${this.$t("tenants.details.notIncluded")} $${this.room.value}`;
+    },
+    isSelectedRoom() {
+      return this.$route.hash === `#room_${this.room.id}`;
     },
   },
 };

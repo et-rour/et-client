@@ -35,21 +35,11 @@
         </div>
       </div>
 
-      <ul class="flex flex-col gap-2 h-40 md:h-auto relative">
-        <router-link
-          v-for="publication in filteredPublications"
-          :to="{
-            name: 'admin-publications-detail',
-            params: { id: `${publication.id}` },
-            hash: '#details',
-          }"
-          :key="publication.id"
-          active-class="active-class-admin "
-          class="cursor-pointer border p-1"
-        >
-          <span class="block">{{ publication.id }}.-{{ publication.title }}</span>
-        </router-link>
-      </ul>
+      <SpinerComponent v-if="isLoadingPublicationsList" />
+      <PublicationsListComponent
+        v-else
+        :publicationsList="filteredPublications"
+      />
     </template>
     <template v-slot:main>
       <p
@@ -67,26 +57,26 @@
 import { mapActions, mapGetters } from "vuex";
 import { CustomErrorToast } from "@/sweetAlert";
 import GeneralLayoutVue from "../../../Layouts/GeneralLayout.vue";
-
+import PublicationsListComponent from "../Components/PublicationsList.vue";
+import SpinerComponent from "../../../../../components/Spiner.vue";
 export default {
   components: {
     GeneralLayoutVue,
+    PublicationsListComponent,
+    SpinerComponent,
   },
   data() {
     return {
+      isLoadingPublicationsList: true,
       filterWord: "",
       isVerified: "",
     };
   },
   methods: {
-    ...mapActions("adminPanelStore", [
-      "getPublications",
-    ]),
+    ...mapActions("adminPanelStore/publications", ["getPublications"]),
   },
   computed: {
-    ...mapGetters("adminPanelStore", [
-      "getFilteredPublications",
-    ]),
+    ...mapGetters("adminPanelStore/publications", ["getFilteredPublications"]),
     filteredPublications() {
       let filtered = this.getFilteredPublications(this.filterWord);
 
@@ -102,12 +92,14 @@ export default {
   },
   async mounted() {
     try {
+      this.isLoadingPublicationsList = true;
       await this.getPublications();
     } catch (error) {
       CustomErrorToast.fire({
         text: error.response.data.message,
       });
     }
+    this.isLoadingPublicationsList = false;
   },
 };
 </script>

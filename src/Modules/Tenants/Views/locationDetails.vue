@@ -112,6 +112,7 @@ import RoomCard from "../Components/RoomCard.vue";
 import ContactModal from "../Components/ContactModal.vue";
 import ModelGlobal from "../../../components/ModelGlobal.vue";
 import SpinerVue from "../../../components/Spiner.vue";
+import { CustomErrorToast } from "@/sweetAlert.js";
 
 export default {
   components: { ModelGlobal, RoomCard, ContactModal, SpinerVue },
@@ -233,6 +234,14 @@ export default {
         this.show3d();
       }, 1000);
     },
+    scrollToAnchor() {
+      this.$nextTick(() => {
+        if (this.$route.hash) {
+          const $el = document.querySelector(this.$route.hash);
+          $el && window.scrollTo(0, $el.offsetTop);
+        }
+      });
+    },
   },
   computed: {
     ...mapGetters("propertiesStore", ["getPropertyDetails"]),
@@ -249,8 +258,16 @@ export default {
     },
   },
   async mounted() {
-    await this.fetchPropertyDetails(this.idProperty);
-    this.property = this.getPropertyDetails;
+    try {
+      await this.fetchPropertyDetails(this.idProperty);
+      this.property = this.getPropertyDetails;
+      console.log("%clocationDetails.vue line:255 router", "color: #007acc;");
+      this.scrollToAnchor();
+    } catch (error) {
+      CustomErrorToast.fire({
+        text: error.response.data.message || error,
+      });
+    }
   },
 };
 </script>

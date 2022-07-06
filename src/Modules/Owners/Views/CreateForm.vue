@@ -368,7 +368,7 @@
         <div class="flex items-center justify-between my-1">
           <label class="text-lg" for="valor_de_arriendo">{{
             $t("createForm.arriendo")
-          }}</label>
+          }} ({{currency}})</label>
           <div class="flex row items-center justify-between w-1/5">
             <ValidationProvider
               v-slot="{ errors }"
@@ -612,6 +612,7 @@ export default {
         const calculatorData = {
           expectedValue: (parseInt(this.valueMin) + parseInt(this.valueMax)) / 2,
           time: this.time,
+          currencyData: this.country,
         };
         try {
           await this.createNewProperty({ propertyData, calculatorData });
@@ -656,7 +657,8 @@ export default {
       "propertyImage",
       "propertyImageState",
     ]),
-    ...mapGetters("authStore", ["user"]),
+    ...mapGetters("authStore", ["user", "siteCountry"]),
+    ...mapGetters("postsStore", ["currencies"]),
     filteredCities() {
       if (this.zonesList.length) {
         let mappedZones = this.zonesList.map((element) => {
@@ -683,6 +685,26 @@ export default {
         phone: this.user.user.phone,
       };
     },
+    currency() {
+      if (!this.zone) {
+        if(this.siteCountry === 'Chile') return 'pesos chilenos'
+        return 'soles'
+      } else {
+        const res = this.zonesList.filter(el => el.id === this.zone);
+        if(res[0].country === 'Chile') return 'pesos chilenos'
+        return 'soles'
+      }
+    },
+    country() {
+      if (!this.zone) {
+        if(this.siteCountry === 'Chile') return 'Chile'
+        return 'Perú'
+      } else {
+        const res = this.zonesList.filter(el => el.id === this.zone);
+        if(res[0].country === 'Chile') return 'Chile'
+        return 'Perú'
+      }
+    }
   },
   async mounted() {
     try {

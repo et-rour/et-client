@@ -129,12 +129,6 @@ export default {
     ProgesBarImage,
     ValidationObserver,
   },
-  props: {
-    idLocation: {
-      type: String,
-      requird: true,
-    },
-  },
   data() {
     return {
       name: "",
@@ -153,11 +147,12 @@ export default {
   },
   computed: {
     ...mapGetters(["imageUrl", "ImageUploadingState"]),
+    ...mapGetters("adminPanelStore/locations", ["getLocationDetails"]),
     ...mapGetters("authStore", ["user"]),
   },
   methods: {
     ...mapActions(["uploadImageTofirebase"]),
-    ...mapActions("adminPanelStore", ["updateRoomImage", "createRoom"]),
+    ...mapActions("adminPanelStore/locations", ["createRoom"]),
     onSelectedImage(event) {
       const image = event.target.files[0];
       if (!image) {
@@ -188,7 +183,7 @@ export default {
           image: uploadedImage,
           value: this.value,
           squareMeter: this.squareMeter,
-          locationId: this.idLocation,
+          locationId: this.getLocationDetails.id,
         });
 
         CustomToast.fire({

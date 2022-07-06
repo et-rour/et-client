@@ -181,7 +181,12 @@
       ></MapCoordsVue>
 
       <div class="w-full flex justify-center">
-        <button class="my-btn" @click="submitLocation">
+        <button
+          class="my-btn"
+          @click="submitLocation"
+          :disabled="isUploadingLocation"
+          :class="isUploadingLocation ? 'bg-gray-500' : ''"
+        >
           {{ $t("general.update") }}
         </button>
       </div>
@@ -200,38 +205,30 @@ import {
 import MapCoordsVue from "../../../../../components/MapCoords.vue";
 
 export default {
-  props: {
-    idLocation: {
-      type: String,
-      required: true,
-    },
-  },
   components: {
     SwitchComponentVue,
     MapCoordsVue,
   },
   computed: {
-    ...mapGetters("adminPanelStore", [
-      "getLocationById",
-      "getFilteredUsers",
-      "getAllZones",
-    ]),
+    ...mapGetters("adminPanelStore/locations", ["getLocationDetails"]),
   },
   data() {
     return {
       location: null,
       fistValueLocation: null,
+
+      isUploadingLocation: false,
     };
   },
   methods: {
-    ...mapActions("adminPanelStore", [
+    ...mapActions("adminPanelStore/locations", [
       "modifyLocation",
       "changeIsActiveLocation",
       "changeIsVerifiedLocation",
       "setLocationValue",
     ]),
     loadLocation() {
-      this.location = this.getLocationById(this.idLocation);
+      this.location = this.getLocationDetails;
       this.fistValueLocation = this.location.value;
     },
     async submitLocation() {
@@ -272,9 +269,9 @@ export default {
           meters: squareMeters,
         };
 
+        this.isUploadingLocation = true;
         await this.modifyLocation(updateLocationBody);
 
-        console.log(this.location);
         CustomToast.fire({
           title: this.$t("sweetAlertMessages.saved"),
           icon: "success",
@@ -284,6 +281,7 @@ export default {
           text: error.response.data.message,
         });
       }
+      this.isUploadingLocation = false;
     },
     toogleIsActive(value) {
       const changeIsActiveLocationTextAcction = !this.location.isActive

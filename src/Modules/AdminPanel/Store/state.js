@@ -1,8 +1,8 @@
 export default () => ({
-  users: [],
-  zones: [],
-  locations: [],
-  reviews: [],
-  reservations: [],
-  publications: [],
+  // users: [],
+  // zones: [],
+  // locations: [],
+  // reviews: [],
+  // publications: [],
+  // reservations: [],
 });

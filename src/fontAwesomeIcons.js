@@ -27,6 +27,8 @@ import {
   faMapLocationDot,
   faHouse,
   faPen,
+  faEye,
+  faBed,
 } from "@fortawesome/free-solid-svg-icons";
 import { faEnvelope, faUser } from "@fortawesome/free-regular-svg-icons";
 
@@ -60,6 +62,8 @@ library.add(
   faMapLocationDot,
   faHouse,
   faPen,
+  faEye,
+  faBed
 );
 
 Vue.config.productionTip = false;

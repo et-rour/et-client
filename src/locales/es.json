@@ -338,7 +338,8 @@
       "locations": "Locaciones",
       "review": "Reseñas",
       "reservation": "Reservas",
-      "publications": "Publicaciones"
+      "publications": "Publicaciones",
+      "payments": "Pagos"
     },
     "users": {
       "select": "Selecciona un usuario",
@@ -364,6 +365,7 @@
       "userLocations": "Locaciónes",
       "createdReviews": "Reseñas creadas",
       "receivedReviews": "Reseñas resividas",
+      "payments": "Pagos",
       "locationsList": {
         "title": "Locaciones del usuario:",
         "noLocationsFound": "El usuario no cuenta con propiedades"
@@ -374,6 +376,10 @@
         "noReviewsFound": "El usuario no cuenta con reviews",
         "from": "De",
         "to": "Para"
+      },
+      "reservations": {
+        "created": "Created",
+        "received": "Received"
       },
       "confiramtionMessages": {
         "activateUser": "¿Seguro que quieres activar al usuario?",
@@ -500,6 +506,15 @@
       "confiramtionMessages": {
         "activate": "¿Seguro que quieres activar la publicación?",
         "desactivate": "¿Seguro que quieres desactivar la publicación?"
+      }
+    },
+    "payments": {
+      "next": "Siguiente",
+      "prev": "Anterior",
+      "excel": "Crear reporte",
+      "download": "Descargar",
+      "sweetAlert": {
+        "confirmation": "¿Deseas crear reporte de los 100 ultimos pagos?"
       }
     }
   },

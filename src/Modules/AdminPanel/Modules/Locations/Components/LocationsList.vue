@@ -1,0 +1,33 @@
+<template>
+  <ul class="flex flex-col h-40 md:h-auto relative">
+    <router-link
+      v-for="location in locationsList"
+      :to="{
+        name: 'admin-locations-detail-info',
+        params: { id: location.id },
+        hash: '#details',
+      }"
+      :key="location.id"
+      active-class="active-class-admin "
+    >
+      <div class="cursor-pointer p-1 hover:bg-my-blue-primary hover:text-white">
+        <span class="block"
+          ><b>{{ location.name }}</b></span
+        >
+        <span>{{ location.zone.city }} ({{ location.zone.country }})</span>
+      </div>
+    </router-link>
+  </ul>
+</template>
+
+<script>
+export default {
+  props: {
+    locationsList: {
+      type: Array,
+    },
+  },
+};
+</script>
+
+<style></style>

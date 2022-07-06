@@ -5,11 +5,7 @@
         {{ $t("adminPanel.locations.roomsList.create.title") }}
         {{ idLocation }}
       </h1> -->
-      <RoomCreateCard
-        class="w-full h-40 my-4 flex gap-4"
-        :idLocation="idLocation"
-      >
-      </RoomCreateCard>
+      <RoomCreateCard class="w-full h-40 my-4 flex gap-4"> </RoomCreateCard>
     </div>
   </div>
 </template>
@@ -19,12 +15,6 @@ import RoomCreateCard from "../Components/RoomCreateCard.vue";
 export default {
   components: {
     RoomCreateCard,
-  },
-  props: {
-    idLocation: {
-      tyoe: Number,
-      required: true,
-    },
   },
 };
 </script>

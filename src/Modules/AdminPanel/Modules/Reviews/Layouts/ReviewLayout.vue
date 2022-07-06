@@ -161,21 +161,8 @@
         </div>
       </div>
 
-      <ul class="flex flex-col gap-2 h-40 md:h-auto relative">
-        <router-link
-          v-for="review in filteredReviews"
-          :to="{
-            name: 'admin-reviews-detail',
-            params: { id: `${review.id}` },
-            hash: '#details',
-          }"
-          :key="review.id"
-          active-class="active-class-admin "
-          class="cursor-pointer border p-1"
-        >
-          <span class="block">{{ review.id }}.-{{ review.title }}</span>
-        </router-link>
-      </ul>
+      <SpinerComponent v-if="isLoadingReviewsList"></SpinerComponent>
+      <ReviewsListComponent v-else :reviewsList="filteredReviews" />
     </template>
     <template v-slot:main>
       <p
@@ -193,13 +180,17 @@
 import { mapActions, mapGetters } from "vuex";
 import { CustomErrorToast } from "@/sweetAlert";
 import GeneralLayoutVue from "../../../Layouts/GeneralLayout.vue";
-
+import ReviewsListComponent from "../Components/ReviewsList.vue";
+import SpinerComponent from "../../../../../components/Spiner.vue";
 export default {
   components: {
     GeneralLayoutVue,
+    ReviewsListComponent,
+    SpinerComponent,
   },
   data() {
     return {
+      isLoadingReviewsList: true,
       filterWord: "",
       filterRating: "",
       isVerified: "",
@@ -207,19 +198,10 @@ export default {
     };
   },
   methods: {
-    ...mapActions("adminPanelStore", ["getReviews", "changeIsActiveReview"]),
-    async changeIsActive(idUser, activeProperty) {
-      try {
-        await this.changeIsActiveReview({ idUser, isActive: activeProperty });
-      } catch (error) {
-        CustomErrorToast.fire({
-          text: error.response.data.message,
-        });
-      }
-    },
+    ...mapActions("adminPanelStore/reviews", ["getReviews"]),
   },
   computed: {
-    ...mapGetters("adminPanelStore", ["getAllReviews", "getFilteredReviews"]),
+    ...mapGetters("adminPanelStore/reviews", ["getFilteredReviews"]),
     filteredReviews() {
       let filtered = this.getFilteredReviews(
         this.filterWord,
@@ -245,12 +227,14 @@ export default {
   },
   async mounted() {
     try {
+      this.isLoadingReviewsList = true;
       await this.getReviews();
     } catch (error) {
       CustomErrorToast.fire({
         text: error.response.data.message,
       });
     }
+    this.isLoadingReviewsList = false;
   },
 };
 </script>

@@ -11,7 +11,7 @@
             bgColor="rgb(30, 64, 175 )"
             v-if="loadingResult"
           />
-          <b v-else>${{ result.min }} - ${{ result.max }}</b>
+          <b v-else>{{parsedResult.symbol}} {{ parsedResult.min }} - {{parsedResult.symbol}} {{ parsedResult.max }}</b>
         </div>
         <div class="text-2xl">{{ $t("createResult.periodicity") }}</div>
       </div>
@@ -51,6 +51,14 @@ export default {
   },
   computed: {
     ...mapGetters("propertiesStore", ["createdProperty"]),
+    parsedResult() {
+      if (this.result === 0) return 0;
+      return {
+        min: Math.round(this.result.min * this.result.currencyType.value),
+        max: Math.round(this.result.max * this.result.currencyType.value),
+        symbol: this.result.currencyType.symbol,
+      } 
+    }
   },
   async mounted() {
     const requestData = {
@@ -58,9 +66,8 @@ export default {
       zoneId: this.createdProperty.location.zone.id,
       time: this.createdProperty.calculatorData.time,
       expectedValue: this.createdProperty.calculatorData.expectedValue,
+      currencyData: this.createdProperty.calculatorData.currencyData,
     };
-    console.log(requestData);
-    console.log(this.createdProperty);
     try {
       const response = await EspacioTemporalAPI.post(
         "/calculator/",
