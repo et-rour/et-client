@@ -9,6 +9,14 @@ import {
   signOut,
 } from "firebase/auth";
 
+import {
+  getAnalytics,
+  setUserProperties,
+  setUserId,
+  setCurrentScreen,
+  logEvent,
+} from "firebase/analytics";
+import Vue from "vue";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -28,6 +36,9 @@ const firebaseConfig = {
 const firebaseApp = initializeApp(firebaseConfig);
 const storage = getStorage(firebaseApp);
 const auth = getAuth();
+const analytics = getAnalytics();
+
+Vue.prototype.$analytics = analytics;
 
 export const uploadBytesfunciont = uploadBytes;
 export {
@@ -37,4 +48,9 @@ export {
   firebaseApp as default,
   onAuthStateChanged,
   signOut,
+  analytics,
+  setUserProperties,
+  setUserId,
+  setCurrentScreen,
+  logEvent,
 };

@@ -1,5 +1,9 @@
-import PaymentsLayout from "../Layouts/PaymentsLayout.vue";
-import Payments from "../Views/Payments.vue";
+const PaymentsLayout = () =>
+  import(
+    /* webpackChunkName: "PaymentsLayout" */ "../Layouts/PaymentsLayout.vue"
+  );
+const Payments = () =>
+  import(/* webpackChunkName: "Payments" */ "../Views/Payments.vue");
 
 export default {
   name: "admin-payments",

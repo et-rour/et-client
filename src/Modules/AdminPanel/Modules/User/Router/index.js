@@ -1,9 +1,14 @@
-import Layout from "../Layouts/userLayout.vue";
-import User from "../Views/User.vue";
-import Locations from "../Views/Locations.vue";
-import Reviews from "../Views/Reviews.vue";
-import Details from "../Views/Details.vue";
-import Payments from "../Views/Payments.vue";
+const Layout = () =>
+  import(/* webpackChunkName: "Layout" */ "../Layouts/userLayout.vue");
+const User = () => import(/* webpackChunkName: "User" */ "../Views/User.vue");
+const Locations = () =>
+  import(/* webpackChunkName: "Locations" */ "../Views/Locations.vue");
+const Reviews = () =>
+  import(/* webpackChunkName: "Reviews" */ "../Views/Reviews.vue");
+const Details = () =>
+  import(/* webpackChunkName: "Details" */ "../Views/Details.vue");
+const Payments = () =>
+  import(/* webpackChunkName: "Payments" */ "../Views/Payments.vue");
 
 export default {
   name: "admin-users",

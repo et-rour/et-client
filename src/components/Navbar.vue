@@ -27,24 +27,24 @@
           active-class="text-my-blue-primary "
           class="w-full py-2 text-center md:w-auto uppercase font-sans mt-10 md:mt-0"
           :to="{ name: 'owner' }"
-          >{{ $t("navbar.owner") }}</router-link
+          ><a> {{ $t("navbar.owner") }} </a></router-link
         >
         <router-link
           active-class="text-my-blue-primary "
           class="w-full py-2 text-center md:w-auto uppercase font-sans"
           :to="{ name: 'tenants' }"
-          >{{ $t("navbar.tenants") }}</router-link
+          ><a> {{ $t("navbar.tenants") }} </a></router-link
         >
         <!-- <router-link
           class="w-full py-2 text-center md:w-auto uppercase font-sans"
           to="/"
-          >{{ $t("navbar.howWorks") }}</router-link
+          ><a> {{ $t("navbar.howWorks") }} </a></router-link
         > -->
         <router-link
           active-class="text-my-blue-primary "
           class="w-full py-2 text-center md:w-auto uppercase font-sans"
           :to="{ name: 'posts' }"
-          >{{ $t("navbar.us") }}</router-link
+          ><a> {{ $t("navbar.us") }} </a></router-link
         >
 
         <!-- <router-link
@@ -116,19 +116,19 @@
                 <router-link
                   :to="{ name: 'profile-main' }"
                   class="my-2 block"
-                  >{{ $t("navbar.profile") }}</router-link
+                  ><a> {{ $t("navbar.profile") }} </a></router-link
                 >
-                <router-link to="#" class="my-2  block">{{
+                <router-link to="#" class="my-2  block"><a> {{
                   $t("navbar.editProfile")
-                }}</router-link>
+                }} </a></router-link>
                 <p @click="logoutApp" class="cursor-pointer mb-4">
-                  {{ $t("profile.layout.logout") }}
+                 <a>  {{ $t("profile.layout.logout") }} </a>
                 </p>
                 <hr />
                 <router-link
                   :to="{ name: 'locations-list' }"
                   class="my-4 block"
-                  >{{ $t("navbar.myProperties") }}</router-link
+                  ><a> {{ $t("navbar.myProperties") }} </a></router-link
                 >
                 <hr />
                 <select

@@ -12,6 +12,10 @@ import VuePaginate from "vue-paginate";
 import "./sweetAlert";
 import JsonExcel from "vue-json-excel";
 
+import VueMeta from "vue-meta";
+
+Vue.use(VueMeta);
+
 Vue.component("downloadExcel", JsonExcel);
 
 Vue.use(VueScrollTo);

@@ -1,8 +1,11 @@
 {
   "sweetAlertMessages": {
+    "wait": "Wait a minute",
     "saved": "Saved",
     "error": "Oops.. something went wrong",
     "confirmTitle": "Are you sure?",
+    "confirmWarningTitle": "Before continuing",
+    "confirmWarningConfirmText": "Got it!!",
     "confirmButton": "Yes do it",
     "cancelButton": "Cancel"
   },
@@ -10,7 +13,8 @@
     "messages": {
       "required": "This fiel is not valid",
       "email": "This field is not a valid e-mail adress",
-      "minValue": "This field must be greater than {min}"
+      "minValue": "This field must be greater than {min}",
+      "whatsapp": "invalid whatsapp number."
     }
   },
   "general": {
@@ -50,6 +54,7 @@
     "day": "Day",
     "month": "Month",
     "year": "Years",
+    "whatsapprequirements": "Include the + symbol, country code, and area code",
     "succesModal": {
       "title": "!All ready!",
       "subtitle": "Welcome to Temporary Space",
@@ -193,7 +198,7 @@
   },
   "schedule": {
     "title": "Select the date for your visit",
-    "descriprion": "Schedule visit for the day",
+    "description": "The inspector will take photos to later make the lease offer. If you accept it, we will contact you to sign a contract and give you access to your property's control panel",
     "schedule": "Schedule",
     "vistit": "SCHEDULE A TECHNICAL VISIT"
   },
@@ -236,7 +241,7 @@
     },
     "schedule": {
       "title": "Select the date for your visit",
-      "descriprion": "Schedule visit for the day",
+      "description": "You can tour the facilities and learn more about the property",
       "schedule": "Schedule",
       "vistit": "SCHEDULE A TECHNICAL VISIT"
     },
@@ -361,6 +366,10 @@
       "isActive": "Is active?",
       "isOwner": "Is owner?",
       "isAdmin": "Is Admin?",
+      "date": "By date",
+      "from": "From",
+      "until": "Until",
+      "downloadUserList": "Download Excel",
       "details": "Details",
       "userLocations": "Locations",
       "createdReviews": "Created reviews",
@@ -424,10 +433,13 @@
       "owner": "Owner",
       "isActive": "Is the location activated?",
       "isverified": "Is the location verified?",
+      "newVisit": "Schedule technical visit",
+      "goToVisit": "go to calendar",
       "value": "property value",
+      "details": "Details",
+      "images": "Images",
       "seeRooms": "Rooms",
       "newRoom": "Create room",
-      "details": "Details",
       "images3d": "Images 3d",
       "roomsList": {
         "title": "all rooms",
@@ -443,6 +455,17 @@
         },
         "confiramtionMessages": {
           "update": "Are you sure you want to upgrade this room?"
+        }
+      },
+      "imagesList": {
+        "change": "Change cover image",
+        "saveCoverImage": "Save Cover Image",
+        "drop": "Drag files here to upload",
+        "select": "Select extra images from the location",
+        "buttonText": "Not for now",
+        "confiramtionMessages": {
+          "hide": "Are you sure you want to hide this image?",
+          "show": "Are you sure you want to show this image?"
         }
       },
       "create": "Add location",
@@ -462,7 +485,9 @@
         "verifyLocation": "Are you sure you want to verify the location?",
         "unverifyLocation": "Are you sure you want to remove location verification?",
         "update": "Are you sure you want to update the current location?",
-        "updatePrice": "Are you sure you want to update the current location price?"
+        "updatePrice": "Are you sure you want to update the price of the current location?",
+        "verifyValue": "Make sure to assign a value to the property before checking it",
+        "changeImage": "Are you sure you want to update the cover of the current location?"
       }
     },
     "reviews": {

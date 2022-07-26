@@ -10,12 +10,16 @@
       :key="location.id"
       active-class="active-class-admin "
     >
-      <div class="cursor-pointer p-1 hover:bg-my-blue-primary hover:text-white">
-        <span class="block"
-          ><b>{{ location.name }}</b></span
+      <a>
+        <div
+          class="cursor-pointer p-1 hover:bg-my-blue-primary hover:text-white"
         >
-        <span>{{ location.zone.city }} ({{ location.zone.country }})</span>
-      </div>
+          <span class="block"
+            ><b>{{ location.name }}</b></span
+          >
+          <span>{{ location.zone.city }} ({{ location.zone.country }})</span>
+        </div>
+      </a>
     </router-link>
   </ul>
 </template>

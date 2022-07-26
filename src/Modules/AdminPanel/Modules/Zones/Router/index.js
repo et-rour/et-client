@@ -1,5 +1,6 @@
-import ZoneLayout from "../Layouts/ZonesLayout.vue";
-import Zone from "../Views/Zone.vue";
+const ZoneLayout = () =>
+  import(/* webpackChunkName: "ZoneLayout" */ "../Layouts/ZonesLayout.vue");
+const Zone = () => import(/* webpackChunkName: "Zone" */ "../Views/Zone.vue");
 
 export default {
   name: "admin-zones",

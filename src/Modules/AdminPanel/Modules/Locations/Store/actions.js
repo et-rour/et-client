@@ -7,9 +7,11 @@ export const getLocations = async ({ commit }) => {
 };
 
 export const fetchLocationDetails = async ({ commit }, idLocation) => {
+  commit("changeLoadingLocationDetails", true);
   const res = await EspacioAPI.get(`/admin/location/${idLocation}`);
   const location = res.data;
   commit("fetchLocationDetails", location);
+  commit("changeLoadingLocationDetails", false);
 };
 
 export const modifyLocation = async ({ commit }, location) => {
@@ -135,6 +137,7 @@ export const postImage3d = async ({ commit }, { imageData, idLocation }) => {
   console.log({ image3d: savedImage });
   commit("postImage3d", { savedImage, idLocation });
 };
+
 export const updateImage3d = async (
   { commit },
   { imageData, locationId, idImage3d }
@@ -146,4 +149,42 @@ export const updateImage3d = async (
   const updatedImage = res.data;
   console.log({ updatedImage });
   commit("updateImage3d", { updatedImage, locationId });
+};
+
+// IMAGES
+export const changeCoverImage = async ({ commit }, { image, idLocation }) => {
+  const res = await EspacioAPI.put(
+    `/admin/modifylocation/changeCoverImage/${idLocation}`,
+    {
+      image,
+    }
+  );
+  const newImage = res.data.image;
+  console.log({ image: image });
+  commit("changeCoverImage", newImage);
+};
+
+export const postLocationImage = async (
+  { commit },
+  { imageUrl, idLocation }
+) => {
+  const res = await EspacioAPI.post("/images", {
+    image: imageUrl,
+    locationId: idLocation,
+  });
+  const savedImageData = res.data;
+  console.log({ image: savedImageData });
+  commit("postLocationImage", savedImageData);
+};
+
+export const changeIsVisibilityImage = async (
+  { commit },
+  { idImage, isVisible }
+) => {
+  const res = await EspacioAPI.put(`/admin/images/${idImage}/visible`, {
+    isVisible,
+  });
+  const { image } = res.data;
+  console.log({ image: image });
+  commit("changeIsVisibilityImage", image);
 };

@@ -1,5 +1,7 @@
-const ProfileLayout = () => import("../Layout/ProfileLayout.vue");
-const Profile = () => import("../Views/Profile.vue");
+const ProfileLayout = () =>
+  import(/* webpackChunkName: "ProfileLayout" */ "../Layout/ProfileLayout.vue");
+const Profile = () =>
+  import(/* webpackChunkName: "Profile" */ "../Views/Profile.vue");
 
 export default [
   {

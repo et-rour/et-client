@@ -4,7 +4,7 @@ import EspacioTemporalAPI from "../Api/index";
 
 export const uploadImageTofirebase = async (
   { commit },
-  { user, file, directory, id }
+  { user, file, directory, id = "0" }
 ) => {
   commit("cleanImageInfo");
   commit("changeLastUsedBy", id);

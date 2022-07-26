@@ -176,7 +176,6 @@
           name="propertiesData"
           :list="propertiesData"
           :per="9"
-          :key="siteCountry"
           class="w-full gap-5 grid grid-cols-2 lg:grid-cols-3"
         >
           <PropertyCard
@@ -203,8 +202,8 @@
           <router-link
             :to="{ name: 'tenants' }"
             class="text-blue-700 border-b border-blue-700 my-2 ml-1 inline-block"
-            >{{ $t("landing.spaces.seeMore")
-            }}<font-awesome-icon icon="fa-solid fa-right-long" class="ml-2" />
+            ><a> {{ $t("landing.spaces.seeMore") }} </a
+            ><font-awesome-icon icon="fa-solid fa-right-long" class="ml-2" />
           </router-link>
         </div>
       </div>
@@ -452,6 +451,9 @@ export default {
       this.localSiteCountry = this.siteCountry;
       this.$refs.paginator.goToPage(1);
     },
+  },
+  metaInfo: {
+    title: "Inicio",
   },
 };
 </script>

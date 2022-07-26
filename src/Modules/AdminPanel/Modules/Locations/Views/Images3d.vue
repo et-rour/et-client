@@ -97,12 +97,12 @@
                     />
 
                     <div class="flex flex-col justify-center items-center">
-                      <button
-                        class="my-btn mr-4"
+                      <div
+                        class="my-btn mr-4 cursor-pointer"
                         @click="$refs.imageSelector.click()"
                       >
                         {{ $t("createForm.image") }}
-                      </button>
+                      </div>
                       <ProgesBarImageVue
                         id="image3d"
                         :imageUrl="imageUrl"

@@ -1,33 +1,43 @@
 import Owners from "../../Owners/Views/Main.vue";
-import CreateProperty from "../../Owners/Views/CreateForm.vue";
-import ResultCreateProperty from "../../Owners/Views/CreateResult.vue";
-import Schedule from "../../Owners/Views/Schedule.vue";
-import ScheduleResult from "../../Owners/Views/ScheduleResult.vue";
+const CreateProperty = () =>
+  import(
+    /* webpackChunkName: "CreateProperty" */ "../../Owners/Views/CreateForm.vue"
+  );
+const ResultCreateProperty = () =>
+  import(
+    /* webpackChunkName: "ResultCreateProperty" */ "../../Owners/Views/CreateResult.vue"
+  );
+const Schedule = () =>
+  import(/* webpackChunkName: "Schedule" */ "../../Owners/Views/Schedule.vue");
+const ScheduleResult = () =>
+  import(
+    /* webpackChunkName: "ScheduleResult" */ "../../Owners/Views/ScheduleResult.vue"
+  );
 
 export default [
   {
     name: "owner",
-    path: "/dueños",
+    path: "/propiedad",
     component: Owners,
   },
   {
     name: "property",
-    path: "/dueños/cargar",
+    path: "/propiedad/cargar",
     component: CreateProperty,
   },
   {
     name: "result",
-    path: "/dueños/cargar/result",
+    path: "/propiedad/cargar/result",
     component: ResultCreateProperty,
   },
   {
     name: "schedule",
-    path: "/dueños/cargar/schedule",
+    path: "/propiedad/cargar/schedule",
     component: Schedule,
   },
   {
     name: "scheduleResult",
-    path: "/dueños/cargar/schedule/result",
+    path: "/propiedad/cargar/schedule/result",
     component: ScheduleResult,
   },
 ];

@@ -36,7 +36,7 @@
               class="absolute bottom-2 right-4 bg-gray-300 text-xl px-1"
               :to="{ name: 'create-image-3d', params: { id: location.id } }"
             >
-              <font-awesome-icon icon="panorama"></font-awesome-icon>
+              <a> <font-awesome-icon icon="panorama"></font-awesome-icon> </a>
             </router-link>
           </abbr>
         </div>

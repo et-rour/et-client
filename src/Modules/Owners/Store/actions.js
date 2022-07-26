@@ -78,6 +78,7 @@ export const createNewProperty = async (
   const location = res.data;
   commit("cleanImageInfo");
   commit("createNewProperty", { location, calculatorData });
+  return location;
 };
 
 export const fetchPropertyDetails = async ({ commit }, propertyId) => {

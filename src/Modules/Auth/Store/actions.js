@@ -4,16 +4,20 @@ import {
   signInWithCustomToken,
   onAuthStateChanged,
   signOut,
+  analytics,
+  logEvent,
 } from "../../../Firebase/index";
 
 export const login = async ({ commit }, data) => {
   const res = await EspacioAPI.post("/auth/login", data);
   console.log({ token: res.data.token });
-  const {user} =  await signInWithCustomToken(auth, res.data.storageTokenAuthFirebase)
-  
+  const { user } = await signInWithCustomToken(
+    auth,
+    res.data.storageTokenAuthFirebase
+  );
+  logEvent(analytics, "login", { user: user.uid });
   console.log({ user });
   commit("login", res.data);
-   
 };
 
 export const loadSession = async ({ commit }) => {

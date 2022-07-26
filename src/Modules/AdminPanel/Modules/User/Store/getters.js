@@ -4,6 +4,42 @@ export const getUserDetails = (state) => {
   return state.userDetails;
 };
 
+export const getUserListForExcel = (state) => {
+  const dataExcel = state.users.map((user) => {
+    console.log(user);
+    const {
+      id,
+      firstName,
+      lastName,
+      created,
+      didReview,
+      email,
+      isActive,
+      isAdmin,
+      isClient,
+      isOwner,
+      isVerified,
+      phone,
+      whatsapp,
+    } = user;
+    return {
+      id: id,
+      registro: created,
+      nombre: `${firstName} ${lastName}`,
+      email: email,
+      telefono: phone,
+      whatsapp: whatsapp ? `"${whatsapp}"` : "",
+      verificado: isVerified ? "Si" : "No",
+      activado: isActive ? "Si" : "No",
+      dueño: isOwner ? "Si" : "No",
+      cliente: isClient ? "Si" : "No",
+      admin: isAdmin ? "Si" : "No",
+      review: didReview ? "Si" : "No",
+    };
+  });
+  return dataExcel;
+};
+
 export const getUserDetailsCreatedReservetions = (state) => {
   const reservationsData = state.userDetails.clientReservations.map(
     (reserv) => {

@@ -15,6 +15,7 @@
           ><b>{{ user.firstName }} {{ user.lastName }}</b></span
         >
         <span>{{ user.email }}</span>
+        <!-- <span class="text-xs text-gray-400 block">{{ user.created }}</span> -->
       </div>
     </router-link>
   </ul>

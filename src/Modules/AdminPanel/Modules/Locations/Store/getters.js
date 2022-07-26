@@ -1,8 +1,17 @@
 export const getAllLocations = (state) => {
   return state.locations;
 };
+export const getIsLoadingLocationDetails = (state) => {
+  return state.loadingLocationDetails;
+};
 export const getLocationDetails = (state) => {
   return state.locationDetails;
+};
+export const getLocationDetailsImages = (state) => {
+  return {
+    images: state.locationDetails.imagesLocation,
+    frontImage: state.locationDetails.image,
+  };
 };
 export const getAllLocationRooms = (state) => {
   return state.locationDetails.roomsDetails;

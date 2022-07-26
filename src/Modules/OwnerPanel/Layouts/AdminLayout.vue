@@ -11,12 +11,12 @@
         <router-link
           :to="{ name: 'locations-list' }"
           class="bg-gray-300 px-1 py-2 rounded-t-lg font-bold"
-          >{{ $t("admin.locations.properties") }}</router-link
+          ><a> {{ $t("admin.locations.properties") }} </a></router-link
         >
         <router-link
           :to="{ name: 'locations-payment' }"
           class="bg-gray-300 px-1 py-2 rounded-t-lg font-bold"
-          >{{ $t("admin.locations.payment") }}</router-link
+          ><a> {{ $t("admin.locations.payment") }} </a></router-link
         >
       </div>
     </div>

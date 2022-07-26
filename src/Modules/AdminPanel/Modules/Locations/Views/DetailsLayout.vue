@@ -4,7 +4,7 @@
       {{ $t("adminPanel.locations.title") }}
     </h1>
 
-    <div v-if="isLoadingLocationDetails" class="flex justify-center">
+    <div v-if="getIsLoadingLocationDetails" class="flex justify-center">
       <SpinerComponent />
     </div>
 
@@ -24,6 +24,15 @@
             active-class="text-my-blue-primary"
             exact
             >{{ $t("adminPanel.locations.details") }}</router-link
+          >
+          <router-link
+            :to="{
+              name: 'admin-locations-detail-images',
+              hash: '#details',
+            }"
+            active-class="text-my-blue-primary"
+            exact
+            >{{ $t("adminPanel.locations.images") }}</router-link
           >
           <router-link
             :to="{
@@ -76,26 +85,25 @@ export default {
     },
   },
   data() {
-    return {
-      isLoadingLocationDetails: true,
-    };
+    return {};
   },
   methods: {
     ...mapActions("adminPanelStore/locations", ["fetchLocationDetails"]),
     async loadLocationDetails() {
       try {
-        this.isLoadingLocationDetails = true;
         await this.fetchLocationDetails(this.idLocation);
       } catch (error) {
         CustomErrorToast.fire({
           text: error.response.data.message || error,
         });
       }
-      this.isLoadingLocationDetails = false;
     },
   },
   computed: {
-    ...mapGetters("adminPanelStore/locations", ["getLocationDetails"]),
+    ...mapGetters("adminPanelStore/locations", [
+      "getLocationDetails",
+      "getIsLoadingLocationDetails",
+    ]),
     locationData() {
       return this.getLocationDetails;
     },

@@ -109,6 +109,9 @@ export default {
   computed: {
     ...mapGetters("authStore", ["user", "isAuth"]),
   },
+  metaInfo: {
+    title: "Dueños",
+  },
 };
 </script>
 

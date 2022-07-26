@@ -7,13 +7,13 @@
           <router-link
             :to="{ name: 'profile-main' }"
             active-class="text-my-blue-primary"
-            >{{ $t("profile.layout.profile") }}</router-link
+            ><a> {{ $t("profile.layout.profile") }} </a></router-link
           >
           <!-- <router-link to="#">Password</router-link> -->
           <router-link
             :to="{ name: 'locations-list' }"
             active-class="text-my-blue-primary"
-            >{{ $t("profile.layout.properties") }}</router-link
+            ><a> {{ $t("profile.layout.properties") }} </a></router-link
           >
           <hr />
           <p @click="logoutApp" class="cursor-pointer">

@@ -1,67 +1,95 @@
 <template>
   <GeneralLayoutVue>
     <template v-slot:sidebar>
-      <div class="w-full">
-        <div class="w-full flex justify-center">
-          <span class="text-center"
-            ><b>{{ $t("adminPanel.users.search") }}</b></span
-          >
+      <div class="sticky -top-4 left-0 z-40 bg-white">
+        <div class="w-full">
+          <div class="w-full flex justify-center">
+            <span class="text-center"
+              ><b>{{ $t("adminPanel.users.search") }}</b></span
+            >
+          </div>
+          <div class="w-full flex justify-center">
+            <input
+              type="text"
+              v-model="filterWord"
+              class="my-input w-full mx-4 border"
+              placeholder="Juan Pérez"
+            />
+          </div>
         </div>
-        <div class="w-full flex justify-center">
-          <input
-            type="text"
-            v-model="filterWord"
-            class="my-input w-full mx-4 border"
-            placeholder="Juan Pérez"
-          />
-        </div>
-      </div>
 
-      <div class="w-full mt-4 pb-4 border-b-2 border-black">
-        <div class="w-full flex justify-center">
-          <span class="text-center"
-            ><b>{{ $t("adminPanel.users.filters") }}</b></span
-          >
-        </div>
-        <div class="w-full flex justify-between px-2">
-          <label for="verified">{{ $t("adminPanel.users.isVerified") }}</label>
-          <select name="verified" v-model="isVerified">
-            <option selected value="unselect">
-              {{ $t("adminPanel.any") }}
-            </option>
-            <option :value="true">{{ $t("adminPanel.yes") }}</option>
-            <option :value="false">{{ $t("adminPanel.no") }}</option>
-          </select>
-        </div>
-        <div class="w-full flex justify-between px-2">
-          <label for="active">{{ $t("adminPanel.users.isActive") }}</label>
-          <select name="active" v-model="isActive">
-            <option selected value="unselect">
-              {{ $t("adminPanel.any") }}
-            </option>
-            <option :value="true">{{ $t("adminPanel.yes") }}</option>
-            <option :value="false">{{ $t("adminPanel.no") }}</option>
-          </select>
-        </div>
-        <div class="w-full flex justify-between px-2">
-          <label for="owner">{{ $t("adminPanel.users.isOwner") }}</label>
-          <select name="owner" v-model="isOwner">
-            <option selected value="unselect">
-              {{ $t("adminPanel.any") }}
-            </option>
-            <option :value="true">{{ $t("adminPanel.yes") }}</option>
-            <option :value="false">{{ $t("adminPanel.no") }}</option>
-          </select>
-        </div>
-        <div class="w-full flex justify-between px-2">
-          <label for="admin">{{ $t("adminPanel.users.isAdmin") }}</label>
-          <select name="admin" v-model="isAdmin">
-            <option selected value="unselect">
-              {{ $t("adminPanel.any") }}
-            </option>
-            <option :value="true">{{ $t("adminPanel.yes") }}</option>
-            <option :value="false">{{ $t("adminPanel.no") }}</option>
-          </select>
+        <div class="w-full mt-4 pb-4 border-b-2 border-black">
+          <div class="w-full flex justify-center">
+            <span class="text-center"
+              ><b>{{ $t("adminPanel.users.filters") }}</b></span
+            >
+          </div>
+          <div class="w-full flex justify-between px-2">
+            <label for="verified">{{
+              $t("adminPanel.users.isVerified")
+            }}</label>
+            <select name="verified" v-model="isVerified">
+              <option selected value="unselect">
+                {{ $t("adminPanel.any") }}
+              </option>
+              <option :value="true">{{ $t("adminPanel.yes") }}</option>
+              <option :value="false">{{ $t("adminPanel.no") }}</option>
+            </select>
+          </div>
+          <div class="w-full flex justify-between px-2">
+            <label for="active">{{ $t("adminPanel.users.isActive") }}</label>
+            <select name="active" v-model="isActive">
+              <option selected value="unselect">
+                {{ $t("adminPanel.any") }}
+              </option>
+              <option :value="true">{{ $t("adminPanel.yes") }}</option>
+              <option :value="false">{{ $t("adminPanel.no") }}</option>
+            </select>
+          </div>
+          <div class="w-full flex justify-between px-2">
+            <label for="owner">{{ $t("adminPanel.users.isOwner") }}</label>
+            <select name="owner" v-model="isOwner">
+              <option selected value="unselect">
+                {{ $t("adminPanel.any") }}
+              </option>
+              <option :value="true">{{ $t("adminPanel.yes") }}</option>
+              <option :value="false">{{ $t("adminPanel.no") }}</option>
+            </select>
+          </div>
+          <div class="w-full flex justify-between px-2">
+            <label for="admin">{{ $t("adminPanel.users.isAdmin") }}</label>
+            <select name="admin" v-model="isAdmin">
+              <option selected value="unselect">
+                {{ $t("adminPanel.any") }}
+              </option>
+              <option :value="true">{{ $t("adminPanel.yes") }}</option>
+              <option :value="false">{{ $t("adminPanel.no") }}</option>
+            </select>
+          </div>
+          <div class="w-full flex flex-col px-2 gap-2">
+            <div class="w-full flex items-center gap-5">
+              <label for="admin">{{ $t("adminPanel.users.from") }}:</label>
+              <input
+                type="date"
+                class="my-input border-b flex-grow"
+                v-model="dateStart"
+              />
+            </div>
+
+            <div class="w-full flex items-center gap-5">
+              <label for="admin">{{ $t("adminPanel.users.until") }}:</label>
+              <input
+                type="date"
+                class="my-input border-b flex-grow"
+                v-model="dateEnd"
+              />
+            </div>
+            <ExcelUsersVue
+              :usersList="filteredData"
+              :dateRange="{ start: dateStart, end: dateEnd }"
+              v-if="filteredData.length > 0"
+            />
+          </div>
         </div>
       </div>
 
@@ -87,11 +115,14 @@ import { CustomErrorToast } from "@/sweetAlert";
 import GeneralLayoutVue from "../../../Layouts/GeneralLayout.vue";
 import UsersListComponent from "../Components/UsersList.vue";
 import SpinerComponent from "../../../../../components/Spiner.vue";
+import moment from "moment";
+import ExcelUsersVue from "../Components/ExcelUsers.vue";
 export default {
   components: {
     GeneralLayoutVue,
     UsersListComponent,
     SpinerComponent,
+    ExcelUsersVue,
   },
   data() {
     return {
@@ -101,6 +132,8 @@ export default {
       isActive: "unselect",
       isOwner: "unselect",
       isAdmin: "unselect",
+      dateStart: "",
+      dateEnd: "",
     };
   },
   methods: {
@@ -108,6 +141,9 @@ export default {
   },
   computed: {
     ...mapGetters("adminPanelStore/users", ["getFilteredUsers"]),
+    dateFormat() {
+      return moment(this.date).format();
+    },
     filteredData() {
       let filtered = this.getFilteredUsers(this.filterWord);
       if (this.isVerified !== "unselect") {
@@ -137,6 +173,13 @@ export default {
         } else if (this.isAdmin === false) {
           filtered = filtered.filter((user) => !user.isAdmin);
         }
+      }
+      if (this.dateStart !== "" && this.dateEnd !== "") {
+        filtered = filtered.filter((user) => {
+          if (this.dateStart < user.created && this.dateEnd > user.created) {
+            return user;
+          }
+        });
       }
       return filtered;
     },

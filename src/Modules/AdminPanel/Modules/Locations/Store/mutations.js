@@ -2,6 +2,10 @@ export const getLocations = (state, locations) => {
   state.locations = locations;
 };
 
+export const changeLoadingLocationDetails = (state, loading) => {
+  state.loadingLocationDetails = loading;
+};
+
 export const fetchLocationDetails = (state, location) => {
   state.locationDetails = location;
 };
@@ -135,5 +139,37 @@ export const updateImage3d = (state, { updatedImage }) => {
   state.locationDetails = {
     ...state.locationDetails,
     images3D: newImages3dArray,
+  };
+};
+
+// IMAGES
+
+export const changeCoverImage = (state, image) => {
+  state.locationDetails = {
+    ...state.locationDetails,
+    image: image,
+  };
+};
+
+export const postLocationImage = (state, savedImage) => {
+  state.locationDetails = {
+    ...state.locationDetails,
+    imagesLocation: [...state.locationDetails.imagesLocation, savedImage],
+  };
+};
+
+export const changeIsVisibilityImage = (state, image) => {
+  const index = state.locationDetails.imagesLocation.findIndex(
+    (imageDetails) => imageDetails.id == image.id
+  );
+
+  let newImagesLocationArray = state.locationDetails.imagesLocation;
+  if (index !== -1) {
+    newImagesLocationArray[index] = image;
+  }
+
+  state.locationDetails = {
+    ...state.locationDetails,
+    imagesLocation: newImagesLocationArray,
   };
 };

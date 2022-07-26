@@ -5,28 +5,32 @@
     <div class="w-9/12 grid grid-cols-3 grid-rows-2 px-20">
       <img src="@/assets/icons/logoFooter.png" alt="logotipo footer" />
       <ul>
-        <li><router-link :to="{ name: 'questions' }">FAQS</router-link></li>
         <li>
-          <router-link :to="{ name: 'owner' }">{{
-            $t("footer.nav.owner")
-          }}</router-link>
+          <router-link :to="{ name: 'questions' }"><a> FAQS </a></router-link>
         </li>
         <li>
-          <router-link :to="{ name: 'tenants' }">{{
-            $t("footer.nav.tenants")
-          }}</router-link>
+          <router-link :to="{ name: 'owner' }"
+            ><a> {{ $t("footer.nav.owner") }} </a></router-link
+          >
         </li>
         <li>
-          <router-link to="/">{{ $t("footer.nav.howWorks") }}</router-link>
+          <router-link :to="{ name: 'tenants' }"
+            ><a> {{ $t("footer.nav.tenants") }} </a></router-link
+          >
         </li>
         <li>
-          <router-link :to="{ name: 'posts' }">{{
-            $t("footer.nav.us")
-          }}</router-link>
+          <router-link to="/"
+            ><a> {{ $t("footer.nav.howWorks") }} </a></router-link
+          >
+        </li>
+        <li>
+          <router-link :to="{ name: 'posts' }"
+            ><a> {{ $t("footer.nav.us") }} </a></router-link
+          >
         </li>
         <li>
           <router-link :to="{ name: 'terms' }">
-            {{ $t("footer.nav.terms") }}
+            <a> {{ $t("footer.nav.terms") }} </a>
           </router-link>
         </li>
       </ul>

@@ -158,18 +158,28 @@
         <label for="value" class="mr-3"
           >{{ $t("adminPanel.locations.value") }}
         </label>
-        <input
-          type="number"
-          class="my-input"
-          v-model="location.value"
-          id="value"
-        />
-        <button
-          class="my-btn w-auto px-4 py-2 ml-4"
-          v-if="fistValueLocation != location.value"
-          @click="setNewLocationValue"
-        >
-          <font-awesome-icon icon="fa-solid fa-floppy-disk" />
+        <div>
+          <input
+            type="number"
+            class="my-input"
+            v-model="location.value"
+            id="value"
+          />
+          <button
+            class="my-btn w-auto px-4 py-2 ml-4"
+            v-if="fistValueLocation != location.value"
+            @click="setNewLocationValue"
+          >
+            <font-awesome-icon icon="fa-solid fa-floppy-disk" />
+          </button>
+        </div>
+      </div>
+
+      <!-- NEW VISIT -->
+      <div class="flex items-center justify-between">
+        <label class="mr-3">{{ $t("adminPanel.locations.newVisit") }} </label>
+        <button class="w-auto px-4 py-2 ml-4" @click="goToSchedule">
+          {{ $t("adminPanel.locations.goToVisit") }}
         </button>
       </div>
 
@@ -201,6 +211,7 @@ import {
   CustomErrorToast,
   CustomToast,
   CustomConfirmDialog,
+  CustomConfirmWarningDialog,
 } from "@/sweetAlert";
 import MapCoordsVue from "../../../../../components/MapCoords.vue";
 
@@ -227,6 +238,21 @@ export default {
       "changeIsVerifiedLocation",
       "setLocationValue",
     ]),
+    goToSchedule() {
+      this.$router.push({
+        name: "schedule",
+        params: {
+          location: {
+            name: this.location.name,
+            address: this.location.address,
+            zone: this.location.zone.zone,
+            city: this.location.zone.city,
+            country: this.location.zone.country,
+            state: this.location.zone.state,
+          },
+        },
+      });
+    },
     loadLocation() {
       this.location = this.getLocationDetails;
       this.fistValueLocation = this.location.value;
@@ -316,6 +342,15 @@ export default {
       const changeIsVerifyLocationTextAcction = !this.location.isVerified
         ? this.$t("adminPanel.locations.confiramtionMessages.verifyLocation")
         : this.$t("adminPanel.locations.confiramtionMessages.unverifyLocation");
+
+      if (this.location.value == 0) {
+        CustomConfirmWarningDialog.fire({
+          text: this.$t(
+            "adminPanel.locations.confiramtionMessages.verifyValue"
+          ),
+        });
+        return;
+      }
 
       CustomConfirmDialog.fire({
         text: changeIsVerifyLocationTextAcction,

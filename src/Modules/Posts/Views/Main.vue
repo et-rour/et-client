@@ -86,6 +86,9 @@ export default {
       });
     }
   },
+  metaInfo: {
+    title: "Comunidad",
+  },
 };
 </script>
 

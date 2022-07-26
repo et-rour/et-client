@@ -35,6 +35,18 @@
         }}</span>
       </p>
 
+      <!-- whatsapp -->
+      <p class="flex items-center gap-3">
+        <font-awesome-icon
+          class="p-2 border rounded-full border-black"
+          icon="fa-solid fa-phone"
+        />
+        Whatsapp:
+        <span class="text-my-blue-primary">{{
+          user.whatsapp ? user.whatsapp : $t("adminPanel.users.noPhoneFound")
+        }}</span>
+      </p>
+
       <!-- verified -->
       <p class="flex items-center gap-3">
         <label>{{ $t("adminPanel.users.verified") }}</label>

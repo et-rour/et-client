@@ -16,11 +16,7 @@
       </p>
       <p>{{ property.description }}</p>
 
-      <img
-        :src="property.image"
-        alt="location image detail"
-        class="w-full h-44 sm:h-64 md:h-80 lg:h-96 mb-4 object-cover"
-      />
+      <SwiperVue :images="getPropertyDetailsImages"></SwiperVue>
 
       <button
         class="relative border border-my-blue-primary rounded-lg w-full py-5 px-2 flex justify-center items-center mb-4 hover:text-white"
@@ -67,9 +63,9 @@
         class="w-full bg-my-blue-primary text-white font-bold my-btn"
         @click="goToSchedule"
       >
-        <router-link :to="{ name: 'tenants-schedule' }">{{
-          $t("tenants.details.vistit")
-        }}</router-link>
+        <router-link :to="{ name: 'tenants-schedule' }"
+          ><a> {{ $t("tenants.details.vistit") }} </a></router-link
+        >
       </button>
       <button
         class="w-full bg-green-500 mt-2 text-white font-bold my-btn"
@@ -113,9 +109,10 @@ import ContactModal from "../Components/ContactModal.vue";
 import ModelGlobal from "../../../components/ModelGlobal.vue";
 import SpinerVue from "../../../components/Spiner.vue";
 import { CustomErrorToast } from "@/sweetAlert.js";
+import SwiperVue from "../Components/Swiper.vue";
 
 export default {
-  components: { ModelGlobal, RoomCard, ContactModal, SpinerVue },
+  components: { ModelGlobal, RoomCard, ContactModal, SpinerVue, SwiperVue },
   props: {
     idProperty: {
       requird: true,
@@ -143,17 +140,22 @@ export default {
       e.preventDefault();
       this.$router.push({ name: "tenants-schedule" });
     },
-    goToBuyLink() {
+    async goToBuyLink() {
       if (!this.isAuth) {
         this.changeShowLoginModal(true);
         return;
       }
-
-      this.goToCheckoutSession({
-        locationId: this.idProperty,
-        userId: this.user.user.id,
-        isLocation: true,
-      });
+      try {
+        await this.goToCheckoutSession({
+          locationId: this.idProperty,
+          userId: this.user.user.id,
+          isLocation: true,
+        });
+      } catch (error) {
+        CustomErrorToast.fire({
+          text: error.response.data.message || error,
+        });
+      }
     },
     closeContactModal() {
       this.showContactModal = false;
@@ -244,7 +246,10 @@ export default {
     },
   },
   computed: {
-    ...mapGetters("propertiesStore", ["getPropertyDetails"]),
+    ...mapGetters("propertiesStore", [
+      "getPropertyDetails",
+      "getPropertyDetailsImages",
+    ]),
     ...mapGetters("propertiesStore", ["propertiesById"]),
     ...mapGetters("authStore", ["user", "isAuth"]),
     zoom() {
@@ -268,6 +273,9 @@ export default {
         text: error.response.data.message || error,
       });
     }
+  },
+  metaInfo: {
+    title: "Detalles Propiedad",
   },
 };
 </script>
