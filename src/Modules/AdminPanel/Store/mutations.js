@@ -1,4 +1,5 @@
 // USERS
+/*
 export const getUsers = (state, users) => {
   state.users = users;
 };
@@ -30,22 +31,10 @@ export const changeIsOwnerStatus = (state, { idUser, isOwner }) => {
 
   state.users = users;
 };
-
-export const changeIsActiveProperty = (state, newUser) => {
-  const users = state.users.map((user) => {
-    if (user.id === newUser.id) {
-      return {
-        ...user,
-        isActive: newUser.isActive,
-      };
-    }
-    return user;
-  });
-
-  state.users = users;
-};
+*/
 
 // ZONES
+/*
 export const getZones = (state, zones) => {
   state.zones = zones;
 };
@@ -75,8 +64,23 @@ export const changeIsActiveZone = (state, { idZone, isActive }) => {
 
   state.zones = zones;
 };
+*/
 
 // LOCATIONS
+/*
+export const changeIsActiveProperty = (state, newUser) => {
+  const users = state.users.map((user) => {
+    if (user.id === newUser.id) {
+      return {
+        ...user,
+        isActive: newUser.isActive,
+      };
+    }
+    return user;
+  });
+
+  state.users = users;
+};
 export const getLocations = (state, locations) => {
   state.locations = locations;
 };
@@ -156,8 +160,10 @@ export const changeIsActivePropertyInLocation = (state, newLocation) => {
 
   state.locations = locations;
 };
+*/
 
 // ROOMS
+/*
 export const createRoom = (state, room) => {
   const locations = state.locations.map((location) => {
     if (location.id === room.location) {
@@ -172,7 +178,6 @@ export const createRoom = (state, room) => {
 
   state.locations = locations;
 };
-
 export const updateRoom = (state, { idLocation, room }) => {
   const locations = state.locations.map((location) => {
     if (location.id === idLocation) {
@@ -217,8 +222,10 @@ export const updateRoomImage = (state, { idLocation, room }) => {
 
   state.locations = locations;
 };
+*/
 
 // REVIEWS
+/*
 export const getReviews = (state, reviews) => {
   state.reviews = reviews;
 };
@@ -250,7 +257,10 @@ export const changeIsVerifiedReview = (state, { idReview, isVerified }) => {
 
   state.reviews = reviews;
 };
+*/
 
+// RESERVATIONS
+/*
 export const getReservations = (state, reservations) => {
   console.log(
     "%cmutations.js line:191 reservations",
@@ -259,8 +269,10 @@ export const getReservations = (state, reservations) => {
   );
   state.reservations = reservations;
 };
+*/
 
 // PUBLICATIONS
+/*
 export const getPublications = (state, publications) => {
   state.publications = publications;
 };
@@ -281,8 +293,10 @@ export const changeIsVerifiedPublication = (
 
   state.publications = publications;
 };
+*/
 
 // IMAGE 3D
+/*
 export const postImage3d = (state, { savedImage, idLocation }) => {
   const locations = state.locations.map((location) => {
     if (location.id === Number(idLocation)) {
@@ -322,3 +336,4 @@ export const updateImage3d = (state, { updatedImage, locationId }) => {
 
   state.locations = locations;
 };
+*/

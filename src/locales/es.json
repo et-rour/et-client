@@ -1,8 +1,11 @@
 {
   "sweetAlertMessages": {
+    "wait": "Espera un momento",
     "saved": "Guardado",
     "error": "Opps.. Algo salio mal",
     "confirmTitle": "¿Estás seguro?",
+    "confirmWarningTitle": "Antes de continuar",
+    "confirmWarningConfirmText": "Entendido!!",
     "confirmButton": "Si, hazlo",
     "cancelButton": "Cancelar"
   },
@@ -10,7 +13,8 @@
     "messages": {
       "required": "Este campo no es válido",
       "email": "Este campo no es una dirección de correo electrónico válida",
-      "minValue": "Este campo debe ser mayor de {min}"
+      "minValue": "Este campo debe ser mayor de {min}",
+      "whatsapp": "Numero de whatsapp invalido."
     }
   },
   "general": {
@@ -50,19 +54,21 @@
     "day": "Dia",
     "month": "Mes",
     "year": "Años",
+    "whatsapprequirements": "Incluya el símbolo +, el código de país y el código de área",
     "succesModal": {
       "title": "!Todo listo!",
       "subtitle": "Bienvenido a Espacio Temporal",
       "buttonOpcion1": "PUBLICA TU PROPIEDAD",
       "buttonOpcion2": "BUSCA UNA PROPIEDAD",
-      "buttonOpcion3": "HOME"
+      "buttonOpcion1Admin": "Explorar la aplicación",
+      "buttonOpcion2Admin": "Ir al panel de administrador"
     }
   },
   "landing": {
     "hero": {
       "title": "BUSCAMOS PROPIEDADES EN DESUSO Y LAS TRANSFORMAMOS EN ESPACIOS DE TRABAJO",
       "titleMovile": "ENCUENTRA UN ESPACIO FLEXIBLE PARA TU NEGOCIO",
-      "searchProperty": "ARRENDAR UN ESPACIO",
+      "searchProperty": "QUIERO ARRENDAR UN ESPACIO",
       "openProperty": "QUIERO ARRENDAR MI PROPIEDAD"
     },
     "video": {
@@ -107,9 +113,9 @@
     "question1": "1. ¿Qué requisitos se exigen para arrendar una habitación?",
     "response1": "Se exige el pago de un mes de garantía.",
     "question2": "2. ¿Qué servicios están incluidos?",
-    "response2": "El valor del arriendo incluye todos los gastos básicos de la casa: agua,luz,gas de cañería,internet wifi y servicio de limpieza de áreas comunes. Los espacios como cocina,living y jardín,son de uso compartido.En todas nuestras propiedades vive un administrador, quien está a cargo de la residencia para ayudarte a resolver cualquier problema y gestionar una buena estadía.",
+    "response2": "El valor del arriendo incluye todos los gastos básicos de la casa: agua, luz, gas de cañería, internet wifi y servicio de limpieza de áreas comunes. Los espacios como cocina, living y jardín, son de uso compartido.En todas nuestras propiedades vive un administrador, quien está a cargo de la residencia para ayudarte a resolver cualquier problema y gestionar una buena estadía.",
     "question3": "3. ¿Tienen estacionamiento para auto o moto?",
-    "response3": "Algunas propiedades cuentan con estacionamiento. Hay que considerar un extra de $20.000.- mensuales a los valores normales de una habitación.",
+    "response3": "Algunas propiedades cuentan con estacionamiento. Hay que considerar un extra de $20.000.- mensuales a los valores normales de un espacio.",
     "help": "¿Necesitas ayuda? Escríbenos",
     "name": "Nombre",
     "email": "E-mail",
@@ -178,7 +184,8 @@
     "ciudad": "Ciudad",
     "tipoPropiedad": "Tipo de propiedad",
     "propiedadEntera": "Propiedad completa",
-    "propiedadParcial": "Habitación/Cuarto"
+    "propiedadParcial": "Habitación/Cuarto",
+    "metros": "Area (metros cuadrados)"
   },
   "createResult": {
     "title": "El valor de arriendo aproximado por tu propiedad es",
@@ -191,7 +198,7 @@
   },
   "schedule": {
     "title": "Selecciona la fecha para tu visita",
-    "descriprion": "Agendar visita para el día",
+    "description": "El inspector tomará fotos para posteriormente realizar la oferta de arriendo. Si la aceptas te contactaremos para firmar contrato y darte acceso al panel de control de tu propiedad",
     "schedule": "Horario",
     "vistit": "AGENDA UNA VISITA TECNICA"
   },
@@ -218,11 +225,12 @@
       }
     },
     "details": {
+      "title": "Información sobre la ubicación",
       "3d": "vista en 3d",
       "contacts": "Ver contactos",
       "description": "Esta propiedad está ubicada en el centro de Providencia. Los plazos mínimos de arriendo son de 3 meses y no se permite el uso de maquinaria ni labores ruidosas.",
       "subtitle": "Espacios disponibles",
-      "vistit": "AGENDA UNA VISITA TECNICA",
+      "vistit": "AGENDA UNA VISITA",
       "pay": "Pagar",
       "modalTitle": "Información de contacto",
       "modalText1": "Para recibir información acerca de",
@@ -233,7 +241,7 @@
     },
     "schedule": {
       "title": "Selecciona la fecha para tu visita",
-      "descriprion": "Agendar visita para el día",
+      "description": "Podras recorrer las instalaciones y conocer más sobre la propiedad",
       "schedule": "Horario",
       "vistit": "AGENDA UNA VISITA TECNICA"
     },
@@ -335,7 +343,8 @@
       "locations": "Locaciones",
       "review": "Reseñas",
       "reservation": "Reservas",
-      "publications": "Publicaciones"
+      "publications": "Publicaciones",
+      "payments": "Pagos"
     },
     "users": {
       "select": "Selecciona un usuario",
@@ -357,10 +366,15 @@
       "isActive": "¿Está activo?",
       "isOwner": "¿Es dueño?",
       "isAdmin": "¿Es Admin?",
+      "date": "Por fecha",
+      "from": "Desde",
+      "until": "Hasta",
+      "downloadUserList": "Descargar Excel",
       "details": "Detalles",
       "userLocations": "Locaciónes",
       "createdReviews": "Reseñas creadas",
       "receivedReviews": "Reseñas resividas",
+      "payments": "Pagos",
       "locationsList": {
         "title": "Locaciones del usuario:",
         "noLocationsFound": "El usuario no cuenta con propiedades"
@@ -371,6 +385,10 @@
         "noReviewsFound": "El usuario no cuenta con reviews",
         "from": "De",
         "to": "Para"
+      },
+      "reservations": {
+        "created": "Created",
+        "received": "Received"
       },
       "confiramtionMessages": {
         "activateUser": "¿Seguro que quieres activar al usuario?",
@@ -415,20 +433,39 @@
       "owner": "Propietario",
       "isActive": "¿La locación esta activada?",
       "isverified": "¿La locación esta verificada?",
+      "newVisit": "Agendar visita tecnica",
+      "goToVisit": "Ir al calendario",
       "value": "Valor de la propiedad",
+      "details": "Detalles",
+      "images": "Imagenes",
       "seeRooms": "Cuartos",
       "newRoom": "Crear cuarto",
-      "details": "Detalles",
       "images3d": "Imagenes 3d",
       "roomsList": {
         "title": "Todos los cuartos",
         "noRooms": "Esta propiedad no tiene ningun cuarto registrado",
+        "buyLink": "Link de compra",
         "create": {
+          "meters": "Metros cuadrados",
+          "name": "Nombre",
+          "description": "Descripción",
+          "isIncluded": "¿Cuarto incluido con la propiedad?",
           "link": "Crea un nuevo cuarto",
           "title": "Crea un nuevo cuarto para propiedad #"
         },
         "confiramtionMessages": {
           "update": "¿Seguro que quieres actualizar este cuarto?"
+        }
+      },
+      "imagesList": {
+        "change": "Cambiar portada",
+        "saveCoverImage": "Guardar Pordata",
+        "drop": "Arrastra los archivos aquí para subirlos",
+        "select": "Selecciona imagenes extras de la locación",
+        "buttonText": "Por ahora no",
+        "confiramtionMessages": {
+          "hide": "¿Seguro que quieres ocultar esta imagen?",
+          "show": "¿Seguro que quieres mostrar esta imagen?"
         }
       },
       "create": "Crear locación",
@@ -448,7 +485,9 @@
         "verifyLocation": "¿Seguro que quieres verificar la locación?",
         "unverifyLocation": "¿Seguro que quieres remover la verificación de la locación?",
         "update": "¿Seguro que quieres actualizar la locación actual?",
-        "updatePrice": "¿Seguro que quieres actualizar el precio de la locación actual?"
+        "updatePrice": "¿Seguro que quieres actualizar el precio de la locación actual?",
+        "verifyValue": "Asegúrate de asignarle un valor a la propiedad antes de verificarla",
+        "changeImage": "¿Seguro que quieres actualizar la portada de la locación actual?"
       }
     },
     "reviews": {
@@ -492,6 +531,15 @@
       "confiramtionMessages": {
         "activate": "¿Seguro que quieres activar la publicación?",
         "desactivate": "¿Seguro que quieres desactivar la publicación?"
+      }
+    },
+    "payments": {
+      "next": "Siguiente",
+      "prev": "Anterior",
+      "excel": "Crear reporte",
+      "download": "Descargar",
+      "sweetAlert": {
+        "confirmation": "¿Deseas crear reporte de los 100 ultimos pagos?"
       }
     }
   },

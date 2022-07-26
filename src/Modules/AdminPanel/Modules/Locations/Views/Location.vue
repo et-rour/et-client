@@ -122,6 +122,19 @@
         />
       </div>
       <div class="flex items-center justify-between">
+        <label for="garage" class="mr-3">
+          <!-- {{ $t("adminPanel.locations.garage") }} -->
+          Area (metros cuadrados)
+        </label>
+        <input
+          type="number"
+          min="1"
+          class="my-input"
+          v-model="location.squareMeters"
+          id="meters"
+        />
+      </div>
+      <div class="flex items-center justify-between">
         <label for="isActive" class="mr-3"
           >{{ $t("adminPanel.locations.isActive") }}
         </label>
@@ -145,18 +158,28 @@
         <label for="value" class="mr-3"
           >{{ $t("adminPanel.locations.value") }}
         </label>
-        <input
-          type="number"
-          class="my-input"
-          v-model="location.value"
-          id="value"
-        />
-        <button
-          class="my-btn w-auto px-4 py-2 ml-4"
-          v-if="fistValueLocation != location.value"
-          @click="setNewLocationValue"
-        >
-          <font-awesome-icon icon="fa-solid fa-floppy-disk" />
+        <div>
+          <input
+            type="number"
+            class="my-input"
+            v-model="location.value"
+            id="value"
+          />
+          <button
+            class="my-btn w-auto px-4 py-2 ml-4"
+            v-if="fistValueLocation != location.value"
+            @click="setNewLocationValue"
+          >
+            <font-awesome-icon icon="fa-solid fa-floppy-disk" />
+          </button>
+        </div>
+      </div>
+
+      <!-- NEW VISIT -->
+      <div class="flex items-center justify-between">
+        <label class="mr-3">{{ $t("adminPanel.locations.newVisit") }} </label>
+        <button class="w-auto px-4 py-2 ml-4" @click="goToSchedule">
+          {{ $t("adminPanel.locations.goToVisit") }}
         </button>
       </div>
 
@@ -168,7 +191,12 @@
       ></MapCoordsVue>
 
       <div class="w-full flex justify-center">
-        <button class="my-btn" @click="submitLocation">
+        <button
+          class="my-btn"
+          @click="submitLocation"
+          :disabled="isUploadingLocation"
+          :class="isUploadingLocation ? 'bg-gray-500' : ''"
+        >
           {{ $t("general.update") }}
         </button>
       </div>
@@ -183,42 +211,50 @@ import {
   CustomErrorToast,
   CustomToast,
   CustomConfirmDialog,
+  CustomConfirmWarningDialog,
 } from "@/sweetAlert";
 import MapCoordsVue from "../../../../../components/MapCoords.vue";
 
 export default {
-  props: {
-    idLocation: {
-      type: String,
-      required: true,
-    },
-  },
   components: {
     SwitchComponentVue,
     MapCoordsVue,
   },
   computed: {
-    ...mapGetters("adminPanelStore", [
-      "getLocationById",
-      "getFilteredUsers",
-      "getAllZones",
-    ]),
+    ...mapGetters("adminPanelStore/locations", ["getLocationDetails"]),
   },
   data() {
     return {
       location: null,
       fistValueLocation: null,
+
+      isUploadingLocation: false,
     };
   },
   methods: {
-    ...mapActions("adminPanelStore", [
+    ...mapActions("adminPanelStore/locations", [
       "modifyLocation",
       "changeIsActiveLocation",
       "changeIsVerifiedLocation",
       "setLocationValue",
     ]),
+    goToSchedule() {
+      this.$router.push({
+        name: "schedule",
+        params: {
+          location: {
+            name: this.location.name,
+            address: this.location.address,
+            zone: this.location.zone.zone,
+            city: this.location.zone.city,
+            country: this.location.zone.country,
+            state: this.location.zone.state,
+          },
+        },
+      });
+    },
     loadLocation() {
-      this.location = this.getLocationById(this.idLocation);
+      this.location = this.getLocationDetails;
       this.fistValueLocation = this.location.value;
     },
     async submitLocation() {
@@ -239,6 +275,7 @@ export default {
         garage,
         lat,
         long,
+        squareMeters,
       } = this.location;
       try {
         const updateLocationBody = {
@@ -255,11 +292,12 @@ export default {
           garage: garage,
           lat: lat,
           lng: long,
+          meters: squareMeters,
         };
 
+        this.isUploadingLocation = true;
         await this.modifyLocation(updateLocationBody);
 
-        console.log(this.location);
         CustomToast.fire({
           title: this.$t("sweetAlertMessages.saved"),
           icon: "success",
@@ -269,6 +307,7 @@ export default {
           text: error.response.data.message,
         });
       }
+      this.isUploadingLocation = false;
     },
     toogleIsActive(value) {
       const changeIsActiveLocationTextAcction = !this.location.isActive
@@ -303,6 +342,15 @@ export default {
       const changeIsVerifyLocationTextAcction = !this.location.isVerified
         ? this.$t("adminPanel.locations.confiramtionMessages.verifyLocation")
         : this.$t("adminPanel.locations.confiramtionMessages.unverifyLocation");
+
+      if (this.location.value == 0) {
+        CustomConfirmWarningDialog.fire({
+          text: this.$t(
+            "adminPanel.locations.confiramtionMessages.verifyValue"
+          ),
+        });
+        return;
+      }
 
       CustomConfirmDialog.fire({
         text: changeIsVerifyLocationTextAcction,

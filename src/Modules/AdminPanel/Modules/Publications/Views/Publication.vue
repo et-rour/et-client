@@ -89,7 +89,7 @@ export default {
     SwitchComponentVue,
   },
   computed: {
-    ...mapGetters("adminPanelStore", ["getPublicationById"]),
+    ...mapGetters("adminPanelStore/publications", ["getPublicationById"]),
   },
   data() {
     return {
@@ -97,7 +97,9 @@ export default {
     };
   },
   methods: {
-    ...mapActions("adminPanelStore", ["changeIsVerifiedPublication"]),
+    ...mapActions("adminPanelStore/publications", [
+      "changeIsVerifiedPublication",
+    ]),
     loadPublication() {
       this.publication = this.getPublicationById(this.idPublication);
     },

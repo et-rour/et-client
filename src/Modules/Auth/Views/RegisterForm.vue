@@ -63,13 +63,34 @@
         <span class="my-error">{{ errors[0] }}</span>
       </ValidationProvider>
 
-      <div>
-        <p class="my-2">{{ $t("login.country") }}</p>
-        <div class="grid grid-cols-3 gap-5">
+      <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div class="">
+          <p class="my-2">Whatsapp</p>
+
+          <ValidationProvider
+            v-slot="{ errors }"
+            class="relative"
+            rules="extWhatsapp"
+          >
+            <input
+              name="whatsapp"
+              class="border py-2 px-4 w-full border-gray-400 rounded-md"
+              v-model="whatsapp"
+            />
+            <span class="my-error">{{ errors[0] }}</span>
+          </ValidationProvider>
+
+          <p class="text-sm ml-1 mt-1 text-gray-500">
+            {{ $t("login.whatsapprequirements") }}
+          </p>
+        </div>
+
+        <div class="text-left">
+          <p class="my-2">{{ $t("login.country") }}</p>
           <ValidationProvider class="relative" rules="required">
             <select
               name="day"
-              class="border text-center py-2 w-full"
+              class="border py-2 w-full border-gray-400 rounded-md"
               v-model="registerCountry"
             >
               <option disabled selected value="">
@@ -79,12 +100,11 @@
               <option value="Perú">Perú</option>
             </select>
           </ValidationProvider>
-          <div></div>
-          <div></div>
         </div>
       </div>
 
-      <div>
+      <!-- DATE -->
+      <!-- <div>
         <p class="my-2">{{ $t("login.birth") }}</p>
         <div class="grid grid-cols-3 gap-5">
           <ValidationProvider v-slot="{ errors }" rules="required">
@@ -245,7 +265,7 @@
             <span class="my-error relative top-0 left-0">{{ errors[0] }}</span>
           </ValidationProvider>
         </div>
-      </div>
+      </div> -->
 
       <div class="flex justify-end items-center w-full mt-2">
         <input
@@ -285,6 +305,7 @@ export default {
       day: "",
       month: "",
       year: "",
+      whatsapp: "",
       isOwner: false,
     };
   },
@@ -301,6 +322,7 @@ export default {
         password: this.registerPassword,
         country: this.registerCountry,
         isOwner: this.isOwner,
+        whatsapp: this.whatsapp,
         phone: this.registerPhone.toString(),
       };
       try {

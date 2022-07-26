@@ -1,10 +1,23 @@
-import LocationLayout from "../Layouts/LocationsLayout.vue";
-import DetailsLayout from "../Views/DetailsLayout.vue";
-import CreatePropertyForm from "../Views/CreatePropertyForm.vue";
-import Location from "../Views/Location.vue";
-import Rooms from "../Views/Rooms.vue";
-import CreateRoom from "../Views/CreateRoom.vue";
-import Images3d from "../Views/Images3d.vue";
+const LocationLayout = () =>
+  import(
+    /* webpackChunkName: "LocationLayout" */ "../Layouts/LocationsLayout.vue"
+  );
+const DetailsLayout = () =>
+  import(/* webpackChunkName: "DetailsLayout" */ "../Views/DetailsLayout.vue");
+const CreatePropertyForm = () =>
+  import(
+    /* webpackChunkName: "CreatePropertyForm" */ "../Views/CreatePropertyForm.vue"
+  );
+const Location = () =>
+  import(/* webpackChunkName: "Location" */ "../Views/Location.vue");
+const Rooms = () =>
+  import(/* webpackChunkName: "Rooms" */ "../Views/Rooms.vue");
+const CreateRoom = () =>
+  import(/* webpackChunkName: "CreateRoom" */ "../Views/CreateRoom.vue");
+const Images3d = () =>
+  import(/* webpackChunkName: "Images3d" */ "../Views/Images3d.vue");
+const Images = () =>
+  import(/* webpackChunkName: "Images" */ "../Views/Images.vue");
 
 export default {
   name: "admin-locations",
@@ -30,41 +43,26 @@ export default {
           name: "admin-locations-detail-info",
           path: "/locations/detail/:id",
           component: Location,
-          props: (route) => {
-            return {
-              idLocation: route.params.id.toString(),
-            };
-          },
+        },
+        {
+          name: "admin-locations-detail-images",
+          path: "/locations/detail/:id/images",
+          component: Images,
         },
         {
           name: "admin-locations-detail-rooms",
           path: "/locations/detail/:id/rooms",
           component: Rooms,
-          props: (route) => {
-            return {
-              idLocation: route.params.id.toString(),
-            };
-          },
         },
         {
           name: "admin-locations-detail-rooms-create",
           path: "/locations/detail/:id/rooms/new",
           component: CreateRoom,
-          props: (route) => {
-            return {
-              idLocation: route.params.id.toString(),
-            };
-          },
         },
         {
           name: "admin-locations-detail-image3d",
           path: "/locations/detail/:id/image3d",
           component: Images3d,
-          props: (route) => {
-            return {
-              idLocation: route.params.id.toString(),
-            };
-          },
         },
       ],
     },

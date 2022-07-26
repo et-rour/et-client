@@ -7,7 +7,6 @@
           v-for="room in listLocationRooms"
           :key="room.id"
           :room="room"
-          :idLocation="idLocation"
         >
         </RoomEditableCardVue>
       </ul>
@@ -26,17 +25,10 @@ export default {
   components: {
     RoomEditableCardVue,
   },
-  props: {
-    idLocation: {
-      type: String,
-      requird: true,
-    },
-  },
-
   computed: {
-    ...mapGetters("adminPanelStore", ["getAllLocationRooms"]),
+    ...mapGetters("adminPanelStore/locations", ["getAllLocationRooms"]),
     listLocationRooms() {
-      return this.getAllLocationRooms(Number(this.idLocation));
+      return this.getAllLocationRooms;
     },
   },
 };

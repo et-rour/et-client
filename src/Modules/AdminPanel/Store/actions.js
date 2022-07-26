@@ -1,6 +1,5 @@
-import EspacioAPI from "../../../Api/index";
-
 // USERS
+/*
 export const getUsers = async ({ commit }) => {
   const res = await EspacioAPI.get("/admin/listusers");
   const users = res.data;
@@ -28,20 +27,10 @@ export const changeIsOwnerStatus = async (
   const { idUser, isOwner } = res.data;
   commit("changeIsOwnerStatus", { idUser, isOwner });
 };
-
-export const changeIsActiveProperty = async (
-  { commit },
-  { idUser, isActive }
-) => {
-  const res = await EspacioAPI.put(`/auth/toogleActive/${idUser}`, {
-    active: isActive,
-  });
-  const user = res.data;
-  console.log("%cactions.js line:6 users", "color: #007acc;", user);
-  commit("changeIsActiveProperty", user);
-};
+*/
 
 // ZONES
+/*
 export const getZones = async ({ commit }) => {
   const res = await EspacioAPI.get("/admin/zone");
   const zones = res.data;
@@ -67,8 +56,21 @@ export const changeIsActiveZone = async ({ commit }, { id, activeStatus }) => {
   const { idZone, isActive } = res.data;
   commit("changeIsActiveZone", { idZone, isActive });
 };
+*/
 
 // LOCATIONS
+/*
+export const changeIsActiveProperty = async (
+  { commit },
+  { idUser, isActive }
+) => {
+  const res = await EspacioAPI.put(`/auth/toogleActive/${idUser}`, {
+    active: isActive,
+  });
+  const user = res.data;
+  console.log("%cactions.js line:6 users", "color: #007acc;", user);
+  commit("changeIsActiveProperty", user);
+};
 export const getLocations = async ({ commit }) => {
   const res = await EspacioAPI.get("/admin/listlocations");
   const locations = res.data.locations;
@@ -128,11 +130,13 @@ export const changeIsActivePropertyInLocation = async (
   const location = res.data;
   commit("changeIsActivePropertyInLocation", location);
 };
+*/
 
 // ROOMS
+/*
 export const createRoom = async (
   { commit },
-  { name, image, squareMeter, value, locationId }
+  { name, image, squareMeter, value, locationId, description }
 ) => {
   const res = await EspacioAPI.post(`room/`, {
     name,
@@ -140,13 +144,14 @@ export const createRoom = async (
     squareMeter,
     locationId,
     value,
+    description,
   });
   const newRoom = res.data;
   commit("createRoom", newRoom);
 };
 export const updateRoom = async (
   { commit },
-  { id, name, image, squareMeter, locationId, value }
+  { id, name, image, squareMeter, locationId, value, description }
 ) => {
   const res = await EspacioAPI.put(`room/${id}`, {
     name,
@@ -154,6 +159,7 @@ export const updateRoom = async (
     squareMeter,
     locationId,
     value,
+    description,
   });
   const newRoom = res.data;
   commit("updateRoom", newRoom);
@@ -170,8 +176,10 @@ export const updateRoomImage = async (
   const newImageUrl = res.data;
   commit("updateRoomImage", newImageUrl);
 };
+*/
 
 // REVIEWS
+/*
 export const getReviews = async ({ commit }) => {
   const res = await EspacioAPI.get("/admin/review");
   const zones = res.data;
@@ -202,6 +210,10 @@ export const changeIsVerifiedReview = async (
   commit("changeIsVerifiedReview", { idReview, isVerified });
 };
 
+*/
+
+// RESERVATIONS
+/*
 export const getReservations = async ({ commit }) => {
   const res = await EspacioAPI.get("/admin/reservation");
   const reservations = res.data;
@@ -212,9 +224,10 @@ export const getReservations = async ({ commit }) => {
   );
   commit("getReservations", reservations);
 };
+*/
 
 // POSTS
-
+/*
 export const getPublications = async ({ commit }) => {
   const res = await EspacioAPI.get("/admin/publications");
   const publications = res.data.publications;
@@ -231,7 +244,10 @@ export const changeIsVerifiedPublication = async (
   const { idPublication, isVerified } = res.data;
   commit("changeIsVerifiedPublication", { idPublication, isVerified });
 };
+*/
+
 // IMAGE3D
+/*
 export const postImage3d = async ({ commit }, { imageData, idLocation }) => {
   const res = await EspacioAPI.post("/image3d/", imageData);
   const savedImage = res.data;
@@ -250,3 +266,4 @@ export const updateImage3d = async (
   console.log({ updatedImage });
   commit("updateImage3d", { updatedImage, locationId });
 };
+*/

@@ -1,6 +1,6 @@
 <template>
   <div class="mx-auto h-full w-full pt-4 flex flex-col">
-    <div class="flex flex-col gap-4 items-start self-center">
+    <div class="flex flex-col gap-4 items-start self-center" v-if="user">
       <!-- firstname -->
       <p class="flex items-center gap-3">
         <font-awesome-icon
@@ -32,6 +32,18 @@
         {{ $t("adminPanel.users.phone") }}:
         <span class="text-my-blue-primary">{{
           user.phone ? user.phone : $t("adminPanel.users.noPhoneFound")
+        }}</span>
+      </p>
+
+      <!-- whatsapp -->
+      <p class="flex items-center gap-3">
+        <font-awesome-icon
+          class="p-2 border rounded-full border-black"
+          icon="fa-solid fa-phone"
+        />
+        Whatsapp:
+        <span class="text-my-blue-primary">{{
+          user.whatsapp ? user.whatsapp : $t("adminPanel.users.noPhoneFound")
         }}</span>
       </p>
 
@@ -95,28 +107,17 @@ export default {
   components: {
     SwitchComponentVue,
   },
-  props: {
-    idUser: {
-      type: String,
-      requird: true,
+  computed: {
+    ...mapGetters("adminPanelStore/users", ["getUserDetails"]),
+    user() {
+      return this.getUserDetails;
     },
   },
-  computed: {
-    ...mapGetters("adminPanelStore", ["getUserById"]),
-  },
-  data() {
-    return {
-      user: null,
-    };
-  },
   methods: {
-    ...mapActions("adminPanelStore", [
+    ...mapActions("adminPanelStore/users", [
       "changeIsActiveUser",
       "changeIsOwnerStatus",
     ]),
-    loadUser() {
-      this.user = this.getUserById(this.idUser);
-    },
     toogleIsActive(value) {
       const changeActiveUserTextAcction = this.user.isActive
         ? this.$t("adminPanel.users.confiramtionMessages.desactivateUser")
@@ -169,14 +170,6 @@ export default {
           }
         }
       );
-    },
-  },
-  created() {
-    this.loadUser();
-  },
-  watch: {
-    idUser() {
-      this.loadUser();
     },
   },
 };

@@ -1,8 +1,11 @@
 {
   "sweetAlertMessages": {
+    "wait": "Wait a minute",
     "saved": "Saved",
     "error": "Oops.. something went wrong",
     "confirmTitle": "Are you sure?",
+    "confirmWarningTitle": "Before continuing",
+    "confirmWarningConfirmText": "Got it!!",
     "confirmButton": "Yes do it",
     "cancelButton": "Cancel"
   },
@@ -10,7 +13,8 @@
     "messages": {
       "required": "This fiel is not valid",
       "email": "This field is not a valid e-mail adress",
-      "minValue": "This field must be greater than {min}"
+      "minValue": "This field must be greater than {min}",
+      "whatsapp": "invalid whatsapp number."
     }
   },
   "general": {
@@ -38,7 +42,9 @@
     "register": "SIGN UP",
     "isOwner": "Are you owner?",
     "email": "E-mail",
+    "emailRegister": "Email *",
     "phone": "Phone number",
+    "passwordRegister": "Password *",
     "password": "Password",
     "firstName": "First name",
     "lastName": "Last name",
@@ -48,12 +54,14 @@
     "day": "Day",
     "month": "Month",
     "year": "Years",
+    "whatsapprequirements": "Include the + symbol, country code, and area code",
     "succesModal": {
       "title": "!All ready!",
       "subtitle": "Welcome to Temporary Space",
       "buttonOpcion1": "PUBLISH YOUR PROPERTY",
       "buttonOpcion2": "SEARCH A PROPERTY",
-      "buttonOpcion3": "HOME"
+      "buttonOpcion1Admin": "Explore the app",
+      "buttonOpcion2Admin": "Go to admin panel"
     }
   },
   "landing": {
@@ -158,6 +166,7 @@
     "habitaciones": "Number of rooms",
     "banios": "Number of bathrooms",
     "pintura": "paint condition",
+    "opcionDefault": "Select",
     "suelo": "ground state",
     "image": "Select a image",
     "options": {
@@ -174,7 +183,9 @@
     "submit": "LOAD PROPERTY",
     "ciudad": "City",
     "tipoPropiedad": "Property type",
-    "propiedadParcial": "Room"
+    "propiedadEntera": "Property complete",
+    "propiedadParcial": "Room",
+    "metros": "Area (square meters)"
   },
   "createResult": {
     "title": "The approximate rental value for your property is",
@@ -187,7 +198,7 @@
   },
   "schedule": {
     "title": "Select the date for your visit",
-    "descriprion": "Schedule visit for the day",
+    "description": "The inspector will take photos to later make the lease offer. If you accept it, we will contact you to sign a contract and give you access to your property's control panel",
     "schedule": "Schedule",
     "vistit": "SCHEDULE A TECHNICAL VISIT"
   },
@@ -214,6 +225,7 @@
       }
     },
     "details": {
+      "title": "Location information",
       "3d": "3d view",
       "contacts": "See contacts",
       "description": "This property is located in downtown Providencia. The minimum rental terms are 3 months and the use of machinery or noisy work is not allowed.",
@@ -229,7 +241,7 @@
     },
     "schedule": {
       "title": "Select the date for your visit",
-      "descriprion": "Schedule visit for the day",
+      "description": "You can tour the facilities and learn more about the property",
       "schedule": "Schedule",
       "vistit": "SCHEDULE A TECHNICAL VISIT"
     },
@@ -331,7 +343,8 @@
       "locations": "locations",
       "review": "Review",
       "reservation": "Reservation",
-      "publications": "Publications"
+      "publications": "Publications",
+      "payments": "Payments"
     },
     "users": {
       "select": "Select a user",
@@ -353,10 +366,15 @@
       "isActive": "Is active?",
       "isOwner": "Is owner?",
       "isAdmin": "Is Admin?",
+      "date": "By date",
+      "from": "From",
+      "until": "Until",
+      "downloadUserList": "Download Excel",
       "details": "Details",
       "userLocations": "Locations",
       "createdReviews": "Created reviews",
       "receivedReviews": "Received reviews",
+      "payments": "Payments",
       "locationsList": {
         "title": "locations for user:",
         "noLocationsFound": "The user does not have properties"
@@ -367,6 +385,10 @@
         "noReviewsFound": "The user has no reviews",
         "from": "From",
         "to": "To"
+      },
+      "reservations": {
+        "created": "Creadas",
+        "received": "Recibidas"
       },
       "confiramtionMessages": {
         "activateUser": "Are you sure you want to activate the user?",
@@ -411,20 +433,39 @@
       "owner": "Owner",
       "isActive": "Is the location activated?",
       "isverified": "Is the location verified?",
+      "newVisit": "Schedule technical visit",
+      "goToVisit": "go to calendar",
       "value": "property value",
+      "details": "Details",
+      "images": "Images",
       "seeRooms": "Rooms",
       "newRoom": "Create room",
-      "details": "Details",
       "images3d": "Images 3d",
       "roomsList": {
         "title": "all rooms",
         "noRooms": "This property doesn't have any room registered",
+        "buyLink": "Buy link",
         "create": {
+          "meters": "Square meter",
+          "name": "Name",
+          "description": "Description",
+          "isIncluded": "Room included with the property?",
           "link": "Create a new room",
           "title": "Create a new room for property #"
         },
         "confiramtionMessages": {
           "update": "Are you sure you want to upgrade this room?"
+        }
+      },
+      "imagesList": {
+        "change": "Change cover image",
+        "saveCoverImage": "Save Cover Image",
+        "drop": "Drag files here to upload",
+        "select": "Select extra images from the location",
+        "buttonText": "Not for now",
+        "confiramtionMessages": {
+          "hide": "Are you sure you want to hide this image?",
+          "show": "Are you sure you want to show this image?"
         }
       },
       "create": "Add location",
@@ -444,7 +485,9 @@
         "verifyLocation": "Are you sure you want to verify the location?",
         "unverifyLocation": "Are you sure you want to remove location verification?",
         "update": "Are you sure you want to update the current location?",
-        "updatePrice": "Are you sure you want to update the current location price?"
+        "updatePrice": "Are you sure you want to update the price of the current location?",
+        "verifyValue": "Make sure to assign a value to the property before checking it",
+        "changeImage": "Are you sure you want to update the cover of the current location?"
       }
     },
     "reviews": {
@@ -488,6 +531,15 @@
       "confiramtionMessages": {
         "activate": "Are you sure you want to enable publishing?",
         "desactivate": "Are you sure you want to disable publishing?"
+      }
+    },
+    "payments": {
+      "next": "Next",
+      "prev": "Previus",
+      "excel": "Create report",
+      "download": "Download",
+      "sweetAlert": {
+        "confirmation": "Do you want to create a report of the last 100 payments?"
       }
     }
   },

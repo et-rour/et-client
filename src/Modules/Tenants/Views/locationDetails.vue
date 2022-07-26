@@ -1,6 +1,13 @@
 <template>
   <div>
-    <div class="my-container mb-32 lg:mb-2" v-if="property">
+    <div
+      class="flex flex-col justify-center items-center h-80"
+      v-if="!property"
+    >
+      <h2 class="my-title">{{ $t("tenants.details.title") }}</h2>
+      <SpinerVue />
+    </div>
+    <div class="my-container mb-32 lg:mb-2" v-else>
       <h1 class="my-title">{{ property.name }}</h1>
       <p>
         {{ property.address }}, {{ property.zone.zone }} -
@@ -9,11 +16,7 @@
       </p>
       <p>{{ property.description }}</p>
 
-      <img
-        :src="property.image"
-        alt="location image detail"
-        class="w-full h-44 sm:h-64 md:h-80 lg:h-96 mb-4 object-cover"
-      />
+      <SwiperVue :images="getPropertyDetailsImages"></SwiperVue>
 
       <button
         class="relative border border-my-blue-primary rounded-lg w-full py-5 px-2 flex justify-center items-center mb-4 hover:text-white"
@@ -60,13 +63,13 @@
         class="w-full bg-my-blue-primary text-white font-bold my-btn"
         @click="goToSchedule"
       >
-        <router-link :to="{ name: 'tenants-schedule' }">{{
-          $t("tenants.details.vistit")
-        }}</router-link>
+        <router-link :to="{ name: 'tenants-schedule' }"
+          ><a> {{ $t("tenants.details.vistit") }} </a></router-link
+        >
       </button>
       <button
         class="w-full bg-green-500 mt-2 text-white font-bold my-btn"
-        @click="goToCheckoutSession"
+        @click="goToBuyLink"
       >
         <a>{{ $t("tenants.details.pay") }}</a>
       </button>
@@ -96,7 +99,7 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations } from "vuex";
+import { mapActions, mapGetters, mapMutations } from "vuex";
 import { Viewer } from "photo-sphere-viewer";
 import { MarkersPlugin } from "photo-sphere-viewer/dist/plugins/markers";
 import "photo-sphere-viewer/dist/photo-sphere-viewer.css";
@@ -104,13 +107,14 @@ import "photo-sphere-viewer/dist/plugins/markers.css";
 import RoomCard from "../Components/RoomCard.vue";
 import ContactModal from "../Components/ContactModal.vue";
 import ModelGlobal from "../../../components/ModelGlobal.vue";
-import EspacioTemporalAPI from "@/Api/index.js";
+import SpinerVue from "../../../components/Spiner.vue";
+import { CustomErrorToast } from "@/sweetAlert.js";
+import SwiperVue from "../Components/Swiper.vue";
 
 export default {
-  components: { ModelGlobal, RoomCard, ContactModal },
+  components: { ModelGlobal, RoomCard, ContactModal, SpinerVue, SwiperVue },
   props: {
     idProperty: {
-      type: Number,
       requird: true,
     },
   },
@@ -130,26 +134,28 @@ export default {
   },
   methods: {
     ...mapMutations("authStore", ["changeShowLoginModal"]),
+    ...mapActions("propertiesStore", ["fetchPropertyDetails"]),
+    ...mapActions(["goToCheckoutSession"]),
     goToSchedule(e) {
       e.preventDefault();
       this.$router.push({ name: "tenants-schedule" });
     },
-    async goToCheckoutSession() {
+    async goToBuyLink() {
       if (!this.isAuth) {
         this.changeShowLoginModal(true);
         return;
       }
-
-      const res = await EspacioTemporalAPI.post(
-        "/locations/create-checkout-session",
-        {
+      try {
+        await this.goToCheckoutSession({
           locationId: this.idProperty,
           userId: this.user.user.id,
-        }
-      );
-      // console.log("%cTest.vue line:22 res", "color: #007acc;", res);
-      // window.location.href = res.url;
-      window.open(res.data.url, "_blank");
+          isLocation: true,
+        });
+      } catch (error) {
+        CustomErrorToast.fire({
+          text: error.response.data.message || error,
+        });
+      }
     },
     closeContactModal() {
       this.showContactModal = false;
@@ -230,8 +236,20 @@ export default {
         this.show3d();
       }, 1000);
     },
+    scrollToAnchor() {
+      this.$nextTick(() => {
+        if (this.$route.hash) {
+          const $el = document.querySelector(this.$route.hash);
+          $el && window.scrollTo(0, $el.offsetTop);
+        }
+      });
+    },
   },
   computed: {
+    ...mapGetters("propertiesStore", [
+      "getPropertyDetails",
+      "getPropertyDetailsImages",
+    ]),
     ...mapGetters("propertiesStore", ["propertiesById"]),
     ...mapGetters("authStore", ["user", "isAuth"]),
     zoom() {
@@ -244,8 +262,20 @@ export default {
       return this.property.lat !== "" && this.property.long !== "";
     },
   },
-  mounted() {
-    this.property = this.propertiesById(this.idProperty);
+  async mounted() {
+    try {
+      await this.fetchPropertyDetails(this.idProperty);
+      this.property = this.getPropertyDetails;
+      console.log("%clocationDetails.vue line:255 router", "color: #007acc;");
+      this.scrollToAnchor();
+    } catch (error) {
+      CustomErrorToast.fire({
+        text: error.response.data.message || error,
+      });
+    }
+  },
+  metaInfo: {
+    title: "Detalles Propiedad",
   },
 };
 </script>

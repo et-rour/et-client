@@ -26,30 +26,18 @@ export default {
     ReviewCard,
   },
   props: {
-    idUser: {
-      type: String,
-      requird: true,
-    },
     isCreator: {
       type: Boolean,
       requird: true,
     },
   },
   computed: {
-    ...mapGetters("adminPanelStore", ["getUserById"]),
-    userName() {
-      return `${this.getUserById(this.idUser).firstName} ${
-        this.getUserById(this.idUser).lastName
-      }`;
-    },
+    ...mapGetters("adminPanelStore/users", ["getUserDetails"]),
     reviewsList() {
       return this.isCreator
-        ? this.getUserById(this.idUser).createdReviews
-        : this.getUserById(this.idUser).receivedReviews;
+        ? this.getUserDetails.createdReviews
+        : this.getUserDetails.receivedReviews;
     },
-  },
-  mounted() {
-    console.log("%cReviews.vue line:62 mounted", "color: #007acc;");
   },
 };
 </script>

@@ -1,5 +1,7 @@
-import ReviewLayout from "../Layouts/ReviewLayout.vue";
-import Review from "../Views/Review.vue";
+const ReviewLayout = () =>
+  import(/* webpackChunkName: "ReviewLayout" */ "../Layouts/ReviewLayout.vue");
+const Review = () =>
+  import(/* webpackChunkName: "Review" */ "../Views/Review.vue");
 
 export default {
   name: "admin-reviews",

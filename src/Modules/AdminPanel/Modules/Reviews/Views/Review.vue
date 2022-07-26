@@ -92,7 +92,7 @@ export default {
     SwitchComponentVue,
   },
   computed: {
-    ...mapGetters("adminPanelStore", ["getReviewById"]),
+    ...mapGetters("adminPanelStore/reviews", ["getReviewById"]),
     isNewZone() {
       return this.$route.params.id === "new";
     },
@@ -104,7 +104,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions("adminPanelStore", [
+    ...mapActions("adminPanelStore/reviews", [
       "changeIsActiveReview",
       "changeIsVerifiedReview",
     ]),

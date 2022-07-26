@@ -149,9 +149,6 @@ export default {
     newCoords: {
       type: Object,
     },
-    idLocation: {
-      required: true,
-    },
   },
   data() {
     return {
@@ -162,7 +159,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions("adminPanelStore", ["updateImage3d"]),
+    ...mapActions("adminPanelStore/locations", ["updateImage3d"]),
     ...mapActions(["uploadImageTofirebase"]),
     changeEditingEvent(idRow) {
       this.$emit("changeEditingClick", idRow);
@@ -208,7 +205,7 @@ export default {
             longitude: this.newCoords.longitude,
           },
           idImage3d: this.newImage3dData.id,
-          locationId: this.idLocation,
+          locationId: this.getLocationDetails.id,
         });
 
         CustomToast.fire({
@@ -229,6 +226,7 @@ export default {
   },
   computed: {
     ...mapGetters("authStore", ["user"]),
+    ...mapGetters("adminPanelStore/locations", ["getLocationDetails"]),
     ...mapGetters(["imageUrl", "ImageUploadingState"]),
   },
   created() {

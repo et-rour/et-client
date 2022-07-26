@@ -211,6 +211,9 @@ export default {
       this.$refs.paginator.goToPage(1);
     },
   },
+  metaInfo: {
+    title: "Arrendatarios",
+  },
 };
 </script>
 

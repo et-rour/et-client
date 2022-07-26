@@ -28,3 +28,17 @@ export const zonesList = (state) => {
 export const isLoading = (state) => {
   return state.loadingProperties;
 };
+export const getPropertyDetails = (state) => {
+  return state.propertyDetails;
+};
+export const getPropertyDetailsImages = (state) => {
+  const images = [
+    {
+      id: 999999999,
+      image: state.propertyDetails.image,
+    },
+    ...state.propertyDetails.imagesLocation,
+  ];
+
+  return images;
+};

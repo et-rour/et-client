@@ -1,4 +1,4 @@
-import moment from "moment";
+/*
 export const getFilteredUsers = (state) => (word) => {
   return state.users.filter((user) => {
     if (user.firstName.toLowerCase().indexOf(word.toLowerCase()) > -1) {
@@ -9,14 +9,20 @@ export const getFilteredUsers = (state) => (word) => {
 export const getUserById = (state) => (id) => {
   return state.users.find((user) => user.id == id);
 };
+*/
 
+// zones
+/*
 export const getAllZones = (state) => {
   return state.zones;
 };
 export const getZoneById = (state) => (id) => {
   return state.zones.find((zone) => zone.id == id);
 };
+*/
 
+// locations
+/*
 export const getAllLocations = (state) => {
   return state.locations;
 };
@@ -38,7 +44,10 @@ export const getFilteredLocations = (state) => (word) => {
 export const getLocationById = (state) => (id) => {
   return state.locations.find((location) => location.id == id);
 };
+*/
 
+// reviews
+/*
 export const getAllReviews = (state) => {
   return state.reviews;
 };
@@ -57,7 +66,10 @@ export const getReviewById = (state) => (id) => {
   console.log("%cgetters.js line:47 getReview", "color: #007acc;", id);
   return state.reviews.find((review) => review.id == id);
 };
+*/
 
+// RESERVATIONS
+/*
 export const getAllReservationsCorrectDataStructure = (state) => {
   const reservationsData = state.reservations.map((reserv) => {
     return {
@@ -66,14 +78,17 @@ export const getAllReservationsCorrectDataStructure = (state) => {
       end: moment(reserv.end).format("LL"),
       price: reserv.price,
       status: reserv.status,
-      // client: `${reserv.client.firstName}`,
-      // owner: `${reserv.owner.firstName}`,
+      created: moment(reserv.created).format("DD/MM/YYYY"),
+      location: reserv.location.id,
+      room: reserv.room ? reserv.room.id : "",
     };
   });
   return reservationsData;
 };
+*/
 
 // PUBLICATIONS
+/*
 export const getaLLPublications = (state) => {
   return state.publications;
 };
@@ -90,3 +105,4 @@ export const getFilteredPublications = (state) => (word) => {
     }
   });
 };
+*/

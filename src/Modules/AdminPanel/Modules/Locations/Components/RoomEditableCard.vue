@@ -1,11 +1,20 @@
 <template>
-  <div class="w-full h-40 my-4 flex gap-4">
-    <div class="w-9/12 sm:w-6/12 lg:w-1/3 h-full bg-gray-200 relative">
-      <img
-        :src="room.image"
-        class="w-full h-full object-contain"
-        alt="project"
-      />
+  <div class="w-full h-auto flex flex-col bg-gray-200">
+    <div class="w-1/3 mx-auto relative">
+      <template>
+        <img
+          v-if="room.image && room.image.length > 0"
+          :src="room.image"
+          class="w-48 h-full object-contain"
+          alt="project"
+        />
+        <img
+          v-else
+          src="@/assets/icons/image.png"
+          class="w-48 h-full object-contain border-2 border-black"
+          alt="project"
+        />
+      </template>
       <div
         @click="$refs.roomImageSelector.click()"
         class="w-10 h-10 rounded-full bg-gray-200 absolute right-0 bottom-0 flex justify-center items-center border-4 border-white cursor-pointer text-my-blue-primary"
@@ -25,25 +34,43 @@
         class="w-full h-5"
       />
     </div>
-    <div class="flex flex-col justify-center relative gap-2">
-      <div class="text-gray-400">
-        <input type="number" class="my-input w-20" v-model="room.squareMeter" />
-        mts&sup2;
+
+    <div class="flex flex-col gap-2 w-full p-2">
+      <input type="text" class="my-input" v-model="room.name" />
+
+      <textarea class="my-input h-28" v-model="room.description"></textarea>
+
+      <div class="flex justify-between">
+        <span>
+          $ <input type="number" class="my-input w-40" v-model="room.value" />
+        </span>
+        <span>
+          mts&sup2;
+          <input
+            type="number"
+            class="my-input w-40"
+            v-model="room.squareMeter"
+          />
+        </span>
       </div>
-      <div class="align-middle text-lg font-bold">
-        <input type="text" class="my-input" v-model="room.name" />
+      <div class="flex justify-between">
+        <button
+          class="my-btn w-auto px-4 py-1 self-end"
+          @click="goToBuyLink"
+          :disabled="!room.stripePriceId"
+          :class="!room.stripePriceId ? 'bg-gray-400' : ''"
+        >
+          {{ $t("adminPanel.locations.roomsList.buyLink") }}
+        </button>
+        <button
+          class="my-btn w-auto px-4 py-1 self-end"
+          @click="updateRoomHandler"
+          :disabled="isSaving"
+          :class="isSaving ? 'bg-gray-400' : ''"
+        >
+          {{ $t("general.save") }}
+        </button>
       </div>
-      <div class="align-middle text-lg">
-        $ <input type="number" class="my-input w-28" v-model="room.value" />
-      </div>
-      <button
-        class="my-btn w-24 px-1 py-1 self-end"
-        @click="updateRoomHandler"
-        :disabled="isSaving"
-        :class="isSaving ? 'bg-gray-400' : ''"
-      >
-        {{ $t("general.save") }}
-      </button>
     </div>
   </div>
 </template>
@@ -56,6 +83,7 @@ import {
   CustomConfirmDialog,
 } from "@/sweetAlert";
 import ProgesBarImage from "../../../../../components/ProgesBarImage.vue";
+
 export default {
   components: {
     ProgesBarImage,
@@ -64,10 +92,6 @@ export default {
     room: {
       type: Object,
       required: true,
-    },
-    idLocation: {
-      type: String,
-      requird: true,
     },
   },
   data() {
@@ -78,10 +102,14 @@ export default {
   computed: {
     ...mapGetters(["imageUrl", "ImageUploadingState"]),
     ...mapGetters("authStore", ["user"]),
+    ...mapGetters("adminPanelStore/locations", ["getLocationDetails"]),
   },
   methods: {
-    ...mapActions(["uploadImageTofirebase"]),
-    ...mapActions("adminPanelStore", ["updateRoomImage", "updateRoom"]),
+    ...mapActions(["uploadImageTofirebase", "goToCheckoutSession"]),
+    ...mapActions("adminPanelStore/locations", [
+      "updateRoomImage",
+      "updateRoom",
+    ]),
     async uploadRoomImage(event, idRoom) {
       const image = event.target.files[0];
       if (!image) {
@@ -102,7 +130,7 @@ export default {
         });
 
         await this.updateRoomImage({
-          locationId: this.idLocation,
+          locationId: this.getLocationDetails.id,
           idRoom: idRoom,
           imageUrl: res,
         });
@@ -132,7 +160,8 @@ export default {
             image: this.room.image,
             value: this.room.value,
             squareMeter: this.room.squareMeter,
-            locationId: this.idLocation,
+            description: this.room.description,
+            locationId: this.getLocationDetails.id,
           });
 
           CustomToast.fire({
@@ -141,10 +170,18 @@ export default {
           });
           this.isSaving = false;
         } catch (error) {
+          this.isSaving = false;
           CustomErrorToast.fire({
             text: error.response.data.message,
           });
         }
+      });
+    },
+    goToBuyLink() {
+      this.goToCheckoutSession({
+        locationId: this.room.id,
+        userId: this.user.user.id,
+        isLocation: false,
       });
     },
   },

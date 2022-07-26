@@ -6,34 +6,40 @@
       :to="{ name: 'owner' }"
       class="flex justify-center flex-col items-center"
     >
-      <img
-        src="@/assets/icons/keys.png"
-        alt="Dueños icon"
-        class="w-10 h-10 object-contain"
-      />
-      <p>Dueños</p>
+      <a>
+        <img
+          src="@/assets/icons/keys.png"
+          alt="Dueños icon"
+          class="w-10 h-10 object-contain"
+        />
+        <p>Dueños</p>
+      </a>
     </router-link>
     <router-link
       :to="{ name: 'tenants' }"
       class="flex justify-center flex-col items-center"
     >
-      <img
-        src="@/assets/icons/user.png"
-        alt="Arrendatarios icon"
-        class="w-10 h-10 object-contain"
-      />
-      <p>Arrendatarios</p>
+      <a>
+        <img
+          src="@/assets/icons/user.png"
+          alt="Arrendatarios icon"
+          class="w-10 h-10 object-contain"
+        />
+        <p>Arrendatarios</p>
+      </a>
     </router-link>
     <router-link
       :to="{ name: 'home' }"
       class="flex justify-center flex-col items-center"
     >
-      <img
-        src="@/assets/icons/aboutUs.png"
-        alt="Nosotros icon"
-        class="w-10 h-10 object-contain"
-      />
-      <p>Comunidad</p>
+      <a>
+        <img
+          src="@/assets/icons/aboutUs.png"
+          alt="Nosotros icon"
+          class="w-10 h-10 object-contain"
+        />
+        <p>Comunidad</p>
+      </a>
     </router-link>
   </div>
 </template>

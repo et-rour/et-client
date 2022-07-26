@@ -97,12 +97,12 @@
                     />
 
                     <div class="flex flex-col justify-center items-center">
-                      <button
-                        class="my-btn mr-4"
+                      <div
+                        class="my-btn mr-4 cursor-pointer"
                         @click="$refs.imageSelector.click()"
                       >
                         {{ $t("createForm.image") }}
-                      </button>
+                      </div>
                       <ProgesBarImageVue
                         id="image3d"
                         :imageUrl="imageUrl"
@@ -178,7 +178,6 @@
                 :image3dData="image"
                 :editing="editing === image.id"
                 :newCoords="newCoords"
-                :idLocation="idLocation"
                 v-on:changeEditingClick="changeEditingId"
               />
             </tbody>
@@ -204,12 +203,6 @@ export default {
     ValidationObserver,
     ProgesBarImageVue,
     TableRowVue,
-  },
-  props: {
-    idLocation: {
-      type: String,
-      required: true,
-    },
   },
   data() {
     return {
@@ -238,8 +231,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions("adminPanelStore", ["postImage3d"]),
-
+    ...mapActions("adminPanelStore/locations", ["postImage3d"]),
     ...mapActions(["uploadImageTofirebase"]),
     async onSubmitCreateNewImage3d() {
       if (this.file === null) {
@@ -260,10 +252,13 @@ export default {
           image: this.imageUrl,
           longitude: this.longitude,
           latitude: this.latitude,
-          locationId: this.idLocation,
+          locationId: this.getLocationDetails.id,
         };
 
-        await this.postImage3d({ imageData, idLocation: this.idLocation });
+        await this.postImage3d({
+          imageData,
+          idLocation: this.getLocationDetails.id,
+        });
 
         this.name = "";
         this.image = "";
@@ -273,6 +268,7 @@ export default {
         this.showMarker();
         CustomToast.fire({
           text: this.$t("sweetAlertMessages.saved"),
+          icon: "success",
         });
       } catch (error) {
         CustomErrorToast.fire({
@@ -378,13 +374,12 @@ export default {
   computed: {
     ...mapGetters("authStore", ["user"]),
     ...mapGetters(["imageUrl", "ImageUploadingState"]),
-    ...mapGetters("adminPanelStore", ["getLocationById"]),
+    ...mapGetters("adminPanelStore/locations", ["getLocationDetails"]),
     images3dList() {
-      return this.getLocationById(this.idLocation).images3D;
+      return this.getLocationDetails.images3D;
     },
   },
   mounted() {
-    // this.property = this.getLocationById(this.idLocation);
     this.showMarker();
   },
 };

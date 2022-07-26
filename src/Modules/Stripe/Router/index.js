@@ -1,5 +1,7 @@
-const stripeSuccess = () => import("../Views/Success.vue");
-const stripeError = () => import("../Views/Error.vue");
+const stripeSuccess = () =>
+  import(/* webpackChunkName: "stripeSuccess" */ "../Views/Success.vue");
+const stripeError = () =>
+  import(/* webpackChunkName: "stripeError" */ "../Views/Error.vue");
 // const stripeTest = () => import("../Views/Test.vue");
 export default [
   // {

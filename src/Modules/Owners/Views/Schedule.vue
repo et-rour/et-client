@@ -1,8 +1,13 @@
 <template>
-  <div class="px-2 py-3 pb-40 md:pb-6">
-    <h2 class="my-title text-center font-bold">
-      {{ $t("tenants.schedule.title") }}
-    </h2>
+  <div class="pb-40 md:pb-6">
+    <div class="my-container text-center">
+      <h2 class="my-title text-center font-bold">
+        {{ $t("schedule.title") }}
+      </h2>
+      <p class="text-gray-500 text-xl">
+        {{ $t("schedule.description") }}
+      </p>
+    </div>
     <div class="w-full text-center">
       <div
         id="calendly-widget"
@@ -17,8 +22,6 @@
 <script>
 import { mapGetters } from "vuex";
 
-const WIDGET_ID = "calendy_external_widget_script";
-
 export default {
   data() {
     return {};
@@ -27,28 +30,23 @@ export default {
     ...mapGetters("authStore", ["user"]),
     ...mapGetters("propertiesStore", ["createdProperty"]),
     completeAddress() {
-      return `${this.createdProperty.location.address},${this.createdProperty.location.zone.zone} - ${this.createdProperty.location.zone.city} (${this.createdProperty.location.zone.state}), ${this.createdProperty.location.zone.country}`;
+      const { address, zone, city, state, country } =
+        this.$route.params.location;
+      return `${address},${zone} - ${city} (${state}), ${country}`;
     },
   },
   mounted() {
-    const recaptchaScript = document.createElement("script");
-    recaptchaScript.setAttribute(
-      "src",
-      "https://assets.calendly.com/assets/external/widget.js"
-    );
-    recaptchaScript.setAttribute("id", WIDGET_ID);
-
-    document.head.appendChild(recaptchaScript);
-
     if (window.Calendly) {
+      const { name } = this.$route.params.location;
+
       window.Calendly.initInlineWidget({
-        url: `${process.env.VUE_APP_VISIT}/?utm_campaign=tecnica`,
+        url: `${process.env.VUE_APP_VISIT}?hide_event_type_details=1&utm_campaign=tecnica`,
         parentElement: document.getElementById("calendly-widget"),
         prefill: {
           name: `${this.user.user.firstName} ${this.user.user.lastName}`,
           email: `${this.user.user.email}`,
           customAnswers: {
-            a1: `${this.createdProperty.location.name}`,
+            a1: `${name}`,
             a2: `${this.completeAddress}`,
             a3: "",
           },
@@ -61,6 +59,9 @@ export default {
     // const widgetScript = document.getElementById(WIDGET_ID);
     // window.Calendly.destroyBadgeWidget();
     // widgetScript.remove();
+  },
+  metaInfo: {
+    title: "Agendar Visita Tecnica",
   },
 };
 </script>

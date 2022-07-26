@@ -27,9 +27,12 @@
               ref="imageSelector"
               class="hidden"
             />
-            <button class="my-btn" @click="$refs.imageSelector.click()">
+            <div
+              class="my-btn text-center mb-2 cursor-pointer"
+              @click="$refs.imageSelector.click()"
+            >
               {{ $t("createForm.image") }}
-            </button>
+            </div>
             <ProgesBarVue
               :value="propertyImageState"
               :imageUrl="propertyImage"
@@ -366,25 +369,54 @@
 
         <!-- valor_de_arriendo -->
         <div class="flex items-center justify-between my-1">
-          <label class="text-lg" for="valor_de_arriendo">{{
-            $t("createForm.arriendo")
-          }}</label>
-          <ValidationProvider
-            v-slot="{ errors }"
-            rules="required|min_value:1"
-            class="w-1/5"
+          <label class="text-lg" for="valor_de_arriendo"
+            >{{ $t("createForm.arriendo") }} ({{ currency }})</label
           >
-            <input
-              class="bg-gray-200 my-input w-full"
-              type="number"
-              name="valor_de_arriendo"
-              min="0"
-              v-model="value"
-            />
-            <span class="my-error relative top-0 left-0 block">{{
-              errors[0]
-            }}</span>
-          </ValidationProvider>
+          <div
+            class="flex flex-col md:flex-row items-center justify-between w-1/5 relative"
+          >
+            <ValidationProvider
+              v-slot="{ errors }"
+              rules="required|min_value:1"
+            >
+              <input
+                class="bg-gray-200 my-input w-full"
+                type="number"
+                name="valor_de_arriendo"
+                min="0"
+                v-model="valueMin"
+              />
+              <div
+                class="my-error absolute w-10 h-10 top-0 -left-10 flex justify-center items-center"
+                v-if="errors[0]"
+              >
+                <abbr :title="errors[0]">
+                  <font-awesome-icon icon="circle-info"></font-awesome-icon>
+                </abbr>
+              </div>
+            </ValidationProvider>
+            <p class="mx-1">a</p>
+            <ValidationProvider
+              v-slot="{ errors }"
+              rules="required|min_value:1"
+            >
+              <input
+                class="bg-gray-200 my-input w-full"
+                type="number"
+                name="valor_de_arriendo"
+                min="0"
+                v-model="valueMax"
+              />
+              <div
+                class="my-error absolute w-10 h-10 top-0 left-full flex justify-center items-center"
+                v-if="errors[0]"
+              >
+                <abbr :title="errors[0]">
+                  <font-awesome-icon icon="circle-info"></font-awesome-icon>
+                </abbr>
+              </div>
+            </ValidationProvider>
+          </div>
         </div>
 
         <!-- time -->
@@ -449,6 +481,29 @@
           </ValidationProvider>
         </div>
 
+        <!-- metros_cuadrados -->
+        <div class="flex items-center justify-between my-1">
+          <label class="text-lg" for="metros">{{
+            $t("createForm.metros")
+          }}</label>
+          <ValidationProvider
+            v-slot="{ errors }"
+            rules="required|min_value:1"
+            class="w-1/5"
+          >
+            <input
+              class="bg-gray-200 my-input w-full"
+              type="number"
+              name="metros"
+              min="1"
+              v-model="meters"
+            />
+            <span class="my-error relative top-0 left-0 block">{{
+              errors[0]
+            }}</span>
+          </ValidationProvider>
+        </div>
+
         <!-- map -->
         <MapCoordsVue
           :lat="lat"
@@ -464,6 +519,12 @@
         {{ $t("createForm.submit") }}
       </button>
     </form>
+    <ModelUploadImagesComponet
+      :showUploadImagesModal="showUploadImagesModal"
+      :idLocation="idLocation"
+      @toogle="toogleShowUploadImagesModal"
+      :buttonText="buttonText"
+    />
   </ValidationObserver>
 </template>
 
@@ -473,11 +534,13 @@ import { ValidationObserver } from "vee-validate";
 import ProgesBarVue from "@/components/ProgesBarImage.vue";
 import { CustomErrorToast } from "@/sweetAlert";
 import MapCoordsVue from "../../../components/MapCoords.vue";
+import ModelUploadImagesComponet from "../../../components/ModelUploadImages.vue";
 export default {
   components: {
     ValidationObserver,
     ProgesBarVue,
     MapCoordsVue,
+    ModelUploadImagesComponet,
   },
   data() {
     return {
@@ -490,7 +553,8 @@ export default {
       bathrooms: "",
       painting: 3,
       floor: 3,
-      value: "",
+      valueMin: "",
+      valueMax: "",
       zone: "",
       ciudad: "",
       time: "",
@@ -498,6 +562,7 @@ export default {
       tipoPropiedad: "",
       lat: "",
       lng: "",
+      meters: "",
       image: null,
       localImage: null,
       file: null,
@@ -532,6 +597,11 @@ export default {
         { name: "19 a 24 meses", value: 6 },
         { name: "Más de 24 meses", value: 7 },
       ],
+
+      // uploadImages
+      showUploadImagesModal: false,
+      idLocation: null,
+      uploadImagesCompleted: false,
     };
   },
   methods: {
@@ -545,37 +615,43 @@ export default {
     async onSubmitForm() {
       if (!this.user.user) {
         this.changeShowLoginModal(open);
-      } else {
-        const propertyData = {
-          name: this.name,
-          address: this.address,
-          zone: this.zone,
-          rooms: this.rooms,
-          bathrooms: this.bathrooms,
-          painting: this.painting,
-          floor: this.floor,
-          imageUrl: this.propertyImage,
-          user: this.user.user.id,
-          garage: this.garage,
-          propertyType: this.tipoPropiedad,
-          email: this.email,
-          phone: this.phoneNumber,
-          description: this.description,
-          lat: this.lat,
-          lng: this.lng,
-        };
-        const calculatorData = {
-          expectedValue: this.value,
-          time: this.time,
-        };
-        try {
-          await this.createNewProperty({ propertyData, calculatorData });
-          this.$router.push({ name: "result" });
-        } catch (error) {
-          CustomErrorToast.fire({
-            text: error.response.data.message,
-          });
-        }
+        return;
+      }
+      const propertyData = {
+        name: this.name,
+        address: this.address,
+        zone: this.zone,
+        rooms: this.rooms,
+        bathrooms: this.bathrooms,
+        painting: this.painting,
+        floor: this.floor,
+        imageUrl: this.propertyImage,
+        user: this.user.user.id,
+        garage: this.garage,
+        propertyType: this.tipoPropiedad,
+        email: this.email,
+        phone: this.phoneNumber,
+        description: this.description,
+        lat: this.lat,
+        lng: this.lng,
+        meters: this.meters,
+      };
+      const calculatorData = {
+        expectedValue: (parseInt(this.valueMin) + parseInt(this.valueMax)) / 2,
+        time: this.time,
+        currencyData: this.country,
+      };
+      try {
+        const { id } = await this.createNewProperty({
+          propertyData,
+          calculatorData,
+        });
+        this.idLocation = id;
+        this.showUploadImagesModal = true;
+      } catch (error) {
+        CustomErrorToast.fire({
+          text: error.response.data.message,
+        });
       }
       // this.createNewProperty()
     },
@@ -604,6 +680,12 @@ export default {
       this.lat = lat.toFixed(5);
       this.lng = lng.toFixed(5);
     },
+    toogleShowUploadImagesModal() {
+      this.showUploadImagesModal = !this.showUploadImagesModal;
+      if (!this.showUploadImagesModal) {
+        this.uploadImagesCompleted = true;
+      }
+    },
   },
   computed: {
     ...mapGetters("propertiesStore", [
@@ -611,7 +693,8 @@ export default {
       "propertyImage",
       "propertyImageState",
     ]),
-    ...mapGetters("authStore", ["user"]),
+    ...mapGetters("authStore", ["user", "siteCountry"]),
+    ...mapGetters("postsStore", ["currencies"]),
     filteredCities() {
       if (this.zonesList.length) {
         let mappedZones = this.zonesList.map((element) => {
@@ -638,6 +721,29 @@ export default {
         phone: this.user.user.phone,
       };
     },
+    buttonText() {
+      return this.$t("adminPanel.locations.imagesList.buttonText");
+    },
+    currency() {
+      if (!this.zone) {
+        if (this.siteCountry === "Chile") return "pesos chilenos";
+        return "soles";
+      } else {
+        const res = this.zonesList.filter((el) => el.id === this.zone);
+        if (res[0].country === "Chile") return "pesos chilenos";
+        return "soles";
+      }
+    },
+    country() {
+      if (!this.zone) {
+        if (this.siteCountry === "Chile") return "Chile";
+        return "Perú";
+      } else {
+        const res = this.zonesList.filter((el) => el.id === this.zone);
+        if (res[0].country === "Chile") return "Chile";
+        return "Perú";
+      }
+    },
   },
   async mounted() {
     try {
@@ -657,6 +763,14 @@ export default {
         this.zone = "";
       }
     },
+    uploadImagesCompleted(val) {
+      if (val === true) {
+        this.$router.push({ name: "result" });
+      }
+    },
+  },
+  metaInfo: {
+    title: "Cargar Propiedad",
   },
 };
 </script>

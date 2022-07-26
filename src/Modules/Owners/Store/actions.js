@@ -78,4 +78,12 @@ export const createNewProperty = async (
   const location = res.data;
   commit("cleanImageInfo");
   commit("createNewProperty", { location, calculatorData });
+  return location;
+};
+
+export const fetchPropertyDetails = async ({ commit }, propertyId) => {
+  const res = await EspacioAPI.get(`/locations/${propertyId}`);
+  const { location } = res.data;
+  commit("cleanImageInfo");
+  commit("fetchPropertyDetails", location);
 };

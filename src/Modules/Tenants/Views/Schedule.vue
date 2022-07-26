@@ -1,8 +1,13 @@
 <template>
-  <div class="px-2 py-3 pb-40 md:pb-6">
-    <h2 class="my-title text-center font-bold">
-      {{ $t("tenants.schedule.title") }}
-    </h2>
+  <div class="pb-40 md:pb-6">
+    <div class="my-container text-center">
+      <h2 class="my-title font-bold">
+        {{ $t("tenants.schedule.title") }}
+      </h2>
+      <p class="text-gray-500 text-xl">
+        {{ $t("tenants.schedule.description") }}
+      </p>
+    </div>
     <div class="w-full text-center">
       <div
         id="calendly-widget"
@@ -16,8 +21,6 @@
 
 <script>
 import { mapGetters } from "vuex";
-
-const WIDGET_ID = "calendy_external_widget_script";
 
 export default {
   props: {
@@ -41,18 +44,9 @@ export default {
   mounted() {
     this.location = this.propertiesById(Number(this.idLocation));
 
-    const recaptchaScript = document.createElement("script");
-    recaptchaScript.setAttribute(
-      "src",
-      "https://assets.calendly.com/assets/external/widget.js"
-    );
-    recaptchaScript.setAttribute("id", WIDGET_ID);
-
-    document.head.appendChild(recaptchaScript);
-
     if (window.Calendly) {
       window.Calendly.initInlineWidget({
-        url: `${process.env.VUE_APP_VISIT}/?utm_campaign=normal`,
+        url: `${process.env.VUE_APP_VISIT}?hide_event_type_details=1&utm_campaign=normal`,
         parentElement: document.getElementById("calendly-widget"),
         prefill: {
           name: `${this.user.user.firstName} ${this.user.user.lastName}`,
@@ -65,6 +59,9 @@ export default {
         },
       });
     }
+  },
+  metaInfo: {
+    title: "Agendar Visita",
   },
 
   beforeDestroy() {

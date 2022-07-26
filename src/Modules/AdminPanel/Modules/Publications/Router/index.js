@@ -1,5 +1,9 @@
-import PublicationLayout from "../Layouts/PublicationLayout.vue";
-import Publication from "../Views/Publication.vue";
+const PublicationLayout = () =>
+  import(
+    /* webpackChunkName: "PublicationLayout" */ "../Layouts/PublicationLayout.vue"
+  );
+const Publication = () =>
+  import(/* webpackChunkName: "Publication" */ "../Views/Publication.vue");
 
 export default {
   name: "admin-publications",

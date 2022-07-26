@@ -24,7 +24,7 @@
           class="my-btn w-auto px-4 mx-1 py-1"
           @click="
             $router.push({
-              name: 'admin-locations-detail',
+              name: 'admin-locations-detail-info',
               params: { id: room.id },
             })
           "
@@ -44,21 +44,13 @@ export default {
   components: {
     RoomCard,
   },
-  props: {
-    idUser: {
-      type: String,
-      requird: true,
-    },
-  },
   computed: {
-    ...mapGetters("adminPanelStore", ["getUserById"]),
+    ...mapGetters("adminPanelStore/users", ["getUserDetails"]),
     userName() {
-      return `${this.getUserById(this.idUser).firstName} ${
-        this.getUserById(this.idUser).lastName
-      }`;
+      return `${this.getUserDetails.firstName} ${this.getUserDetails.lastName}`;
     },
     locationsList() {
-      return this.getUserById(this.idUser).locations;
+      return this.getUserDetails.locations;
     },
   },
 };

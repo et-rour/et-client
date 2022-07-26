@@ -1,6 +1,7 @@
 import Index from "../Views/index.vue";
 import locationDetails from "../Views/locationDetails.vue";
-import Schedule from "../Views/Schedule.vue";
+const Schedule = () =>
+  import(/* webpackChunkName: "Schedule" */ "../Views/Schedule.vue");
 export default [
   {
     name: "tenants",

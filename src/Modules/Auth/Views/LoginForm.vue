@@ -52,6 +52,9 @@ export default {
       loginPassword: "",
     };
   },
+  computed: {
+    ...mapGetters("authStore", ["user"]),
+  },
   methods: {
     ...mapActions("authStore", ["login", "changeShowLoginModal"]),
     async onSubmitLogin() {
@@ -62,10 +65,13 @@ export default {
       try {
         await this.login(userData);
 
+        
         this.changeShowLoginModal(false);
-        if (this.user.user.isOwner) {
-          this.$router.push({ name: "owner" });
-        } else if (this.user.user) {
+        if (this.user.user.isAdmin) {
+          this.$router.push({ name: "admin-locations", hash: '#details'});
+        }else if (this.user.user.isOwner) {
+          this.$router.push({ name: "locations-list" });
+        } else {
           this.$router.push({ name: "profile-main" });
         }
       } catch (error) {
@@ -74,9 +80,6 @@ export default {
         });
       }
     },
-  },
-  computed: {
-    ...mapGetters("authStore", ["user"]),
   },
 };
 </script>

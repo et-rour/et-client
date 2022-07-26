@@ -7,7 +7,7 @@ import i18n from "./i18n.js";
 import "sweetalert2/dist/sweetalert2.min.css";
 const options = {
   confirmButtonColor: "#2323D5",
-  cancelButtonColor: '#d33',
+  cancelButtonColor: "#d33",
 };
 
 Vue.use(VueSweetalert2, options);
@@ -35,13 +35,23 @@ export const CustomErrorToast = Swal.mixin({
 
 export const CustomConfirmDialog = Swal.mixin({
   title: i18n.t("sweetAlertMessages.confirmTitle"),
-  icon: 'warning',
+  icon: "warning",
   showCancelButton: true,
   confirmButtonColor: "#2323D5",
-  cancelButtonColor: '#d33',
+  cancelButtonColor: "#d33",
   confirmButtonText: `${i18n.t("sweetAlertMessages.confirmButton")}`,
-  cancelButtonText: `${i18n.t("sweetAlertMessages.cancelButton")}`
-})
+  cancelButtonText: `${i18n.t("sweetAlertMessages.cancelButton")}`,
+});
+
+export const CustomConfirmWarningDialog = Swal.mixin({
+  title: i18n.t("sweetAlertMessages.confirmWarningTitle"),
+  icon: "warning",
+  showCancelButton: false,
+  confirmButtonColor: "#2cc98e",
+  confirmButtonText: `${i18n.t(
+    "sweetAlertMessages.confirmWarningConfirmText"
+  )}`,
+});
 // .then((result) => {
 //   if (result.isConfirmed) {
 //     Swal.fire(
@@ -52,3 +62,4 @@ export const CustomConfirmDialog = Swal.mixin({
 //   }
 // })
 
+export default Swal;

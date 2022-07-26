@@ -11,15 +11,19 @@
             bgColor="rgb(30, 64, 175 )"
             v-if="loadingResult"
           />
-          <b v-else>${{ result.min }} - ${{ result.max }}</b>
+          <b v-else
+            >{{ parsedResult.symbol }} {{ parsedResult.min }} -
+            {{ parsedResult.symbol }} {{ parsedResult.max }}</b
+          >
         </div>
         <div class="text-2xl">{{ $t("createResult.periodicity") }}</div>
       </div>
       <div class="flex flex-col items-center justify-evenly">
-        <button class="bg-my-blue-primary text-white p-2 rounded-lg">
-          <router-link :to="{ name: 'schedule' }">{{
-            $t("createResult.vistit")
-          }}</router-link>
+        <button
+          class="bg-my-blue-primary text-white p-2 rounded-lg"
+          @click="goToSchedule"
+        >
+          {{ $t("createResult.vistit") }}
         </button>
         <p class="text-center text-xs mt-4">
           {{ $t("createResult.description_1") }}<br />{{
@@ -51,6 +55,14 @@ export default {
   },
   computed: {
     ...mapGetters("propertiesStore", ["createdProperty"]),
+    parsedResult() {
+      if (this.result === 0) return 0;
+      return {
+        min: Math.round(this.result.min * this.result.currencyType.value),
+        max: Math.round(this.result.max * this.result.currencyType.value),
+        symbol: this.result.currencyType.symbol,
+      };
+    },
   },
   async mounted() {
     const requestData = {
@@ -58,9 +70,8 @@ export default {
       zoneId: this.createdProperty.location.zone.id,
       time: this.createdProperty.calculatorData.time,
       expectedValue: this.createdProperty.calculatorData.expectedValue,
+      currencyData: this.createdProperty.calculatorData.currencyData,
     };
-    console.log(requestData);
-    console.log(this.createdProperty);
     try {
       const response = await EspacioTemporalAPI.post(
         "/calculator/",
@@ -72,6 +83,26 @@ export default {
     } catch (error) {
       alert(`error: ${error.response.data}`);
     }
+  },
+  methods: {
+    goToSchedule() {
+      this.$router.push({
+        name: "schedule",
+        params: {
+          location: {
+            name: this.createdProperty.location.name,
+            address: this.createdProperty.location.address,
+            zone: this.createdProperty.location.zone.zone,
+            city: this.createdProperty.location.zone.city,
+            country: this.createdProperty.location.zone.country,
+            state: this.createdProperty.location.zone.state,
+          },
+        },
+      });
+    },
+  },
+  metaInfo: {
+    title: "Cargar Propiedad Resultado",
   },
 };
 </script>

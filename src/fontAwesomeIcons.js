@@ -27,8 +27,15 @@ import {
   faMapLocationDot,
   faHouse,
   faPen,
+  faEye,
+  faBed,
+  faEyeSlash,
 } from "@fortawesome/free-solid-svg-icons";
-import { faEnvelope, faUser } from "@fortawesome/free-regular-svg-icons";
+import {
+  faEnvelope,
+  faUser,
+  faFileExcel,
+} from "@fortawesome/free-regular-svg-icons";
 
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
@@ -60,6 +67,10 @@ library.add(
   faMapLocationDot,
   faHouse,
   faPen,
+  faEye,
+  faBed,
+  faEyeSlash,
+  faFileExcel
 );
 
 Vue.config.productionTip = false;
