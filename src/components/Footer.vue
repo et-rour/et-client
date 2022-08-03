@@ -1,7 +1,10 @@
 <template>
   <div
-    class="w-full h-96 bg-gray-900 flex-col justify-center items-center text-white hidden md:flex"
+    class="w-full h-96 bg-gray-900 flex-col justify-center items-center text-white hidden md:flex relative"
   >
+    <div class="absolute top-0 left-0 text-gray-900">
+      version: {{ appVersion }}
+    </div>
     <div class="w-9/12 grid grid-cols-3 grid-rows-2 px-20">
       <img src="@/assets/icons/logoFooter.png" alt="logotipo footer" />
       <ul>
@@ -97,6 +100,7 @@
 import { VueRecaptcha } from "vue-recaptcha";
 import EspacioTemporalAPI from "@/Api/index.js";
 import { CustomErrorToast } from "@/sweetAlert";
+import { version } from "../../package";
 
 export default {
   components: { VueRecaptcha },
@@ -107,6 +111,7 @@ export default {
       status: "",
       sucessfulServerResponse: "",
       serverError: "",
+      appVersion: version,
     };
   },
   methods: {

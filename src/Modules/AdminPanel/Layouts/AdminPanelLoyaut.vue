@@ -2,7 +2,7 @@
   <div class="w-full">
     <div class="w-full h-screen flex flex-col md:flex-row">
       <ul
-        class="flex flex-col md:h-full md:w-40 bg-my-blue-primary border-t-2 border-black text-white text-center md:text-left"
+        class="flex flex-col md:h-full md:w-40 bg-my-blue-primary border-t-2 border-black text-white text-center md:text-left flex-shrink-0"
       >
         <span class="text-center py-2">ADMIN MENU</span>
         <router-link :to="{ name: 'admin-users', hash: '#sidebar' }">

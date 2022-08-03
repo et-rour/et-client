@@ -18,10 +18,23 @@
       <ValidationProvider v-slot="{ errors }" rules="required" class="relative">
         <input
           v-model="loginPassword"
-          type="password"
+          :type="showPassword ? 'text' : 'password'"
           :placeholder="$t('login.password')"
           class="my-input border border-gray-400 w-full py-3 rounded-b-md rounded-t-none"
         />
+        <font-awesome-icon
+          v-if="!showPassword"
+          icon="eye"
+          class="absolute top-0.5 right-5 cursor-pointer"
+          @click="showPassword = !showPassword"
+        />
+        <font-awesome-icon
+          v-else
+          icon="eye-slash"
+          class="absolute top-0.5 right-5 cursor-pointer"
+          @click="showPassword = !showPassword"
+        />
+
         <span class="my-error">{{ errors[0] }}</span>
       </ValidationProvider>
 
@@ -50,6 +63,7 @@ export default {
     return {
       loginEmail: "",
       loginPassword: "",
+      showPassword: false,
     };
   },
   computed: {
@@ -65,11 +79,10 @@ export default {
       try {
         await this.login(userData);
 
-        
         this.changeShowLoginModal(false);
         if (this.user.user.isAdmin) {
-          this.$router.push({ name: "admin-locations", hash: '#details'});
-        }else if (this.user.user.isOwner) {
+          this.$router.push({ name: "admin-locations", hash: "#details" });
+        } else if (this.user.user.isOwner) {
           this.$router.push({ name: "locations-list" });
         } else {
           this.$router.push({ name: "profile-main" });

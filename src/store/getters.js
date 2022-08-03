@@ -7,3 +7,7 @@ export const imageUrl = (state) => {
 export const ImageUploadingState = (state) => {
   return state.ImageUploadingStatus;
 };
+
+export const getHomeCoverData = (state) => {
+  return state.HomeCoverData;
+};

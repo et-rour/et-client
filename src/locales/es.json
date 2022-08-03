@@ -40,6 +40,8 @@
     "welcome": "Bienvenido a Espacio Temporal",
     "login": "INICIAR SESIÓN",
     "register": "REGISTRATE",
+    "goLogin": "Ir a Iniciar Sesión",
+    "goRegister": "Ir a Registrarse",
     "isOwner": "¿Eres propietario?",
     "email": "Email",
     "emailRegister": "Email *",
@@ -231,7 +233,7 @@
       "description": "Esta propiedad está ubicada en el centro de Providencia. Los plazos mínimos de arriendo son de 3 meses y no se permite el uso de maquinaria ni labores ruidosas.",
       "subtitle": "Espacios disponibles",
       "vistit": "AGENDA UNA VISITA",
-      "pay": "Pagar",
+      "pay": "Reservar y pagar",
       "modalTitle": "Información de contacto",
       "modalText1": "Para recibir información acerca de",
       "modalText2": ", ubicado en",
@@ -330,7 +332,8 @@
       "addImage": "AGREGAR IMÁGEN",
       "post": "PUBLICAR",
       "success": "Gracias por compartir"
-    }
+    },
+    "creator": "Fundadora de"
   },
   "adminPanel": {
     "title": "Panel de Administrador",

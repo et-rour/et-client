@@ -30,6 +30,7 @@ import {
   faEye,
   faBed,
   faEyeSlash,
+  faArrowRotateLeft,
 } from "@fortawesome/free-solid-svg-icons";
 import {
   faEnvelope,
@@ -70,7 +71,8 @@ library.add(
   faEye,
   faBed,
   faEyeSlash,
-  faFileExcel
+  faFileExcel,
+  faArrowRotateLeft
 );
 
 Vue.config.productionTip = false;

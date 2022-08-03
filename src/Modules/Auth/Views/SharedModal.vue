@@ -64,14 +64,14 @@
             v-if="showLogin"
             class="underline text-blue-800"
           >
-            Go to register
+            {{ $t("login.goRegister") }}
           </button>
           <button
             @click="toogleShowLoginForm"
             v-else
             class="underline text-blue-800"
           >
-            Go to login
+            {{ $t("login.goLogin") }}
           </button>
         </div>
       </div>

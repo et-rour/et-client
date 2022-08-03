@@ -4,7 +4,7 @@ import EspacioTemporalAPI from "../Api/index";
 
 export const uploadImageTofirebase = async (
   { commit },
-  { user, file, directory, id = "0" }
+  { user, file, directory, id = "0", specificDirectory = null }
 ) => {
   commit("cleanImageInfo");
   commit("changeLastUsedBy", id);
@@ -12,7 +12,9 @@ export const uploadImageTofirebase = async (
   const dateSaved = new Date().getTime();
   const storageRef = ref(
     storage,
-    `${user}/${directory}/${dateSaved}_${file.name}`
+    specificDirectory
+      ? specificDirectory
+      : `${user}/${directory}/${dateSaved}_${file.name}`
   );
   const metadata = {
     contentType: "image/jpeg",
@@ -77,4 +79,25 @@ export const goToCheckoutSession = async (
   // console.log("%cTest.vue line:22 res", "color: #007acc;", res);
   // window.location.href = res.url;
   window.open(res.data.url, "_blank");
+};
+
+export const fetchHomeCoverImage = async ({ commit }) => {
+  const res = await EspacioTemporalAPI.get("/general/coverImage");
+  commit("fetchHomeCoverImage", res.data);
+};
+
+export const updateHomeCoverImage = async ({ commit }, imageUrl) => {
+  const res = await EspacioTemporalAPI.post("/general/coverImage", {
+    imageUrl,
+  });
+  console.log({ newImage: res.data });
+  commit("updateHomeCoverImage", res.data);
+};
+
+export const updateHomeCoverText = async ({ commit }, text) => {
+  const res = await EspacioTemporalAPI.post("/general/text", {
+    text,
+  });
+  console.log({ text: res.data });
+  commit("updateHomeCoverText", res.data);
 };
