@@ -4,7 +4,7 @@
     id="sidebar"
   >
     <div
-      class="w-full md:w-64 h-40 md:h-full overflow-y-auto relative py-4 border-r-2 border-black"
+      class="w-full md:w-64 h-40 md:h-full overflow-y-auto relative py-4 border-r-2 border-black flex-shrink-0"
       v-if="showSidebar"
     >
       <slot name="sidebar"></slot>

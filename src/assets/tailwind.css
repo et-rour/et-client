@@ -5,6 +5,15 @@
 html {
   font-family: "Roboto", sans-serif;
   scroll-behavior: smooth !important;
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+* {
+  /* border: 0.5px solid red; */
 }
 .withe-space {
   white-space: pre-line;

@@ -40,6 +40,8 @@
     "welcome": "Welcome to Temporary Space",
     "login": "LOG IN",
     "register": "SIGN UP",
+    "goLogin": "GO TO LOG IN",
+    "goRegister": "GO TO SIGN UP",
     "isOwner": "Are you owner?",
     "email": "E-mail",
     "emailRegister": "Email *",
@@ -330,7 +332,8 @@
       "addImage": "ADD IMAGE",
       "post": "POST",
       "success": "Thanks for sharing"
-    }
+    },
+    "creator": "Fundator of"
   },
   "adminPanel": {
     "title": "Administrator Dashboard",

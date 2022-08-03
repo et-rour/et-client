@@ -1,45 +1,7 @@
 <template>
   <div class="w-full mx-auto mb-24 md:mb-2">
     <!-- hero -->
-    <div class="my-container hero-main mx-auto relative overflow-hidden">
-      <img
-        src="@/assets/images/homeImage.png"
-        alt="Hero image"
-        class="w-full h-full object-cover rounded-3xl"
-      />
-      <!-- MASK -->
-      <div
-        class="w-full h-full absolute top-0 left-0 flex flex-col justify-end gap-3 py-4 rounded-b-3xl mask"
-      ></div>
-
-      <div
-        class="w-full h-full absolute top-0 left-0 flex flex-col justify-end items-center pb-16"
-      >
-        <div class="w-10/12 lg:w-8/12">
-          <h1 class="my-title text-white mb-3 hidden lg:block">
-            {{ $t("landing.hero.title") }}
-          </h1>
-          <h1 class="my-title text-white mb-3 lg:hidden">
-            {{ $t("landing.hero.titleMovile") }}
-          </h1>
-
-          <div class="flex gap-8 flex-col sm:flex-row">
-            <button
-              class="my-btn bg-white w-full md:w-70 text-my-blue-primary"
-              @click="$router.push({ name: 'tenants' })"
-            >
-              {{ $t("landing.hero.searchProperty") }}
-            </button>
-            <button
-              class="my-btn w-full md:w-70 text-white p-2"
-              @click="$router.push({ name: 'owner' })"
-            >
-              {{ $t("landing.hero.openProperty") }}
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
+    <CoverImageVue />
 
     <VideoComponent></VideoComponent>
 
@@ -345,8 +307,9 @@ import PropertyCard from "../../components/PropertyCard.vue";
 import { mapActions, mapGetters } from "vuex";
 import Spiner from "../../components/Spiner.vue";
 import VideoComponent from "./Components/VideoComponent.vue";
+import CoverImageVue from "./Components/CoverImage.vue";
 export default {
-  components: { PropertyCard, Spiner, VideoComponent },
+  components: { PropertyCard, Spiner, VideoComponent, CoverImageVue },
   data() {
     return {
       search: "",

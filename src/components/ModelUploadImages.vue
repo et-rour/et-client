@@ -12,7 +12,7 @@
         id="dropzone"
         :options="dropzoneOptions"
         v-on:vdropzone-sending="sendingEvent"
-        class="border-2 border-black border-dashed w-3/4 mx-auto h-1/2"
+        class="border-2 border-black border-dashed w-5/6 h-3/4 mx-auto overflow-y-auto"
         @vdropzone-error="erroHandler"
       ></vue-dropzone>
       <div class="w-3/4 flex justify-end items-center mt-6 mx-auto">
