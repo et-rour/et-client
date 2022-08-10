@@ -74,61 +74,36 @@
 
     <!-- avalible spaces -->
     <div class="my-container mt-6" id="spaces">
-      <div class="flex justify-between items-center">
-        <h2 class="my-title">{{ $t("tenants.index.avalibleSpaces.title") }}</h2>
-        <div class="flex flex-col gap-3">
-          <button
-            class="px-4 border rounded-full cursor-pointer w-full"
-            @click="toggleType('room')"
-            :class="this.type === 'room' ? 'selectedField' : ''"
-          >
-            <p>{{ $t("landing.hero_2.private") }}</p>
-          </button>
-          <button
-            class="px-4 border rounded-full cursor-pointer w-full"
-            @click="toggleType('entire')"
-            :class="this.type === 'entire' ? 'selectedField' : ''"
-          >
-            <p>{{ $t("landing.hero_2.complete") }}</p>
-          </button>
-        </div>
-      </div>
-      <div class="w-full relative">
-        <input
-          type="text"
-          v-model="search"
-          class="my-input w-full border border-gray-400 border-l-0 border-r-0 rounded-none py-4 my-3 pl-12"
-        />
-        <font-awesome-icon
-          icon="search"
-          class="text-3xl absolute top-6 left-3 text-gray-400"
-        ></font-awesome-icon>
-      </div>
+      <FilterLocationsComponent @filter="loadPropertiesFiltered" />
+
       <div class="w-full" v-if="isLoading">
         <Spiner></Spiner>
       </div>
-      <paginate
-        ref="paginator"
-        name="propertiesData"
-        :list="propertiesData"
-        :per="8"
-        class="w-full grid grid-cols-1 md:grid-cols-2 gap-4"
-        v-else-if="propertiesData.length > 0"
-      >
-        <InfoCard
-          v-for="property in paginated('propertiesData')"
-          :key="property.id"
-          :property="property"
-        ></InfoCard>
-      </paginate>
+
+      <div v-else-if="propertiesListFiltered.length > 0">
+        <paginate
+          ref="paginator"
+          name="propertiesListFiltered"
+          :list="propertiesListFiltered"
+          :per="8"
+          class="w-full grid grid-cols-1 md:grid-cols-2 gap-4"
+        >
+          <InfoCard
+            v-for="property in paginated('propertiesListFiltered')"
+            :key="property.id"
+            :property="property"
+          ></InfoCard>
+        </paginate>
+      </div>
+
       <h3 class="my-title-2 text-center text-gray-400" v-else>
         {{ $t("landing.spaces.notFound") }}
       </h3>
       <paginate-links
-        for="propertiesData"
+        for="propertiesListFiltered"
         class="flex justify-center p-2"
         :hide-single-page="true"
-        v-if="propertiesData.length > 0"
+        v-if="propertiesListFiltered.length > 0"
         :simple="{
           prev: '<<',
           next: '>>',
@@ -144,17 +119,16 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
+import FilterLocationsComponent from "../../../components/FilterLocationsComponent.vue";
 import Spiner from "../../../components/Spiner.vue";
 import InfoCard from "../Components/InfoCard.vue";
 
 export default {
-  components: { InfoCard, Spiner },
+  components: { InfoCard, Spiner, FilterLocationsComponent },
   data() {
     return {
-      search: "",
-      type: "",
-      localSiteCountry: "",
-      paginate: ["propertiesData"],
+      propertiesListFiltered: [],
+      paginate: ["propertiesListFiltered"],
     };
   },
   computed: {
@@ -164,19 +138,6 @@ export default {
       "propertiesList",
     ]),
     ...mapGetters("authStore", ["siteCountry"]),
-    propertiesData() {
-      let arr = this.filteredPropertiesList(this.search);
-
-      if (this.type !== "") {
-        arr = arr.filter((el) => el.propertyType === this.type);
-      }
-
-      if (this.localSiteCountry !== "") {
-        arr = arr.filter((el) => el.zone.country === this.localSiteCountry);
-      }
-
-      return arr;
-    },
   },
   methods: {
     ...mapActions("propertiesStore", ["loadProperties"]),
@@ -201,13 +162,53 @@ export default {
         }
       }
     },
+    loadPropertiesFiltered({ zone, city, type, siteCountry }) {
+      console.log("%cMain.vue line:260 {object}", "color: #007acc;", {
+        zone,
+        city,
+        type,
+      });
+      let listProperties = this.propertiesList;
+
+      if (type !== "") {
+        listProperties = listProperties.filter(
+          (property) => property.propertyType === type
+        );
+      }
+
+      if (zone !== "") {
+        listProperties = listProperties.filter(
+          (property) => property.zone.zone === zone
+        );
+      }
+
+      if (city !== "") {
+        listProperties = listProperties.filter(
+          (property) => property.zone.city === city
+        );
+      }
+      if (siteCountry !== "") {
+        listProperties = listProperties.filter(
+          (property) => property.zone.country === siteCountry
+        );
+      }
+
+      console.log("%cMain.vue line:381 {listProperties}", "color: #007acc;", {
+        listProperties,
+      });
+      this.propertiesListFiltered = listProperties;
+    },
   },
   mounted() {
-    this.localSiteCountry = this.siteCountry;
+    this.loadPropertiesFiltered({
+      zone: "",
+      city: "",
+      type: "",
+      siteCountry: "",
+    });
   },
   watch: {
     siteCountry() {
-      this.localSiteCountry = this.siteCountry;
       this.$refs.paginator.goToPage(1);
     },
   },

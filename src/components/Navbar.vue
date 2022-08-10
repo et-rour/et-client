@@ -43,9 +43,10 @@
         <router-link
           active-class="text-my-blue-primary "
           class="w-full py-2 text-center md:w-auto uppercase font-sans"
-          :to="{ name: 'posts' }"
+          :to="{ name: 'about-us' }"
           ><a> {{ $t("navbar.us") }} </a></router-link
         >
+        <!-- {{siteCountry}} -->
 
         <!-- <router-link
           active-class="text-my-blue-primary "
@@ -62,22 +63,6 @@
           >{{ $t("navbar.admin") }}</router-link
         > -->
 
-        <div class="flex justify-around items-center w-28 h-10 rounded-md border-gray-200 border-2">
-          <div
-            class="flex justify-around items-center w-full h-full rounded-tl-md rounded-bl-md background-red p-1 hover:bg-gray-200 cursor-pointer"
-            :class="localSiteCountry === 'Chile' ? 'bg-gray-200' : null"
-            @click="localSiteCountry = 'Chile'"
-          >
-            <img class="w-8 h-6" src="../assets/images/chile-flag-xs.png" alt="cl">
-          </div>
-          <div
-            class="flex justify-around items-center w-full h-full rounded-tr-md rounded-br-md p-1 hover:bg-gray-200 cursor-pointer"
-            :class="localSiteCountry === 'Perú' ? 'bg-gray-200' : null"
-            @click="localSiteCountry = 'Perú'"
-          >
-            <img class="w-8 h-6" src="../assets/images/peru-flag-xs.png" alt="pe">
-          </div>
-        </div>
 
         <div class="flex flex-col justify-center items-center relative">
           <button
@@ -131,18 +116,38 @@
                   ><a> {{ $t("navbar.myProperties") }} </a></router-link
                 >
                 <hr />
-                <select
-                  v-model="$i18n.locale"
-                  class="w-auto text-black my-4 uppercase"
-                >
-                  <option
-                    v-for="(lang, i) in langs"
-                    :key="`Lang${i}`"
-                    :value="lang"
+                <div class="flex justify-between mt-3">
+                  <select
+                    v-model="$i18n.locale"
+                    class="w-auto text-black uppercase"
                   >
-                    {{ lang }}
-                  </option>
-                </select>
+                    <option
+                      v-for="(lang, i) in langs"
+                      :key="`Lang${i}`"
+                      :value="lang"
+                    >
+                      {{ lang }}
+                    </option>
+                  </select>
+
+                  <div class="flex justify-around items-center w-28 h-10 rounded-md border-gray-200 border-2">
+                    <div
+                      class="flex justify-around items-center w-full h-full rounded-tl-md rounded-bl-md background-red p-1 hover:bg-gray-200 cursor-pointer"
+                      :class="siteCountry === 'Chile' ? 'bg-gray-200' : null"
+                      @click="setNewSiteCountry('Chile')"
+                    >
+                      <img class="w-8 h-6" src="../assets/images/chile-flag-xs.png" alt="cl">
+                    </div>
+                    <div
+                      class="flex justify-around items-center w-full h-full rounded-tr-md rounded-br-md p-1 hover:bg-gray-200 cursor-pointer"
+                      :class="siteCountry === 'Perú' ? 'bg-gray-200' : null"
+                      @click="setNewSiteCountry('Perú')"
+                    >
+                      <img class="w-8 h-6" src="../assets/images/peru-flag-xs.png" alt="pe">
+                    </div>
+                  </div>
+                </div>
+                
               </div>
             </div>
           </div>
@@ -174,12 +179,12 @@ export default {
       showAccoutOptions: false,
       showCountryOptions: false,
       langs: ["es", "en"],
-      localSiteCountry: "",
     };
   },
   methods: {
     ...mapMutations({
       changeModel: "authStore/changeShowLoginModal",
+      changeSiteCountry: "authStore/setSiteCountry",
     }),
     ...mapActions("authStore", ["logout", "setSiteCountry"]),
     toogleLoginModalOpen() {
@@ -206,29 +211,33 @@ export default {
           });
         }
       },
+      setNewSiteCountry(country){
+      console.log('%cNavbar.vue line:215 {country}', 'color: #007acc;', {country});
+      switch (country) {
+        case "Chile":
+          if (this.siteCountry==="Chile") {
+            this.changeSiteCountry("")
+            break;
+          }
+          this.changeSiteCountry("Chile")
+          break;
+        case "Perú":
+          if (this.siteCountry==="Perú") {
+            this.changeSiteCountry("")
+            break;
+          }
+          this.changeSiteCountry("Perú")
+          break;
+      }
     },
+    },
+    
   computed: {
     ...mapGetters("authStore", ["isAuth", "user", "siteCountry"]),
     movileMenuClasses() {
       return this.movileMenuOpen ? "left-0" : "right-full";
     },
-    country() {
-      return this.siteCountry;
-    },
-  },
-  watch: {
-    siteCountry() {
-      this.localSiteCountry = this.siteCountry;
-    },
-    localSiteCountry() {
-      if (this.localSiteCountry !== this.siteCountry) {
-        this.setSiteCountry(this.localSiteCountry);
-      }
-      this.setSiteCountry(this.localSiteCountry);
-    },
-  },
-  mounted() {
-    this.localSiteCountry = this.siteCountry;
+    
   },
 };
 </script>

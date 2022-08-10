@@ -449,6 +449,36 @@
           </ValidationProvider>
         </div>
 
+        <!-- time without use-->
+        <div class="flex items-center justify-between mb-4">
+          <label class="text-lg" for="zona">{{ $t("createForm.timeUse") }}</label>
+          <ValidationProvider
+            v-slot="{ errors }"
+            rules="required"
+            class="w-1/5"
+          >
+            <select
+              class="bg-gray-200 px-12 w-full"
+              name="tiempoUso"
+              v-model="timeUse"
+            >
+              <option disabled selected value="">
+                {{ $t("createForm.opcionDefault") }}
+              </option>
+              <option
+                v-for="(item, index) in timeOptions"
+                :value="item.value"
+                :key="index + item.name + 'time'"
+              >
+                {{ item.name }}
+              </option>
+            </select>
+            <span class="my-error relative top-0 left-0 block">{{
+              errors[0]
+            }}</span>
+          </ValidationProvider>
+        </div>
+
         <!-- garage -->
         <div class="flex items-center justify-between mb-4">
           <label class="text-lg" for="zona">{{
@@ -508,8 +538,37 @@
         <MapCoordsVue
           :lat="lat"
           :long="lng"
-          v-on:changeCoords="setNewCoords"
+          @result-click="setNewCoords"
         ></MapCoordsVue>
+
+        <!-- VALIDATE COORDS -->
+        <ValidationObserver>
+          <ValidationProvider
+            v-slot="{ errors }"
+            rules="both:@longitud"
+            class="w-full"
+            name="latitude"
+          >
+            <input
+              class="bg-gray-200 my-input hidden w-full"
+              type="text"
+              v-model="lat"
+            />
+            <span class="my-error relative top-0 left-0 block">{{
+              errors[0]
+            }}</span>
+          </ValidationProvider>
+
+          <ValidationProvider class="w-full" name="longitud">
+            <input
+              class="bg-gray-200 my-input hidden w-full"
+              type="text"
+              v-model="lng"
+            />
+          </ValidationProvider>
+        </ValidationObserver>
+
+        <!-- <p>lat:{{ lat }} long:{{ lng }}</p> -->
       </div>
 
       <button
@@ -558,10 +617,11 @@ export default {
       zone: "",
       ciudad: "",
       time: "",
+      timeUse: "",
       garage: "",
       tipoPropiedad: "",
-      lat: "",
-      lng: "",
+      lat: undefined,
+      lng: undefined,
       meters: "",
       image: null,
       localImage: null,
@@ -639,6 +699,7 @@ export default {
       const calculatorData = {
         expectedValue: (parseInt(this.valueMin) + parseInt(this.valueMax)) / 2,
         time: this.time,
+        timeUse: this.timeUse,
         currencyData: this.country,
       };
       try {
@@ -653,13 +714,10 @@ export default {
           text: error.response.data.message,
         });
       }
-      // this.createNewProperty()
     },
     async onSelectedImage(event) {
-      // await this.loginInfirebaseStorage(this.user.firebaseToken);
       const image = event.target.files[0];
       if (!image) {
-        // this.localImage = null
         this.file = null;
         return;
       }

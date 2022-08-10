@@ -32,6 +32,7 @@ export default {
   data() {
     return {
       location: null,
+      calendly: null,
     };
   },
   computed: {
@@ -41,11 +42,15 @@ export default {
       return `${this.location.address},${this.location.zone.zone} - ${this.location.zone.city} (${this.location.zone.state}), ${this.location.zone.country}`;
     },
   },
-  mounted() {
-    this.location = this.propertiesById(Number(this.idLocation));
+  methods: {
+    initCalenly() {
+      console.log(
+        "%cSchedule.vue line:48 this.calendly",
+        "color: #007acc;",
+        this.calendly
+      );
 
-    if (window.Calendly) {
-      window.Calendly.initInlineWidget({
+      this.calendly.initInlineWidget({
         url: `${process.env.VUE_APP_VISIT}?hide_event_type_details=1&utm_campaign=normal`,
         parentElement: document.getElementById("calendly-widget"),
         prefill: {
@@ -58,8 +63,14 @@ export default {
           },
         },
       });
-    }
+    },
   },
+  mounted() {
+    this.location = this.propertiesById(Number(this.idLocation));
+    this.calendly = window.Calendly;
+    this.initCalenly();
+  },
+
   metaInfo: {
     title: "Agendar Visita",
   },

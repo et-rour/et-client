@@ -24,7 +24,9 @@ import { mapGetters } from "vuex";
 
 export default {
   data() {
-    return {};
+    return {
+      calendly: null,
+    };
   },
   computed: {
     ...mapGetters("authStore", ["user"]),
@@ -35,11 +37,16 @@ export default {
       return `${address},${zone} - ${city} (${state}), ${country}`;
     },
   },
-  mounted() {
-    if (window.Calendly) {
+  methods: {
+    initCalenly() {
+      console.log(
+        "%cSchedule.vue line:48 this.calendly",
+        "color: #007acc;",
+        this.calendly
+      );
       const { name } = this.$route.params.location;
 
-      window.Calendly.initInlineWidget({
+      this.calendly.initInlineWidget({
         url: `${process.env.VUE_APP_VISIT}?hide_event_type_details=1&utm_campaign=tecnica`,
         parentElement: document.getElementById("calendly-widget"),
         prefill: {
@@ -52,7 +59,11 @@ export default {
           },
         },
       });
-    }
+    },
+  },
+  mounted() {
+    this.calendly = window.Calendly;
+    this.initCalenly();
   },
 
   beforeDestroy() {

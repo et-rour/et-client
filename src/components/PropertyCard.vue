@@ -25,6 +25,10 @@ import { mapGetters } from 'vuex';
           >{{ $t("landing.propertyCard.noValue") }} /
         </span>
         - {{ property.name }}
+        <!-- <p>
+          zone:{{ property.zone.zone }} city:{{ property.zone.city }} country:
+          {{ property.zone.country }}
+        </p> -->
       </router-link>
     </div>
   </div>

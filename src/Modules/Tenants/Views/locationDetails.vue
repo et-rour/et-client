@@ -8,19 +8,92 @@
       <SpinerVue />
     </div>
     <div class="my-container mb-32 lg:mb-2" v-else>
+      <!-- header -->
       <h1 class="my-title">{{ property.name }}</h1>
-      <p>
-        {{ property.address }}, {{ property.zone.zone }} -
-        {{ property.zone.city }} ({{ property.zone.state }}),
-        {{ property.zone.country }}.
-      </p>
-      <p>{{ property.description }}</p>
 
-      <SwiperVue :images="getPropertyDetailsImages"></SwiperVue>
+      <div
+        class="w-full flex flex-col md:flex-row md:gap-4 justify-between mb-6 text-center xl::text-left"
+      >
+        <p>
+          {{ property.address }}, {{ property.zone.city }} -
+          {{ property.zone.state }}
+        </p>
+
+        <div class="flex flex-col md:flex-row gap-4 md:gap-14 justify-between">
+          <div class="flex items-center">
+            <font-awesome-icon class="text-2xl mr-4" icon="restroom" />
+            <p class="inline-block">
+              {{
+                $tc("tenants.details.bathroom", property.bathrooms, {
+                  count: property.bathrooms,
+                })
+              }}
+            </p>
+          </div>
+
+          <div class="flex items-center">
+            <font-awesome-icon class="text-2xl mr-4" icon="door-open" />
+            <p class="inline-block">
+              {{
+                $tc("tenants.details.room", property.rooms, {
+                  count: property.rooms,
+                })
+              }}
+            </p>
+          </div>
+
+          <div class="flex items-center">
+            <font-awesome-icon class="text-2xl mr-4" icon="train-subway" />
+            <p class="inline-block">Metro Irrazanabal</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-12 gap-4 p-2">
+        <!-- <SwiperVue
+          :images="getPropertyDetailsImages"
+          class="col-span-12"
+        ></SwiperVue> -->
+
+        <!-- COVER IMAGE -->
+        <div class="col-span-12 md:col-span-7">
+          <img
+            :src="property.image"
+            alt="cover property"
+            class="w-full h-44 sm:h-64 md:h-80 object-cover mb-8"
+          />
+          <p>{{ property.description }}</p>
+        </div>
+
+        <div class="col-span-12 md:col-span-5">
+          <div class="grid grid-cols-4 gap-2 md:grid-cols-2">
+            <img
+              :src="image.image"
+              :alt="`image_extra_${image.id}`"
+              class="w-full"
+              v-for="image in getPropertyImages"
+              :key="image.id"
+            />
+          </div>
+
+          <button
+            class="my-btn py-3 mt-3 rounded-none w-full"
+            @click="toggleShowModalImages"
+          >
+            {{ $t("tenants.details.pictures") }}
+          </button>
+          <button
+            class="my-btn py-3 mt-3 rounded-none bg-green-400 w-full"
+            @click="goToSchedule"
+          >
+            {{ $t("tenants.details.vistit") }}
+          </button>
+        </div>
+      </div>
 
       <button
-        class="relative border border-my-blue-primary rounded-lg w-full py-5 px-2 flex justify-center items-center mb-4 hover:text-white"
-        @click="toggleShowModal"
+        class="relative border border-my-blue-primary rounded-lg w-full py-5 px-2 flex justify-center items-center my-5 hover:text-white"
+        @click="toggleShowModalImages3d"
         :class="
           property.images3D.length === 0
             ? 'hover:bg-gray-400 cursor-not-allowed'
@@ -52,21 +125,24 @@
       ></RoomCard>
 
       <!-- MAP -->
-      <div class="w-full bg-gray-400 my-4">
+      <!-- <div class="w-full bg-gray-400 my-4">
         <l-map style="height: 300px" :zoom="zoom" :center="markerLatLng">
           <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
           <l-marker :lat-lng="markerLatLng" v-if="validMarker"></l-marker>
         </l-map>
-      </div>
+      </div> -->
+      <Mapa :center="markerLatLng" :zoom="zoom" />
+      <!-- <p>{{ markerLatLng }}</p> -->
 
-      <button
+      <!-- <button
         class="w-full bg-my-blue-primary text-white font-bold my-btn"
         @click="goToSchedule"
       >
         <router-link :to="{ name: 'tenants-schedule' }"
           ><a> {{ $t("tenants.details.vistit") }} </a></router-link
         >
-      </button>
+      </button> -->
+
       <button
         class="w-full bg-green-500 mt-2 text-white font-bold my-btn"
         @click="goToBuyLink"
@@ -76,18 +152,42 @@
       <!-- <p>{{ validMarker }}</p> -->
     </div>
 
-    <!-- MODAL 3D PICTURES -->
-    <ModelGlobal :showModal="showModal" v-on:toogle="toggleShowModal">
+    <!-- MODAL EXTRA IMAGES -->
+    <ModelGlobal
+      v-if="showModalImages"
+      :showModal="showModalImages"
+      v-on:toogle="toggleShowModalImages"
+    >
       <div class="w-2/3 h-96 bg-white relative" @click.stop>
-        <div id="viewer" class="w-full h-full"></div>
+        <SwiperVue
+          :images="getPropertyDetailsImages"
+          class="col-span-12"
+        ></SwiperVue>
         <button
           class="bg-gray-500 w-10 h-10 absolute top-0 right-0 z-50"
-          @click="toggleShowModal"
+          @click="toggleShowModalImages"
         >
           <font-awesome-icon icon="times"></font-awesome-icon>
         </button>
       </div>
     </ModelGlobal>
+
+    <!-- MODAL 3D PICTURES -->
+    <ModelGlobal
+      :showModal="showModalImages3d"
+      v-on:toogle="toggleShowModalImages3d"
+    >
+      <div class="w-2/3 h-96 bg-white relative" @click.stop>
+        <div id="viewer" class="w-full h-full"></div>
+        <button
+          class="bg-gray-500 w-10 h-10 absolute top-0 right-0 z-50"
+          @click="toggleShowModalImages3d"
+        >
+          <font-awesome-icon icon="times"></font-awesome-icon>
+        </button>
+      </div>
+    </ModelGlobal>
+
     <ContactModal
       v-if="property"
       :isModalOpen="showContactModal"
@@ -110,9 +210,16 @@ import ModelGlobal from "../../../components/ModelGlobal.vue";
 import SpinerVue from "../../../components/Spiner.vue";
 import { CustomErrorToast } from "@/sweetAlert.js";
 import SwiperVue from "../Components/Swiper.vue";
-
+import Mapa from "../Components/GoogleCustomMap.vue";
 export default {
-  components: { ModelGlobal, RoomCard, ContactModal, SpinerVue, SwiperVue },
+  components: {
+    ModelGlobal,
+    RoomCard,
+    ContactModal,
+    SpinerVue,
+    SwiperVue,
+    Mapa,
+  },
   props: {
     idProperty: {
       requird: true,
@@ -122,12 +229,11 @@ export default {
     return {
       // MAP
       property: null,
-      url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-      attribution:
-        '&copy; <a target="_blank" href="http://osm.org/copyright">OpenStreetMap</a> contributors',
 
+      // EXTRA IMAGES
+      showModalImages: false,
       // 3D IMAGES
-      showModal: false,
+      showModalImages3d: false,
       viewer: "",
       showContactModal: false,
     };
@@ -230,11 +336,14 @@ export default {
           );
       });
     },
-    toggleShowModal() {
-      this.showModal = !this.showModal;
+    toggleShowModalImages3d() {
+      this.showModalImages3d = !this.showModalImages3d;
       setTimeout(() => {
         this.show3d();
       }, 1000);
+    },
+    toggleShowModalImages() {
+      this.showModalImages = !this.showModalImages;
     },
     scrollToAnchor() {
       this.$nextTick(() => {
@@ -249,6 +358,7 @@ export default {
     ...mapGetters("propertiesStore", [
       "getPropertyDetails",
       "getPropertyDetailsImages",
+      "getPropertyImages",
     ]),
     ...mapGetters("propertiesStore", ["propertiesById"]),
     ...mapGetters("authStore", ["user", "isAuth"]),
@@ -256,10 +366,19 @@ export default {
       return this.property.lat !== "" && this.property.long !== "" ? 15 : 2;
     },
     markerLatLng() {
-      return [this.property.lat, this.property.long];
-    },
-    validMarker() {
-      return this.property.lat !== "" && this.property.long !== "";
+      // RANDOM DEVIATION
+      const latDeviation = (
+        Math.random() * (0.0009 - -0.0009) +
+        -0.0009
+      ).toFixed(4);
+      const lngDeviation = (
+        Math.random() * (0.0009 - -0.0009) +
+        -0.0009
+      ).toFixed(4);
+      return {
+        lat: Number(this.property.lat) + Number(latDeviation),
+        lng: Number(this.property.long) + Number(lngDeviation),
+      };
     },
   },
   async mounted() {

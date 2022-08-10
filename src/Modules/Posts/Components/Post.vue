@@ -1,19 +1,28 @@
 <template>
-  <div class="w-full mb-5">
-    <h3 class="my-title font-normal mb-2">{{ post.title }}</h3>
-    <img :src="post.image" alt="post image" class="w-full h-72 object-cover" />
-    <p class="mb-5 mt-2">“{{ post.description }}”</p>
-    <div class="font-medium">
-      <p>
-        {{ post.user.firstName }}, {{ $t("posts.creator") }} {{ post.title }}
-      </p>
-      <a class="block" :href="post.webSite" target="_blank">{{
-        webSiteFormat
-      }}</a>
-      <a class="block" :href="post.instagram" target="_blank">{{
-        instagramFormat
-      }}</a>
+  <div class="w-full flex flex-col justify-between">
+    <div class="font-semibold mb-4">
+      <h3 class="text-xl font-extrabold mb-2">{{ post.title }}</h3>
+      <div class="h-48 w-full bg-blue-400 rounded-3xl overflow-hidden">
+        <img
+          :src="post.image"
+          alt="post image"
+          class="w-full h-full object-cover"
+        />
+      </div>
+      <p class="mb-5 mt-3 text-sm">{{ post.description }}</p>
+      <div class="text-sm">
+        <p>
+          {{ post.user.firstName }}, {{ $t("posts.creator") }} {{ post.title }}
+        </p>
+        <a class="block" :href="post.webSite" target="_blank">{{
+          webSiteFormat
+        }}</a>
+        <a class="block" :href="post.instagram" target="_blank">{{
+          instagramFormat
+        }}</a>
+      </div>
     </div>
+    <hr />
   </div>
 </template>
 

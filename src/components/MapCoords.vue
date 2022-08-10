@@ -1,128 +1,155 @@
 <template>
   <div class="w-full my-4">
-    <div class="w-full relative mb-10">
-      <div class="flex justify-center items-center relative">
-        <input
-          type="text"
-          class="border border-black flex-grow my-input"
-          v-model="addressSugestion"
-          @keypress.enter.prevent="fetchSugestions"
-          placeholder="Los condes, Santiago, Chile"
-        />
-        <div
-          class="px-3 py-2 absolute right-0 top-0 cursor-pointer"
-          @click="fetchSugestions"
-        >
-          <font-awesome-icon icon="search" />
-        </div>
-      </div>
+    <input
+      type="text"
+      id="pac-input"
+      class="border border-black flex-grow my-input w-full my-5"
+      placeholder="Los condes, Santiago, Chile"
+    />
 
-      <div
-        class="flex flex-col gap-4 pb-4 absolute top-9 left-0 z-50 bg-gray-100 w-full"
-        v-if="showSugestionsMenu"
-      >
-        <SpinerComponent v-if="loadingSugestions"></SpinerComponent>
-
-        <div
-          v-else
-          class="w-full bg-gray-200 py-1 px-5 flex justify-between cursor-pointer"
-          v-for="sugestion in sugestions"
-          :key="sugestion.place_id"
-          @click="setSugestedCoords(sugestion.lat, sugestion.lon)"
-        >
-          <p>{{ sugestion.display_name }}</p>
-        </div>
-      </div>
-    </div>
-
-    <l-map
-      style="height: 300px"
-      class="z-40 relative"
-      :zoom="zoom"
-      :center="markerLatLng"
-      :options="{ interactive: true }"
-      @click="handleMapClick"
-    >
-      <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
-      <l-marker :lat-lng="markerLatLng"></l-marker>
-    </l-map>
-    <!-- <p>lat:{{ lat }}</p>
-    <p>long:{{ long }}</p> -->
+    <div id="map"></div>
+    <!-- resultClick
+    <p>lat:{{ resultClick.lat }}</p>
+    <p>long:{{ resultClick.lng }}</p>
+    resultClick -->
   </div>
 </template>
 
 <script>
-import axios from "axios";
-import { CustomErrorToast } from "@/sweetAlert";
-import SpinerComponent from "./Spiner.vue";
 export default {
-  components: {
-    SpinerComponent,
-  },
   props: {
-    lat: { required: true, default: -13.44 },
-    long: { required: true, default: -70.659 },
+    lat: {
+      type: String,
+      default: "-7.92047",
+    },
+    long: {
+      type: String,
+      default: "-63.33285",
+    },
+    editing: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
-      url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-      attribution:
-        '&copy; <a target="_blank" href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-      zoom: 3,
-
-      showSugestionsMenu: true,
-      loadingSugestions: false,
-      addressSugestion: "",
-      sugestions: [],
-      notSugestionsFound: false,
+      map: null,
+      autocomplete: null,
+      marker: null,
+      resultClick: {
+        lat: null,
+        long: null,
+      },
     };
   },
-  computed: {
-    markerLatLng() {
-      return [this.lat, this.long];
-    },
-  },
   methods: {
-    handleMapClick(event) {
-      const { latlng } = event;
-      console.log("%cMapCoords.vue line:72 latlng", "color: #007acc;", latlng);
-      this.$emit("changeCoords", latlng);
-    },
-    async fetchSugestions() {
-      if (this.addressSugestion.length === 0) return;
+    initMap() {
+      const center = { lat: Number(this.lat), lng: Number(this.long) };
+      console.log({ center });
+      this.map = new window.google.maps.Map(document.getElementById("map"), {
+        zoom: this.editing ? 10 : 2,
+        center,
+        mapTypeControl: false,
+      });
 
-      try {
-        this.loadingSugestions = true;
-        this.notSugestionsFound = false;
-        this.showSugestionsMenu = true;
-        const res = await axios.get(
-          `https://nominatim.openstreetmap.org/?addressdetails=5&q=${this.addressSugestion}&format=json&limit=5`
-        );
-        this.sugestions = res.data;
-        if (this.sugestions.length === 0) {
-          this.notSugestionsFound = true;
-        }
-      } catch (error) {
-        CustomErrorToast.fire({
-          text: error.response.data.message || error,
+      if (this.editing) {
+        const svgMarker = {
+          path: "M10.453 14.016l6.563-6.609-1.406-1.406-5.156 5.203-2.063-2.109-1.406 1.406zM12 2.016q2.906 0 4.945 2.039t2.039 4.945q0 1.453-0.727 3.328t-1.758 3.516-2.039 3.070-1.711 2.273l-0.75 0.797q-0.281-0.328-0.75-0.867t-1.688-2.156-2.133-3.141-1.664-3.445-0.75-3.375q0-2.906 2.039-4.945t4.945-2.039z",
+          fillColor: "blue",
+          fillOpacity: 0.6,
+          strokeWeight: 0,
+          rotation: 0,
+          scale: 2,
+          anchor: new window.google.maps.Point(15, 30),
+        };
+
+        new window.google.maps.Marker({
+          map: this.map,
+          icon: svgMarker,
+          position: { lat: Number(this.lat), lng: Number(this.long) },
         });
       }
-      this.loadingSugestions = false;
-    },
-    setSugestedCoords(lat, lng) {
-      this.showSugestionsMenu = false;
-      const coords = {
-        lat: Number(lat),
-        lng: Number(lng),
+
+      const defaultBounds = {
+        north: center.lat + 0.1,
+        south: center.lat - 0.1,
+        east: center.lng + 0.1,
+        west: center.lng - 0.1,
       };
-      console.log("%cMapCoords.vue line:93 coords", "color: #007acc;", coords);
-      this.$emit("changeCoords", coords);
-      setTimeout(() => {
-        this.zoom = 12;
-      }, 500);
+      const input = document.getElementById("pac-input");
+      const options = {
+        bounds: defaultBounds,
+        fields: ["address_components", "geometry", "icon", "name"],
+        strictBounds: false,
+        map: this.map,
+      };
+      this.autocomplete = new window.google.maps.places.Autocomplete(
+        input,
+        options
+      );
+
+      this.marker = new window.google.maps.Marker({
+        map: this.map,
+        anchorPoint: new window.google.maps.Point(0, -29),
+      });
+
+      this.map.addListener("click", (event) => {
+        this.clickMap(event.latLng);
+      });
+
+      this.autocomplete.addListener("place_changed", this.addMarker);
     },
+    addMarker() {
+      this.marker.setVisible(false);
+
+      const place = this.autocomplete.getPlace();
+
+      if (!place.geometry || !place.geometry.location) {
+        // User entered the name of a Place that was not suggested and
+        // pressed the Enter key, or the Place Details request failed.
+        window.alert("No details available for input: '" + place.name + "'");
+        return;
+      }
+
+      // If the place has a geometry, then present it on a map.
+      if (place.geometry.viewport) {
+        this.map.fitBounds(place.geometry.viewport);
+      } else {
+        this.map.setCenter(place.geometry.location);
+        this.map.setZoom(17);
+      }
+
+      this.marker.setPosition(place.geometry.location);
+      this.marker.setVisible(true);
+
+      this.getMarkerCoords(place.geometry.location);
+    },
+    clickMap(location) {
+      this.marker.setVisible(false);
+      this.marker.setPosition(location);
+      this.marker.setVisible(true);
+
+      this.getMarkerCoords(location);
+    },
+    getMarkerCoords(location) {
+      const tmpLocation = location.toString();
+      // (-15.54, -65.3434)
+      const tmpReplace = tmpLocation.replace("(", "").replace(")", "");
+      const coord = tmpReplace.split(", ");
+      this.resultClick.lat = parseFloat(coord[0]);
+      this.resultClick.lng = parseFloat(coord[1]);
+
+      this.$emit("result-click", this.resultClick);
+    },
+  },
+  mounted() {
+    this.initMap();
   },
 };
 </script>
 
-<style></style>
+<style>
+#map {
+  height: 400px;
+}
+</style>

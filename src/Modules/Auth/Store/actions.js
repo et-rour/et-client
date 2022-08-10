@@ -21,7 +21,7 @@ export const login = async ({ commit }, data) => {
 };
 
 export const loadSession = async ({ commit }) => {
-  onAuthStateChanged(auth, (user) => {
+  await onAuthStateChanged(auth, (user) => {
     if (user) {
       // User is signed in, see docs for a list of available properties
       // https://firebase.google.com/docs/reference/js/firebase.User

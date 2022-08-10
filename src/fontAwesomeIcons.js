@@ -31,6 +31,9 @@ import {
   faBed,
   faEyeSlash,
   faArrowRotateLeft,
+  faDoorOpen,
+  faRestroom,
+  faTrainSubway,
 } from "@fortawesome/free-solid-svg-icons";
 import {
   faEnvelope,
@@ -72,7 +75,10 @@ library.add(
   faBed,
   faEyeSlash,
   faFileExcel,
-  faArrowRotateLeft
+  faArrowRotateLeft,
+  faDoorOpen,
+  faRestroom,
+  faTrainSubway
 );
 
 Vue.config.productionTip = false;
