@@ -161,7 +161,7 @@
       <div class="w-2/3 h-96 bg-white relative" @click.stop>
         <SwiperVue
           :images="getPropertyDetailsImages"
-          class="col-span-12"
+          class="h-full"
         ></SwiperVue>
         <button
           class="bg-gray-500 w-10 h-10 absolute top-0 right-0 z-50"

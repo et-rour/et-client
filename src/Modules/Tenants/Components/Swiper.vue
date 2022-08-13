@@ -1,13 +1,16 @@
 <template>
-  <swiper :options="swiperOptions" navigation>
+  <swiper :options="swiperOptions">
     <swiper-slide v-for="image in images" :key="image.id">
-      <img
-        :src="image.image"
-        :alt="`image_${image}`"
-        class="w-full h-44 sm:h-64 md:h-80 lg:h-96 mb-4 object-cover"
-      />
+      <div class="w-full h-full pb-8">
+        <img
+          :src="image.image"
+          :alt="`image_${image}`"
+          class="w-full h-full object-cover rounded-3xl overflow-hidden"
+        />
+      </div>
     </swiper-slide>
     <div class="swiper-pagination" slot="pagination"></div>
+
     <div class="swiper-button-prev" slot="button-prev"></div>
     <div class="swiper-button-next" slot="button-next"></div>
   </swiper>
@@ -16,7 +19,6 @@
 <script>
 import "swiper/dist/css/swiper.css";
 import { swiper, swiperSlide } from "vue-awesome-swiper";
-
 export default {
   props: {
     images: {
@@ -37,13 +39,32 @@ export default {
           nextEl: ".swiper-button-next",
           prevEl: ".swiper-button-prev",
         },
+        pagination: {
+          el: ".swiper-pagination",
+          renderBullet(index, className) {
+            return `<span class="${className} swiper-pagination-bullet-custom"></span>`;
+          },
+        },
       },
     };
   },
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style>
+.swiper-pagination {
+  bottom: -5px !important;
+}
+.swiper-pagination-bullet-custom {
+  width: 40px size !important;
+  height: 40px size !important;
+  text-align: center;
+  color: red;
+  opacity: 0.7;
+  transition: all ease 1s;
+  bottom: 2px;
+}
+</style>
 <style scoped>
 .swiper-slide {
   display: flex;

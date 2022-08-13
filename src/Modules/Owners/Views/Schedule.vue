@@ -50,8 +50,10 @@ export default {
         url: `${process.env.VUE_APP_VISIT}?hide_event_type_details=1&utm_campaign=tecnica`,
         parentElement: document.getElementById("calendly-widget"),
         prefill: {
-          name: `${this.user.user.firstName} ${this.user.user.lastName}`,
-          email: `${this.user.user.email}`,
+          name: this.isAuth
+            ? `${this.user.user.firstName} ${this.user.user.lastName}`
+            : "",
+          email: this.isAuth ? `${this.user.user.email}` : "",
           customAnswers: {
             a1: `${name}`,
             a2: `${this.completeAddress}`,

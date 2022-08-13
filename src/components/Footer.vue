@@ -22,7 +22,7 @@
           >
         </li>
         <li>
-          <router-link to="/"
+          <router-link :to="{ name: 'how-it-works' }"
             ><a> {{ $t("footer.nav.howWorks") }} </a></router-link
           >
         </li>

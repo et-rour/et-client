@@ -34,39 +34,45 @@
     </div>
 
     <!-- details -->
-    <div class="bg-my-blue-primary w-full relative px-2 py-5 text-white mt-8">
-      <div class="my-container mx-auto">
-        <h2 class="my-title-2">
-          {{ $t("tenants.index.details.title") }}
-        </h2>
-        <p class="my-5">
-          {{ $t("tenants.index.details.description") }}
-        </p>
+    <div class="bg-my-blue-primary w-full relative py-24 text-white mt-8">
+      <div
+        class="my-container mx-auto grid grid-cols-1 gap-5 lg:grid-cols-7 lg:gap-16"
+      >
+        <div class="lg:col-span-4">
+          <h2 class="my-title text-5xl">
+            {{ $t("tenants.index.details.title") }}
+          </h2>
+          <p class="my-5 font-light text-sm">
+            {{ $t("tenants.index.details.description") }}
+          </p>
+        </div>
 
-        <div class="w-full pl-8 md:w-2/3">
-          <div class="w-full bg-lime-600 flex items-center my-3">
+        <div
+          class="flex flex-col justify-between h-72 font-extrabold text-xl lg:col-span-3"
+        >
+          <div class="flex items-center w-full">
             <img
-              src="@/assets/icons/calendar.png"
+              src="@/assets/icons/white_thief.png"
               alt="calendar icon"
-              class="w-10 h-10 object-contain mr-8"
+              class="w-16 h-16 object-contain mr-8"
             />
-            <p>{{ $t("tenants.index.details.monthly") }}</p>
+            <p>{{ $t("tenants.index.details.icon_des_1") }}</p>
           </div>
-          <div class="w-full bg-lime-600 flex items-center my-3">
+          <div class="flex items-center w-full">
             <img
-              src="@/assets/icons/links.png"
+              src="@/assets/icons/white_house.png"
               alt="calendar icon"
-              class="w-10 h-10 object-contain mr-8"
+              class="w-16 h-16 object-contain mr-8"
             />
-            <p>{{ $t("tenants.index.details.flexible") }}</p>
+            <p>{{ $t("tenants.index.details.icon_des_2") }}</p>
           </div>
-          <div class="w-full bg-lime-600 flex items-center my-3">
+          <div class="flex items-center w-full">
             <img
-              src="@/assets/icons/people.png"
+              src="@/assets/icons/white_bed.png"
               alt="calendar icon"
-              class="w-10 h-10 object-contain mr-8"
+              class="w-16 h-16 object-contain mr-8"
             />
-            <p>{{ $t("tenants.index.details.community") }}</p>
+            <p>{{ $t("tenants.index.details.icon_des_3") }}</p>
           </div>
         </div>
       </div>

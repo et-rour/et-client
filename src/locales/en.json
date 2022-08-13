@@ -76,7 +76,10 @@
     },
     "video": {
       "title": "We manage all types of unused properties",
-      "description": "Have you not been able to rent your property? We take care of managing your property with flexible and short-term contracts. Are you looking for a flexible work space? We have spaces in excellent locations for entrepreneurs and artists.",
+      "question_1": "Have you not been able to rent your property?",
+      "response_1": "We take care of managing your property with flexible and short-term contracts.",
+      "question_2": "Looking for a flexible work space?",
+      "response_2": "We have spaces in excellent locations for entrepreneurs and artists.",
       "ver": "WATCH VIDEO"
     },
     "hero_2": {
@@ -225,11 +228,11 @@
         "find": "FIND A SPACE"
       },
       "details": {
-        "title": "Flexible use spaces with simple and short-term contracts",
-        "description": "Do you have an SME and need a flexible space to work? Are you an artist and need a workshop?",
-        "monthly": "monthly contracts",
-        "flexible": "flex use",
-        "community": "Work in community"
+        "title": "We manage all types of unused properties",
+        "description": "Have you not been able to rent your property? We take care of managing your property with flexible and short-term contracts. In this way we generate VALUE from a frozen resource.",
+        "icon_des_1": "We avoid misuse",
+        "icon_des_2": "We generate an income",
+        "icon_des_3": "Provide an opportunity for entrepreneurs"
       },
       "avalibleSpaces": {
         "title": "Available spaces near you"
@@ -534,7 +537,8 @@
       "description": "Description",
       "user": "Owner",
       "isVerified": "Is the publication verified",
-      "image": "image",
+      "image": "images",
+      "noImage": "There are no registered images",
       "webSite": "webSite",
       "instagram": "instagram",
       "profile": "See profile",

@@ -36,7 +36,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters("authStore", ["user"]),
+    ...mapGetters("authStore", ["user", "isAuth"]),
     ...mapGetters("propertiesStore", ["propertiesById"]),
     completeAddress() {
       return `${this.location.address},${this.location.zone.zone} - ${this.location.zone.city} (${this.location.zone.state}), ${this.location.zone.country}`;
@@ -54,8 +54,10 @@ export default {
         url: `${process.env.VUE_APP_VISIT}?hide_event_type_details=1&utm_campaign=normal`,
         parentElement: document.getElementById("calendly-widget"),
         prefill: {
-          name: `${this.user.user.firstName} ${this.user.user.lastName}`,
-          email: `${this.user.user.email}`,
+          name: this.isAuth
+            ? `${this.user.user.firstName} ${this.user.user.lastName}`
+            : "",
+          email: this.isAuth ? `${this.user.user.email}` : "",
           customAnswers: {
             a1: `${this.location.name}`,
             a2: `${this.completeAddress}`,

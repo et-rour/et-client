@@ -326,7 +326,7 @@ export default {
         phone: this.registerPhone.toString(),
       };
       try {
-        this.register(userData);
+        await this.register(userData);
 
         this.changeShowLoginModal(false);
       } catch (error) {

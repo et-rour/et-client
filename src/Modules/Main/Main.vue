@@ -23,7 +23,7 @@
       <div
         class="w-full h-full absolute top-0 left-0 flex flex-col justify-end items-center pb-16"
       >
-        <div class="w-10/12 lg:w-10/12">
+        <div class="w-10/12 lg:w-11/12 xl:w-10/12">
           <h1 class="my-title text-white mb-4">
             <span class="mr-6">{{ $t("landing.hero_2.title") }}</span>
             <button

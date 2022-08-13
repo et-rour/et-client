@@ -19,7 +19,7 @@
         </div>
       </div>
 
-      <LocationImage
+      <ImageVisibility
         class="w-full h-36"
         v-for="image in getLocationDetailsImages.images"
         :key="image.id"
@@ -31,6 +31,7 @@
       @toogle="toogleShowUploadImagesModal"
       :showUploadImagesModal="showUploadImages"
       :idLocation="getLocationDetails.id"
+      :route="`/Location_${getLocationDetails.id}`"
     >
     </ModelUploadImagesComponent>
   </div>
@@ -39,12 +40,12 @@
 <script>
 import { mapActions, mapGetters } from "vuex";
 import ModelUploadImagesComponent from "../../../../../components/ModelUploadImages.vue";
-import LocationImage from "../Components/LocationImage.vue";
+import ImageVisibility from "../../../../../components/ImageVisibility.vue";
 import { CustomErrorToast } from "@/sweetAlert";
 import CoverIMageComponent from "../Components/CoverImage.vue";
 export default {
   components: {
-    LocationImage,
+    ImageVisibility,
     ModelUploadImagesComponent,
     CoverIMageComponent,
   },

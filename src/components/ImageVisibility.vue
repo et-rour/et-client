@@ -10,7 +10,11 @@
       @click="changeVisivilityHandler"
       :class="isSaving && 'bg-gray-400'"
     >
-      <font-awesome-icon icon="eye" class="text-white" v-if="image.isVisible" />
+      <font-awesome-icon
+        icon="eye"
+        class="text-white"
+        v-if="localImageVisibility"
+      />
       <font-awesome-icon
         v-else
         icon="fa-solid fa-eye-slash"
@@ -36,6 +40,7 @@ export default {
   data() {
     return {
       isSaving: false,
+      localImageVisibility: null,
     };
   },
   methods: {
@@ -43,7 +48,7 @@ export default {
     async changeVisivilityHandler() {
       if (this.isSaving) return;
 
-      const confirmMessage = this.image.isVisible
+      const confirmMessage = this.localImageVisibility
         ? this.$t("adminPanel.locations.imagesList.confiramtionMessages.hide")
         : this.$t("adminPanel.locations.imagesList.confiramtionMessages.show");
       const { isConfirmed } = await CustomConfirmDialog.fire({
@@ -53,22 +58,29 @@ export default {
 
       try {
         this.isSaving = true;
-        await this.changeIsVisibilityImage({
+        const isSavedImage = await this.changeIsVisibilityImage({
           idImage: this.image.id,
-          isVisible: !this.image.isVisible,
+          isVisible: !this.localImageVisibility,
         });
-        CustomToast.fire({
-          title: this.$t("sweetAlertMessages.saved"),
-          icon: "success",
-        });
+
+        if (isSavedImage.saved) {
+          CustomToast.fire({
+            title: this.$t("sweetAlertMessages.saved"),
+            icon: "success",
+          });
+          this.localImageVisibility = isSavedImage.isVisible;
+        }
         this.isSaving = false;
       } catch (error) {
         this.isSaving = false;
         CustomErrorToast.fire({
-          text: error.response.data.message || error,
+          text: error,
         });
       }
     },
+  },
+  mounted() {
+    this.localImageVisibility = this.image.isVisible;
   },
 };
 </script>

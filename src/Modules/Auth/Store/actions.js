@@ -65,15 +65,14 @@ export const loginInfirebaseStorage = async (_, customTokenAuthFirebase) => {
   }
 };
 
-export const register = ({ commit }, credentials) => {
-  EspacioAPI.post("/auth/register", credentials).then((response) => {
-    if (response.data && response.data.token)
-      window.localStorage.setItem(
-        process.env.VUE_APP_API_BASE,
-        response.data.token
-      );
-    commit("register", response.data);
-  });
+export const register = async ({ commit }, credentials) => {
+  const response = await EspacioAPI.post("/auth/register", credentials);
+  if (response.data && response.data.token)
+    window.localStorage.setItem(
+      process.env.VUE_APP_API_BASE,
+      response.data.token
+    );
+  commit("register", response.data);
 };
 
 export const logout = async ({ commit }) => {

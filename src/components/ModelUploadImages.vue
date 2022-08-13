@@ -42,6 +42,10 @@ export default {
     showUploadImagesModal: {
       type: Boolean,
     },
+    route: {
+      type: String,
+      required: true,
+    },
     idLocation: {
       required: true,
     },
@@ -66,6 +70,7 @@ export default {
       // formData.append("image", file);
       formData.append("token", this.user.firebaseToken);
       formData.append("userName", this.user.user.email);
+      formData.append("route", this.route);
       formData.append("locationId", this.idLocation);
     },
     erroHandler(file, message) {

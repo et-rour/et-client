@@ -64,9 +64,11 @@ export const uploadfile = async ({ commit }, { user, file }) => {
 };
 
 export const createNewPost = async ({ commit }, postData) => {
-  await EspacioAPI.post("/publications", postData);
+  const res = await EspacioAPI.post("/publications", postData);
   // const post = res.data;
   commit("cleanImageInfo");
+  const { id } = res.data;
+  return id;
 };
 
 export const loadCurrencies = async ({ commit }) => {

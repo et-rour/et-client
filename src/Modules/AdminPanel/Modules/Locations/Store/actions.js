@@ -177,14 +177,16 @@ export const postLocationImage = async (
   commit("postLocationImage", savedImageData);
 };
 
-export const changeIsVisibilityImage = async (
-  { commit },
-  { idImage, isVisible }
-) => {
+export const changeIsVisibilityImage = async (_, { idImage, isVisible }) => {
   const res = await EspacioAPI.put(`/admin/images/${idImage}/visible`, {
     isVisible,
   });
   const { image } = res.data;
-  console.log({ image: image });
-  commit("changeIsVisibilityImage", image);
+  // commit("changeIsVisibilityImage", image);
+  console.log(
+    "%cactions.js line:189 { saved: true, isVisible: image.isVisible }",
+    "color: white; background-color: #007acc;",
+    { saved: true, isVisible: image.isVisible }
+  );
+  return { saved: true, isVisible: image.isVisible };
 };
