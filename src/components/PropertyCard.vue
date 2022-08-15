@@ -48,7 +48,9 @@ export default {
     ...mapGetters("postsStore", ["currencies"]),
     ...mapGetters("authStore", ["siteCountry"]),
     currency() {
+      let backUpCurrency;
       for (let i = 0; i < this.currencies.length; i++) {
+        if (this.currencies[i].country === 'Chile') backUpCurrency = { symbol: this.currencies[i].symbol, value: this.currencies[i].value }
         if (this.currencies[i].country === this.siteCountry) {
           return {
             symbol: this.currencies[i].symbol,
@@ -56,8 +58,11 @@ export default {
           };
         }
       }
-      return "US$";
+      return backUpCurrency;
     },
   },
+  mounted() {
+    console.log('currency', this.siteCountry)
+  }
 };
 </script>
