@@ -21,7 +21,7 @@ export const login = async ({ commit }, data) => {
 };
 
 export const loadSession = async ({ commit }) => {
-  onAuthStateChanged(auth, (user) => {
+  await onAuthStateChanged(auth, (user) => {
     if (user) {
       // User is signed in, see docs for a list of available properties
       // https://firebase.google.com/docs/reference/js/firebase.User
@@ -65,15 +65,14 @@ export const loginInfirebaseStorage = async (_, customTokenAuthFirebase) => {
   }
 };
 
-export const register = ({ commit }, credentials) => {
-  EspacioAPI.post("/auth/register", credentials).then((response) => {
-    if (response.data && response.data.token)
-      window.localStorage.setItem(
-        process.env.VUE_APP_API_BASE,
-        response.data.token
-      );
-    commit("register", response.data);
-  });
+export const register = async ({ commit }, credentials) => {
+  const response = await EspacioAPI.post("/auth/register", credentials);
+  if (response.data && response.data.token)
+    window.localStorage.setItem(
+      process.env.VUE_APP_API_BASE,
+      response.data.token
+    );
+  commit("register", response.data);
 };
 
 export const logout = async ({ commit }) => {

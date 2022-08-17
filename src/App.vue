@@ -1,7 +1,7 @@
 <template>
   <div class="withe-space">
     <Navbar></Navbar>
-    <router-view></router-view>
+    <router-view v-if="!loadingApp"></router-view>
     <MovileMenu />
     <Footer></Footer>
   </div>
@@ -27,9 +27,14 @@ import { version } from "../package.json";
 
 export default {
   components: { Navbar, MovileMenu, Footer },
+  data() {
+    return {
+      loadingApp: true,
+    };
+  },
   methods: {
     ...mapActions("authStore", ["loadSession", "setSiteCountry"]),
-    ...mapActions("propertiesStore", ["loadProperties"]),
+    ...mapActions("propertiesStore", ["loadProperties", "loadZones"]),
     ...mapActions("postsStore", ["loadCurrencies"]),
     ...mapMutations({ loadCustomProperties: "propertiesStore/loadProperties" }),
   },
@@ -39,11 +44,30 @@ export default {
       return this.user.user.country;
     },
   },
-  async created() {
+  async mounted() {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUserId(analytics, user.uid);
+        setUserProperties(analytics, {
+          account_type: "Basic", // can help you to define audiences
+        });
+      }
+    });
+    this.loadingApp = true;
     try {
       await this.loadSession();
       await this.loadProperties();
       await this.loadCurrencies();
+      await this.loadZones();
+      console.log(
+        "%cApp.vue line:48 RUNNINF",
+        "color: #007acc;",
+        `RUNNING
+            this.loadSession()
+            this.loadProperties()
+            this.loadCurrencies()
+            this.loadZones()`
+      );
     } catch (error) {
       CustomErrorToast.fire({
         text: error.response.data.message || error,
@@ -52,10 +76,11 @@ export default {
       // load empty array properties
       this.loadCustomProperties([]);
     }
+    this.loadingApp = false;
   },
   watch: {
     userCountry() {
-      this.setSiteCountry(this.user.user.country);
+      // this.setSiteCountry(this.user.user.country);
     },
   },
   metaInfo: {
@@ -81,16 +106,6 @@ export default {
         app_version: version,
       });
     },
-  },
-  mounted() {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setUserId(analytics, user.uid);
-        setUserProperties(analytics, {
-          account_type: "Basic", // can help you to define audiences
-        });
-      }
-    });
   },
 };
 </script>

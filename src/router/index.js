@@ -4,6 +4,8 @@ import Landing from "../Modules/Main/Main.vue";
 import Questions from "../Modules/Main/Questions.vue";
 import Terms from "../Modules/Main/Terms.vue";
 import WorkWithUs from "../Modules/Main/WorkWithUs.vue";
+import AboutUs from "../Modules/Main/AboutUs.vue";
+import HowItWorks from "../Modules/Main/HowItWorks.vue";
 
 import OwnerRoutes from "../Modules/Owners/Router/index";
 import TenantsRouter from "../Modules/Tenants/Router/index";
@@ -34,6 +36,16 @@ const routes = [
     name: "workwithus",
     path: "/workwithus",
     component: WorkWithUs,
+  },
+  {
+    name: "about-us",
+    path: "/about",
+    component: AboutUs,
+  },
+  {
+    name: "how-it-works",
+    path: "/como-funciona",
+    component: HowItWorks,
   },
   ...OwnerRoutes,
   ...TenantsRouter,

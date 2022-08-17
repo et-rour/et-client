@@ -1,16 +1,32 @@
 <template>
   <!-- video -->
-  <div class="my-container mt-12 mb-24">
-    <h2 class="my-title-2 text-center">
-      {{ $t("landing.video.title") }}
-    </h2>
-    <p class="text-center my-4">
-      {{ $t("landing.video.description") }}
-    </p>
-    <div class="w-full flex justify-center">
-      <button class="my-btn w-64 mt-6 text-white" @click="toogleShowModal">
-        {{ $t("landing.video.ver") }}
-      </button>
+  <div class="mt-12 mb-24 bg-my-blue-primary text-white py-24">
+    <div class="my-container grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-0">
+      <div>
+        <h2 class="my-title mb-8">
+          {{ $t("landing.video.title") }}
+        </h2>
+        <p class="text-sm font-extrabold">
+          {{ $t("landing.video.question_1") }}
+        </p>
+        <p class="text-sm font-extralight mb-4">
+          {{ $t("landing.video.response_1") }}
+        </p>
+        <p class="text-sm font-extrabold inline">
+          {{ $t("landing.video.question_2") }}
+        </p>
+        <p class="text-sm font-extralight inline">
+          {{ $t("landing.video.response_2") }}
+        </p>
+      </div>
+      <div class="flex justify-center items-center">
+        <button
+          class="my-btn w-auto font-bold py-2 bg-white px-12 text-my-blue-primary hover:bg-gray-400"
+          @click="toogleShowModal"
+        >
+          {{ $t("landing.video.ver") }}
+        </button>
+      </div>
     </div>
 
     <ModelGlobal :showModal="showVideoModal" v-on:toogle="toogleShowModal">

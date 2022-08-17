@@ -34,9 +34,8 @@
 
     <!-- POSTS -->
     <Spiner v-if="isLoading"></Spiner>
-    <div class="my-container flex flex-col">
+    <div class="my-container grid grid-cols-1 md:grid-cols-3 gap-4">
       <Post v-for="post in postList" :key="post.id" :post="post" />
-      <hr />
     </div>
 
     <CreatePost :showModal="showCreatePostModal" />

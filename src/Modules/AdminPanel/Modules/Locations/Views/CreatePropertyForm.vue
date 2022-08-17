@@ -307,11 +307,8 @@
       </div> -->
 
         <!-- coords -->
-        <MapCoordsVue
-          :lat="location.lat"
-          :long="location.long"
-          v-on:changeCoords="setNewCoords"
-        ></MapCoordsVue>
+        <MapCoordsVue @result-click="setNewCoords"></MapCoordsVue>
+        <p>lat:{{ location.lat }} lng:{{ location.long }}</p>
         <div class="w-full flex justify-center">
           <button class="my-btn" @click="submitLocation">
             <!-- {{ $t("general.update") }} -->
@@ -464,7 +461,7 @@ export default {
   async created() {
     try {
       await this.getUsers();
-      await this.getZones();
+      // await this.getZones();
     } catch (error) {
       console.log(error);
     }

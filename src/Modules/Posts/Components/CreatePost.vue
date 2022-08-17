@@ -22,25 +22,49 @@
               :placeholder="$t('posts.createPost.name')"
               class="my-input border border-gray-500 w-full py-3 rounded-none border-b-0"
             />
-            <span class="my-error relative top-0 left-0 block w-full h-6 border-t border-black" v-if="errors[0]">{{ errors[0] }}</span>
+            <span
+              class="my-error relative top-0 left-0 block w-full h-6 border-t border-black"
+              v-if="errors[0]"
+              >{{ errors[0] }}</span
+            >
           </ValidationProvider>
-          <ValidationProvider v-slot="{ errors }" class="relative" rules="extUrl">
+          <ValidationProvider
+            v-slot="{ errors }"
+            class="relative"
+            rules="extUrl"
+          >
             <input
               v-model="site"
               type="text"
-              :placeholder="`${$t('posts.createPost.site')} https://www.google.com`"
+              :placeholder="`${$t(
+                'posts.createPost.site'
+              )} https://www.google.com`"
               class="my-input border border-gray-500 w-full py-3 rounded-none border-b-0"
             />
-            <span class="my-error relative top-0 left-0 block w-full h-6 border-t border-black" v-if="errors[0]">{{ errors[0] }}</span>
+            <span
+              class="my-error relative top-0 left-0 block w-full h-6 border-t border-black"
+              v-if="errors[0]"
+              >{{ errors[0] }}</span
+            >
           </ValidationProvider>
-          <ValidationProvider v-slot="{ errors }" class="relative" rules="extInstagramUrl" >
+          <ValidationProvider
+            v-slot="{ errors }"
+            class="relative"
+            rules="extInstagramUrl"
+          >
             <input
               v-model="instagram"
               type="text"
-              :placeholder="`${$t('posts.createPost.social')} https://www.instagram.com/john_smith`"
+              :placeholder="`${$t(
+                'posts.createPost.social'
+              )} https://www.instagram.com/john_smith`"
               class="my-input border border-gray-500 w-full py-3 rounded-none border-b-0"
             />
-            <span class="my-error relative top-0 left-0 block w-full h-6 border-t border-black" v-if="errors[0]">{{ errors[0] }}</span>
+            <span
+              class="my-error relative top-0 left-0 block w-full h-6 border-t border-black"
+              v-if="errors[0]"
+              >{{ errors[0] }}</span
+            >
           </ValidationProvider>
           <ValidationProvider
             v-slot="{ errors }"
@@ -53,10 +77,14 @@
               :placeholder="$t('posts.createPost.review')"
               class="my-input border border-gray-500 w-full py-3 rounded-none h-24"
             ></textarea>
-            <span class="my-error relative top-0 left-0 block w-full h-6 border-black" v-if="errors[0]">{{ errors[0] }}</span>
+            <span
+              class="my-error relative top-0 left-0 block w-full h-6 border-black"
+              v-if="errors[0]"
+              >{{ errors[0] }}</span
+            >
           </ValidationProvider>
 
-          <input
+          <!-- <input
             type="file"
             @change="uploadPostImage"
             class="hidden"
@@ -72,7 +100,7 @@
               :imageUrl="postImage"
               class="absolute right-5 top-5"
             />
-          </div>
+          </div> -->
           <button
             :disabled="invalid"
             type="submit"
@@ -114,6 +142,14 @@
         <font-awesome-icon icon="times" class="text-2xl" />
       </div>
     </div>
+
+    <ModelUploadImages
+      v-if="createdPostId"
+      @toogle="toogleShowUploadImagesModal"
+      :showUploadImagesModal="showUploadImages"
+      :idLocation="createdPostId"
+      :route="`/Publication_${createdPostId}`"
+    />
   </ModelGlobal>
 </template>
 
@@ -121,14 +157,15 @@
 import ModelGlobal from "../../../components/ModelGlobal.vue";
 import { ValidationObserver } from "vee-validate";
 import { mapActions, mapGetters, mapMutations } from "vuex";
-import ProgesBarVue from "../../../components/ProgesBarImage.vue";
+// import ProgesBarVue from "../../../components/ProgesBarImage.vue";
 import { CustomErrorToast } from "@/sweetAlert";
+import ModelUploadImages from "../../../components/ModelUploadImages.vue";
 
 export default {
   components: {
     ModelGlobal,
     ValidationObserver,
-    ProgesBarVue,
+    ModelUploadImages,
   },
   props: {
     showModal: {
@@ -145,11 +182,17 @@ export default {
 
       file: null,
       successCreatingPost: false,
+
+      showUploadImages: false,
+      createdPostId: null,
     };
   },
   methods: {
     ...mapActions("postsStore", ["createNewPost", "uploadfile"]),
     ...mapMutations("postsStore", ["cleanImageInfo"]),
+    toogleShowUploadImagesModal() {
+      this.showUploadImages = !this.showUploadImages;
+    },
     closeModal() {
       this.successCreatingPost = false;
       this.name = "";
@@ -169,7 +212,8 @@ export default {
         instagram: this.instagram,
       };
       try {
-        await this.createNewPost(postData);
+        this.createdPostId = await this.createNewPost(postData);
+        this.toogleShowUploadImagesModal();
 
         this.successCreatingPost = true;
       } catch (error) {

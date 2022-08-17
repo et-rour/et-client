@@ -13,7 +13,7 @@
           <span class="text-my-blue-primary">{{ publication.title }}</span>
         </p>
 
-        <p class="flex justify-between items-center gap-3">
+        <p class="flex justify-between gap-3">
           {{ $t("adminPanel.publications.description") }}:
           <span class="text-my-blue-primary">{{
             publication.description
@@ -36,10 +36,28 @@
             v-on:toogle="toogleIsVerified"
           />
         </div>
-        <div class="flex justify-between gap-3">
+        <div class="flex justify-between gap-3 flex-wrap">
           <p>{{ $t("adminPanel.publications.image") }}:</p>
-          <div class="w-56 h-4w-56 object-cover bg-red-300">
-            <img :src="publication.image" :alt="publication.title" />
+          <p v-if="publication.images && publication.images.length < 1">
+            {{ $t("adminPanel.publications.noImage") }}:
+          </p>
+          <div
+            v-else
+            class="flex-grow grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+          >
+            <!-- <img
+              v-for="image in publication.images"
+              :key="image.id"
+              class="w-56 h-56 object-cover"
+              :src="image.image"
+              :alt="`publication${image.id}`"
+            /> -->
+            <ImageVisibility
+              class="w-56"
+              v-for="image in publication.images"
+              :key="image.id"
+              :image="image"
+            />
           </div>
         </div>
         <p class="flex justify-between items-center gap-3">
@@ -78,6 +96,7 @@ import {
   CustomToast,
   CustomConfirmDialog,
 } from "@/sweetAlert";
+import ImageVisibility from "../../../../../components/ImageVisibility.vue";
 export default {
   props: {
     idPublication: {
@@ -87,6 +106,7 @@ export default {
   },
   components: {
     SwitchComponentVue,
+    ImageVisibility,
   },
   computed: {
     ...mapGetters("adminPanelStore/publications", ["getPublicationById"]),

@@ -4,6 +4,7 @@
       <div class="flex items-center justify-between">
         <label for="name" class="mr-3"
           >{{ $t("adminPanel.locations.name") }}
+          <span class="text-transparent"> {{ location.id }}</span>
         </label>
         <input
           type="text"
@@ -187,8 +188,10 @@
       <MapCoordsVue
         :lat="location.lat"
         :long="location.long"
-        v-on:changeCoords="setNewCoords"
+        :editing="true"
+        @result-click="setNewCoords"
       ></MapCoordsVue>
+      <!-- <p>lat:{{ location.lat }} long:{{ location.long }}</p> -->
 
       <div class="w-full flex justify-center">
         <button

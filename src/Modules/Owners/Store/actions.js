@@ -9,11 +9,10 @@ export const loadProperties = async ({ commit }) => {
   commit("loadProperties", response.data.locations);
 };
 
-export const loadZones = ({ commit }) => {
-  EspacioAPI.get("/zones/").then((response) => {
-    console.log({ responseZones: response });
-    commit("loadZones", response.data.zones);
-  });
+export const loadZones = async ({ commit }) => {
+  const res = await EspacioAPI.get("/zones/");
+  console.log({ responseZones: res });
+  commit("loadZones", res.data.zones);
 };
 
 export const uploadfile = async ({ commit }, { user, file }) => {

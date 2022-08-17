@@ -23,7 +23,7 @@
       <div
         class="w-full h-full absolute top-0 left-0 flex flex-col justify-end items-center pb-16"
       >
-        <div class="w-10/12 lg:w-9/12">
+        <div class="w-10/12 lg:w-11/12 xl:w-10/12">
           <h1 class="my-title text-white mb-4">
             <span class="mr-6">{{ $t("landing.hero_2.title") }}</span>
             <button
@@ -33,91 +33,7 @@
               {{ $t("landing.hero_2.ver") }}
             </button>
           </h1>
-
-          <div
-            class="w-full rounded-md lg:rounded-full bg-white justify-center items-center px-0 lg:px-8 pb-4 lg:py-4"
-          >
-            <div class="flex flex-col lg:flex-row">
-              <!-- search -->
-              <div class="flex justify-center items-center gap-2 border">
-                <font-awesome-icon
-                  icon="search"
-                  class="text-2xl text-gray-400 block"
-                />
-                <input
-                  type="text"
-                  placeholder="Santiago"
-                  class="block w-full h-full py-3"
-                  v-model="search"
-                />
-              </div>
-              <!-- select -->
-              <div class="">
-                <select
-                  name="pets"
-                  id="pet-select"
-                  class="w-full text-center border h-full py-3"
-                  v-model="zone"
-                >
-                  <option value="" selected>
-                    {{ $t("landing.hero_2.commune") }}
-                  </option>
-                  <option
-                    v-for="zone in sortedZones"
-                    :key="zone.id"
-                    :value="zone.id"
-                  >
-                    {{ zone.city }} - {{ zone.zone }}
-                  </option>
-                </select>
-              </div>
-              <!-- buttons -->
-              <div
-                class="flex justify-center items-center gap-2 flex-nowrap py-4 px-2 text-center border flex-shrink-0"
-              >
-                <button
-                  class="px-4 border rounded-full cursor-pointer w-44"
-                  @click="toggleType('room')"
-                  :class="this.type === 'room' ? 'selectedField' : ''"
-                >
-                  <p>{{ $t("landing.hero_2.private") }}</p>
-                </button>
-                <button
-                  class="px-4 border rounded-full cursor-pointer w-48"
-                  @click="toggleType('entire')"
-                  :class="this.type === 'entire' ? 'selectedField' : ''"
-                >
-                  <p>{{ $t("landing.hero_2.complete") }}</p>
-                </button>
-              </div>
-              <!-- find -->
-              <div class="flex justify-center items-center">
-                <!-- <button
-                  class="my-btn w-12 h-12 rounded-full flex justify-center items-center flex-shrink-0"
-                >
-                  <font-awesome-icon
-                    icon="search"
-                    class="text-2xl text-white block"
-                  />
-                </button>-->
-                <button
-                  class="my-btn w-12 h-12 rounded-full flex justify-center items-center flex-shrink-0"
-                  @click="resetFilters"
-                >
-                  <font-awesome-icon
-                    icon="undo"
-                    class="text-2xl text-white block"
-                  />
-                </button>
-              </div>
-            </div>
-            <!-- <div
-              class="my-btn w-24 h-12 flex justify-center items-center absolute right-24 mb-16 rounded-tl-lg rounded-tr-lg rounded-br-lg rounded-bl-none"
-              :class="resetVisible ? 'hidden' : ''"
-            >
-              <p>Reset filters</p>
-            </div> -->
-          </div>
+          <FilterLocationsComponent @filter="loadPropertiesFiltered" />
         </div>
       </div>
     </div>
@@ -131,12 +47,12 @@
       <div class="w-full" v-if="isLoading">
         <Spiner></Spiner>
       </div>
-      <!-- cards -->
-      <div v-else-if="propertiesList.length > 0">
+      <!-- paginate -->
+      <div v-else-if="propertiesListFiltered.length > 0">
         <paginate
           ref="paginator"
           name="propertiesData"
-          :list="propertiesData"
+          :list="propertiesListFiltered"
           :per="9"
           class="w-full gap-5 grid grid-cols-2 lg:grid-cols-3"
         >
@@ -169,7 +85,7 @@
           </router-link>
         </div>
       </div>
-      <!-- see more -->
+      <!-- NO AVALIBLE -->
       <h3 class="my-title-2 text-center text-gray-400" v-else>
         {{ $t("landing.spaces.notFound") }}
       </h3>
@@ -308,14 +224,18 @@ import { mapActions, mapGetters } from "vuex";
 import Spiner from "../../components/Spiner.vue";
 import VideoComponent from "./Components/VideoComponent.vue";
 import CoverImageVue from "./Components/CoverImage.vue";
+import FilterLocationsComponent from "../../components/FilterLocationsComponent.vue";
 export default {
-  components: { PropertyCard, Spiner, VideoComponent, CoverImageVue },
+  components: {
+    PropertyCard,
+    Spiner,
+    VideoComponent,
+    CoverImageVue,
+    FilterLocationsComponent,
+  },
   data() {
     return {
-      search: "",
-      zone: "",
-      type: "",
-      localSiteCountry: "",
+      propertiesListFiltered: [],
       resetVisible: true,
       paginate: ["propertiesData"],
     };
@@ -328,58 +248,45 @@ export default {
       "zonesList",
     ]),
     ...mapGetters("authStore", ["siteCountry"]),
-    propertiesData() {
-      let arr = this.filteredPropertiesList(this.search);
-
-      if (this.type !== "") {
-        arr = arr.filter((el) => el.propertyType === this.type);
-      }
-
-      if (this.zone !== "") {
-        arr = arr.filter((el) => el.zone.id === this.zone);
-      }
-
-      if (this.localSiteCountry !== "") {
-        arr = arr.filter((el) => el.zone.country === this.localSiteCountry);
-      }
-
-      return arr;
-    },
-    sortedZones() {
-      let res = this.sortZones(this.zonesList);
-      res = res.filter((zone) => zone.country === this.siteCountry);
-      return res;
-    },
   },
   methods: {
     ...mapActions("propertiesStore", ["loadProperties", "loadZones"]),
-    toggleType(option) {
-      if (option === "room") {
-        if (this.type === "room") {
-          this.type = "";
-        } else {
-          this.type = "room";
-        }
+    loadPropertiesFiltered({ zone, city, type, siteCountry }) {
+      console.log("%cMain.vue line:260 {object}", "color: #007acc;", {
+        zone,
+        city,
+        type,
+      });
+      let listProperties = this.propertiesList;
+
+      if (type !== "") {
+        listProperties = listProperties.filter(
+          (property) => property.propertyType === type
+        );
       }
-      if (option === "entire") {
-        if (this.type === "entire") {
-          this.type = "";
-        } else {
-          this.type = "entire";
-        }
+
+      if (zone !== "") {
+        listProperties = listProperties.filter(
+          (property) => property.zone.zone === zone
+        );
       }
-    },
-    sortArray(x, y) {
-      if (x.city < y.city) {
-        return -1;
+
+      if (city !== "") {
+        listProperties = listProperties.filter(
+          (property) => property.zone.city === city
+        );
       }
-      if (x.city > y.city) {
-        return 1;
+
+      if (siteCountry !== "") {
+        listProperties = listProperties.filter(
+          (property) => property.zone.country === siteCountry
+        );
       }
-      return 0;
-    },
-    sortZones(arr) {
-      return arr.sort(this.sortArray);
+
+      console.log("%cMain.vue line:381 {listProperties}", "color: #007acc;", {
+        listProperties,
+      });
+      this.propertiesListFiltered = listProperties;
     },
     showWorkWithUsModal() {
       // Use sweetalert2
@@ -402,16 +309,20 @@ export default {
       this.resetVisible = !this.resetVisible;
     },
   },
-  mounted() {
-    if (this.propertiesList.length < 1) {
-      this.loadProperties();
-      this.loadZones();
-    }
-    this.localSiteCountry = this.siteCountry;
+  async mounted() {
+    console.log("%cMain.vue line:313 counted", "color: #007acc;");
+    this.loadPropertiesFiltered({
+      zone: "",
+      city: "",
+      type: "",
+      siteCountry: "",
+    });
   },
   watch: {
     siteCountry() {
-      this.localSiteCountry = this.siteCountry;
+      this.$refs.paginator.goToPage(1);
+    },
+    zone() {
       this.$refs.paginator.goToPage(1);
     },
   },

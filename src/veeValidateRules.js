@@ -64,6 +64,17 @@ extend("email", {
   message: (_, values) => i18n.t("validations.messages.email", values),
 });
 
+extend("both", {
+  ...required,
+  params: ["target"],
+  validate(value, { target }) {
+    console.log(value, { target });
+    if (!target) return false;
+    return value.length > 0 && target.length > 0;
+  },
+  message: (_, values) => i18n.t("validations.messages.location", values),
+});
+
 extend("min_value", {
   ...min_value,
   message: (_, values) =>

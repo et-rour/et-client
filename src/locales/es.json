@@ -14,6 +14,7 @@
       "required": "Este campo no es válido",
       "email": "Este campo no es una dirección de correo electrónico válida",
       "minValue": "Este campo debe ser mayor de {min}",
+      "location": "Es necesario seleccionar la ubicación",
       "whatsapp": "Numero de whatsapp invalido."
     }
   },
@@ -25,10 +26,10 @@
     "update": "Actualizar"
   },
   "navbar": {
-    "owner": "Dueños",
-    "tenants": "Arrendatarios",
+    "owner": "PUBLICA TU PROPIEDAD",
+    "tenants": "ESPACIOS DISPONIBLES",
+    "us": "NOSOTROS",
     "howWorks": "¿Cómo funciona?",
-    "us": "Comunidad",
     "posts": "Publicaciónes",
     "myProperties": "Mis propiedades",
     "admin": "Admin",
@@ -75,15 +76,21 @@
     },
     "video": {
       "title": "Administramos todo tipo de inmuebles en desuso",
-      "description": "¿No has podido arrendar tu propiedad? Nosotros nos encargamos de administrar tu propiedad con contratos flexibles y de corta duración. ¿Buscas un espacio flexible de trabajo? Tenemos espacios en excelentes ubicaciones para emprendedores y artistas.",
+      "question_1": "¿No has podido arrendar tu propiedad?",
+      "response_1": "Nosotros nos encargamos de administrar tu propiedad con contratos flexibles y de corta duración.",
+      "question_2": "¿Buscas un espacio flexible de trabajo?",
+      "response_2": "Tenemos espacios en excelentes ubicaciones para emprendedores y artistas.",
       "ver": "VER VIDEO"
     },
     "hero_2": {
       "title": "ENCUENTRA UN ESPACIO FLEXIBLE PARA TU NEGOCIO",
       "ver": "VER ESPACIOS DISPONIBLES",
       "commune": "Comuna",
+      "city": "Ciudad",
       "private": "Espacio privado",
-      "complete": "Propiedad completa"
+      "complete": "Propiedad completa",
+      "hours": "Arriendo por horas",
+      "seeResult": "VER RESULTADOS"
     },
     "spaces": {
       "title": "Espacios disponibles cerca de ti",
@@ -147,6 +154,10 @@
     "button": "QUIERO UNIRME AL PROGRAMA DE REFERIDOS",
     "buttonMovile": "UNIRME AL PROGRAMA DE REFERIDOS"
   },
+  "about-us": {
+    "who": "QUIENES SOMOS",
+    "description": "Fundada en 2019, Espacio Temporal ha creado espacios comerciales especialmente para hacer la experiencia de arriendo más fácil, cómoda para PYMES, artistas y emprendedores"
+  },
   "owners": {
     "title": "Administramos todo tipo de inmuebles en desuso",
     "subtitle": "¿No has podido arrendar tu propiedad? Nosotros nos encargamos de administrar tu propiedad con contratos flexibles y de corta duración. De esta forma generamos VALOR a partir de un recurso congelado.",
@@ -180,6 +191,7 @@
     },
     "arriendo": "Valor de arriendo",
     "time": "Tiempo disponible",
+    "timeUse": "Tiempo sin uso",
     "garage": "Estacionamiento",
     "more": "o más",
     "submit": "CARGAR PROPIEDAD",
@@ -216,11 +228,11 @@
         "find": "ENCUENTRA UN ESPACIO"
       },
       "details": {
-        "title": "Espacios de uso flexible con contratos simples y a plazos cortos",
-        "description": "¿Tienes una PYME y necesitas un espacio flexible para trabajar? ¿Eres artista y necesitas un taller?",
-        "monthly": "Contratos mensuales",
-        "flexible": "Uso flexible",
-        "community": "Trabaja en comunidad"
+        "title": "Administramos todo tipo de inmuebles en desuso",
+        "description": "¿No has podido arrendar tu propiedad? Nosotros nos encargamos de administrar tu propiedad con contratos \n flexibles y de corta duración. De esta forma generamos VALOR a partir de un recurso congelado.",
+        "icon_des_1": "Evitamos malos usos",
+        "icon_des_2": "Generamos un ingreso",
+        "icon_des_3": "Entrega una oportunidad para emprendedores"
       },
       "avalibleSpaces": {
         "title": "Espacios disponibles cerca de ti"
@@ -232,6 +244,7 @@
       "contacts": "Ver contactos",
       "description": "Esta propiedad está ubicada en el centro de Providencia. Los plazos mínimos de arriendo son de 3 meses y no se permite el uso de maquinaria ni labores ruidosas.",
       "subtitle": "Espacios disponibles",
+      "pictures": "Ver todas las fotos",
       "vistit": "AGENDA UNA VISITA",
       "pay": "Reservar y pagar",
       "modalTitle": "Información de contacto",
@@ -239,7 +252,9 @@
       "modalText2": ", ubicado en",
       "modalText3": "Puedes comunicarte a",
       "included": "Espacio incluido",
-      "notIncluded": "Puedes arrendar por: "
+      "notIncluded": "Puedes arrendar por: ",
+      "bathroom": "1 baño | {count} baños",
+      "room": "1 habitacion | {count} habitaciones"
     },
     "schedule": {
       "title": "Selecciona la fecha para tu visita",
@@ -264,7 +279,7 @@
       "owner": "Dueños",
       "tenants": "Arrendatarios",
       "howWorks": "¿Comó funciona?",
-      "us": "Comunidad",
+      "us": "Mercado de emprendedores",
       "terms": "TÉRMINOS Y CONDICIONES"
     },
     "form": {
@@ -522,7 +537,8 @@
       "description": "Descripción",
       "user": "Dueño",
       "isVerified": "¿La publicacion esta verificada?",
-      "image": "Imagen",
+      "image": "Imagenes",
+      "noImage": "No hay imagenes registradas",
       "webSite": "Sitio web",
       "instagram": "Instagram",
       "profile": "Ver perfil",

@@ -69,6 +69,7 @@ export default {
       locationId: this.createdProperty.location.id,
       zoneId: this.createdProperty.location.zone.id,
       time: this.createdProperty.calculatorData.time,
+      timeUse: this.createdProperty.calculatorData.time,
       expectedValue: this.createdProperty.calculatorData.expectedValue,
       currencyData: this.createdProperty.calculatorData.currencyData,
     };
