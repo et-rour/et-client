@@ -126,6 +126,17 @@ export const updateRoomImage = async (
     image: imageUrl,
     locationId,
   });
+  const room = res.data;
+  commit("updateRoom", room);
+};
+export const updateRoomIsActive = async (
+  { commit },
+  { locationId, idRoom, isActive }
+) => {
+  const res = await EspacioAPI.put(`room/${idRoom}/isActive`, {
+    isActive,
+    locationId,
+  });
   const newRoom = res.data;
   commit("updateRoom", newRoom);
 };

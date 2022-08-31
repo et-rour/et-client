@@ -64,16 +64,30 @@ export const uploadImageTofirebase = async (
   commit("imageUploaded", { id, downloadURL });
   return downloadURL;
 };
-export const goToCheckoutSession = async (
+export const goToLocationCheckoutSession = async (
   _,
-  { locationId, userId, isLocation }
+  { locationId, userId, range }
 ) => {
   const res = await EspacioTemporalAPI.post(
-    "/locations/create-checkout-session",
+    "/reservation/location/create-checkout-session",
     {
       locationId,
       userId,
-      isLocation,
+      range,
+    }
+  );
+  // console.log("%cTest.vue line:22 res", "color: #007acc;", res);
+  // window.location.href = res.url;
+  window.open(res.data.url, "_blank");
+};
+
+export const goToRoomCheckoutSession = async (_, { roomId, userId, range }) => {
+  const res = await EspacioTemporalAPI.post(
+    "/reservation/room/create-checkout-session",
+    {
+      roomId,
+      userId,
+      range,
     }
   );
   // console.log("%cTest.vue line:22 res", "color: #007acc;", res);

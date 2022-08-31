@@ -247,6 +247,14 @@
       "pictures": "See all pictures",
       "vistit": "SCHEDULE A TECHNICAL VISIT",
       "pay": "Pay",
+      "payRoom": "reserve space",
+      "includedServises": "Included services",
+      "vault": "Vault",
+      "parking": "Parking",
+      "cleaning": "Cleaning",
+      "toilets": "Toilets",
+      "wifi": "Wifi",
+      "security": "Security",
       "modalTitle": "Contact information",
       "modalText1": "To receive more information about",
       "modalText2": ", located at",
@@ -254,7 +262,15 @@
       "included": "space included",
       "notIncluded": "You can lease for: ",
       "bathroom": "1 bathroom | {count} bathrooms",
-      "room": "1 room | {count} rooms"
+      "room": "1 room | {count} rooms",
+      "select": "Select a date",
+      "selectToSee": "Select a date to see the valid end dates",
+      "selectDate": "Select the rental period",
+      "start": "Start",
+      "end": "The end",
+      "validDates": "valid dates for the day",
+      "datesValidationMessage": "Select a valid end date",
+      "monthly": "monthly"
     },
     "schedule": {
       "title": "Select the date for your visit",
@@ -463,6 +479,7 @@
         "title": "all rooms",
         "noRooms": "This property doesn't have any room registered",
         "buyLink": "Buy link",
+        "isActive": "Is the room sold out?",
         "create": {
           "meters": "Square meter",
           "name": "Name",
@@ -472,7 +489,9 @@
           "title": "Create a new room for property #"
         },
         "confiramtionMessages": {
-          "update": "Are you sure you want to upgrade this room?"
+          "update": "Are you sure you want to upgrade this room?",
+          "changeToInactive": "Are you sure you want to disable this room?",
+          "changeToActive": "Are you sure you want to make avalible this room?"
         }
       },
       "imagesList": {

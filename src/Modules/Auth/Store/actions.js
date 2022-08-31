@@ -21,13 +21,21 @@ export const login = async ({ commit }, data) => {
 };
 
 export const loadSession = async ({ commit }) => {
-  await onAuthStateChanged(auth, (user) => {
+  await onAuthStateChanged(auth, async (user) => {
     if (user) {
       // User is signed in, see docs for a list of available properties
       // https://firebase.google.com/docs/reference/js/firebase.User
       const uid = user.uid;
       console.log({ uid });
-      commit("changeAccessToken", user.accessToken);
+      if (!auth) return;
+      const refreshtoken = await auth.currentUser.getIdToken(true);
+      console.log(
+        "%cactions.js line:32 refreshtoken",
+        "color: #007acc;",
+        refreshtoken
+      );
+
+      commit("changeAccessToken", refreshtoken);
       // ...
     }
   });

@@ -451,7 +451,9 @@
 
         <!-- time without use-->
         <div class="flex items-center justify-between mb-4">
-          <label class="text-lg" for="zona">{{ $t("createForm.timeUse") }}</label>
+          <label class="text-lg" for="zona">{{
+            $t("createForm.timeUse")
+          }}</label>
           <ValidationProvider
             v-slot="{ errors }"
             rules="required"
@@ -539,6 +541,7 @@
           :lat="lat"
           :long="lng"
           @result-click="setNewCoords"
+          :showMap="false"
         ></MapCoordsVue>
 
         <!-- VALIDATE COORDS -->

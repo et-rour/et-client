@@ -247,6 +247,14 @@
       "pictures": "Ver todas las fotos",
       "vistit": "AGENDA UNA VISITA",
       "pay": "Reservar y pagar",
+      "payRoom": "Reservar espacio",
+      "includedServises": "SERVICIOS INCLUÍDOS",
+      "vault": "Bodega",
+      "parking": "Parking",
+      "cleaning": "Limpieza",
+      "toilets": "Baños",
+      "wifi": "Wifi",
+      "security": "Seguridad",
       "modalTitle": "Información de contacto",
       "modalText1": "Para recibir información acerca de",
       "modalText2": ", ubicado en",
@@ -254,7 +262,15 @@
       "included": "Espacio incluido",
       "notIncluded": "Puedes arrendar por: ",
       "bathroom": "1 baño | {count} baños",
-      "room": "1 habitacion | {count} habitaciones"
+      "room": "1 habitacion | {count} habitaciones",
+      "select": "Selecciona una fecha",
+      "selectToSee": "Selecciona una fecha para ver las fechas validas de fin",
+      "selectDate": "Selecciona el período del arriendo",
+      "start": "Desde",
+      "end": "Hasta",
+      "validDates": "fechas de fin válidas para el día:",
+      "datesValidationMessage": "Selecciona una fecha de fin válida",
+      "monthly": "mensual"
     },
     "schedule": {
       "title": "Selecciona la fecha para tu visita",
@@ -449,7 +465,7 @@
       "garage": "Garaje",
       "zone": "Zona",
       "owner": "Propietario",
-      "isActive": "¿La locación esta activada?",
+      "isActive": "¿La locación esta agotada?",
       "isverified": "¿La locación esta verificada?",
       "newVisit": "Agendar visita tecnica",
       "goToVisit": "Ir al calendario",
@@ -463,6 +479,7 @@
         "title": "Todos los cuartos",
         "noRooms": "Esta propiedad no tiene ningun cuarto registrado",
         "buyLink": "Link de compra",
+        "isActive": "¿El cuarto esta agotado?",
         "create": {
           "meters": "Metros cuadrados",
           "name": "Nombre",
@@ -472,7 +489,9 @@
           "title": "Crea un nuevo cuarto para propiedad #"
         },
         "confiramtionMessages": {
-          "update": "¿Seguro que quieres actualizar este cuarto?"
+          "update": "¿Seguro que quieres actualizar este cuarto?",
+          "changeToInactive": "¿Estás seguro de que quieres desactivar esta habitación?",
+          "changeToActive": "¿Estás seguro de que quieres que esta habitación esté disponible?"
         }
       },
       "imagesList": {
