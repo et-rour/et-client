@@ -7,49 +7,53 @@
       <h2 class="my-title">{{ $t("tenants.details.title") }}</h2>
       <SpinerVue />
     </div>
-    <div class="my-container mb-32 lg:mb-2" v-else>
+    <div class="mb-32 lg:mb-2" v-else>
       <!-- header -->
-      <h1 class="my-title">{{ property.name }}</h1>
+      <div class="my-container">
+        <h1 class="my-title">{{ property.name }}</h1>
+        <div
+          class="w-full flex flex-col md:flex-row md:gap-4 justify-between mb-6 text-center xl::text-left"
+        >
+          <p>
+            {{ property.address }}, {{ property.zone.city }} -
+            {{ property.zone.state }}
+          </p>
 
-      <div
-        class="w-full flex flex-col md:flex-row md:gap-4 justify-between mb-6 text-center xl::text-left"
-      >
-        <p>
-          {{ property.address }}, {{ property.zone.city }} -
-          {{ property.zone.state }}
-        </p>
+          <!-- <div
+            class="flex flex-col md:flex-row gap-4 md:gap-14 justify-between"
+          >
+            <div class="flex items-center">
+              <font-awesome-icon class="text-2xl mr-4" icon="restroom" />
+              <p class="inline-block">
+                {{
+                  $tc("tenants.details.bathroom", property.bathrooms, {
+                    count: property.bathrooms,
+                  })
+                }}
+              </p>
+            </div>
 
-        <div class="flex flex-col md:flex-row gap-4 md:gap-14 justify-between">
-          <div class="flex items-center">
-            <font-awesome-icon class="text-2xl mr-4" icon="restroom" />
-            <p class="inline-block">
-              {{
-                $tc("tenants.details.bathroom", property.bathrooms, {
-                  count: property.bathrooms,
-                })
-              }}
-            </p>
-          </div>
+            <div class="flex items-center">
+              <font-awesome-icon class="text-2xl mr-4" icon="door-open" />
+              <p class="inline-block">
+                {{
+                  $tc("tenants.details.room", property.rooms, {
+                    count: property.rooms,
+                  })
+                }}
+              </p>
+            </div>
 
-          <div class="flex items-center">
-            <font-awesome-icon class="text-2xl mr-4" icon="door-open" />
-            <p class="inline-block">
-              {{
-                $tc("tenants.details.room", property.rooms, {
-                  count: property.rooms,
-                })
-              }}
-            </p>
-          </div>
-
-          <div class="flex items-center">
-            <font-awesome-icon class="text-2xl mr-4" icon="train-subway" />
-            <p class="inline-block">Metro Irrazanabal</p>
-          </div>
+            <div class="flex items-center">
+              <font-awesome-icon class="text-2xl mr-4" icon="train-subway" />
+              <p class="inline-block">Metro Irrazanabal</p>
+            </div>
+          </div> -->
         </div>
       </div>
 
-      <div class="grid grid-cols-12 gap-4 p-2">
+      <!-- images -->
+      <div class="grid grid-cols-12 gap-4 p-2 my-container mb-8">
         <!-- <SwiperVue
           :images="getPropertyDetailsImages"
           class="col-span-12"
@@ -91,65 +95,86 @@
         </div>
       </div>
 
-      <button
-        class="relative border border-my-blue-primary rounded-lg w-full py-5 px-2 flex justify-center items-center my-5 hover:text-white"
-        @click="toggleShowModalImages3d"
-        :class="
-          property.images3D.length === 0
-            ? 'hover:bg-gray-400 cursor-not-allowed'
-            : 'hover:bg-my-blue-primary'
-        "
-        :disabled="property.images3D.length === 0"
-      >
-        <img src="@/assets/images/Vector.svg" alt="icon 3d" class="" />
-        {{ $t("tenants.details.3d") }}
-      </button>
-      <!-- <div id="viewer" class="w-full h-96"></div> -->
-      <button
-        class="relative border border-my-blue-primary rounded-lg w-full py-9 px-2 flex justify-center items-center mb-4 hover:bg-my-blue-primary hover:text-white"
-        @click="showContactModalFunc"
-      >
-        {{ $t("tenants.details.contacts") }}
-      </button>
+      <!-- INCLUDED SERVICES -->
+      <IncludedServices
+        :services="{
+          vault: true,
+          parking: property.garage > 0,
+          cleaning: true,
+          bathrooms: property.bathrooms > 0,
+          wifi: true,
+          security: true,
+        }"
+      />
 
-      <!-- <p>
-        {{ $t("tenants.details.description") }}
-      </p> -->
+      <!-- calendar -->
+      <div class="my-container flex gap-8 my-16">
+        <CalendarComponent
+          class="flex-grow"
+          @rangeChage="getDateRange"
+          @correctRange="changeisCorrectRange"
+          :range="range"
+          :reservations="property.reservations"
+          :locationLeaseRange="{
+            start: property.startLease,
+            end: property.endLease,
+          }"
+        />
+      </div>
+      <!-- <p>start: {{ dates.start }}</p>
+      <p>end: {{ dates.end }}</p>
+      <p>isCorrect: {{ isCorrectRange }}</p> -->
 
-      <h3 class="my-title-2 my-4 mt-8">{{ $t("tenants.details.subtitle") }}</h3>
-      <hr class="solid my-4" />
-      <RoomCard
-        v-for="room in property.roomsDetails"
-        :key="room.id"
-        :room="room"
-      ></RoomCard>
+      <!-- buttons -->
+      <!-- <template>
+        <button
+          class="relative border border-my-blue-primary rounded-lg w-full py-5 px-2 flex justify-center items-center my-5 hover:text-white"
+          @click="toggleShowModalImages3d"
+          :class="
+            property.images3D.length === 0
+              ? 'hover:bg-gray-400 cursor-not-allowed'
+              : 'hover:bg-my-blue-primary'
+          "
+          :disabled="property.images3D.length === 0"
+        >
+          <img src="@/assets/images/Vector.svg" alt="icon 3d" class="" />
+          {{ $t("tenants.details.3d") }}
+        </button>
+        <button
+          class="relative border border-my-blue-primary rounded-lg w-full py-9 px-2 flex justify-center items-center mb-4 hover:bg-my-blue-primary hover:text-white"
+          @click="showContactModalFunc"
+        >
+          {{ $t("tenants.details.contacts") }}
+        </button>
+      </template> -->
+
+      <!-- ROOMS -->
+      <div class="my-container mb-20">
+        <h3 class="my-title-2 my-4 mt-8">
+          {{ $t("tenants.details.subtitle") }}
+        </h3>
+        <RoomCard
+          v-for="room in property.roomsDetails"
+          :key="room.id"
+          :room="room"
+          :locationLeaseRange="{
+            start: property.startLease,
+            end: property.endLease,
+          }"
+        ></RoomCard>
+      </div>
 
       <!-- MAP -->
-      <!-- <div class="w-full bg-gray-400 my-4">
-        <l-map style="height: 300px" :zoom="zoom" :center="markerLatLng">
-          <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
-          <l-marker :lat-lng="markerLatLng" v-if="validMarker"></l-marker>
-        </l-map>
-      </div> -->
-      <Mapa :center="markerLatLng" :zoom="zoom" />
-      <!-- <p>{{ markerLatLng }}</p> -->
+      <div class="my-container">
+        <Mapa :center="markerLatLng" :zoom="zoom" />
 
-      <!-- <button
-        class="w-full bg-my-blue-primary text-white font-bold my-btn"
-        @click="goToSchedule"
-      >
-        <router-link :to="{ name: 'tenants-schedule' }"
-          ><a> {{ $t("tenants.details.vistit") }} </a></router-link
+        <button
+          class="w-full bg-green-500 mt-2 text-white font-bold my-btn"
+          @click="goToBuyLink"
         >
-      </button> -->
-
-      <button
-        class="w-full bg-green-500 mt-2 text-white font-bold my-btn"
-        @click="goToBuyLink"
-      >
-        <a>{{ $t("tenants.details.pay") }}</a>
-      </button>
-      <!-- <p>{{ validMarker }}</p> -->
+          <a>{{ $t("tenants.details.pay") }}</a>
+        </button>
+      </div>
     </div>
 
     <!-- MODAL EXTRA IMAGES -->
@@ -211,6 +236,9 @@ import SpinerVue from "../../../components/Spiner.vue";
 import { CustomErrorToast } from "@/sweetAlert.js";
 import SwiperVue from "../Components/Swiper.vue";
 import Mapa from "../Components/GoogleCustomMap.vue";
+import CalendarComponent from "../Components/CalendarComponent.vue";
+import moment from "moment";
+import IncludedServices from "../Components/IncludedServices.vue";
 export default {
   components: {
     ModelGlobal,
@@ -219,6 +247,8 @@ export default {
     SpinerVue,
     SwiperVue,
     Mapa,
+    CalendarComponent,
+    IncludedServices,
   },
   props: {
     idProperty: {
@@ -236,14 +266,25 @@ export default {
       showModalImages3d: false,
       viewer: "",
       showContactModal: false,
+
+      // date
+      range: {
+        start: null,
+        end: null,
+      },
+      isCorrectRange: false,
     };
   },
   methods: {
     ...mapMutations("authStore", ["changeShowLoginModal"]),
     ...mapActions("propertiesStore", ["fetchPropertyDetails"]),
-    ...mapActions(["goToCheckoutSession"]),
+    ...mapActions(["goToLocationCheckoutSession"]),
     goToSchedule(e) {
       e.preventDefault();
+      if (!this.isAuth) {
+        this.changeShowLoginModal(true);
+        return;
+      }
       this.$router.push({ name: "tenants-schedule" });
     },
     async goToBuyLink() {
@@ -251,11 +292,18 @@ export default {
         this.changeShowLoginModal(true);
         return;
       }
+      if (!this.isCorrectRange) {
+        CustomErrorToast.fire({
+          icon: "warning",
+          text: this.$t("tenants.details.datesValidationMessage"),
+        });
+        return;
+      }
       try {
-        await this.goToCheckoutSession({
+        await this.goToLocationCheckoutSession({
           locationId: this.idProperty,
           userId: this.user.user.id,
-          isLocation: true,
+          range: this.dates,
         });
       } catch (error) {
         CustomErrorToast.fire({
@@ -353,6 +401,12 @@ export default {
         }
       });
     },
+    getDateRange({ range }) {
+      this.range = range;
+    },
+    changeisCorrectRange(isCorrect) {
+      this.isCorrectRange = isCorrect;
+    },
   },
   computed: {
     ...mapGetters("propertiesStore", [
@@ -378,6 +432,12 @@ export default {
       return {
         lat: Number(this.property.lat) + Number(latDeviation),
         lng: Number(this.property.long) + Number(lngDeviation),
+      };
+    },
+    dates() {
+      return {
+        start: moment(this.range.start).valueOf(),
+        end: moment(this.range.end).valueOf(),
       };
     },
   },

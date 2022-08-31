@@ -7,7 +7,7 @@
       placeholder="Los condes, Santiago, Chile"
     />
 
-    <div id="map"></div>
+    <div id="map" v-show="showMap"></div>
     <!-- resultClick
     <p>lat:{{ resultClick.lat }}</p>
     <p>long:{{ resultClick.lng }}</p>
@@ -29,6 +29,10 @@ export default {
     editing: {
       type: Boolean,
       default: false,
+    },
+    showMap: {
+      type: Boolean,
+      default: true,
     },
   },
   data() {

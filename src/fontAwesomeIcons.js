@@ -34,6 +34,7 @@ import {
   faDoorOpen,
   faRestroom,
   faTrainSubway,
+  faCaretDown,
 } from "@fortawesome/free-solid-svg-icons";
 import {
   faEnvelope,
@@ -78,7 +79,8 @@ library.add(
   faArrowRotateLeft,
   faDoorOpen,
   faRestroom,
-  faTrainSubway
+  faTrainSubway,
+  faCaretDown
 );
 
 Vue.config.productionTip = false;
