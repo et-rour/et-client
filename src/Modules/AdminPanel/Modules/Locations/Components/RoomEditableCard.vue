@@ -53,6 +53,15 @@
           />
         </span>
       </div>
+      <div class="flex justify-between items-center">
+        <label>
+          {{ $t("adminPanel.locations.roomsList.isActive") }}
+        </label>
+        <SwitchComponent
+          :value="room.isActive"
+          @toogle="changeIsActiveRoom"
+        ></SwitchComponent>
+      </div>
       <div class="flex justify-between">
         <button
           class="my-btn w-auto px-4 py-1 self-end"
@@ -83,10 +92,12 @@ import {
   CustomConfirmDialog,
 } from "@/sweetAlert";
 import ProgesBarImage from "../../../../../components/ProgesBarImage.vue";
+import SwitchComponent from "../../../../../components/SwitchComponent.vue";
 
 export default {
   components: {
     ProgesBarImage,
+    SwitchComponent,
   },
   props: {
     room: {
@@ -105,10 +116,11 @@ export default {
     ...mapGetters("adminPanelStore/locations", ["getLocationDetails"]),
   },
   methods: {
-    ...mapActions(["uploadImageTofirebase", "goToCheckoutSession"]),
+    ...mapActions(["uploadImageTofirebase", "goToRoomCheckoutSession"]),
     ...mapActions("adminPanelStore/locations", [
       "updateRoomImage",
       "updateRoom",
+      "updateRoomIsActive",
     ]),
     async uploadRoomImage(event, idRoom) {
       const image = event.target.files[0];
@@ -178,11 +190,40 @@ export default {
       });
     },
     goToBuyLink() {
-      this.goToCheckoutSession({
-        locationId: this.room.id,
+      this.goToRoomCheckoutSession({
+        roomId: this.room.id,
         userId: this.user.user.id,
-        isLocation: false,
       });
+    },
+    async changeIsActiveRoom(toogleValue) {
+      console.log(
+        "%cRoomEditableCard.vue line:200 toogleValue",
+        "color: #007acc;",
+        toogleValue
+      );
+      const changeIsActiveRoomTextAlert = toogleValue
+        ? this.$t(
+            "adminPanel.locations.roomsList.confiramtionMessages.changeToActive"
+          )
+        : this.$t(
+            "adminPanel.locations.roomsList.confiramtionMessages.changeToInactive"
+          );
+      const { isConfirmed } = await CustomConfirmDialog.fire({
+        text: changeIsActiveRoomTextAlert,
+      });
+      if (!isConfirmed) return;
+
+      try {
+        await this.updateRoomIsActive({
+          idRoom: this.room.id,
+          locationId: this.getLocationDetails.id,
+          isActive: toogleValue,
+        });
+      } catch (error) {
+        CustomErrorToast.fire({
+          text: error.response.data.message || error,
+        });
+      }
     },
   },
 };

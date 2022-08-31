@@ -1,5 +1,7 @@
 <template>
   <div class="pb-40 md:pb-6">
+    <!-- {{ userData }}
+    {{ locationData }} -->
     <div class="my-container text-center">
       <h2 class="my-title font-bold">
         {{ $t("tenants.schedule.title") }}
@@ -31,46 +33,51 @@ export default {
   },
   data() {
     return {
-      location: null,
+      userData: null,
+      locationData: null,
       calendly: null,
     };
   },
   computed: {
     ...mapGetters("authStore", ["user", "isAuth"]),
-    ...mapGetters("propertiesStore", ["propertiesById"]),
+    ...mapGetters("propertiesStore", ["getPropertyDetails"]),
     completeAddress() {
-      return `${this.location.address},${this.location.zone.zone} - ${this.location.zone.city} (${this.location.zone.state}), ${this.location.zone.country}`;
+      return `${this.locationData.address},${this.locationData.zone.zone} - ${this.locationData.zone.city} (${this.locationData.zone.state}), ${this.locationData.zone.country}`;
     },
   },
   methods: {
     initCalenly() {
-      console.log(
-        "%cSchedule.vue line:48 this.calendly",
-        "color: #007acc;",
-        this.calendly
-      );
-
       this.calendly.initInlineWidget({
         url: `${process.env.VUE_APP_VISIT}?hide_event_type_details=1&utm_campaign=normal`,
         parentElement: document.getElementById("calendly-widget"),
         prefill: {
           name: this.isAuth
-            ? `${this.user.user.firstName} ${this.user.user.lastName}`
+            ? `${this.userData.firstName} ${this.userData.lastName}`
             : "",
-          email: this.isAuth ? `${this.user.user.email}` : "",
+          email: this.isAuth ? `${this.userData.email}` : "",
           customAnswers: {
-            a1: `${this.location.name}`,
+            a1: `${this.locationData.name}`,
             a2: `${this.completeAddress}`,
             a3: "",
           },
         },
       });
     },
+    loadLocationAndUserData() {
+      this.userData = this.user.user;
+      this.locationData = this.getPropertyDetails;
+      this.calendly = null;
+      this.calendly = window.Calendly;
+      this.initCalenly();
+      console.log(
+        "%cSchedule.vue line:78 this.calendly",
+        "color: #26bfa5;",
+        this.calendly
+      );
+    },
   },
   mounted() {
-    this.location = this.propertiesById(Number(this.idLocation));
-    this.calendly = window.Calendly;
-    this.initCalenly();
+    this.loadLocationAndUserData();
   },
 
   metaInfo: {
@@ -81,6 +88,11 @@ export default {
     // const widgetScript = document.getElementById(WIDGET_ID);
     // window.Calendly.destroyBadgeWidget();
     // widgetScript.remove();
+  },
+  watch: {
+    isAuth() {
+      this.loadLocationAndUserData();
+    },
   },
 };
 </script>

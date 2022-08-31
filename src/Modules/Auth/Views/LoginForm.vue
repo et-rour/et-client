@@ -55,6 +55,7 @@
 import { ValidationObserver } from "vee-validate";
 import { mapActions, mapGetters } from "vuex";
 import { CustomErrorToast } from "@/sweetAlert";
+import { isValidToRedirect } from "../utils/redirect";
 export default {
   components: {
     ValidationObserver,
@@ -73,13 +74,16 @@ export default {
     ...mapActions("authStore", ["login", "changeShowLoginModal"]),
     async onSubmitLogin() {
       const userData = {
-        email: this.loginEmail,
+        email: this.loginEmail.toLowerCase(),
         password: this.loginPassword,
       };
       try {
         await this.login(userData);
 
         this.changeShowLoginModal(false);
+
+        if (!isValidToRedirect(this.$route.name)) return;
+
         if (this.user.user.isAdmin) {
           this.$router.push({ name: "admin-locations", hash: "#details" });
         } else if (this.user.user.isOwner) {

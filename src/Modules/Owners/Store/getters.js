@@ -48,11 +48,11 @@ export const getZonesOrderedByCity = (state) => (countrySelected) => {
       }
     }
   });
-  console.log(
-    "%cgetters.js line:56 filteredCities",
-    "color: #007acc;",
-    filteredCities
-  );
+  // console.log(
+  //   "%cgetters.js line:56 filteredCities",
+  //   "color: #007acc;",
+  //   filteredCities
+  // );
   return filteredCities;
 };
 export const getZonesOrderedByComuna = (state) => (countrySelected) => {
@@ -78,7 +78,7 @@ export const getZonesOrderedByComuna = (state) => (countrySelected) => {
       }
     }
   });
-  console.log("%cgetters.js line:56 filtered", "color: #007acc;", filtered);
+  // console.log("%cgetters.js line:56 filtered", "color: #007acc;", filtered);
   return filtered;
 };
 export const isLoading = (state) => {
