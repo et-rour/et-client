@@ -19,7 +19,7 @@ html {
   border: 0.5px solid red;
 }
 .as {
-  border: 0.5px solid yellow;
+  border: 0.5px solid green;
 }
 .zx {
   border: 0.5px solid blue;
@@ -52,6 +52,15 @@ html {
 .yellow-label {
   color: #dbbc24;
 }
+.hero-main {
+  height: calc(100vh - 190px);
+}
+@media (min-width: 768px) {
+  .hero-main {
+    height: calc(100vh - 100px);
+  }
+}
+
 @layer components {
   /* .btn-primary {
     @apply py-2 px-4 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-my-blue-primary focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75;
@@ -68,6 +77,9 @@ html {
   }
   .my-container {
     @apply container w-11/12 md:w-9/12 mx-auto;
+  }
+  .my-container-mobile {
+    @apply mb-40 md:mb-10;
   }
   .my-btn {
     @apply bg-my-blue-primary w-64 py-3 rounded-2xl text-white hover:bg-my-blue-primary-hover transition-colors;

@@ -1,38 +1,17 @@
 <template>
   <div class="w-full h-auto flex flex-col bg-gray-200">
-    <div class="w-1/3 mx-auto relative">
-      <template>
-        <img
-          v-if="room.image && room.image.length > 0"
-          :src="room.image"
-          class="w-48 h-full object-contain"
-          alt="project"
-        />
-        <img
-          v-else
-          src="@/assets/icons/image.png"
-          class="w-48 h-full object-contain border-2 border-black"
-          alt="project"
-        />
-      </template>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 relative p-6">
+      <ImageVisibility
+        v-for="image in room.imagesRoom"
+        :key="image.id"
+        :image="image"
+      />
       <div
-        @click="$refs.roomImageSelector.click()"
+        @click="showUploadImagesModal = true"
         class="w-10 h-10 rounded-full bg-gray-200 absolute right-0 bottom-0 flex justify-center items-center border-4 border-white cursor-pointer text-my-blue-primary"
       >
-        <font-awesome-icon icon="camera" />
+        <font-awesome-icon icon="plus" />
       </div>
-      <input
-        type="file"
-        class="hidden"
-        ref="roomImageSelector"
-        @change="uploadRoomImage($event, room.id)"
-      />
-      <ProgesBarImage
-        :id="`room_${room.id}`"
-        :imageUrl="imageUrl"
-        :value="ImageUploadingState"
-        class="w-full h-5"
-      />
     </div>
 
     <div class="flex flex-col gap-2 w-full p-2">
@@ -81,6 +60,16 @@
         </button>
       </div>
     </div>
+
+    <ModelUploadImages
+      :showUploadImagesModal="showUploadImagesModal"
+      @toogle="toogleShowUploadImagesModal"
+      :id="room.id"
+      :route="`/Location_${getLocationDetails.id}/Room_${room.id}/`"
+      :table="'room'"
+      :buttonText="'Close'"
+    >
+    </ModelUploadImages>
   </div>
 </template>
 
@@ -91,13 +80,15 @@ import {
   CustomToast,
   CustomConfirmDialog,
 } from "@/sweetAlert";
-import ProgesBarImage from "../../../../../components/ProgesBarImage.vue";
 import SwitchComponent from "../../../../../components/SwitchComponent.vue";
+import ModelUploadImages from "../../../../../components/ModelUploadImages.vue";
+import ImageVisibility from "../../../../../components/ImageVisibility.vue";
 
 export default {
   components: {
-    ProgesBarImage,
     SwitchComponent,
+    ModelUploadImages,
+    ImageVisibility,
   },
   props: {
     room: {
@@ -108,6 +99,7 @@ export default {
   data() {
     return {
       isSaving: false,
+      showUploadImagesModal: false,
     };
   },
   computed: {
@@ -121,6 +113,7 @@ export default {
       "updateRoomImage",
       "updateRoom",
       "updateRoomIsActive",
+      "fetchLocationDetails",
     ]),
     async uploadRoomImage(event, idRoom) {
       const image = event.target.files[0];
@@ -194,6 +187,16 @@ export default {
         roomId: this.room.id,
         userId: this.user.user.id,
       });
+    },
+    async toogleShowUploadImagesModal() {
+      this.showUploadImagesModal = !this.showUploadImagesModal;
+      try {
+        await this.fetchLocationDetails(this.getLocationDetails.id);
+      } catch (error) {
+        CustomErrorToast.fire({
+          text: error.response.data.message || error,
+        });
+      }
     },
     async changeIsActiveRoom(toogleValue) {
       console.log(

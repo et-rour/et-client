@@ -18,80 +18,50 @@
       <p class="lg:w-6/12 inline-block">{{ $t("about-us.description") }}</p>
 
       <div class="w-full flex justify-center flex-wrap gap-4 my-20">
-        <div
-          class="w-48 flex flex-col items-center"
-          v-for="person in listPersons"
+        <PersonalCard
+          v-for="person in getPersonalMembers"
           :key="person.id"
-        >
-          <img
-            src="@/assets/icons/circle-user.png"
-            alt="user-circle"
-            class="w-24 h-24 object-cover"
-          />
-          <p class="font-bold mt-2">{{ person.name }}</p>
-          <p>{{ person.charge }}</p>
-        </div>
+          :person="person"
+        />
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapActions, mapGetters } from "vuex";
+import { CustomErrorToast } from "@/sweetAlert";
+import PersonalCard from "./Components/PersonalCard.vue";
 export default {
   data() {
     return {
-      listPersons: [
-        {
-          id: 1,
-          image: "",
-          name: "Valentin Soto",
-          charge: "Fundador",
-        },
-        {
-          id: 2,
-          image: "",
-          name: "Nombre",
-          charge: "Cargo",
-        },
-        {
-          id: 3,
-          image: "",
-          name: "Nombre",
-          charge: "Cargo",
-        },
-        {
-          id: 4,
-          image: "",
-          name: "Nombre",
-          charge: "Cargo",
-        },
-        {
-          id: 5,
-          image: "",
-          name: "Nombre",
-          charge: "Cargo",
-        },
-        {
-          id: 6,
-          image: "",
-          name: "Nombre",
-          charge: "Cargo",
-        },
-        {
-          id: 7,
-          image: "",
-          name: "Nombre",
-          charge: "Cargo",
-        },
-        {
-          id: 8,
-          image: "",
-          name: "Nombre",
-          charge: "Cargo",
-        },
-      ],
+      loading: false,
     };
   },
+  methods: {
+    ...mapActions(["fetchPersonalMembers"]),
+    async fetchPersonalData() {
+      this.loading = true;
+      try {
+        await this.fetchPersonalMembers();
+      } catch (error) {
+        CustomErrorToast.fire({
+          text: error.response.data.message || error,
+        });
+      }
+      this.loading = false;
+    },
+  },
+  computed: {
+    ...mapGetters(["getPersonalMembers"]),
+  },
+  mounted() {
+    this.fetchPersonalData();
+  },
+  metaInfo: {
+    title: "Nosotros",
+  },
+  components: { PersonalCard },
 };
 </script>
 

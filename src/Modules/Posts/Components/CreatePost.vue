@@ -145,10 +145,11 @@
 
     <ModelUploadImages
       v-if="createdPostId"
-      @toogle="toogleShowUploadImagesModal"
       :showUploadImagesModal="showUploadImages"
-      :idLocation="createdPostId"
-      :route="`/Publication_${createdPostId}`"
+      @toogle="toogleShowUploadImagesModal"
+      :id="createdPostId"
+      :table="'publication'"
+      :route="`/Publication_${createdPostId}/`"
     />
   </ModelGlobal>
 </template>

@@ -46,8 +46,12 @@ export default {
       type: String,
       required: true,
     },
-    idLocation: {
+    id: {
       required: true,
+    },
+    table: {
+      required: true,
+      type: String,
     },
     buttonText: {
       default: "Close",
@@ -69,9 +73,10 @@ export default {
     sendingEvent(file, xhr, formData) {
       // formData.append("image", file);
       formData.append("token", this.user.firebaseToken);
-      formData.append("userName", this.user.user.email);
-      formData.append("route", this.route);
-      formData.append("locationId", this.idLocation);
+      formData.append("userEmail", this.user.user.email);
+      formData.append("route", this.route); // ej: /Location_1/ , /Location_1/Room_1/,  /Publication_1/,
+      formData.append("table", this.table);
+      formData.append("id", this.id);
     },
     erroHandler(file, message) {
       CustomErrorToast.fire({

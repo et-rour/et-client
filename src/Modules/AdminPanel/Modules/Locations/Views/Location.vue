@@ -1,5 +1,5 @@
 <template>
-  <div class="w-2/3 mx-auto h-full">
+  <div class="w-2/3 mx-auto mb-8">
     <div class="w-full h-full py-4 flex flex-col gap-3">
       <div class="flex items-center justify-between">
         <label for="name" class="mr-3"
@@ -184,6 +184,55 @@
         </button>
       </div>
 
+      <!-- vault -->
+      <div class="flex items-center justify-between">
+        <label for="garage" class="mr-3">
+          {{ $t("adminPanel.locations.haveVault") }}
+        </label>
+        <input
+          type="checkbox"
+          min="1"
+          class="my-input"
+          v-model="location.vault"
+        />
+      </div>
+      <!-- cleaning -->
+      <div class="flex items-center justify-between">
+        <label for="garage" class="mr-3">
+          {{ $t("adminPanel.locations.haveCleaning") }}
+        </label>
+        <input
+          type="checkbox"
+          min="1"
+          class="my-input"
+          v-model="location.cleaning"
+        />
+      </div>
+      <!-- wifi -->
+      <div class="flex items-center justify-between">
+        <label for="garage" class="mr-3">
+          {{ $t("adminPanel.locations.haveWifi") }}
+        </label>
+        <input
+          type="checkbox"
+          min="1"
+          class="my-input"
+          v-model="location.wifi"
+        />
+      </div>
+      <!-- security -->
+      <div class="flex items-center justify-between">
+        <label for="garage" class="mr-3">
+          {{ $t("adminPanel.locations.haveSecurity") }}
+        </label>
+        <input
+          type="checkbox"
+          min="1"
+          class="my-input"
+          v-model="location.security"
+        />
+      </div>
+
       <!-- coords -->
       <MapCoordsVue
         :lat="location.lat"
@@ -279,6 +328,10 @@ export default {
         lat,
         long,
         squareMeters,
+        vault,
+        cleaning,
+        wifi,
+        security,
       } = this.location;
       try {
         const updateLocationBody = {
@@ -296,6 +349,10 @@ export default {
           lat: lat,
           lng: long,
           meters: squareMeters,
+          vault,
+          cleaning,
+          wifi,
+          security,
         };
 
         this.isUploadingLocation = true;

@@ -18,6 +18,7 @@ export const changeAccessToken = (state, token) => {
 
 export const changeShowLoginModal = (state, open) => {
   state.showLoginModal = open;
+  state.showWelcomeModal = false;
 };
 export const changeShowWelcomeModal = (state, open) => {
   state.showWelcomeModal = open;
@@ -35,4 +36,4 @@ export const updateUser = (state, newUser) => {
 };
 export const setSiteCountry = (state, country) => {
   state.siteCountry = country;
-}
+};

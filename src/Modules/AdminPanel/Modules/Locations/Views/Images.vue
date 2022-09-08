@@ -28,10 +28,11 @@
     </div>
 
     <ModelUploadImagesComponent
-      @toogle="toogleShowUploadImagesModal"
       :showUploadImagesModal="showUploadImages"
-      :idLocation="getLocationDetails.id"
-      :route="`/Location_${getLocationDetails.id}`"
+      @toogle="toogleShowUploadImagesModal"
+      :id="getLocationDetails.id"
+      :route="`/Location_${getLocationDetails.id}/`"
+      :table="'location'"
     >
     </ModelUploadImagesComponent>
   </div>

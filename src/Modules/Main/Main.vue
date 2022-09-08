@@ -337,14 +337,6 @@ export default {
   background-color: #2323d5;
   color: #fff;
 }
-.hero-main {
-  height: calc(100vh - 190px);
-}
-@media (min-width: 768px) {
-  .hero-main {
-    height: calc(100vh - 100px);
-  }
-}
 
 .hero {
   height: calc(100vh - 190px);

@@ -306,6 +306,55 @@
         </button>
       </div> -->
 
+        <!-- vault -->
+        <div class="flex items-center justify-between">
+          <label for="garage" class="mr-3">
+            {{ $t("adminPanel.locations.haveVault") }}
+          </label>
+          <input
+            type="checkbox"
+            min="1"
+            class="my-input"
+            v-model="location.vault"
+          />
+        </div>
+        <!-- cleaning -->
+        <div class="flex items-center justify-between">
+          <label for="garage" class="mr-3">
+            {{ $t("adminPanel.locations.haveCleaning") }}
+          </label>
+          <input
+            type="checkbox"
+            min="1"
+            class="my-input"
+            v-model="location.cleaning"
+          />
+        </div>
+        <!-- wifi -->
+        <div class="flex items-center justify-between">
+          <label for="garage" class="mr-3">
+            {{ $t("adminPanel.locations.haveWifi") }}
+          </label>
+          <input
+            type="checkbox"
+            min="1"
+            class="my-input"
+            v-model="location.wifi"
+          />
+        </div>
+        <!-- security -->
+        <div class="flex items-center justify-between">
+          <label for="garage" class="mr-3">
+            {{ $t("adminPanel.locations.haveSecurity") }}
+          </label>
+          <input
+            type="checkbox"
+            min="1"
+            class="my-input"
+            v-model="location.security"
+          />
+        </div>
+
         <!-- coords -->
         <MapCoordsVue @result-click="setNewCoords"></MapCoordsVue>
         <p>lat:{{ location.lat }} lng:{{ location.long }}</p>
@@ -354,6 +403,11 @@ export default {
         zone: 0,
         owner: 0,
         meters: 0,
+        // services
+        vault: false,
+        cleaning: false,
+        wifi: false,
+        security: false,
       },
       country: "unselect",
       state: "unselect",
@@ -387,6 +441,10 @@ export default {
           lat: this.location.lat,
           lng: this.location.long,
           meters: this.location.meters,
+          vault: this.location.vault,
+          cleaning: this.location.cleaning,
+          wifi: this.location.wifi,
+          security: this.location.security,
         };
         await this.createLocation(body);
 

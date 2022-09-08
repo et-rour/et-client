@@ -55,7 +55,7 @@ export const getZonesOrderedByCity = (state) => (countrySelected) => {
   // );
   return filteredCities;
 };
-export const getZonesOrderedByComuna = (state) => (countrySelected) => {
+export const getZonesOrderedByComuna = (state) => (citySelected) => {
   // SORT ZONES
   const zones = [...state.zones];
   zones.sort((x, y) => {
@@ -71,7 +71,7 @@ export const getZonesOrderedByComuna = (state) => (countrySelected) => {
   // FILTER ZONES BY COUNTRY AND REMOVE DUPLICATED ZONES
   let comumeList = [];
   const filtered = zones.filter((zone) => {
-    if (zone.country === countrySelected || countrySelected === "") {
+    if (zone.city === citySelected) {
       if (!comumeList.includes(zone.zone)) {
         comumeList.push(zone.zone);
         return true;

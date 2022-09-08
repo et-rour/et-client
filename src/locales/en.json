@@ -4,6 +4,7 @@
     "saved": "Saved",
     "error": "Oops.. something went wrong",
     "confirmTitle": "Are you sure?",
+    "confirmLeaveRouterMessage": "Do you really want to leave? you have unsaved changes!",
     "confirmWarningTitle": "Before continuing",
     "confirmWarningConfirmText": "Got it!!",
     "confirmButton": "Yes do it",
@@ -156,6 +157,11 @@
   },
   "about-us": {
     "who": "ABOUT US",
+    "name": "Name",
+    "position": "Position",
+    "email": "E-mail",
+    "showEmail": "show email",
+    "showPersonalMember": "show member",
     "description": "Founded in 2019, Espacio Temporal has created commercial spaces especially to make the rental experience easier and more comfortable for SMEs, artists and entrepreneurs."
   },
   "owners": {
@@ -466,6 +472,10 @@
       "zone": "Zone",
       "owner": "Owner",
       "isActive": "Is the location activated?",
+      "haveVault": "Does the location have a Vault?",
+      "haveCleaning": "Does the location have a Cleaning service?",
+      "haveWifi": "Does the location have Wifi?",
+      "haveSecurity": "Does the location have Security?",
       "isverified": "Is the location verified?",
       "newVisit": "Schedule technical visit",
       "goToVisit": "go to calendar",

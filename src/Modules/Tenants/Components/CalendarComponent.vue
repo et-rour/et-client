@@ -17,6 +17,7 @@
         :drag-attribute="selectDragAttribute"
         @drag="dranHandler"
         @dayclick="dayClick"
+        :popover="{ visibility: 'hover-focus' }"
       >
         <template v-slot="{ inputValue, inputEvents }" v-if="isPopOver">
           <p class="text-center text-gray-400 my-5">
@@ -196,16 +197,6 @@ export default {
       this.dragValue = e;
     },
     dayClick(day) {
-      // console.log(
-      //   "\x1b[44m%s\x1b[0m",
-      //   "CalendarComponent.vue line:146 day",
-      //   JSON.stringify(day, null, "\t")
-      // );
-      console.log(
-        "%cCalendarComponent.vue line:150 moment(day).valueOf()",
-        "color: white; background-color: #007acc;",
-        moment(day.id).valueOf()
-      );
       if (day.isDisabled) return;
       this.validEndDates = [];
 

@@ -583,9 +583,11 @@
     </form>
     <ModelUploadImagesComponet
       :showUploadImagesModal="showUploadImagesModal"
-      :idLocation="idLocation"
       @toogle="toogleShowUploadImagesModal"
-      :buttonText="buttonText"
+      :id="idLocation"
+      :route="`/Location_${idLocation}/`"
+      :table="'location'"
+      :buttonText="`${$t('adminPanel.locations.imagesList.buttonText')}`"
     />
   </ValidationObserver>
 </template>
@@ -594,9 +596,10 @@
 import { mapActions, mapGetters, mapMutations } from "vuex";
 import { ValidationObserver } from "vee-validate";
 import ProgesBarVue from "@/components/ProgesBarImage.vue";
-import { CustomErrorToast } from "@/sweetAlert";
+import { CustomErrorToast, CustomConfirmDialog } from "@/sweetAlert";
 import MapCoordsVue from "../../../components/MapCoords.vue";
 import ModelUploadImagesComponet from "../../../components/ModelUploadImages.vue";
+
 export default {
   components: {
     ValidationObserver,
@@ -782,9 +785,6 @@ export default {
         phone: this.user.user.phone,
       };
     },
-    buttonText() {
-      return this.$t("adminPanel.locations.imagesList.buttonText");
-    },
     currency() {
       if (!this.zone) {
         if (this.siteCountry === "Chile") return "pesos chilenos";
@@ -832,6 +832,17 @@ export default {
   },
   metaInfo: {
     title: "Cargar Propiedad",
+  },
+  beforeRouteLeave(to, from, next) {
+    CustomConfirmDialog.fire({
+      text: this.$t("sweetAlertMessages.confirmLeaveRouterMessage"),
+    }).then((res) => {
+      if (res.isConfirmed) {
+        next();
+      } else {
+        next(false);
+      }
+    });
   },
 };
 </script>

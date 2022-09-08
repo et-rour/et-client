@@ -11,3 +11,7 @@ export const ImageUploadingState = (state) => {
 export const getHomeCoverData = (state) => {
   return state.HomeCoverData;
 };
+
+export const getPersonalMembers = (state) => {
+  return state.personal;
+};

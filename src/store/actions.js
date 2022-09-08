@@ -115,3 +115,24 @@ export const updateHomeCoverText = async ({ commit }, text) => {
   console.log({ text: res.data });
   commit("updateHomeCoverText", res.data);
 };
+
+export const fetchPersonalMembers = async ({ commit }) => {
+  const res = await EspacioTemporalAPI.get("/personal/");
+  commit("fetchPersonalMembers", res.data);
+};
+
+export const updatePersonalMember = async (
+  { commit },
+  { personalMemberInfo, id }
+) => {
+  const res = await EspacioTemporalAPI.put(
+    `/personal/${id}`,
+    personalMemberInfo
+  );
+  console.log(
+    "%cactions.js line:132 response",
+    "color: white; background-color: #007acc;",
+    res
+  );
+  commit("updatePersonalMember", { updatedPersonal: res.data });
+};
