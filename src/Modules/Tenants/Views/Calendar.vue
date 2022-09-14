@@ -1,8 +1,11 @@
 <template>
-  <div class="my-container my-container-mobile">
+  <div
+    class="my-container my-container-mobile"
+    v-if="getPropertyDetails && calendarData"
+  >
     <div class="w-full lg:w-1/2 h-80 mx-auto mb-10">
       <img
-        :src="getPropertyDetails.image"
+        :src="calendarData && calendarData.image"
         alt="cover image calendar"
         class="w-full h-full object-cover"
       />
@@ -13,11 +16,8 @@
       @rangeChage="getDateRange"
       @correctRange="changeisCorrectRange"
       :range="range"
-      :reservations="getPropertyDetails.reservations"
-      :locationLeaseRange="{
-        start: getPropertyDetails.startLease,
-        end: getPropertyDetails.endLease,
-      }"
+      :reservations="calendarData.reservations"
+      :locationLeaseRange="calendarData.leaseRange"
       :isPopOver="true"
     />
 
@@ -39,9 +39,12 @@ import Swal from "sweetalert2";
 
 export default {
   components: { CalendarComponent },
-
+  props: {
+    idRoom: { required: true, type: String },
+  },
   data() {
     return {
+      calendarData: null,
       range: {
         start: null,
         end: null,
@@ -85,9 +88,21 @@ export default {
     getDateRange({ range }) {
       this.range = range;
     },
+    loadCalendarData() {
+      const isEntire = this.idRoom === "entire" ? "entire" : "room";
+      const { reservations, leaseRange, image } = this.getCaledarData({
+        type: isEntire,
+        id: this.idRoom,
+      });
+      this.calendarData = {
+        image,
+        reservations,
+        leaseRange,
+      };
+    },
   },
   computed: {
-    ...mapGetters("propertiesStore", ["getPropertyDetails"]),
+    ...mapGetters("propertiesStore", ["getPropertyDetails", "getCaledarData"]),
     ...mapGetters("authStore", ["user"]),
     dates() {
       return {
@@ -95,6 +110,9 @@ export default {
         end: moment(this.range.end).valueOf(),
       };
     },
+  },
+  mounted() {
+    this.loadCalendarData();
   },
 };
 </script>

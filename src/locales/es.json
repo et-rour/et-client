@@ -1,6 +1,7 @@
 {
   "sweetAlertMessages": {
     "wait": "Espera un momento",
+    "saving": "Guardando {object}",
     "saved": "Guardado",
     "error": "Opps.. Algo salio mal",
     "confirmTitle": "¿Estás seguro?",
@@ -20,11 +21,19 @@
     }
   },
   "general": {
+    "copied": "Email copiado",
+
     "yes": "Si",
     "seeImage": "Ver imagen",
     "cancel": "Cancel",
     "save": "Guardar",
-    "update": "Actualizar"
+    "update": "Actualizar",
+
+    "image": "imagen | imagen | {count} imagenes",
+    "property": "propiedad",
+
+    "month": "cero meses | 1 mes | {count} meses",
+    "year": "cero años | 1 año | {count} meses"
   },
   "navbar": {
     "owner": "PUBLICA TU PROPIEDAD",
@@ -187,25 +196,31 @@
     "pintura": "Estado de pintura",
     "opcionDefault": "Seleccionar",
     "suelo": "Estado de suelo",
-    "image": "Selecciona una imagen",
+    "image": "Selecciona una imagen de portada",
+    "imagesDesc": "Cargar fotos adicionales (opcionalmente)",
+    "imagesLimit": "Solo puedes seleccionar hasta 5 images",
+    "images": "Selecciona hasta 5 images",
+    "imagesLimitSize": "Archivo: {file} es demaciado grande",
     "options": {
+      "to": "{start} a {end} meses",
+      "moreThan": "Más de {start} meses",
+      "more": "{count} o más",
       "reallyBad": "Muy Malo",
       "bad": "Malo",
       "regular": "Regular",
       "good": "Bueno",
       "reallyGood": "Excelente"
     },
-    "arriendo": "Valor de arriendo",
+    "arriendo": "Valor de arriendo esperado",
     "time": "Tiempo disponible",
-    "timeUse": "Tiempo sin uso",
+    "timeUse": "Tiempo que ha estado en desuso",
     "garage": "Estacionamiento",
-    "more": "o más",
     "submit": "CARGAR PROPIEDAD",
     "ciudad": "Ciudad",
     "tipoPropiedad": "Tipo de propiedad",
     "propiedadEntera": "Propiedad completa",
     "propiedadParcial": "Habitación/Cuarto",
-    "metros": "Area (metros cuadrados)"
+    "metros": "Tamaño de la propiedad (m2)"
   },
   "createResult": {
     "title": "El valor de arriendo aproximado por tu propiedad es",
@@ -256,7 +271,7 @@
       "payRoom": "Reservar espacio",
       "includedServises": "SERVICIOS INCLUÍDOS",
       "vault": "Bodega",
-      "parking": "Parking",
+      "parking": "Estacionamiento",
       "cleaning": "Limpieza",
       "toilets": "Baños",
       "wifi": "Wifi",

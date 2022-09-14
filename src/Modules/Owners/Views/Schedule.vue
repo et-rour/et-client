@@ -4,9 +4,6 @@
       <h2 class="my-title text-center font-bold">
         {{ $t("schedule.title") }}
       </h2>
-      <p class="text-gray-500 text-xl">
-        {{ $t("schedule.description") }}
-      </p>
     </div>
     <div class="w-full text-center">
       <div

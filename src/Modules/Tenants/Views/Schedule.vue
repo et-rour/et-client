@@ -6,9 +6,6 @@
       <h2 class="my-title font-bold">
         {{ $t("tenants.schedule.title") }}
       </h2>
-      <p class="text-gray-500 text-xl">
-        {{ $t("tenants.schedule.description") }}
-      </p>
     </div>
     <div class="w-full text-center">
       <div
@@ -25,12 +22,6 @@
 import { mapGetters } from "vuex";
 
 export default {
-  props: {
-    idLocation: {
-      type: String,
-      required: true,
-    },
-  },
   data() {
     return {
       userData: null,

@@ -1,10 +1,13 @@
 <template>
   <div>
-    <div
-      class="flex flex-col justify-center items-center h-80"
-      v-if="!property"
-    >
+    <div class="flex flex-col justify-center items-center" v-if="!property">
       <h2 class="my-title">{{ $t("tenants.details.title") }}</h2>
+      <p>{{ sidebarImages }}</p>
+      <br />
+      <br />
+      <br />
+      <br />
+      <p>{{ carouselModalImages }}</p>
     </div>
     <div class="mb-32 lg:mb-2" v-else>
       <!-- header -->
@@ -52,7 +55,7 @@
       </div>
 
       <!-- images -->
-      <div class="grid grid-cols-12 gap-4 p-2 my-container mb-8">
+      <div class="grid grid-cols-12 gap-x-4 p-2 my-container mb-8">
         <!-- <SwiperVue
           :images="getPropertyDetailsImages"
           class="col-span-12"
@@ -65,7 +68,6 @@
             alt="cover property"
             class="w-full h-44 sm:h-64 md:h-80 object-cover mb-8"
           />
-          <p>{{ property.description }}</p>
         </div>
 
         <div class="col-span-12 md:col-span-5">
@@ -74,13 +76,14 @@
               :src="image.image"
               :alt="`image_extra_${image.id}`"
               class="w-full"
-              v-for="image in getPropertyImages"
+              v-for="image in sidebarImages"
               :key="image.id"
             />
 
             <button
               class="py-2 px-3 rounded-lg flex items-center absolute right-2 bottom-2 text-xs shadow-xl border bg-white"
               @click="toggleShowModalImages"
+              v-if="sidebarImages.length > 0"
             >
               <img
                 src="@/assets/icons/menupoints.png"
@@ -98,6 +101,7 @@
             {{ $t("tenants.details.vistit") }}
           </button>
         </div>
+        <p class="col-span-12">{{ property.description }}</p>
       </div>
 
       <!-- INCLUDED SERVICES -->
@@ -141,7 +145,7 @@
       </template> -->
 
       <!-- ROOMS -->
-      <div class="my-container mb-20">
+      <div class="my-container mb-20" v-if="property.propertyType !== 'entire'">
         <h3 class="my-title-2 my-4 mt-8">
           {{ $t("tenants.details.subtitle") }}
         </h3>
@@ -161,6 +165,7 @@
         <button
           class="w-full bg-green-500 mt-2 text-white font-bold my-btn"
           @click="goToCalendar"
+          v-if="property.propertyType==='entire'"
         >
           <a>{{ $t("tenants.details.pay") }}</a>
         </button>
@@ -174,10 +179,7 @@
       v-on:toogle="toggleShowModalImages"
     >
       <div class="w-2/3 h-96 bg-white relative" @click.stop>
-        <SwiperVue
-          :images="getPropertyDetailsImages"
-          class="h-full"
-        ></SwiperVue>
+        <SwiperVue :images="carouselModalImages" class="h-full"></SwiperVue>
         <button
           class="bg-gray-500 w-10 h-10 absolute top-0 right-0 z-50"
           @click="toggleShowModalImages"
@@ -242,17 +244,10 @@ export default {
   },
   data() {
     return {
-      // MAP
       property: null,
 
       // EXTRA IMAGES
       showModalImages: false,
-      // 3D IMAGES
-      // showModalImages3d: false,
-      // viewer: "",
-      // showContactModal: false,
-
-      // date
     };
   },
   methods: {
@@ -267,12 +262,9 @@ export default {
       this.$router.push({ name: "tenants-schedule" });
     },
     async goToCalendar() {
-      if (!this.isAuth) {
-        this.changeShowLoginModal(true);
-        return;
-      }
       this.$router.push({
         name: "tenants-calendar",
+        params: { idRoom: "entire" },
       });
     },
     closeContactModal() {
@@ -369,7 +361,6 @@ export default {
   computed: {
     ...mapGetters("propertiesStore", [
       "getPropertyDetails",
-      "getPropertyDetailsImages",
       "getPropertyImages",
     ]),
     ...mapGetters("propertiesStore", ["propertiesById"]),
@@ -391,6 +382,18 @@ export default {
         lat: Number(this.property.lat) + Number(latDeviation),
         lng: Number(this.property.long) + Number(lngDeviation),
       };
+    },
+    sidebarImages() {
+      return this.getPropertyImages(
+        this.getPropertyDetails.propertyType
+      ).filter((image, index) => {
+        if (index < 4) {
+          return image;
+        }
+      });
+    },
+    carouselModalImages() {
+      return this.getPropertyImages(this.getPropertyDetails.propertyType);
     },
   },
   async mounted() {

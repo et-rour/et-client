@@ -1,6 +1,11 @@
 <template>
   <div class="w-2/3 mx-auto mb-8">
     <div class="w-full h-full py-4 flex flex-col gap-3">
+      <router-link
+        :to="{ name: 'tenants-detail', params: { id: location.id } }"
+        class="underline text-my-blue-primary text-right"
+        >{{ $t("adminPanel.locations.title") }}</router-link
+      >
       <div class="flex items-center justify-between">
         <label for="name" class="mr-3"
           >{{ $t("adminPanel.locations.name") }}

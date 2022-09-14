@@ -1,6 +1,7 @@
 {
   "sweetAlertMessages": {
     "wait": "Wait a minute",
+    "saving": "Saving {object}",
     "saved": "Saved",
     "error": "Oops.. something went wrong",
     "confirmTitle": "Are you sure?",
@@ -20,11 +21,18 @@
     }
   },
   "general": {
+    "copied": "Copied to clipboard",
     "yes": "Yes",
     "seeImage": "See image",
     "cancel": "Cancel",
     "save": "Save",
-    "update": "Update"
+    "update": "Update",
+
+    "image": "image | image | {count} images",
+    "property": "property",
+
+    "month": "no months | 1 month | {count} months",
+    "year": "no years | 1 year | {count} months"
   },
   "navbar": {
     "owner": "PUBLISH YOUR PROPERTY",
@@ -187,8 +195,15 @@
     "pintura": "paint condition",
     "opcionDefault": "Select",
     "suelo": "ground state",
+    "imagesDesc": "Upload photos optionally",
+    "images": "Select up to 5 images",
+    "imagesLimit": "You can only select up to 5 images",
+    "imagesLimitSize": "File: {file} is to large",
     "image": "Select a image",
     "options": {
+      "to": "{{start}} to {{end}} months",
+      "moreThan": "More than {{start}} months",
+      "more": "{{count}} or more",
       "reallyBad": "Really Malo",
       "bad": "Bad",
       "regular": "Regular",
@@ -199,7 +214,6 @@
     "time": "Available time",
     "timeUse": "Time without use",
     "garage": "Number of garages",
-    "more": "or more",
     "submit": "LOAD PROPERTY",
     "ciudad": "City",
     "tipoPropiedad": "Property type",

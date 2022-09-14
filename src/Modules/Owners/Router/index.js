@@ -7,8 +7,8 @@ const ResultCreateProperty = () =>
   import(
     /* webpackChunkName: "ResultCreateProperty" */ "../../Owners/Views/CreateResult.vue"
   );
-// const Schedule = () =>
-//   import(/* webpackChunkName: "Schedule" */ "../../Owners/Views/Schedule.vue");
+const Schedule = () =>
+  import(/* webpackChunkName: "Schedule" */ "../../Owners/Views/Schedule.vue");
 // const ScheduleResult = () =>
 //   import(
 //     /* webpackChunkName: "ScheduleResult" */ "../../Owners/Views/ScheduleResult.vue"
@@ -29,5 +29,10 @@ export default [
     name: "result",
     path: "/propiedad/result",
     component: ResultCreateProperty,
+  },
+  {
+    name: "schedule",
+    path: "/propiedad/cargar/schedule",
+    component: Schedule,
   },
 ];

@@ -1,5 +1,8 @@
 <template>
-  <div class="w-48 flex flex-col items-center">
+  <div
+    class="w-48 flex flex-col items-center py-6"
+    :class="!person.isVisible && 'bg-gray-200'"
+  >
     <div class="relative">
       <img
         v-if="person.image"
@@ -13,17 +16,19 @@
         alt="user-circle"
         class="w-24 h-24 object-cover"
       />
-      <a
-        :href="`mailto:${person.email}?subject=Espacio temporal - Mas información&body=Hola, ${person.name} me encantaria una charla con tigo.`"
+      <div
+        class="cursor-pointer"
         v-if="person.isEmailVisible"
+        @click="copyClopboard"
       >
         <font-awesome-icon
           icon="fa-regular fa-envelope"
           class="absolute bottom-0 right-0 bg-my-green-primary p-2 rounded-full text-white"
         />
-      </a>
+      </div>
       <div
         class="absolute bottom-0 left-0 bg-my-blue-primary rounded-full text-white w-8 h-8 text-xs flex justify-center items-center"
+        v-if="isAdmin"
         @click="isEditing = !isEditing"
       >
         <font-awesome-icon :icon="!isEditing ? 'pen' : 'times'" class="" />
@@ -81,7 +86,7 @@
 
 <script>
 import { CustomErrorToast, CustomToast } from "@/sweetAlert";
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   props: {
@@ -119,6 +124,15 @@ export default {
       this.isSaving = false;
       this.isEditing = false;
     },
+    copyClopboard() {
+      // Copy the text inside the text field
+      navigator.clipboard.writeText(this.person.email);
+
+      CustomToast.fire({ icon: "success", text: this.$t("general.copied") });
+    },
+  },
+  computed: {
+    ...mapGetters("authStore", ["isAdmin"]),
   },
   mounted() {
     this.editingPerson = {

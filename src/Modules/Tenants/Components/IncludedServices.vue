@@ -13,7 +13,7 @@
           v-show="services[service.id] === true"
         >
           <template>
-            <p class="inline-block text-left w-24">{{ service.text }}</p>
+            <p class="inline-block text-left w-36">{{ service.text }}</p>
             <img
               :src="require(`@/assets/icons/white_services/${service.image}`)"
               alt="box"

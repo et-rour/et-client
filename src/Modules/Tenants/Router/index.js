@@ -32,15 +32,14 @@ export default [
       },
       {
         name: "tenants-calendar",
-        path: "/propietario/:id/calendar",
+        path: "/propietario/:id/calendar/:idRoom",
         component: Calendar,
         props: (route) => {
           return {
-            idLocation: `${route.params.id}`,
+            idRoom: `${route.params.idRoom}`,
           };
         },
-        beforeEnter(to, from, next) {
-          console.log(to, from, next);
+        beforeEnter(_, __, next) {
           isAuth(next);
         },
       },
@@ -48,13 +47,7 @@ export default [
         name: "tenants-schedule",
         path: "/propietario/:id/schedule",
         component: Schedule,
-        props: (route) => {
-          return {
-            idLocation: `${route.params.id}`,
-          };
-        },
-        beforeEnter(to, from, next) {
-          console.log(to, from, next);
+        beforeEnter(_, __, next) {
           isAuth(next);
         },
       },
