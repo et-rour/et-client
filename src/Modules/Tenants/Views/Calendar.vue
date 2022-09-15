@@ -1,115 +1,117 @@
 <template>
   <div
-    class="my-container my-container-mobile"
-    v-if="getPropertyDetails && calendarData"
+    class="my-container my-container-mobile min-h-screen"
+    v-if="getPropertyDetails"
   >
-    <div class="w-full lg:w-1/2 h-80 mx-auto mb-10">
-      <img
-        :src="calendarData && calendarData.image"
-        alt="cover image calendar"
-        class="w-full h-full object-cover"
-      />
+    <div class="">
+      <div class="border-b flex gap-4">
+        <span
+          v-for="(step, index) in steps"
+          :key="`step_${index}`"
+          @click="partSelected = step"
+          :class="partSelected !== step && 'text-gray-400'"
+          >Paso {{ step }}</span
+        >
+      </div>
+      <!-- <div>
+        <p>{{ reservationData.reservationDateRange }}</p>
+        <p>{{ reservationData.correctReservationDateRange }}</p>
+        <p>{{ reservationData.contract }}</p>
+        <p></p>
+      </div> -->
+
+      <div class="grid grid-cols-3 text-center md:text-left">
+        <Part1
+          v-if="calendarData"
+          class="col-span-3"
+          :class="partSelected === 1 ? 'order-first' : 'hidden'"
+          @navigate="(stepDirection) => navigatePrevNext(stepDirection)"
+          :reservations="calendarData.reservations"
+          :leaseRange="calendarData.leaseRange"
+        />
+        <Part2
+          class="col-span-3"
+          :class="partSelected === 2 ? 'order-first' : 'hidden'"
+          @navigate="(stepDirection) => navigatePrevNext(stepDirection)"
+        />
+        <Part3
+          class="col-span-3"
+          :class="partSelected === 3 ? 'order-first' : 'hidden'"
+          @navigate="(stepDirection) => navigatePrevNext(stepDirection)"
+        />
+      </div>
+      <!-- {{ JSON.stringify(reservationData, null, "\t") }} -->
     </div>
-
-    <CalendarComponent
-      class="bg-white shadow-2xl py-8 px-4"
-      @rangeChage="getDateRange"
-      @correctRange="changeisCorrectRange"
-      :range="range"
-      :reservations="calendarData.reservations"
-      :locationLeaseRange="calendarData.leaseRange"
-      :isPopOver="true"
-    />
-
-    <button
-      class="w-full bg-green-500 mt-12 text-white font-bold my-btn"
-      @click="goToPayment"
-    >
-      <a>{{ $t("tenants.details.pay") }}</a>
-    </button>
   </div>
 </template>
 
 <script>
-import { CustomErrorToast } from "@/sweetAlert";
-import CalendarComponent from "../Components/CalendarComponent.vue";
-import { mapActions, mapGetters, mapMutations } from "vuex";
-import moment from "moment";
-import Swal from "sweetalert2";
+import { mapGetters, mapMutations } from "vuex";
 
+import Part1 from "../Components/Part1.vue";
+import Part2 from "../Components/Part2.vue";
+import Part3 from "../Components/Part3.vue";
 export default {
-  components: { CalendarComponent },
+  components: {
+    Part1,
+    Part2,
+    Part3,
+  },
   props: {
     idRoom: { required: true, type: String },
   },
   data() {
     return {
+      partSelected: 1,
+      steps: [1, 2, 3],
       calendarData: null,
-      range: {
-        start: null,
-        end: null,
-      },
-      isCorrectRange: false,
     };
   },
   methods: {
-    ...mapActions(["goToLocationCheckoutSession"]),
-    ...mapMutations("authStore", ["changeShowLoginModal"]),
-
-    async goToPayment() {
-      if (!this.isCorrectRange) {
-        CustomErrorToast.fire({
-          icon: "warning",
-          text: this.$t("tenants.details.datesValidationMessage"),
-        });
+    ...mapMutations("propertiesStore/reservationStorage", [
+      "changeReservationData",
+    ]),
+    navigatePrevNext(stepDirection) {
+      console.log(
+        "%cerror Calendar.vue line:68 ",
+        "color: red; display: block; width: 100%;",
+        stepDirection
+      );
+      if (stepDirection === "next") {
+        this.partSelected = this.partSelected + 1;
         return;
       }
-      try {
-        new Swal({
-          title: this.$t("sweetAlertMessages.wait"),
-          allowOutsideClick: true,
-        });
-        Swal.showLoading();
-        await this.goToLocationCheckoutSession({
-          locationId: this.getPropertyDetails.id,
-          userId: this.user.user.id,
-          range: this.dates,
-        });
-        Swal.hideLoading();
-      } catch (error) {
-        CustomErrorToast.fire({
-          text: error.response.data.message || error,
-        });
-      }
-    },
-    changeisCorrectRange(isCorrect) {
-      this.isCorrectRange = isCorrect;
-    },
-    getDateRange({ range }) {
-      this.range = range;
+      this.partSelected = this.partSelected - 1;
     },
     loadCalendarData() {
-      const isEntire = this.idRoom === "entire" ? "entire" : "room";
-      const { reservations, leaseRange, image } = this.getCaledarData({
+      const { idRoom } = this.$route.params;
+      console.log(
+        "%cPart1.vue line:95 this.$route",
+        "color: white; background-color: #007acc;",
+        this.$route
+      );
+      const isEntire = idRoom === "entire" ? "entire" : "room";
+      const { reservations, leaseRange, value, name } = this.getCaledarData({
         type: isEntire,
-        id: this.idRoom,
+        id: idRoom,
       });
       this.calendarData = {
-        image,
         reservations,
         leaseRange,
+        value,
       };
+      this.changeReservationData({
+        start: null,
+        end: null,
+        correctDate: false,
+        value,
+        name,
+      });
     },
   },
   computed: {
     ...mapGetters("propertiesStore", ["getPropertyDetails", "getCaledarData"]),
-    ...mapGetters("authStore", ["user"]),
-    dates() {
-      return {
-        start: moment(this.range.start).valueOf(),
-        end: moment(this.range.end).valueOf(),
-      };
-    },
+    ...mapGetters("propertiesStore/reservationStorage", ["reservationData"]),
   },
   mounted() {
     this.loadCalendarData();

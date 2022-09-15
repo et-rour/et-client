@@ -103,31 +103,19 @@ export const getPropertyImages = (state) => (propertyType) => {
       }
     });
   }
-  console.log(
-    "%cgetters.js line:101 imagesArray",
-    "color: white; background-color: #007acc;",
-    imagesArray
-  );
   return imagesArray;
 };
 
-// @propertyType {type:"entire"}
-// @propertyType {id:1,type:"entire"}
-// id only needed in case of propertyType room
 export const getCaledarData = (state) => (data) => {
-  if (state.propertyDetails === null) {
-    return {
-      image: null,
-      reservations: [],
-      leaseRange: {
-        start: null,
-        end: null,
-      },
-    };
-  }
+  let calendarData;
 
+  if (!state.propertyDetails) {
+    return null;
+  }
   if (data.type === "entire") {
-    return {
+    calendarData = {
+      name: state.propertyDetails.name,
+      value: state.propertyDetails.value,
       image: state.propertyDetails.image,
       reservations: [...state.propertyDetails.reservations],
       leaseRange: {
@@ -135,16 +123,20 @@ export const getCaledarData = (state) => (data) => {
         end: state.propertyDetails.endLease,
       },
     };
+  } else {
+    const room = state.propertyDetails.roomsDetails.find(
+      (room) => room.id === Number(data.id)
+    );
+    calendarData = {
+      name: `${state.propertyDetails.name} \n -${room.name}`,
+      value: room.value,
+      image: room.imagesRoom[0] && room.imagesRoom[0].image,
+      reservations: [...room.reservations],
+      leaseRange: {
+        start: room.startLease,
+        end: room.endLease,
+      },
+    };
   }
-  const room = state.propertyDetails.roomsDetails.find(
-    (room) => room.id === Number(data.id)
-  );
-  return {
-    image: room.imagesRoom[0] && room.imagesRoom[0].image,
-    reservations: [...room.reservations],
-    leaseRange: {
-      start: room.startLease,
-      end: room.endLease,
-    },
-  };
+  return calendarData;
 };

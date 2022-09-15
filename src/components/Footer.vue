@@ -39,7 +39,7 @@
       </ul>
       <form
         class="row-start-2 col-start-1 col-end-4 flex flex-col border-b"
-        action="https://formsubmit.co/info@espaciotemporal.cl"
+        :action="`https://formsubmit.co/${email}`"
         method="POST"
       >
         <p>{{ $t("footer.form.Contact") }}</p>
@@ -65,13 +65,12 @@
             />
           </div>
           <div class="flex gap-2 flex-col">
-            <input
-              type="text"
+            <textarea
               name="message"
+              cols="30"
               class="my-input text-black h-full p-1"
               :placeholder="$t('footer.form.message')"
-              cols="30"
-            />
+            ></textarea>
           </div>
           <div class="flex gap-2 flex-col">
             <VueRecaptcha
@@ -158,6 +157,9 @@ export default {
   computed: {
     siteKey() {
       return `${process.env.VUE_APP_CAPTCHA_API}`;
+    },
+    email() {
+      return process.env.VUE_APP_MAIL_TO;
     },
   },
 };

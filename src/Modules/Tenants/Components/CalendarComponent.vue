@@ -20,9 +20,6 @@
         :popover="{ visibility: 'hover-focus' }"
       >
         <template v-slot="{ inputValue, inputEvents }" v-if="isPopOver">
-          <p class="text-center text-gray-400 my-5">
-            {{ $t("tenants.details.selectDate") }}
-          </p>
           <div
             class="flex items-center justify-between sm:justify-center sm:gap-8"
           >
@@ -33,7 +30,7 @@
               <input
                 :value="inputValue.start"
                 v-on="inputEvents.start"
-                class="border px-2 py-1 w-32 focus:outline-none bg-gray-300"
+                class="border px-2 py-1 w-32 focus:outline-none bg-gray-200"
               />
               <font-awesome-icon
                 icon="caret-down"
@@ -48,7 +45,7 @@
               <input
                 :value="inputValue.end"
                 v-on="inputEvents.end"
-                class="border px-2 py-1 w-32 focus:outline-none bg-gray-300"
+                class="border px-2 py-1 w-32 focus:outline-none bg-gray-200"
               />
               <font-awesome-icon
                 icon="caret-down"
@@ -80,7 +77,7 @@
 
     <div
       v-if="showDetailsCard"
-      class="border shadow-xl my-4 px-6 py-4 rounded-2xl flex-shrink w-full md:w-80 grid grid-cols-2 gap-2"
+      class="my-4 px-6 py-4 rounded-2xl flex-shrink w-full md:w-80 grid grid-cols-2 gap-2"
     >
       <div class="text-sm">
         <p class="font-bold">{{ $t("tenants.details.start") }}:</p>

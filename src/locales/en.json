@@ -22,6 +22,11 @@
   },
   "general": {
     "copied": "Copied to clipboard",
+
+    "next": "Following",
+    "previus": "Previous",
+    "finish": "Finish your payment",
+
     "yes": "Yes",
     "seeImage": "See image",
     "cancel": "Cancel",
@@ -128,12 +133,24 @@
   },
   "questions": {
     "title": "Frequent questions",
-    "question1": "1. What requirements are required to rent a room?",
-    "response1": "One month guarantee payment is required.",
-    "question2": "2. What services are included?",
-    "response2": "The value of the lease includes all the basic expenses of the house: water, electricity, piped gas, Wi-Fi internet and cleaning service for common areas. Spaces such as the kitchen, living room and garden are for shared use. An administrator lives in all our properties, who is in charge of the residence to help you solve any problem and manage a good stay.",
-    "question3": "3. Do you have car parking?",
-    "response3": "Some properties have parking. An extra of $20,000.- per month must be considered in addition to the normal values of a room.",
+    "question1": "1. Who can rent a work space with Temporary Space?",
+    "response1": "Any person, Chilean or foreign. \n In all our centers we have an administrator, who is willing to help you, to solve any problem you have.",
+    "question2": "2. What requirements are required to rent a work space?",
+    "response2": "One month guarantee payment is required.",
+    "question3": "3. What is the minimum rental period?",
+    "response3": "The minimum rental period is 6 months. In any case, if we have several spaces available, we can make the period more flexible according to your needs.",
+    "question4": "4. Can I vacate a workspace early at the end of the contract?",
+    "response4": "Yes, but you will not be able to recover the guarantee paid.",
+    "question5": "5. Are common expenses paid?",
+    "response5": "Yes, $20,000 per month. With this, the basic expenses of the centers are covered: water, electricity, Wi-Fi internet, alarm and cleaning service for common areas.",
+    "question6": "What are the center hours?",
+    "response6": "All our centers open from Monday to Friday at 9 am and close at 7 pm.",
+    "question7": "Can I sleep in my workspace?",
+    "response7": "No, the spaces are exclusively for commercial purposes. At night they stay with the alarms activated and nobody can stay to stay.",
+    "question8": "How can I reserve work space and pay my monthly payments?",
+    "response8": "You can reserve a space directly on our website (webpay) or by making a deposit/transfer to the current account of Espacio Temporal. You can request the data by email.",
+    "question9": "Do you have car or motorcycle parking?",
+    "response9": "Some centers have parking. It is necessary to consider an extra of $20,000.- monthly to the normal values ​​of the spaces.",
     "help": "Need help? write us",
     "name": "Name",
     "email": "E-mail",
@@ -297,6 +314,12 @@
       "description": "You can tour the facilities and learn more about the property",
       "schedule": "Schedule",
       "vistit": "SCHEDULE A TECHNICAL VISIT"
+    },
+    "calendar": {
+      "Paso1": "choose a date",
+      "see": "See contract",
+      "Paso2": "sign your contract",
+      "Paso3": "Review and add to cart"
     },
     "stripe": {
       "success": {

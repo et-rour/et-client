@@ -9,15 +9,38 @@
       <p>{{ $t("questions.response1") }}</p>
       <p class="text-xl font-bold">{{ $t("questions.question2") }}</p>
       <p>{{ $t("questions.response2") }}</p>
+
       <p class="text-xl font-bold">{{ $t("questions.question3") }}</p>
       <p>{{ $t("questions.response3") }}</p>
+
+      <p class="text-xl font-bold">{{ $t("questions.question4") }}</p>
+      <p>{{ $t("questions.response4") }}</p>
+
+      <p class="text-xl font-bold">{{ $t("questions.question5") }}</p>
+      <p>{{ $t("questions.response5") }}</p>
+
+      <p class="text-xl font-bold">{{ $t("questions.question6") }}</p>
+      <p>{{ $t("questions.response6") }}</p>
+
+      <p class="text-xl font-bold">{{ $t("questions.question7") }}</p>
+      <p>{{ $t("questions.response7") }}</p>
+
+      <p class="text-xl font-bold">{{ $t("questions.question8") }}</p>
+      <p>{{ $t("questions.response8") }}</p>
+
+      <p class="text-xl font-bold">{{ $t("questions.question9") }}</p>
+      <p>{{ $t("questions.response9") }}</p>
     </div>
 
     <hr class="my-14" />
 
-    <form class="w-full sm:w-11/12 md:w-4/6 lg:w-3/6 mx-auto md:mx-0 mb-10">
+    <form
+      class="w-full sm:w-11/12 md:w-4/6 lg:w-3/6 mx-auto md:mx-0 mb-10"
+      method="POST"
+      :action="`https://formsubmit.co/${email}`"
+    >
       <h3 class="my-title mb-8 text-center md:text-left">
-        {{ $t("questions.help") }}
+        {{ $t("questions.help") }} {{ email }}
       </h3>
 
       <div class="my-3 flex items-center w-full md:w-2/3">
@@ -54,7 +77,13 @@
 </template>
 
 <script>
-export default {};
+export default {
+  computed: {
+    email() {
+      return process.env.VUE_APP_MAIL_TO;
+    },
+  },
+};
 </script>
 
 <style></style>

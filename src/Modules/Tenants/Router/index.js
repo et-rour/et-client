@@ -3,7 +3,7 @@ import LocationLayout from "../Layout/Layout.vue";
 import LocationDetails from "../Views/locationDetails.vue";
 import Calendar from "../Views/Calendar.vue";
 import Schedule from "../Views/Schedule.vue";
-import { isAuth } from "../../../Guards/isAuth";
+import { isAuth, isValidCalendarLease } from "../../../Guards/isAuth";
 export default [
   {
     name: "tenants",
@@ -39,8 +39,18 @@ export default [
             idRoom: `${route.params.idRoom}`,
           };
         },
-        beforeEnter(_, __, next) {
-          isAuth(next);
+        beforeEnter(to, __, next) {
+          const type = to.params.idRoom === "entire" ? "entire" : "room";
+          if (!isValidCalendarLease(type, to.params.idRoom)) {
+            next({
+              name: "tenants-detail",
+              params: { idProperty: to.params.idProperty },
+            });
+          }
+          if (isAuth()) {
+            next(true);
+          }
+          next(false);
         },
       },
       {
@@ -48,7 +58,10 @@ export default [
         path: "/propietario/:id/schedule",
         component: Schedule,
         beforeEnter(_, __, next) {
-          isAuth(next);
+          if (isAuth()) {
+            next(true);
+          }
+          next(false);
         },
       },
     ],

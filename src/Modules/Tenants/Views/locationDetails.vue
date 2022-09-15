@@ -2,12 +2,6 @@
   <div>
     <div class="flex flex-col justify-center items-center" v-if="!property">
       <h2 class="my-title">{{ $t("tenants.details.title") }}</h2>
-      <p>{{ sidebarImages }}</p>
-      <br />
-      <br />
-      <br />
-      <br />
-      <p>{{ carouselModalImages }}</p>
     </div>
     <div class="mb-32 lg:mb-2" v-else>
       <!-- header -->
@@ -165,7 +159,7 @@
         <button
           class="w-full bg-green-500 mt-2 text-white font-bold my-btn"
           @click="goToCalendar"
-          v-if="property.propertyType==='entire'"
+          v-if="property.propertyType === 'entire'"
         >
           <a>{{ $t("tenants.details.pay") }}</a>
         </button>

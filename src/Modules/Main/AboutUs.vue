@@ -1,5 +1,5 @@
 <template>
-  <div class="mb-24 md:mb-0 w-full">
+  <div class="my-container-mobile w-full">
     <div class="my-container hero-main rounded-3xl overflow-hidden relative">
       <img
         src="@/assets/images/OrgEspacioTemporal.jpeg"
@@ -24,6 +24,23 @@
           :person="person"
         />
       </div>
+    </div>
+    <div class="my-container text-center">
+      <h4 class="font-bold text-xl mb-4">Contacto</h4>
+      <p class="flex justify-center mb-4">
+        <span
+          class="flex justify-center items-center border border-black w-8 h-8 rounded-full mr-2"
+          ><font-awesome-icon icon="fa-regular fa-envelope" class=""
+        /></span>
+        <span> Email: info@espaciotemporal.cl </span>
+      </p>
+      <p class="flex justify-center">
+        <span
+          class="flex justify-center items-center border border-black w-8 h-8 rounded-full mr-2"
+          ><font-awesome-icon icon="fa-brands fa-whatsapp" class=""
+        /></span>
+        <span> Whatsapp: +56 9 2181 1458 </span>
+      </p>
     </div>
   </div>
 </template>
