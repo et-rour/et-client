@@ -40,7 +40,7 @@
       :action="`https://formsubmit.co/${email}`"
     >
       <h3 class="my-title mb-8 text-center md:text-left">
-        {{ $t("questions.help") }} {{ email }}
+        {{ $t("questions.help") }}
       </h3>
 
       <div class="my-3 flex items-center w-full md:w-2/3">

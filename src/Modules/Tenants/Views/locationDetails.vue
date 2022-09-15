@@ -11,7 +11,7 @@
           class="w-full flex flex-col md:flex-row md:gap-4 justify-between mb-6 text-center xl::text-left"
         >
           <p>
-            {{ property.address }}, {{ property.zone.city }} -
+            {{ property.zone.city }} -
             {{ property.zone.state }}
           </p>
 

@@ -39,7 +39,7 @@ export default {
   methods: {
     initCalenly() {
       this.calendly.initInlineWidget({
-        url: `${process.env.VUE_APP_VISIT}?hide_event_type_details=1&utm_campaign=normal`,
+        url: `${process.env.VUE_APP_VISIT}?hide_event_type_details=1&hide_gdpr_banner=1&primary_color=2323d5&utm_campaign=normal`,
         parentElement: document.getElementById("calendly-widget"),
         prefill: {
           name: this.isAuth
