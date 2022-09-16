@@ -17,14 +17,12 @@ import { mapGetters } from 'vuex';
         class="text-gray-400"
       >
         <a class="text-black" v-if="property.value !== '0'"
-          >{{ currency.symbol }}
-          {{ (parseInt(property.value) * parseInt(currency.value)).toFixed(0) }}
-          / {{ $t("landing.propertyCard.montly") }}
+          >{{ currency }} / {{ $t("landing.propertyCard.montly") }}
         </a>
         <span class="text-black" v-else
           >{{ $t("landing.propertyCard.noValue") }} /
         </span>
-        - {{ property.name }}
+        - {{ property.zone.city }}, {{ property.zone.zone }}
         <!-- <p>
           zone:{{ property.zone.zone }} city:{{ property.zone.city }} country:
           {{ property.zone.country }}
@@ -48,21 +46,22 @@ export default {
     ...mapGetters("postsStore", ["currencies"]),
     ...mapGetters("authStore", ["siteCountry"]),
     currency() {
-      let backUpCurrency;
+      if (this.siteCountry === "") {
+        return `$US ${this.property.value} `;
+      }
+
       for (let i = 0; i < this.currencies.length; i++) {
-        if (this.currencies[i].country === 'Chile') backUpCurrency = { symbol: this.currencies[i].symbol, value: this.currencies[i].value }
         if (this.currencies[i].country === this.siteCountry) {
-          return {
-            symbol: this.currencies[i].symbol,
-            value: this.currencies[i].value,
-          };
+          return `${this.currencies[i].symbol} ${(
+            parseInt(this.property.value) * this.currencies[i].value
+          ).toFixed(0)} `;
         }
       }
-      return backUpCurrency;
+      return "";
     },
   },
   mounted() {
-    console.log('currency', this.siteCountry)
-  }
+    console.log("currency", this.siteCountry);
+  },
 };
 </script>

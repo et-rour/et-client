@@ -32,14 +32,14 @@
     <ModelGlobal :showModal="showVideoModal" v-on:toogle="toogleShowModal">
       <div class="w-2/3 h-1/3 md:h-2/3 bg-white" @click.stop>
         <!-- <iframe
-          class="w-full h-full"
           src="https://www.youtube.com/embed/u31qwQUeGuM"
           title="YouTube video player"
           frameborder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowfullscreen
-        ></iframe> -->
+          ></iframe> -->
         <video
+          class="w-full h-full"
           playsinline
           autoplay
           loop

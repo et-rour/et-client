@@ -13,13 +13,8 @@
         ><a> {{ property.name }} </a></router-link
       >
       <p class="text-gray-500">
-        <span class="text-black"
-          >{{ currency.symbol }}
-          {{
-            (parseInt(property.value) * parseInt(currency.value)).toFixed(0)
-          }}</span
-        >
-        / {{ property.address }}
+        <span class="text-black">{{ currency }}</span>
+        / {{ property.zone.city }}, {{ property.zone.zone }}
       </p>
     </div>
   </div>
@@ -39,15 +34,18 @@ export default {
     ...mapGetters("postsStore", ["currencies"]),
     ...mapGetters("authStore", ["siteCountry"]),
     currency() {
+      if (this.siteCountry === "") {
+        return `$US ${this.property.value} `;
+      }
+
       for (let i = 0; i < this.currencies.length; i++) {
         if (this.currencies[i].country === this.siteCountry) {
-          return {
-            symbol: this.currencies[i].symbol,
-            value: this.currencies[i].value,
-          };
+          return `${this.currencies[i].symbol} ${(
+            parseInt(this.property.value) * this.currencies[i].value
+          ).toFixed(0)} `;
         }
       }
-      return "US$";
+      return "";
     },
   },
 };
