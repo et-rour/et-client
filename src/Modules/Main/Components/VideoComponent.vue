@@ -48,7 +48,7 @@
           ref="myVideo"
         >
           <source
-            :src="require('@/assets/videos/Espacios Temporales.mp4')"
+            src="https://firebasestorage.googleapis.com/v0/b/espacio-temporal-9a372.appspot.com/o/Espacios%20Temporales.mp4?alt=media&token=7dda93d1-91b9-4e40-a125-67b7911c1908"
             type="video/mp4"
           />
         </video>
