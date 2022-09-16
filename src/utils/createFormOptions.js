@@ -6,6 +6,7 @@ export default {
     { label: i18n.t("createForm.propiedadParcial"), value: "room" },
   ],
   rooms: [
+    { name: "No aplica", value: -1 },
     { name: "1", value: 1 },
     { name: "2", value: 2 },
     { name: "3", value: 3 },
@@ -13,6 +14,7 @@ export default {
     { name: i18n.t("createForm.options.more", { count: 5 }), value: 5 },
   ],
   bathrooms: [
+    { name: "No aplica", value: -1 },
     { name: "1", value: 1 },
     { name: "2", value: 2 },
     { name: "3", value: 3 },
@@ -27,6 +29,7 @@ export default {
     { name: "Excelente", value: 5 },
   ],
   garage: [
+    { name: "No aplica", value: -1 },
     { name: "0", value: 1 },
     { name: "1", value: 2 },
     { name: "2", value: 3 },
@@ -42,9 +45,10 @@ export default {
     { name: i18n.tc("general.month", 6, { count: 6 }), value: 1 },
     { name: i18n.tc("general.year", 1, { count: 1 }), value: 2 },
     { name: i18n.tc("general.year", 2, { count: 2 }), value: 3 },
-    { name: i18n.tc("general.year", 3, { count: 3 }), value: 4 },
+    { name: `+ ${i18n.tc("general.year", 3, { count: 3 })}`, value: 4 },
   ],
   timeUnused: [
+    { name: "No aplica", value: -1 },
     { name: i18n.t("createForm.options.to", { start: 1, end: 3 }), value: 1 },
     { name: i18n.t("createForm.options.to", { start: 4, end: 6 }), value: 2 },
     { name: i18n.t("createForm.options.to", { start: 7, end: 9 }), value: 3 },

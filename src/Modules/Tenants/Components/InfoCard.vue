@@ -35,7 +35,11 @@ export default {
     ...mapGetters("authStore", ["siteCountry"]),
     currency() {
       if (this.siteCountry === "") {
-        return `$US ${this.property.value} `;
+        const clCurrency = this.currencies.filter( el => el.country === 'Chile');
+        // return `$US ${this.property.value} `;
+        return `${clCurrency[0].symbol} ${(
+            parseInt(this.property.value) * clCurrency[0].value
+          ).toFixed(0)} `;
       }
 
       for (let i = 0; i < this.currencies.length; i++) {
