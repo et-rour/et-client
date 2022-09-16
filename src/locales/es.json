@@ -37,7 +37,7 @@
     "property": "propiedad",
 
     "month": "cero meses | 1 mes | {count} meses",
-    "year": "cero años | 1 año | {count} meses"
+    "year": "cero años | 1 año | {count} años"
   },
   "navbar": {
     "owner": "PUBLICA TU PROPIEDAD",
@@ -228,7 +228,7 @@
       "reallyGood": "Excelente"
     },
     "arriendo": "Valor de arriendo esperado",
-    "time": "Tiempo disponible",
+    "time": "Período de arriendo disponible",
     "timeUse": "Tiempo que ha estado en desuso",
     "garage": "Estacionamiento",
     "submit": "CARGAR PROPIEDAD",

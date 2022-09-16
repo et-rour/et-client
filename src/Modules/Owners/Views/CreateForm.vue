@@ -137,7 +137,7 @@
         <hr class="solid my-4" />
 
         <!-- direccion -->
-        <div class="flex items-center justify-between mb-2">
+        <!-- <div class="flex items-center justify-between mb-2">
           <label class="text-lg" for="direccion">{{
             $t("createForm.dirección")
           }}</label>
@@ -153,7 +153,7 @@
             />
             <span class="my-error relative top-0 left-0">{{ errors[0] }}</span>
           </ValidationProvider>
-        </div>
+        </div> -->
 
         <!-- description -->
         <div class="flex items-start justify-between mb-2">
@@ -669,7 +669,7 @@ export default {
       }
       const propertyData = {
         name: this.name,
-        address: this.address,
+        address: "",
         zone: this.zone,
         rooms: this.rooms,
         bathrooms: this.bathrooms,
