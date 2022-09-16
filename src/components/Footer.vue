@@ -2,9 +2,6 @@
   <div
     class="w-full h-96 bg-gray-900 flex-col justify-center items-center text-white hidden md:flex relative"
   >
-    <div class="absolute top-0 left-0 text-gray-900">
-      version: {{ appVersion }}
-    </div>
     <div class="w-9/12 grid grid-cols-3 grid-rows-2 px-20">
       <img src="@/assets/icons/logoFooter.png" alt="logotipo footer" />
       <ul>
@@ -39,7 +36,7 @@
       </ul>
       <form
         class="row-start-2 col-start-1 col-end-4 flex flex-col border-b"
-        action="https://formsubmit.co/info@espaciotemporal.cl"
+        :action="`https://formsubmit.co/${email}`"
         method="POST"
       >
         <p>{{ $t("footer.form.Contact") }}</p>
@@ -65,13 +62,12 @@
             />
           </div>
           <div class="flex gap-2 flex-col">
-            <input
-              type="text"
+            <textarea
               name="message"
+              cols="30"
               class="my-input text-black h-full p-1"
               :placeholder="$t('footer.form.message')"
-              cols="30"
-            />
+            ></textarea>
           </div>
           <div class="flex gap-2 flex-col">
             <VueRecaptcha
@@ -100,7 +96,6 @@
 import { VueRecaptcha } from "vue-recaptcha";
 import EspacioTemporalAPI from "@/Api/index.js";
 import { CustomErrorToast } from "@/sweetAlert";
-import { version } from "../../package";
 
 export default {
   components: { VueRecaptcha },
@@ -111,7 +106,6 @@ export default {
       status: "",
       sucessfulServerResponse: "",
       serverError: "",
-      appVersion: version,
     };
   },
   methods: {
@@ -158,6 +152,9 @@ export default {
   computed: {
     siteKey() {
       return `${process.env.VUE_APP_CAPTCHA_API}`;
+    },
+    email() {
+      return process.env.VUE_APP_MAIL_TO;
     },
   },
 };

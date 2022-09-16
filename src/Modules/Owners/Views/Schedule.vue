@@ -4,9 +4,6 @@
       <h2 class="my-title text-center font-bold">
         {{ $t("schedule.title") }}
       </h2>
-      <p class="text-gray-500 text-xl">
-        {{ $t("schedule.description") }}
-      </p>
     </div>
     <div class="w-full text-center">
       <div
@@ -47,7 +44,7 @@ export default {
       const { name } = this.$route.params.location;
 
       this.calendly.initInlineWidget({
-        url: `${process.env.VUE_APP_VISIT}?hide_event_type_details=1&utm_campaign=tecnica`,
+        url: `${process.env.VUE_APP_VISIT}?hide_event_type_details=1&hide_gdpr_banner=1&primary_color=2323d5&utm_campaign=tecnica`,
         parentElement: document.getElementById("calendly-widget"),
         prefill: {
           name: this.isAuth

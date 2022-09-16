@@ -9,10 +9,10 @@ const ResultCreateProperty = () =>
   );
 const Schedule = () =>
   import(/* webpackChunkName: "Schedule" */ "../../Owners/Views/Schedule.vue");
-const ScheduleResult = () =>
-  import(
-    /* webpackChunkName: "ScheduleResult" */ "../../Owners/Views/ScheduleResult.vue"
-  );
+// const ScheduleResult = () =>
+//   import(
+//     /* webpackChunkName: "ScheduleResult" */ "../../Owners/Views/ScheduleResult.vue"
+//   );
 
 export default [
   {
@@ -27,17 +27,12 @@ export default [
   },
   {
     name: "result",
-    path: "/propiedad/cargar/result",
+    path: "/propiedad/result",
     component: ResultCreateProperty,
   },
   {
     name: "schedule",
     path: "/propiedad/cargar/schedule",
     component: Schedule,
-  },
-  {
-    name: "scheduleResult",
-    path: "/propiedad/cargar/schedule/result",
-    component: ScheduleResult,
   },
 ];

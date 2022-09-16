@@ -1,7 +1,9 @@
 import Index from "../Views/index.vue";
-import locationDetails from "../Views/locationDetails.vue";
-const Schedule = () =>
-  import(/* webpackChunkName: "Schedule" */ "../Views/Schedule.vue");
+import LocationLayout from "../Layout/Layout.vue";
+import LocationDetails from "../Views/locationDetails.vue";
+import Calendar from "../Views/Calendar.vue";
+import Schedule from "../Views/Schedule.vue";
+import { isAuth, isValidCalendarLease } from "../../../Guards/isAuth";
 export default [
   {
     name: "tenants",
@@ -9,23 +11,59 @@ export default [
     component: Index,
   },
   {
-    name: "tenants-detail",
+    name: "tenants-layout",
     path: "/propietario/:id",
-    component: locationDetails,
+    component: LocationLayout,
     props: (route) => {
       return {
         idProperty: route.params.id,
       };
     },
-  },
-  {
-    name: "tenants-schedule",
-    path: "/propietario/:id/schedule",
-    component: Schedule,
-    props: (route) => {
-      return {
-        idLocation: `${route.params.id}`,
-      };
-    },
+    children: [
+      {
+        name: "tenants-detail",
+        path: "/propietario/:id/details",
+        component: LocationDetails,
+        props: (route) => {
+          return {
+            idProperty: route.params.id,
+          };
+        },
+      },
+      {
+        name: "tenants-calendar",
+        path: "/propietario/:id/calendar/:idRoom",
+        component: Calendar,
+        props: (route) => {
+          return {
+            idRoom: `${route.params.idRoom}`,
+          };
+        },
+        beforeEnter(to, __, next) {
+          const type = to.params.idRoom === "entire" ? "entire" : "room";
+          if (!isValidCalendarLease(type, to.params.idRoom)) {
+            next({
+              name: "tenants-detail",
+              params: { idProperty: to.params.idProperty },
+            });
+          }
+          if (isAuth()) {
+            next(true);
+          }
+          next(false);
+        },
+      },
+      {
+        name: "tenants-schedule",
+        path: "/propietario/:id/schedule",
+        component: Schedule,
+        beforeEnter(_, __, next) {
+          if (isAuth()) {
+            next(true);
+          }
+          next(false);
+        },
+      },
+    ],
   },
 ];

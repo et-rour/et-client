@@ -1,8 +1,10 @@
 <template>
   <div class="mb-24 w-full">
-    <div class="my-container hero-main rounded-3xl overflow-hidden relative">
+    <div
+      class="my-container rounded-3xl overflow-hidden relative object-contain"
+    >
       <img
-        src="@/assets/images/OrgEspacioTemporal.jpeg"
+        src="@/assets/images/how-it-works-2.png"
         alt="Hero image"
         class="w-full h-full object-cover"
       />
@@ -65,6 +67,9 @@ export default {
         },
       ],
     };
+  },
+  metaInfo: {
+    title: "¿Como Funciona?",
   },
 };
 </script>

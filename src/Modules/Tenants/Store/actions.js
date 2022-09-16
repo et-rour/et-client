@@ -86,3 +86,19 @@ export const fetchPropertyDetails = async ({ commit }, propertyId) => {
   commit("cleanImageInfo");
   commit("fetchPropertyDetails", location);
 };
+
+export const uploadPropertyArrayImages = async (_, { id, images }) => {
+  var formData = new FormData();
+  formData.append("id", id);
+  formData.append("table", "location");
+  formData.append("route", `/Location_${id}`);
+  images.forEach((element) => {
+    formData.append("images", element);
+  });
+  const res = await EspacioAPI.post("/images/multi", formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+  return res.data;
+};

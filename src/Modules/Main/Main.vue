@@ -1,6 +1,9 @@
 <template>
   <div class="w-full mx-auto mb-24 md:mb-2">
     <!-- hero -->
+    <div class="absolute top-0 left-0 text-gray-100">
+      version: {{ appVersion }}
+    </div>
     <CoverImageVue />
 
     <VideoComponent></VideoComponent>
@@ -225,6 +228,7 @@ import Spiner from "../../components/Spiner.vue";
 import VideoComponent from "./Components/VideoComponent.vue";
 import CoverImageVue from "./Components/CoverImage.vue";
 import FilterLocationsComponent from "../../components/FilterLocationsComponent.vue";
+import { version } from "../../../package.json";
 export default {
   components: {
     PropertyCard,
@@ -238,6 +242,7 @@ export default {
       propertiesListFiltered: [],
       resetVisible: true,
       paginate: ["propertiesData"],
+      appVersion: version,
     };
   },
   computed: {
@@ -336,14 +341,6 @@ export default {
 .selectedField {
   background-color: #2323d5;
   color: #fff;
-}
-.hero-main {
-  height: calc(100vh - 190px);
-}
-@media (min-width: 768px) {
-  .hero-main {
-    height: calc(100vh - 100px);
-  }
 }
 
 .hero {

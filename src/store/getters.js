@@ -11,3 +11,23 @@ export const ImageUploadingState = (state) => {
 export const getHomeCoverData = (state) => {
   return state.HomeCoverData;
 };
+
+export const getPersonalMembers = (state) => {
+  console.log(
+    "%cgetters.js line:16 state.authStore.user",
+    "color: white; background-color: #007acc;",
+    state.authStore.user
+  );
+  const userIsAdmin = state.authStore.user && state.authStore.user;
+
+  if (!userIsAdmin) {
+    let newPersonalArray = state.personal.filter((person) => {
+      if (person.isVisible) {
+        return person;
+      }
+    });
+    return newPersonalArray;
+  } else {
+    return [...state.personal];
+  }
+};

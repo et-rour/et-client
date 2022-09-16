@@ -128,7 +128,7 @@ export default {
       return this.getZonesOrderedByCity(this.siteCountry);
     },
     filteredZones() {
-      return this.getZonesOrderedByComuna(this.siteCountry);
+      return this.getZonesOrderedByComuna(this.city);
     },
   },
   mounted() {},

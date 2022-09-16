@@ -5,8 +5,8 @@
 
       <div class="w-full rounded-3xl overflow-hidden">
         <Swiper
-          v-if="post.images && post.images.length > 0"
-          :images="post.images"
+          v-if="post.imagesPublication && post.imagesPublication.length > 0"
+          :images="post.imagesPublication"
           class="h-52 w-full"
         ></Swiper>
 

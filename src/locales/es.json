@@ -1,9 +1,11 @@
 {
   "sweetAlertMessages": {
     "wait": "Espera un momento",
+    "saving": "Guardando {object}",
     "saved": "Guardado",
     "error": "Opps.. Algo salio mal",
     "confirmTitle": "¿Estás seguro?",
+    "confirmLeaveRouterMessage": "¿De verdad quieres irte? ¡Tienes cambios no guardados!",
     "confirmWarningTitle": "Antes de continuar",
     "confirmWarningConfirmText": "Entendido!!",
     "confirmButton": "Si, hazlo",
@@ -19,11 +21,23 @@
     }
   },
   "general": {
+    "copied": "Email copiado",
+
+    "next": "Siguiente",
+    "previus": "Volver",
+    "finish": "Finaliza tu pago",
+
     "yes": "Si",
     "seeImage": "Ver imagen",
     "cancel": "Cancel",
     "save": "Guardar",
-    "update": "Actualizar"
+    "update": "Actualizar",
+
+    "image": "imagen | imagen | {count} imagenes",
+    "property": "propiedad",
+
+    "month": "cero meses | 1 mes | {count} meses",
+    "year": "cero años | 1 año | {count} meses"
   },
   "navbar": {
     "owner": "PUBLICA TU PROPIEDAD",
@@ -119,12 +133,24 @@
   },
   "questions": {
     "title": "Preguntas frecuentes",
-    "question1": "1. ¿Qué requisitos se exigen para arrendar una habitación?",
-    "response1": "Se exige el pago de un mes de garantía.",
-    "question2": "2. ¿Qué servicios están incluidos?",
-    "response2": "El valor del arriendo incluye todos los gastos básicos de la casa: agua, luz, gas de cañería, internet wifi y servicio de limpieza de áreas comunes. Los espacios como cocina, living y jardín, son de uso compartido.En todas nuestras propiedades vive un administrador, quien está a cargo de la residencia para ayudarte a resolver cualquier problema y gestionar una buena estadía.",
-    "question3": "3. ¿Tienen estacionamiento para auto o moto?",
-    "response3": "Algunas propiedades cuentan con estacionamiento. Hay que considerar un extra de $20.000.- mensuales a los valores normales de un espacio.",
+    "question1": "1. ¿Quiénes pueden arrendar un espacio de trabajo con Espacio Temporal?",
+    "response1": "Cualquier persona, chilena o extranjera. \n En todos nuestros centros contamos con un administrador, quien está dispuesto a ayudarte, para resolver cualquier problema que tengas.",
+    "question2": "2. ¿Qué requisitos se exigen para arrendar un espacio de trabajo?",
+    "response2": "Se exige el pago de un mes de garantía.",
+    "question3": "3. ¿Cuál es el periodo mínimo de arriendo?",
+    "response3": "El Periodo de arriendo mínimo es de 6 meses. De todas formas, si contamos con varios espacios disponibles, podemos flexibilizar el periodo acorde a tus necesidades.",
+    "question4": "4. ¿Puedo desocupar un espacio de trabajo de forma anticipada al termino del contrato?",
+    "response4": "Si, pero no podrás recuperar la garantía pagada. ",
+    "question5": "5. ¿Se pagan gastos comunes?",
+    "response5": "Si, $20.000 mensuales. Con esto se cubren los gastos básicos de los centros: agua, luz, internet wifi, alarma y servicio de limpieza de áreas comunes.",
+    "question6": "6. ¿Cuáles son los horarios de los centros?",
+    "response6": "Todos nuestros centros abren de lunes a viernes a las 9 am y cierran a las 19 hrs.",
+    "question7": "7. ¿Me puedo quedar a dormir en mi espacio de trabajo?",
+    "response7": "No, los espacios son exclusivamente para fines comerciales. Por las noches quedan con las alarmas activadas y nadie puede quedase a alojar.",
+    "question8": "8. ¿Cómo puedo reservar espacio de trabajo y pagar mis mensualidades?",
+    "response8": "Puedes reservar un espacio directamente en nuestro sitio web (webpay) o haciendo un depósito/transferencia a la cuenta corriente de Espacio Temporal. Los datos los puedes solicitar al correo ",
+    "question9": "9. ¿Tienen estacionamiento para auto o moto? ",
+    "response9": "Algunos centros cuentan con estacionamiento. Hay que considerar un extra de $20.000.- mensuales a los valores normales de los espacios.",
     "help": "¿Necesitas ayuda? Escríbenos",
     "name": "Nombre",
     "email": "E-mail",
@@ -156,6 +182,11 @@
   },
   "about-us": {
     "who": "QUIENES SOMOS",
+    "name": "Nombre",
+    "position": "Posición",
+    "email": "Email",
+    "showEmail": "Mostrar email",
+    "showPersonalMember": "Mostrar miembro",
     "description": "Fundada en 2019, Espacio Temporal ha creado espacios comerciales especialmente para hacer la experiencia de arriendo más fácil, cómoda para PYMES, artistas y emprendedores"
   },
   "owners": {
@@ -181,25 +212,31 @@
     "pintura": "Estado de pintura",
     "opcionDefault": "Seleccionar",
     "suelo": "Estado de suelo",
-    "image": "Selecciona una imagen",
+    "image": "Selecciona una imagen de portada",
+    "imagesDesc": "Cargar fotos adicionales (opcionalmente)",
+    "imagesLimit": "Solo puedes seleccionar hasta 5 images",
+    "images": "Selecciona hasta 5 images",
+    "imagesLimitSize": "Archivo: {file} es demaciado grande",
     "options": {
+      "to": "{start} a {end} meses",
+      "moreThan": "Más de {start} meses",
+      "more": "{count} o más",
       "reallyBad": "Muy Malo",
       "bad": "Malo",
       "regular": "Regular",
       "good": "Bueno",
       "reallyGood": "Excelente"
     },
-    "arriendo": "Valor de arriendo",
+    "arriendo": "Valor de arriendo esperado",
     "time": "Tiempo disponible",
-    "timeUse": "Tiempo sin uso",
+    "timeUse": "Tiempo que ha estado en desuso",
     "garage": "Estacionamiento",
-    "more": "o más",
     "submit": "CARGAR PROPIEDAD",
     "ciudad": "Ciudad",
     "tipoPropiedad": "Tipo de propiedad",
     "propiedadEntera": "Propiedad completa",
     "propiedadParcial": "Habitación/Cuarto",
-    "metros": "Area (metros cuadrados)"
+    "metros": "Tamaño de la propiedad (m2)"
   },
   "createResult": {
     "title": "El valor de arriendo aproximado por tu propiedad es",
@@ -244,13 +281,13 @@
       "contacts": "Ver contactos",
       "description": "Esta propiedad está ubicada en el centro de Providencia. Los plazos mínimos de arriendo son de 3 meses y no se permite el uso de maquinaria ni labores ruidosas.",
       "subtitle": "Espacios disponibles",
-      "pictures": "Ver todas las fotos",
+      "pictures": "Mostrar todas las fotos",
       "vistit": "AGENDA UNA VISITA",
       "pay": "Reservar y pagar",
       "payRoom": "Reservar espacio",
       "includedServises": "SERVICIOS INCLUÍDOS",
       "vault": "Bodega",
-      "parking": "Parking",
+      "parking": "Estacionamiento",
       "cleaning": "Limpieza",
       "toilets": "Baños",
       "wifi": "Wifi",
@@ -277,6 +314,12 @@
       "description": "Podras recorrer las instalaciones y conocer más sobre la propiedad",
       "schedule": "Horario",
       "vistit": "AGENDA UNA VISITA TECNICA"
+    },
+    "calendar": {
+      "Paso1": "Elegir la fecha",
+      "Paso2": "Firma tu contrato",
+      "see": "Ver contrato",
+      "Paso3": "Revisa y añade al carro"
     },
     "stripe": {
       "success": {
@@ -467,6 +510,10 @@
       "owner": "Propietario",
       "isActive": "¿La locación esta agotada?",
       "isverified": "¿La locación esta verificada?",
+      "haveVault": "¿La propiedad tiene una bóveda?",
+      "haveCleaning": "¿La propiedad cuenta con servicio de Limpieza?",
+      "haveWifi": "¿La propiedad tiene Wifi?",
+      "haveSecurity": "¿La propiedad cuenta con Seguridad?",
       "newVisit": "Agendar visita tecnica",
       "goToVisit": "Ir al calendario",
       "value": "Valor de la propiedad",

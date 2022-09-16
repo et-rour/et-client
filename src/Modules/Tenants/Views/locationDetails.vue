@@ -1,11 +1,7 @@
 <template>
   <div>
-    <div
-      class="flex flex-col justify-center items-center h-80"
-      v-if="!property"
-    >
+    <div class="flex flex-col justify-center items-center" v-if="!property">
       <h2 class="my-title">{{ $t("tenants.details.title") }}</h2>
-      <SpinerVue />
     </div>
     <div class="mb-32 lg:mb-2" v-else>
       <!-- header -->
@@ -15,7 +11,7 @@
           class="w-full flex flex-col md:flex-row md:gap-4 justify-between mb-6 text-center xl::text-left"
         >
           <p>
-            {{ property.address }}, {{ property.zone.city }} -
+            {{ property.zone.city }} -
             {{ property.zone.state }}
           </p>
 
@@ -53,7 +49,7 @@
       </div>
 
       <!-- images -->
-      <div class="grid grid-cols-12 gap-4 p-2 my-container mb-8">
+      <div class="grid grid-cols-12 gap-x-4 p-2 my-container mb-8">
         <!-- <SwiperVue
           :images="getPropertyDetailsImages"
           class="col-span-12"
@@ -66,26 +62,32 @@
             alt="cover property"
             class="w-full h-44 sm:h-64 md:h-80 object-cover mb-8"
           />
-          <p>{{ property.description }}</p>
         </div>
 
         <div class="col-span-12 md:col-span-5">
-          <div class="grid grid-cols-4 gap-2 md:grid-cols-2">
+          <div class="grid grid-cols-4 gap-2 md:grid-cols-2 relative">
             <img
               :src="image.image"
               :alt="`image_extra_${image.id}`"
               class="w-full"
-              v-for="image in getPropertyImages"
+              v-for="image in sidebarImages"
               :key="image.id"
             />
+
+            <button
+              class="py-2 px-3 rounded-lg flex items-center absolute right-2 bottom-2 text-xs shadow-xl border bg-white"
+              @click="toggleShowModalImages"
+              v-if="sidebarImages.length > 0"
+            >
+              <img
+                src="@/assets/icons/menupoints.png"
+                class="w-3 h-3 mr-1"
+                alt="menu"
+              />
+              {{ $t("tenants.details.pictures") }}
+            </button>
           </div>
 
-          <button
-            class="my-btn py-3 mt-3 rounded-none w-full"
-            @click="toggleShowModalImages"
-          >
-            {{ $t("tenants.details.pictures") }}
-          </button>
           <button
             class="my-btn py-3 mt-3 rounded-none bg-green-400 w-full"
             @click="goToSchedule"
@@ -93,37 +95,25 @@
             {{ $t("tenants.details.vistit") }}
           </button>
         </div>
+        <p class="col-span-12">{{ property.description }}</p>
       </div>
 
       <!-- INCLUDED SERVICES -->
       <IncludedServices
         :services="{
-          vault: true,
+          vault: property.vault,
           parking: property.garage > 0,
-          cleaning: true,
+          cleaning: property.cleaning,
           bathrooms: property.bathrooms > 0,
-          wifi: true,
-          security: true,
+          wifi: property.wifi,
+          security: property.security,
         }"
       />
 
-      <!-- calendar -->
-      <div class="my-container flex gap-8 my-16">
-        <CalendarComponent
-          class="flex-grow"
-          @rangeChage="getDateRange"
-          @correctRange="changeisCorrectRange"
-          :range="range"
-          :reservations="property.reservations"
-          :locationLeaseRange="{
-            start: property.startLease,
-            end: property.endLease,
-          }"
-        />
+      <!-- MAP -->
+      <div class="my-container my-16">
+        <Mapa :center="markerLatLng" :zoom="zoom" />
       </div>
-      <!-- <p>start: {{ dates.start }}</p>
-      <p>end: {{ dates.end }}</p>
-      <p>isCorrect: {{ isCorrectRange }}</p> -->
 
       <!-- buttons -->
       <!-- <template>
@@ -149,7 +139,7 @@
       </template> -->
 
       <!-- ROOMS -->
-      <div class="my-container mb-20">
+      <div class="my-container mb-20" v-if="property.propertyType !== 'entire'">
         <h3 class="my-title-2 my-4 mt-8">
           {{ $t("tenants.details.subtitle") }}
         </h3>
@@ -164,13 +154,12 @@
         ></RoomCard>
       </div>
 
-      <!-- MAP -->
+      <!-- Pay -->
       <div class="my-container">
-        <Mapa :center="markerLatLng" :zoom="zoom" />
-
         <button
           class="w-full bg-green-500 mt-2 text-white font-bold my-btn"
-          @click="goToBuyLink"
+          @click="goToCalendar"
+          v-if="property.propertyType === 'entire'"
         >
           <a>{{ $t("tenants.details.pay") }}</a>
         </button>
@@ -184,10 +173,7 @@
       v-on:toogle="toggleShowModalImages"
     >
       <div class="w-2/3 h-96 bg-white relative" @click.stop>
-        <SwiperVue
-          :images="getPropertyDetailsImages"
-          class="h-full"
-        ></SwiperVue>
+        <SwiperVue :images="carouselModalImages" class="h-full"></SwiperVue>
         <button
           class="bg-gray-500 w-10 h-10 absolute top-0 right-0 z-50"
           @click="toggleShowModalImages"
@@ -198,7 +184,7 @@
     </ModelGlobal>
 
     <!-- MODAL 3D PICTURES -->
-    <ModelGlobal
+    <!-- <ModelGlobal
       :showModal="showModalImages3d"
       v-on:toogle="toggleShowModalImages3d"
     >
@@ -211,43 +197,38 @@
           <font-awesome-icon icon="times"></font-awesome-icon>
         </button>
       </div>
-    </ModelGlobal>
+    </ModelGlobal> -->
 
-    <ContactModal
+    <!-- <ContactModal
       v-if="property"
       :isModalOpen="showContactModal"
       :locationName="property.name"
       :locationAddress="`${property.address}, ${property.zone.zone} - ${property.zone.city} (${property.zone.state}), ${property.zone.country}`"
       v-on:closePopup="closeContactModal"
-    ></ContactModal>
+    ></ContactModal> -->
   </div>
 </template>
 
 <script>
 import { mapActions, mapGetters, mapMutations } from "vuex";
-import { Viewer } from "photo-sphere-viewer";
-import { MarkersPlugin } from "photo-sphere-viewer/dist/plugins/markers";
+// import { Viewer } from "photo-sphere-viewer";
+// import { MarkersPlugin } from "photo-sphere-viewer/dist/plugins/markers";
 import "photo-sphere-viewer/dist/photo-sphere-viewer.css";
 import "photo-sphere-viewer/dist/plugins/markers.css";
 import RoomCard from "../Components/RoomCard.vue";
-import ContactModal from "../Components/ContactModal.vue";
+// import ContactModal from "../Components/ContactModal.vue";
 import ModelGlobal from "../../../components/ModelGlobal.vue";
-import SpinerVue from "../../../components/Spiner.vue";
 import { CustomErrorToast } from "@/sweetAlert.js";
 import SwiperVue from "../Components/Swiper.vue";
 import Mapa from "../Components/GoogleCustomMap.vue";
-import CalendarComponent from "../Components/CalendarComponent.vue";
-import moment from "moment";
 import IncludedServices from "../Components/IncludedServices.vue";
 export default {
   components: {
     ModelGlobal,
     RoomCard,
-    ContactModal,
-    SpinerVue,
+    // ContactModal,
     SwiperVue,
     Mapa,
-    CalendarComponent,
     IncludedServices,
   },
   props: {
@@ -257,27 +238,14 @@ export default {
   },
   data() {
     return {
-      // MAP
       property: null,
 
       // EXTRA IMAGES
       showModalImages: false,
-      // 3D IMAGES
-      showModalImages3d: false,
-      viewer: "",
-      showContactModal: false,
-
-      // date
-      range: {
-        start: null,
-        end: null,
-      },
-      isCorrectRange: false,
     };
   },
   methods: {
     ...mapMutations("authStore", ["changeShowLoginModal"]),
-    ...mapActions("propertiesStore", ["fetchPropertyDetails"]),
     ...mapActions(["goToLocationCheckoutSession"]),
     goToSchedule(e) {
       e.preventDefault();
@@ -287,109 +255,91 @@ export default {
       }
       this.$router.push({ name: "tenants-schedule" });
     },
-    async goToBuyLink() {
-      if (!this.isAuth) {
-        this.changeShowLoginModal(true);
-        return;
-      }
-      if (!this.isCorrectRange) {
-        CustomErrorToast.fire({
-          icon: "warning",
-          text: this.$t("tenants.details.datesValidationMessage"),
-        });
-        return;
-      }
-      try {
-        await this.goToLocationCheckoutSession({
-          locationId: this.idProperty,
-          userId: this.user.user.id,
-          range: this.dates,
-        });
-      } catch (error) {
-        CustomErrorToast.fire({
-          text: error.response.data.message || error,
-        });
-      }
+    async goToCalendar() {
+      this.$router.push({
+        name: "tenants-calendar",
+        params: { idRoom: "entire" },
+      });
     },
     closeContactModal() {
       this.showContactModal = false;
     },
-    showContactModalFunc() {
-      this.showContactModal = true;
-    },
-    show3d() {
-      let onlyMarkers = [];
-      const markerList = this.property.images3D.map((image, index) => {
-        const markerWithImage = {
-          marker: {
-            id: index + 1,
-            tooltip: image.name,
-            circle: 30,
-            svgStyle: {
-              fill: "rgba(255,255,0,0.3)",
-              stroke: "yellow",
-              strokeWidth: "2px",
-            },
-            longitude: image.longitude,
-            latitude: image.latitude,
-            anchor: "center right",
-          },
-          image: image.image,
-        };
+    // showContactModalFunc() {
+    //   this.showContactModal = true;
+    // },
+    // show3d() {
+    //   let onlyMarkers = [];
+    //   const markerList = this.property.images3D.map((image, index) => {
+    //     const markerWithImage = {
+    //       marker: {
+    //         id: index + 1,
+    //         tooltip: image.name,
+    //         circle: 30,
+    //         svgStyle: {
+    //           fill: "rgba(255,255,0,0.3)",
+    //           stroke: "yellow",
+    //           strokeWidth: "2px",
+    //         },
+    //         longitude: image.longitude,
+    //         latitude: image.latitude,
+    //         anchor: "center right",
+    //       },
+    //       image: image.image,
+    //     };
 
-        onlyMarkers.push(markerWithImage.marker);
-        return markerWithImage;
-      });
+    //     onlyMarkers.push(markerWithImage.marker);
+    //     return markerWithImage;
+    //   });
 
-      console.log({ onlyMarkers });
-      if (this.viewer !== "" || onlyMarkers.length === 0) {
-        return;
-      }
-      this.viewer = new Viewer({
-        container: document.querySelector("#viewer"),
-        panorama: markerList[0].image,
-        plugins: [
-          [
-            MarkersPlugin,
-            {
-              markers: onlyMarkers,
-            },
-          ],
-        ],
-      });
-      const markersPlugin = this.viewer.getPlugin(MarkersPlugin);
+    //   console.log({ onlyMarkers });
+    //   if (this.viewer !== "" || onlyMarkers.length === 0) {
+    //     return;
+    //   }
+    //   this.viewer = new Viewer({
+    //     container: document.querySelector("#viewer"),
+    //     panorama: markerList[0].image,
+    //     plugins: [
+    //       [
+    //         MarkersPlugin,
+    //         {
+    //           markers: onlyMarkers,
+    //         },
+    //       ],
+    //     ],
+    //   });
+    //   const markersPlugin = this.viewer.getPlugin(MarkersPlugin);
 
-      markersPlugin.on("select-marker", (e, marker) => {
-        console.log(marker.id);
-        this.viewer
-          .animate({
-            longitude: marker.config.longitude,
-            latitude: marker.config.latitude,
-            zoom: 100,
-            speed: "-2rpm",
-          })
-          .then(() =>
-            this.viewer.setPanorama(markerList[marker.id - 1].image).then(
-              () =>
-                markersPlugin.updateMarker({
-                  // id: marker.id,
-                  // longitude: -1.8,
-                  // latitude: -0.28,
-                }),
-              this.viewer.animate({
-                zoom: 50,
-                speed: "2rpm",
-              })
-            )
-          );
-      });
-    },
-    toggleShowModalImages3d() {
-      this.showModalImages3d = !this.showModalImages3d;
-      setTimeout(() => {
-        this.show3d();
-      }, 1000);
-    },
+    //   markersPlugin.on("select-marker", (e, marker) => {
+    //     console.log(marker.id);
+    //     this.viewer
+    //       .animate({
+    //         longitude: marker.config.longitude,
+    //         latitude: marker.config.latitude,
+    //         zoom: 100,
+    //         speed: "-2rpm",
+    //       })
+    //       .then(() =>
+    //         this.viewer.setPanorama(markerList[marker.id - 1].image).then(
+    //           () =>
+    //             markersPlugin.updateMarker({
+    //               // id: marker.id,
+    //               // longitude: -1.8,
+    //               // latitude: -0.28,
+    //             }),
+    //           this.viewer.animate({
+    //             zoom: 50,
+    //             speed: "2rpm",
+    //           })
+    //         )
+    //       );
+    //   });
+    // },
+    // toggleShowModalImages3d() {
+    //   this.showModalImages3d = !this.showModalImages3d;
+    //   setTimeout(() => {
+    //     this.show3d();
+    //   }, 1000);
+    // },
     toggleShowModalImages() {
       this.showModalImages = !this.showModalImages;
     },
@@ -401,17 +351,10 @@ export default {
         }
       });
     },
-    getDateRange({ range }) {
-      this.range = range;
-    },
-    changeisCorrectRange(isCorrect) {
-      this.isCorrectRange = isCorrect;
-    },
   },
   computed: {
     ...mapGetters("propertiesStore", [
       "getPropertyDetails",
-      "getPropertyDetailsImages",
       "getPropertyImages",
     ]),
     ...mapGetters("propertiesStore", ["propertiesById"]),
@@ -434,18 +377,22 @@ export default {
         lng: Number(this.property.long) + Number(lngDeviation),
       };
     },
-    dates() {
-      return {
-        start: moment(this.range.start).valueOf(),
-        end: moment(this.range.end).valueOf(),
-      };
+    sidebarImages() {
+      return this.getPropertyImages(
+        this.getPropertyDetails.propertyType
+      ).filter((image, index) => {
+        if (index < 4) {
+          return image;
+        }
+      });
+    },
+    carouselModalImages() {
+      return this.getPropertyImages(this.getPropertyDetails.propertyType);
     },
   },
   async mounted() {
     try {
-      await this.fetchPropertyDetails(this.idProperty);
       this.property = this.getPropertyDetails;
-      console.log("%clocationDetails.vue line:255 router", "color: #007acc;");
       this.scrollToAnchor();
     } catch (error) {
       CustomErrorToast.fire({

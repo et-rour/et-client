@@ -6,13 +6,13 @@
     >
       <div class="my-container font-semibold">
         <!-- image -->
-        <div class="flex w-full justify-between">
-          <h1 class="w-auto">
+        <div class="flex flex-col md:flex-row justify-between">
+          <h1 class="text-center">
             {{ $t("createForm.title") }}
           </h1>
-          <div class="w-3/4 flex flex-col items-end gap-4">
+          <div class="w-full md:w-80 flex flex-col items-end gap-4">
             <div
-              class="h-40 w-1/3 bg-gray-200 flex justify-center items-center"
+              class="h-40 w-full bg-gray-200 flex justify-center items-center"
             >
               <img
                 v-if="localImage"
@@ -26,18 +26,52 @@
               @change="onSelectedImage"
               ref="imageSelector"
               class="hidden"
+              accept="image/png, image/gif, image/jpeg"
             />
             <div
-              class="my-btn text-center mb-2 cursor-pointer"
+              class="my-btn text-center mb-2 cursor-pointer px-4 w-72"
               @click="$refs.imageSelector.click()"
             >
               {{ $t("createForm.image") }}
             </div>
             <ProgesBarVue
+              :id="`coverImage`"
               :value="propertyImageState"
               :imageUrl="propertyImage"
-              class=""
             />
+          </div>
+        </div>
+
+        <!-- images -->
+        <div class="flex justify-between mb-4">
+          <label class="text-lg" for="name">{{
+            $t("createForm.imagesDesc")
+          }}</label>
+
+          <div class="text-right flex flex-col">
+            <input
+              type="file"
+              name="images"
+              multiple
+              id="images"
+              class="hidden"
+              ref="imagesSelector"
+              @change="onSelectedImages"
+              accept="image/png, image/gif, image/jpeg"
+            />
+            <div
+              class="my-btn text-center mb-2 cursor-pointer self-end w-72"
+              @click="$refs.imagesSelector.click()"
+            >
+              {{ $t("createForm.images") }}
+            </div>
+            <p
+              v-for="(image, index) in images"
+              class="text-sm text-gray-400"
+              :key="`local_image_array_${index}_${image.name}`"
+            >
+              {{ image.name }}
+            </p>
           </div>
         </div>
 
@@ -159,12 +193,9 @@
               </option>
               <!-- <option selected value="">Ciudad</option> -->
               <option
-                v-for="(item, index) in [
-                  { label: $t('createForm.propiedadEntera'), value: 'entire' },
-                  { label: $t('createForm.propiedadParcial'), value: 'room' },
-                ]"
+                v-for="(item, index) in typeOptions"
                 :value="item.value"
-                :key="index + index + 'type'"
+                :key="`${index}_option`"
               >
                 {{ item.label }}
               </option>
@@ -292,7 +323,7 @@
                 {{ $t("createForm.opcionDefault") }}
               </option>
               <option
-                v-for="(item, index) in garageOptions"
+                v-for="(item, index) in bathroomsOptions"
                 :value="item.value"
                 :key="index + item.value + 'garage'"
               >
@@ -375,17 +406,12 @@
           <div
             class="flex flex-col md:flex-row items-center justify-between w-1/5 relative"
           >
-            <ValidationProvider
-              v-slot="{ errors }"
-              rules="required|min_value:1"
-            >
-              <input
+            <ValidationProvider v-slot="{ errors }" rules="required">
+              <InputNumber
                 class="bg-gray-200 my-input w-full"
-                type="number"
-                name="valor_de_arriendo"
-                min="0"
                 v-model="valueMin"
               />
+
               <div
                 class="my-error absolute w-10 h-10 top-0 -left-10 flex justify-center items-center"
                 v-if="errors[0]"
@@ -396,17 +422,12 @@
               </div>
             </ValidationProvider>
             <p class="mx-1">a</p>
-            <ValidationProvider
-              v-slot="{ errors }"
-              rules="required|min_value:1"
-            >
-              <input
+            <ValidationProvider v-slot="{ errors }" rules="required">
+              <InputNumber
                 class="bg-gray-200 my-input w-full"
-                type="number"
-                name="valor_de_arriendo"
-                min="0"
                 v-model="valueMax"
               />
+
               <div
                 class="my-error absolute w-10 h-10 top-0 left-full flex justify-center items-center"
                 v-if="errors[0]"
@@ -436,7 +457,7 @@
                 {{ $t("createForm.opcionDefault") }}
               </option>
               <option
-                v-for="(item, index) in timeOptions"
+                v-for="(item, index) in timeAvalibleOptions"
                 :value="item.value"
                 :key="index + item.name + 'time'"
               >
@@ -468,7 +489,7 @@
                 {{ $t("createForm.opcionDefault") }}
               </option>
               <option
-                v-for="(item, index) in timeOptions"
+                v-for="(item, index) in timeUnusedOptions"
                 :value="item.value"
                 :key="index + item.name + 'time'"
               >
@@ -520,16 +541,10 @@
           }}</label>
           <ValidationProvider
             v-slot="{ errors }"
-            rules="required|min_value:1"
+            rules="required"
             class="w-1/5"
           >
-            <input
-              class="bg-gray-200 my-input w-full"
-              type="number"
-              name="metros"
-              min="1"
-              v-model="meters"
-            />
+            <InputNumber class="bg-gray-200 my-input w-full" v-model="meters" />
             <span class="my-error relative top-0 left-0 block">{{
               errors[0]
             }}</span>
@@ -581,12 +596,6 @@
         {{ $t("createForm.submit") }}
       </button>
     </form>
-    <ModelUploadImagesComponet
-      :showUploadImagesModal="showUploadImagesModal"
-      :idLocation="idLocation"
-      @toogle="toogleShowUploadImagesModal"
-      :buttonText="buttonText"
-    />
   </ValidationObserver>
 </template>
 
@@ -594,15 +603,18 @@
 import { mapActions, mapGetters, mapMutations } from "vuex";
 import { ValidationObserver } from "vee-validate";
 import ProgesBarVue from "@/components/ProgesBarImage.vue";
-import { CustomErrorToast } from "@/sweetAlert";
+import { CustomErrorToast, CustomConfirmWarningDialog } from "@/sweetAlert";
 import MapCoordsVue from "../../../components/MapCoords.vue";
-import ModelUploadImagesComponet from "../../../components/ModelUploadImages.vue";
+import createPropertyOptions from "@/utils/createFormOptions.js";
+import InputNumber from "../../../components/InputNumberMask.vue";
+import Swal from "sweetalert2";
+
 export default {
   components: {
     ValidationObserver,
     ProgesBarVue,
     MapCoordsVue,
-    ModelUploadImagesComponet,
+    InputNumber,
   },
   data() {
     return {
@@ -629,42 +641,16 @@ export default {
       image: null,
       localImage: null,
       file: null,
-      stateOptions: [
-        { name: "Muy malo", value: 1 },
-        { name: "Malo", value: 2 },
-        { name: "Regular", value: 3 },
-        { name: "Bueno", value: 4 },
-        { name: "Excelente", value: 5 },
-      ],
-      garageOptions: [
-        { name: "0", value: 1 },
-        { name: "1", value: 2 },
-        { name: "2", value: 3 },
-        { name: "3", value: 4 },
-        { name: "4", value: 5 },
-        { name: "5 o más", value: 6 },
-      ],
-      roomsOptions: [
-        { name: "1", value: 1 },
-        { name: "2", value: 2 },
-        { name: "3", value: 3 },
-        { name: "4", value: 4 },
-        { name: "5 o más", value: 5 },
-      ],
-      timeOptions: [
-        { name: "1 a 3 meses", value: 1 },
-        { name: "4 a 6 meses", value: 2 },
-        { name: "7 a 9 meses", value: 3 },
-        { name: "10 a 12 meses", value: 4 },
-        { name: "13 a 18 meses", value: 5 },
-        { name: "19 a 24 meses", value: 6 },
-        { name: "Más de 24 meses", value: 7 },
-      ],
+      typeOptions: createPropertyOptions.type,
+      roomsOptions: createPropertyOptions.rooms,
+      bathroomsOptions: createPropertyOptions.bathrooms,
+      stateOptions: createPropertyOptions.state,
+      garageOptions: createPropertyOptions.garage,
+      timeAvalibleOptions: createPropertyOptions.timeAvalible,
+      timeUnusedOptions: createPropertyOptions.timeUnused,
 
       // uploadImages
-      showUploadImagesModal: false,
-      idLocation: null,
-      uploadImagesCompleted: false,
+      images: [],
     };
   },
   methods: {
@@ -672,6 +658,7 @@ export default {
       "loadZones",
       "createNewProperty",
       "uploadfile",
+      "uploadPropertyArrayImages",
     ]),
     ...mapActions("authStore", ["loginInfirebaseStorage"]),
     ...mapMutations("authStore", ["changeShowLoginModal"]),
@@ -705,13 +692,40 @@ export default {
         timeUse: this.timeUse,
         currencyData: this.country,
       };
+      new Swal({
+        title: this.$t("sweetAlertMessages.saving", {
+          object: this.$t("general.property"),
+        }),
+        allowOutsideClick: false,
+      });
+
+      Swal.showLoading();
       try {
         const { id } = await this.createNewProperty({
           propertyData,
           calculatorData,
         });
         this.idLocation = id;
-        this.showUploadImagesModal = true;
+
+        if (this.images.length > 0) {
+          new Swal({
+            title: this.$t("sweetAlertMessages.saving", {
+              object: this.$t("general.image", 2, {
+                count: this.images.length,
+              }),
+            }),
+            allowOutsideClick: false,
+          });
+          Swal.showLoading();
+
+          await this.uploadPropertyArrayImages({
+            id,
+            images: [...this.images],
+          });
+        }
+        Swal.close();
+
+        this.$router.push({ name: "result" });
       } catch (error) {
         CustomErrorToast.fire({
           text: error.response.data.message,
@@ -736,16 +750,47 @@ export default {
         });
       }
     },
+    async onSelectedImages(event) {
+      const images = [...event.target.files];
+
+      if (images.length > 5) {
+        await CustomConfirmWarningDialog.fire({
+          text: this.$t("createForm.imagesLimit"),
+        });
+        return;
+      }
+
+      const newImages = [];
+      images.forEach(async (image) => {
+        if (image.size > 1048576) {
+          await CustomConfirmWarningDialog.fire({
+            text: this.$t("createForm.imagesLimitSize", { file: image.name }),
+          });
+        }
+        newImages.push(image);
+      });
+      this.images = newImages;
+    },
     setNewCoords(event) {
       const { lat, lng } = event;
       this.lat = lat.toFixed(5);
       this.lng = lng.toFixed(5);
     },
-    toogleShowUploadImagesModal() {
-      this.showUploadImagesModal = !this.showUploadImagesModal;
-      if (!this.showUploadImagesModal) {
-        this.uploadImagesCompleted = true;
+    removeLetters(e) {
+      const value = e.target.value;
+      const regExOnlyNumbers = new RegExp("^[,0-9]+$");
+
+      if (!value.match(regExOnlyNumbers)) {
+        console.log(
+          "%cerror CreateForm.vue line:735 ",
+          "color: red; display: block; width: 100%;"
+        );
+        return;
       }
+      const newValue = value
+        .replaceAll(",", "")
+        .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      this.meters = newValue;
     },
   },
   computed: {
@@ -781,9 +826,6 @@ export default {
         email: this.user.user.email,
         phone: this.user.user.phone,
       };
-    },
-    buttonText() {
-      return this.$t("adminPanel.locations.imagesList.buttonText");
     },
     currency() {
       if (!this.zone) {
@@ -824,14 +866,23 @@ export default {
         this.zone = "";
       }
     },
-    uploadImagesCompleted(val) {
-      if (val === true) {
-        this.$router.push({ name: "result" });
-      }
-    },
   },
   metaInfo: {
     title: "Cargar Propiedad",
   },
 };
 </script>
+
+<style scooped>
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+</style>

@@ -1,6 +1,9 @@
 export const isAuth = (state) => {
   return state.isAuth;
 };
+export const isAdmin = (state) => {
+  return state.user && state.user.isAdmin;
+};
 export const user = (state) => {
   return {
     user: state.user,
@@ -16,4 +19,4 @@ export const isWelcomeModalOpen = (state) => {
 };
 export const siteCountry = (state) => {
   return state.siteCountry;
-}
+};

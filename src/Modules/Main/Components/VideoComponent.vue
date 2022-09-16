@@ -30,15 +30,28 @@
     </div>
 
     <ModelGlobal :showModal="showVideoModal" v-on:toogle="toogleShowModal">
-      <div class="w-2/3 h-1/3 md:h-2/3 bg-white">
-        <iframe
+      <div class="w-2/3 h-1/3 md:h-2/3 bg-white" @click.stop>
+        <!-- <iframe
           class="w-full h-full"
           src="https://www.youtube.com/embed/u31qwQUeGuM"
           title="YouTube video player"
           frameborder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowfullscreen
-        ></iframe>
+        ></iframe> -->
+        <video
+          playsinline
+          autoplay
+          loop
+          controls
+          :muted="!showVideoModal"
+          ref="myVideo"
+        >
+          <source
+            src="https://firebasestorage.googleapis.com/v0/b/espacio-temporal-9a372.appspot.com/o/Espacios%20Temporales.mp4?alt=media&token=7dda93d1-91b9-4e40-a125-67b7911c1908"
+            type="video/mp4"
+          />
+        </video>
       </div>
     </ModelGlobal>
   </div>
@@ -55,6 +68,7 @@ export default {
   },
   methods: {
     toogleShowModal() {
+      this.$refs.myVideo.pause();
       this.showVideoModal = !this.showVideoModal;
     },
   },

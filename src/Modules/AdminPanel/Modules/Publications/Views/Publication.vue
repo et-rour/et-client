@@ -54,7 +54,7 @@
             /> -->
             <ImageVisibility
               class="w-56"
-              v-for="image in publication.images"
+              v-for="image in publication.imagesPublication"
               :key="image.id"
               :image="image"
             />

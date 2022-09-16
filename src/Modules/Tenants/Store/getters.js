@@ -55,7 +55,7 @@ export const getZonesOrderedByCity = (state) => (countrySelected) => {
   // );
   return filteredCities;
 };
-export const getZonesOrderedByComuna = (state) => (countrySelected) => {
+export const getZonesOrderedByComuna = (state) => (citySelected) => {
   // SORT ZONES
   const zones = [...state.zones];
   zones.sort((x, y) => {
@@ -71,7 +71,7 @@ export const getZonesOrderedByComuna = (state) => (countrySelected) => {
   // FILTER ZONES BY COUNTRY AND REMOVE DUPLICATED ZONES
   let comumeList = [];
   const filtered = zones.filter((zone) => {
-    if (zone.country === countrySelected || countrySelected === "") {
+    if (zone.city === citySelected) {
       if (!comumeList.includes(zone.zone)) {
         comumeList.push(zone.zone);
         return true;
@@ -87,20 +87,56 @@ export const isLoading = (state) => {
 export const getPropertyDetails = (state) => {
   return state.propertyDetails;
 };
-export const getPropertyDetailsImages = (state) => {
-  const images = [
-    {
-      id: 999999999,
-      image: state.propertyDetails.image,
-    },
-    ...state.propertyDetails.imagesLocation,
-  ];
-
-  return images;
+export const getPropertyImages = (state) => (propertyType) => {
+  let imagesArray = [];
+  state.propertyDetails.imagesLocation.forEach((image) => {
+    imagesArray.push({
+      ...image,
+    });
+  });
+  if (propertyType === "room") {
+    state.propertyDetails.roomsDetails.forEach((room) => {
+      if (room.imagesRoom[0]) {
+        imagesArray.push({
+          ...room.imagesRoom[0],
+        });
+      }
+    });
+  }
+  return imagesArray;
 };
-export const getPropertyImages = (state) => {
-  const images = state.propertyDetails.imagesLocation.filter(
-    (image, index) => index < 4
-  );
-  return images;
+
+export const getCaledarData = (state) => (data) => {
+  let calendarData;
+
+  if (!state.propertyDetails) {
+    return null;
+  }
+  if (data.type === "entire") {
+    calendarData = {
+      name: state.propertyDetails.name,
+      value: state.propertyDetails.value,
+      image: state.propertyDetails.image,
+      reservations: [...state.propertyDetails.reservations],
+      leaseRange: {
+        start: state.propertyDetails.startLease,
+        end: state.propertyDetails.endLease,
+      },
+    };
+  } else {
+    const room = state.propertyDetails.roomsDetails.find(
+      (room) => room.id === Number(data.id)
+    );
+    calendarData = {
+      name: `${state.propertyDetails.name} \n -${room.name}`,
+      value: room.value,
+      image: room.imagesRoom[0] && room.imagesRoom[0].image,
+      reservations: [...room.reservations],
+      leaseRange: {
+        start: room.startLease,
+        end: room.endLease,
+      },
+    };
+  }
+  return calendarData;
 };
