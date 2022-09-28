@@ -2,8 +2,9 @@ import i18n from "@/i18n.js";
 
 export default {
   type: [
-    { label: i18n.t("createForm.propiedadEntera"), value: "entire" },
-    { label: i18n.t("createForm.propiedadParcial"), value: "room" },
+    { label: i18n.t("createForm.propertyTypes.house"), value: "house" },
+    { label: i18n.t("createForm.propertyTypes.field"), value: "field" },
+    { label: i18n.t("createForm.propertyTypes.shed"), value: "shed" },
   ],
   rooms: [
     { name: "No aplica", value: -1 },

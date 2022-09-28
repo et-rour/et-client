@@ -238,6 +238,38 @@
         />
       </div>
 
+      <!-- sugested value -->
+      <div class="flex items-center justify-between">
+        <label class="mr-2">{{
+          $t("adminPanel.locations.sugestedValue")
+        }}</label>
+        <p>
+          {{
+            location.expectedValue
+              ? location.expectedValue
+              : $t("general.notAsign")
+          }}
+        </p>
+      </div>
+      <!-- created by -->
+      <div class="flex justify-between">
+        <label class="mr-2">{{
+          $t("adminPanel.locations.createdBy")
+        }}</label>
+        <p>{{location.createdByAdmin ? $t("adminPanel.locations.admin"):$t("adminPanel.locations.user")}}</p>
+      </div>
+
+      <!-- expected value -->
+      <div class="flex justify-between">
+        <label class="mr-2">{{
+          $t("adminPanel.locations.expectedValue")
+        }}</label>
+        <div>
+          <p>min: ${{ location.suggestedValue.min }}</p>
+          <p>max: ${{ location.suggestedValue.max }}</p>
+        </div>
+      </div>
+
       <!-- coords -->
       <MapCoordsVue
         :lat="location.lat"

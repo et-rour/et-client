@@ -3,9 +3,9 @@
     class="flex items-center justify-center my-container py-10 mb-40 md:mb-0"
   >
     <div class="flex flex-col items-center justify-evenly w-full h-4/5">
-      <h1 class="my-title text-center my-3">{{ $t("createResult.title") }}:</h1>
+      <h1 v-if="createdProperty.location.propertyType === 'house'" class="my-title text-center my-3">{{ $t("createResult.title") }}:</h1>
       <div class="w-full flex flex-col items-center justify-evenly">
-        <div class="text-white bg-my-blue-primary text-4xl font-sans p-4">
+        <div v-if="createdProperty.location.propertyType === 'house'" class="text-white bg-my-blue-primary text-4xl font-sans p-4">
           <Spiner
             spinerColor="#ffffff"
             bgColor="rgb(30, 64, 175 )"
@@ -15,6 +15,9 @@
             >{{ parsedResult.symbol }} {{ parsedResult.min }} -
             {{ parsedResult.symbol }} {{ parsedResult.max }}</b
           >
+        </div>
+        <div v-else class="text-white bg-my-blue-primary text-4xl font-sans p-4 text-center">
+          <b>{{ $t("createResult.noResult") }}</b>
         </div>
         <div class="text-2xl">{{ $t("createResult.periodicity") }}</div>
       </div>
@@ -73,16 +76,17 @@ export default {
       expectedValue: this.createdProperty.calculatorData.expectedValue,
       currencyData: this.createdProperty.calculatorData.currencyData,
     };
-    try {
-      const response = await EspacioTemporalAPI.post(
-        "/calculator/",
-        requestData
-      );
-      console.log(response);
-      this.result = response.data;
-      this.loadingResult = false;
-    } catch (error) {
-      alert(`error: ${error.response.data}`);
+    if (this.createdProperty.location.propertyType === 'house') {
+      try {
+        const response = await EspacioTemporalAPI.post(
+          "/calculator/",
+          requestData
+        );
+        this.result = response.data;
+        this.loadingResult = false;
+      } catch (error) {
+        alert(`error: ${error.response.data}`);
+      }
     }
   },
   methods: {

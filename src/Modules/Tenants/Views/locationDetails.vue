@@ -1,10 +1,11 @@
 <template>
-  <div>
+  <div class="relative">
     <div class="flex flex-col justify-center items-center" v-if="!property">
       <h2 class="my-title">{{ $t("tenants.details.title") }}</h2>
     </div>
     <div class="mb-32 lg:mb-2" v-else>
       <!-- header -->
+
       <div class="my-container">
         <h1 class="my-title">{{ property.name }}</h1>
         <div

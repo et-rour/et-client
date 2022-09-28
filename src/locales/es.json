@@ -37,12 +37,19 @@
     "property": "propiedad",
 
     "month": "cero meses | 1 mes | {count} meses",
-    "year": "cero años | 1 año | {count} años"
+    "year": "cero años | 1 año | {count} años",
+
+    "notFound": "No se encontro",
+    "notAsign": "No se asigno"
   },
   "navbar": {
     "owner": "PUBLICA TU PROPIEDAD",
     "tenants": "ESPACIOS DISPONIBLES",
     "us": "NOSOTROS",
+    "usOption1": "Que hacemos",
+    "usOption2": "Equipo",
+    "usOption3": "Casos de éxito",
+    "usOption4": "Confían en nosotros",
     "howWorks": "¿Cómo funciona?",
     "posts": "Publicaciónes",
     "myProperties": "Mis propiedades",
@@ -236,7 +243,15 @@
     "tipoPropiedad": "Tipo de propiedad",
     "propiedadEntera": "Propiedad completa",
     "propiedadParcial": "Habitación/Cuarto",
-    "metros": "Tamaño de la propiedad (m2)"
+    "propertyTypes": {
+      "house": "Casa/Edificio",
+      "field": "Terreno",
+      "shed": "Galpón"
+    },
+    "metros": "Superficie de la propiedad (m2)",
+    "useType": "Uso de suelo",
+    "useType2": "Comercial",
+    "useType1": "Habitacional"
   },
   "createResult": {
     "title": "El valor de arriendo aproximado por tu propiedad es",
@@ -245,7 +260,8 @@
     "description_1": "La visita tecnica consiste en la verificacion del domicilio ",
     "description_2": "y los datos entregados, ademas de una revision de las ",
     "description_3": "condiciones de la propiedad y la factibilidad de uso.",
-    "confirm": "Confirma el valor de arriendo mediante una visita técnica de nuestros inspectores."
+    "confirm": "Confirma el valor de arriendo mediante una visita técnica de nuestros inspectores.",
+    "noResult": "Para este tipo de propiedades un inspector debe evaluar la propiedad, agende una visita para averiguar el arriendo esperado."
   },
   "schedule": {
     "title": "Selecciona la fecha para tu visita",
@@ -471,7 +487,9 @@
         "activateUser": "¿Seguro que quieres activar al usuario?",
         "desactivateUser": "¿Seguro que quieres desactivar al usuario?",
         "makeOwner": "¿Seguro que quieres que el usuario tenga nivel de dueño?",
-        "removeOwner": "¿Seguro que quieres remover el nivel de dueño al usuario?"
+        "removeOwner": "¿Seguro que quieres remover el nivel de dueño al usuario?",
+        "makeAdmin": "¿Seguro que quieres que el usuario sea un Admin?",
+        "removeAdmin": "¿Seguro que quieres remover el rol de Admin?"
       }
     },
     "zones": {
@@ -522,6 +540,11 @@
       "seeRooms": "Cuartos",
       "newRoom": "Crear cuarto",
       "images3d": "Imagenes 3d",
+      "sugestedValue": "Valor sugerido",
+      "expectedValue": "Valor esperado",
+      "createdBy": "Propiedad creada por",
+      "admin": "Administador",
+      "user": "Usuario",
       "roomsList": {
         "title": "Todos los cuartos",
         "noRooms": "Esta propiedad no tiene ningun cuarto registrado",

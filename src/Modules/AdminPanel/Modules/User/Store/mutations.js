@@ -23,3 +23,12 @@ export const changeIsOwnerStatus = (state, { isOwner }) => {
 
   state.userDetails = newUserData;
 };
+
+export const changeIsAdminRol = (state, { isAdmin }) => {
+  const newUserData = {
+    ...state.userDetails,
+    isAdmin,
+  };
+
+  state.userDetails = newUserData;
+};

@@ -188,10 +188,6 @@
               name="ciudad"
               v-model="tipoPropiedad"
             >
-              <option disabled selected value="">
-                {{ $t("createForm.opcionDefault") }}
-              </option>
-              <!-- <option selected value="">Ciudad</option> -->
               <option
                 v-for="(item, index) in typeOptions"
                 :value="item.value"
@@ -199,6 +195,28 @@
               >
                 {{ item.label }}
               </option>
+            </select>
+            <span class="my-error relative top-0 left-0 block">{{
+              errors[0]
+            }}</span>
+          </ValidationProvider>
+        </div>
+
+        <!-- city -->
+        <div class="flex items-center justify-between mb-4">
+          <label class="text-lg" for="useType">{{ $t("createForm.useType") }}</label>
+          <ValidationProvider
+            v-slot="{ errors }"
+            rules="required"
+            class="w-1/5"
+          >
+            <select
+              class="bg-gray-200 px-12 w-full"
+              name="landUse"
+              v-model="landUse"
+            >
+              <option :value="'commercial'">{{ $t("createForm.useType2") }}</option>
+              <option :value="'housing'">{{ $t("createForm.useType1") }}</option>
             </select>
             <span class="my-error relative top-0 left-0 block">{{
               errors[0]
@@ -282,22 +300,15 @@
             rules="required"
             class="w-1/5"
           >
-            <select
-              class="bg-gray-200 px-12 w-full"
-              name="tiempo"
-              v-model="rooms"
-            >
-              <option disabled selected value="">
-                {{ $t("createForm.opcionDefault") }}
-              </option>
-              <option
-                v-for="(item, index) in roomsOptions"
-                :value="item.value"
-                :key="index + item.value + 'room'"
-              >
-                {{ item.name }}
-              </option>
-            </select>
+            <div class="flex row justify-between items-center">
+              <button @click="changeRooms('minus')" class="bg-my-blue-primary rounded-full w-6 h-6 mx-2 text-white">-</button>
+              <InputNumber
+                  disabled
+                  class="bg-gray-200 my-input w-full text-center"
+                  v-model="rooms"
+                />
+              <button @click="changeRooms('add')" class="bg-my-blue-primary rounded-full w-6 h-6 mx-2 text-white">+</button>
+            </div>
             <span class="my-error relative top-0 left-0 block">{{
               errors[0]
             }}</span>
@@ -623,18 +634,19 @@ export default {
       phoneNumber: "",
       address: "",
       description: "",
-      rooms: "",
+      rooms: 0,
       bathrooms: "",
       painting: 3,
       floor: 3,
       valueMin: "",
       valueMax: "",
+      landUse: "commercial",
       zone: "",
       ciudad: "",
       time: "",
       timeUse: "",
       garage: "",
-      tipoPropiedad: "",
+      tipoPropiedad: "house",
       lat: undefined,
       lng: undefined,
       meters: "",
@@ -679,6 +691,7 @@ export default {
         user: this.user.user.id,
         garage: this.garage,
         propertyType: this.tipoPropiedad,
+        landUse: this.landUse,
         email: this.email,
         phone: this.phoneNumber,
         description: this.description,
@@ -792,6 +805,10 @@ export default {
         .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       this.meters = newValue;
     },
+    changeRooms(type) {
+      if (type === 'add' && this.rooms < 40) this.rooms = this.rooms + 1;
+      if (type === 'minus' && this.rooms > 0) this.rooms = this.rooms - 1;
+    }
   },
   computed: {
     ...mapGetters("propertiesStore", [

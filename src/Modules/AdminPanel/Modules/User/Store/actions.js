@@ -32,3 +32,10 @@ export const changeIsOwnerStatus = async (
   const { idUser, isOwner } = res.data;
   commit("changeIsOwnerStatus", { idUser, isOwner });
 };
+
+export const changeIsAdminRol = async ({ commit }, { id, isAdminStatus }) => {
+  const res = await EspacioAPI.put(`admin/user/${id}/asignAdmin`, {
+    isAdmin: isAdminStatus,
+  });
+  commit("changeIsAdminRol", res.data);
+};

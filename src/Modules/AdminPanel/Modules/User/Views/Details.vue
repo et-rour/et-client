@@ -70,18 +70,17 @@
         <SwitchComponentVue :value="user.isOwner" v-on:toogle="toogleIsOwner" />
       </div>
 
+      <!-- admin -->
+      <div class="flex items-center">
+        <label>{{ $t("adminPanel.users.admin") }}</label>
+        <SwitchComponentVue :value="user.isAdmin" v-on:toogle="toogleIsAdmin" />
+      </div>
+
       <!-- client -->
       <div class="flex items-center">
         <label class="mr-2">{{ $t("adminPanel.users.client") }}</label>
         <span class="text-my-blue-primary">{{
           user.isClient ? $t("general.yes") : "No"
-        }}</span>
-      </div>
-      <!-- admin -->
-      <div class="flex items-center">
-        <label class="mr-2">{{ $t("adminPanel.users.admin") }}</label>
-        <span class="text-my-blue-primary">{{
-          user.isAdmin ? $t("general.yes") : "No"
         }}</span>
       </div>
       <!-- review -->
@@ -117,6 +116,7 @@ export default {
     ...mapActions("adminPanelStore/users", [
       "changeIsActiveUser",
       "changeIsOwnerStatus",
+      "changeIsAdminRol",
     ]),
     toogleIsActive(value) {
       const changeActiveUserTextAcction = this.user.isActive
@@ -146,7 +146,7 @@ export default {
       );
     },
     toogleIsOwner(value) {
-      const changeOwnerUserTextAcction = this.user.isOwner
+      const changeOwnerUserTextAcction = !this.user.isOwner
         ? this.$t("adminPanel.users.confiramtionMessages.makeOwner")
         : this.$t("adminPanel.users.confiramtionMessages.removeOwner");
       CustomConfirmDialog.fire({ text: changeOwnerUserTextAcction }).then(
@@ -162,6 +162,32 @@ export default {
                 icon: "success",
               });
               this.user.isOwner = value;
+            }
+          } catch (error) {
+            CustomErrorToast.fire({
+              text: error.response.data.message,
+            });
+          }
+        }
+      );
+    },
+    toogleIsAdmin(value) {
+      const changeOwnerUserTextAcction = !this.user.isAdmin
+        ? this.$t("adminPanel.users.confiramtionMessages.makeAdmin")
+        : this.$t("adminPanel.users.confiramtionMessages.removeAdmin");
+      CustomConfirmDialog.fire({ text: changeOwnerUserTextAcction }).then(
+        async (result) => {
+          try {
+            if (result.isConfirmed) {
+              await this.changeIsAdminRol({
+                id: this.user.id,
+                isAdminStatus: value,
+              });
+              CustomToast.fire({
+                title: this.$t("sweetAlertMessages.saved"),
+                icon: "success",
+              });
+              this.user.isAdmin = value;
             }
           } catch (error) {
             CustomErrorToast.fire({
