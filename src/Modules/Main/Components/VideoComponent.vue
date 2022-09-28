@@ -6,16 +6,16 @@
         <h2 class="my-title mb-8">
           {{ $t("landing.video.title") }}
         </h2>
-        <p class="text-sm font-extrabold">
+        <p class="text-md font-extrabold">
           {{ $t("landing.video.question_1") }}
         </p>
-        <p class="text-sm font-extralight mb-4">
+        <p class="text-md font-extralight mb-4">
           {{ $t("landing.video.response_1") }}
         </p>
-        <p class="text-sm font-extrabold inline">
+        <p class="text-md font-extrabold inline">
           {{ $t("landing.video.question_2") }}
         </p>
-        <p class="text-sm font-extralight inline">
+        <p class="text-md font-extralight inline">
           {{ $t("landing.video.response_2") }}
         </p>
       </div>

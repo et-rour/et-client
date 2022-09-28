@@ -12,7 +12,7 @@
         @click="$router.push({ name: 'home' })"
       >
         <img
-          class="md:w-32 md:h-10 w-28 h-9 object-contain"
+          class="md:w-40 md:h-14 w-28 h-9 object-contain "
           src="@/assets/icons/logoHeader.png"
           alt="logo espacio temporal"
         />
@@ -35,17 +35,11 @@
           :to="{ name: 'tenants' }"
           ><a> {{ $t("navbar.tenants") }} </a></router-link
         >
-        
-        <!-- <router-link
-          active-class="text-my-blue-primary "
-          class="w-full py-2 text-center md:w-auto uppercase font-sans"
-          :to="{ name: 'about-us' }"
-          ><a> {{ $t("navbar.us") }} </a></router-link
-        > -->
-        <div class=" relative group">
+
+        <div class=" relative group z-50">
           <p class=" font-bold">{{ $t("navbar.us") }}</p>
           <!-- <div class=" as flex flex-col gap-4 absolute w-48 top-6 -left-12 text-center bg-red-500 "> -->
-          <div class="flex flex-col gap-4 absolute w-48 top-6 -left-12 text-center bg-gray-100 shadow-xl invisible group-hover:visible  h-0 group-hover:h-44 overflow-hidden  transition-all ease-in duration-500 ">
+          <div class="flex flex-col gap-4 absolute w-48 top-6 -left-12 text-center bg-black text-white md:bg-gray-100 md:text-black shadow-xl invisible group-hover:visible  h-0 group-hover:h-44 overflow-hidden  transition-all ease-in duration-500 ">
             <router-link
               class=" hover:text-my-blue-primary mt-4"
               :to="{ name: 'about-us' }"

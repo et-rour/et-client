@@ -1,7 +1,10 @@
 <template>
   <div class="withe-space">
     <Navbar></Navbar>
-    <router-view v-if="!loadingApp"></router-view>
+    <div class="min-h-screen">
+      <router-view v-if="!loadingApp"></router-view>
+
+    </div>
     <MovileMenu />
     <Footer></Footer>
   </div>

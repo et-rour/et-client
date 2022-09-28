@@ -2,9 +2,9 @@
   <div
     class="w-full rounded-md lg:rounded-full bg-white justify-center items-center px-0 pb-4 lg:py-4 overflow-hidden"
   >
-    <div class="flex flex-col lg:flex-row w-full">
+    <div class="flex flex-col lg:flex-row w-full px-8">
       <div class="w-full lg:flex-grow">
-        <select class="w-full text-center border h-full py-3" v-model="city">
+        <select class="w-full text-center border lg:border-l-0 h-full py-3" v-model="city">
           <option value="" selected>
             {{ $t("landing.hero_2.city") }}
           </option>
@@ -34,7 +34,7 @@
       </div>
       <!-- buttons -->
       <div
-        class="flex flex-col lg:flex-row justify-evenly fitems-center gap-2 py-4 px-2 text-center border text-sm flex-shrink-0"
+        class="flex flex-col lg:flex-row justify-evenly fitems-center gap-2 py-4 px-2 text-center border lg:border-r-0 text-sm flex-shrink-0"
       >
         <button
           class="border rounded-full cursor-pointer w-auto px-2 py-2"

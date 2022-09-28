@@ -27,7 +27,7 @@
         class="w-full h-full absolute top-0 left-0 flex flex-col justify-end items-center pb-16"
       >
         <div class="w-10/12 lg:w-11/12 xl:w-10/12">
-          <h1 class="my-title text-white mb-4">
+          <h1 class="my-title text-3xl md:text-myheader1 text-white mb-4">
             <span class="mr-6">{{ $t("landing.hero_2.title") }}</span>
             <button
               class="my-btn bg-white text-my-blue-primary text-xl w-auto px-6 inline-block align-top"
@@ -57,7 +57,7 @@
           name="propertiesData"
           :list="propertiesListFiltered"
           :per="9"
-          class="w-full gap-5 grid grid-cols-2 lg:grid-cols-3"
+          class="w-full gap-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
         >
           <PropertyCard
             v-for="property in paginated('propertiesData')"
@@ -111,7 +111,7 @@
         class="w-full h-full absolute top-0 left-0 flex flex-col justify-end items-center pb-16"
       >
         <div class="w-10/12 lg:w-8/12">
-          <h1 class="my-title text-white">
+          <h1 class="my-title text-3xl md:text-myheader1 text-white">
             {{ $t("landing.hero_3.title_1") }}
             <br />
             <span class="mr-4">
