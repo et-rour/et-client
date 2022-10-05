@@ -66,7 +66,7 @@ export const uploadImageTofirebase = async (
 };
 export const goToLocationCheckoutSession = async (
   _,
-  { locationId, userId, range }
+  { locationId, userId, range, signature }
 ) => {
   const res = await EspacioTemporalAPI.post(
     "/reservation/location/create-checkout-session",
@@ -74,6 +74,7 @@ export const goToLocationCheckoutSession = async (
       locationId,
       userId,
       range,
+      signature,
     }
   );
   // console.log("%cTest.vue line:22 res", "color: #007acc;", res);
@@ -81,13 +82,17 @@ export const goToLocationCheckoutSession = async (
   window.open(res.data.url, "_blank");
 };
 
-export const goToRoomCheckoutSession = async (_, { roomId, userId, range }) => {
+export const goToRoomCheckoutSession = async (
+  _,
+  { roomId, userId, range, signature }
+) => {
   const res = await EspacioTemporalAPI.post(
     "/reservation/room/create-checkout-session",
     {
       roomId,
       userId,
       range,
+      signature,
     }
   );
   // console.log("%cTest.vue line:22 res", "color: #007acc;", res);

@@ -10,7 +10,7 @@ export const changeReservationDateRange = (
 };
 export const changeReservationData = (
   state,
-  { start, end, correctDate, value, name }
+  { start, end, correctDate, value, name, address }
 ) => {
   state.reservationDateRange = {
     start,
@@ -19,9 +19,13 @@ export const changeReservationData = (
   state.correctReservationDateRange = correctDate;
   state.reservationValue = value;
   state.reservationName = name;
+  state.address = address;
 };
 export const changeContract = (state, contract) => {
   state.contract = contract;
+};
+export const changeSignature = (state, signature) => {
+  state.signature = signature;
 };
 export const changeReservationValue = (state, { value }) => {
   state.reservationValue = value;

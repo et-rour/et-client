@@ -248,7 +248,7 @@
       "field": "Land",
       "shed": "Shed"
     },
-    "metros": "Area (square meters)",
+    "metros": "Property area (square meters built)",
     "useType": "Use of soil",
     "useType2": "Commercial",
     "useType1": "Residential"
@@ -323,6 +323,7 @@
       "end": "The end",
       "validDates": "valid dates for the day",
       "datesValidationMessage": "Select a valid end date",
+      "signatureValidationMessage": "Sign the contract before continuing",
       "monthly": "monthly"
     },
     "schedule": {

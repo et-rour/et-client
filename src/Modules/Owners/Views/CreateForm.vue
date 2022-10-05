@@ -301,13 +301,13 @@
             class="w-1/5"
           >
             <div class="flex row justify-between items-center">
-              <button @click="changeRooms('minus')" class="bg-my-blue-primary rounded-full w-6 h-6 mx-2 text-white">-</button>
+              <button @click="(e) => changeRooms('minus', e)" class="bg-my-blue-primary rounded-full w-6 h-6 mx-2 text-white">-</button>
               <InputNumber
                   disabled
                   class="bg-gray-200 my-input w-full text-center"
                   v-model="rooms"
                 />
-              <button @click="changeRooms('add')" class="bg-my-blue-primary rounded-full w-6 h-6 mx-2 text-white">+</button>
+              <button @click="(e) => changeRooms('add', e)" class="bg-my-blue-primary rounded-full w-6 h-6 mx-2 text-white">+</button>
             </div>
             <span class="my-error relative top-0 left-0 block">{{
               errors[0]
@@ -420,7 +420,8 @@
             <ValidationProvider v-slot="{ errors }" rules="required">
               <InputNumber
                 class="bg-gray-200 my-input w-full"
-                v-model="valueMin"
+                v-model="displayedValueMin"
+                @change-value="updateValueMin"
               />
 
               <div
@@ -436,7 +437,8 @@
             <ValidationProvider v-slot="{ errors }" rules="required">
               <InputNumber
                 class="bg-gray-200 my-input w-full"
-                v-model="valueMax"
+                v-model="displayedValueMax"
+                @change-value="updateValueMax"
               />
 
               <div
@@ -555,7 +557,7 @@
             rules="required"
             class="w-1/5"
           >
-            <InputNumber class="bg-gray-200 my-input w-full" v-model="meters" />
+            <InputNumber class="bg-gray-200 my-input w-full" v-model="displayedMeters" @change-value="updateMeters" />
             <span class="my-error relative top-0 left-0 block">{{
               errors[0]
             }}</span>
@@ -629,6 +631,9 @@ export default {
   },
   data() {
     return {
+      displayedMeters: "",
+      displayedValueMin: "",
+      displayedValueMax: "",
       name: "",
       email: "",
       phoneNumber: "",
@@ -805,9 +810,19 @@ export default {
         .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       this.meters = newValue;
     },
-    changeRooms(type) {
+    changeRooms(type, e) {
+      e.preventDefault();
       if (type === 'add' && this.rooms < 40) this.rooms = this.rooms + 1;
       if (type === 'minus' && this.rooms > 0) this.rooms = this.rooms - 1;
+    },
+    updateMeters(meters) {
+      this.meters = meters;
+    },
+    updateValueMin(value) {
+      this.valueMin = value;
+    },
+    updateValueMax(value) {
+      this.valueMax = value;
     }
   },
   computed: {

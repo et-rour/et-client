@@ -8,7 +8,7 @@
         <span
           v-for="(step, index) in steps"
           :key="`step_${index}`"
-          @click="partSelected = step"
+          class="cursor-default"
           :class="partSelected !== step && 'text-gray-400'"
           >Paso {{ step }}</span
         >
@@ -91,10 +91,11 @@ export default {
         this.$route
       );
       const isEntire = idRoom === "entire" ? "entire" : "room";
-      const { reservations, leaseRange, value, name } = this.getCaledarData({
-        type: isEntire,
-        id: idRoom,
-      });
+      const { reservations, leaseRange, value, name, address } =
+        this.getCaledarData({
+          type: isEntire,
+          id: idRoom,
+        });
       this.calendarData = {
         reservations,
         leaseRange,
@@ -106,6 +107,7 @@ export default {
         correctDate: false,
         value,
         name,
+        address,
       });
     },
   },

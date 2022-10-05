@@ -22,8 +22,14 @@
           {{ reservationData.reservationName }}
         </p>
         <p class="text-sm font-bold text-center">
-          <span class="bg-yellow-300 p-1"> TOTAL: ${{ maskNumber }} </span>
+          <span class="bg-yellow-300 p-1">
+            TOTAL: $
+            <NumberMaskComponent
+              :number="`${reservationData.reservationValue}`"
+            />
+          </span>
         </p>
+        <!-- <p>{{ dates }}</p> -->
       </div>
     </template>
   </PartTemplateVue>
@@ -35,10 +41,12 @@ import Swal from "sweetalert2";
 import { mapActions, mapGetters } from "vuex";
 import { CustomErrorToast } from "../../../sweetAlert";
 import PartTemplateVue from "./PartTemplate.vue";
+import NumberMaskComponent from "../../../components/NumberMaskComponent.vue";
 
 export default {
   components: {
     PartTemplateVue,
+    NumberMaskComponent,
   },
   methods: {
     ...mapActions(["goToLocationCheckoutSession", "goToRoomCheckoutSession"]),
@@ -47,6 +55,13 @@ export default {
         CustomErrorToast.fire({
           icon: "warning",
           text: this.$t("tenants.details.datesValidationMessage"),
+        });
+        return;
+      }
+      if (this.reservationData.signature === "") {
+        CustomErrorToast.fire({
+          icon: "warning",
+          text: this.$t("tenants.details.signatureValidationMessage"),
         });
         return;
       }
@@ -62,12 +77,14 @@ export default {
             locationId: this.getPropertyDetails.id,
             userId: this.user.user.id,
             range: this.dates,
+            signature: this.reservationData.signature,
           });
         } else {
           await this.goToRoomCheckoutSession({
             roomId: this.$route.params.idRoom,
             userId: this.user.user.id,
             range: this.dates,
+            signature: this.reservationData.signature,
           });
         }
         Swal.hideLoading();
@@ -84,14 +101,11 @@ export default {
     ...mapGetters("propertiesStore/reservationStorage", ["reservationData"]),
     dates() {
       return {
-        start: moment(this.reservationData.start).valueOf(),
-        end: moment(this.reservationData.end).valueOf(),
+        start: moment(
+          this.reservationData.reservationDateRange.start
+        ).valueOf(),
+        end: moment(this.reservationData.reservationDateRange.end).valueOf(),
       };
-    },
-    maskNumber() {
-      return `${this.reservationData.reservationValue}`
-        .replaceAll(",", "")
-        .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     },
   },
 };

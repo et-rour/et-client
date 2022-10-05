@@ -124,7 +124,7 @@ html {
     @apply mb-40 md:mb-10;
   }
   .my-btn {
-    @apply bg-my-blue-primary w-64 py-3 rounded-2xl text-white hover:bg-my-blue-primary-hover transition-colors;
+    @apply bg-my-blue-primary w-64 py-3 rounded-2xl text-white hover:bg-opacity-80 transition-colors;
   }
   .my-error {
     @apply text-red-300 absolute top-0 left-1/3;

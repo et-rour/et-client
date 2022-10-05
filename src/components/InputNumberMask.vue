@@ -33,6 +33,9 @@ export default {
         .replaceAll(",", "")
         .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       this.$emit("input", newValue);
+
+      const realValue = newValue.replaceAll(",", "");
+      this.$emit("change-value", realValue);
     },
   },
 };

@@ -248,7 +248,7 @@
       "field": "Terreno",
       "shed": "Galpón"
     },
-    "metros": "Superficie de la propiedad (m2)",
+    "metros": "Superficie de la propiedad (M² construidos)",
     "useType": "Uso de suelo",
     "useType2": "Comercial",
     "useType1": "Habitacional"
@@ -323,6 +323,7 @@
       "end": "Hasta",
       "validDates": "fechas de fin válidas para el día:",
       "datesValidationMessage": "Selecciona una fecha de fin válida",
+      "signatureValidationMessage": "Firma el contrato antes de continuar",
       "monthly": "mensual"
     },
     "schedule": {
