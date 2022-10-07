@@ -6,10 +6,7 @@
       </h3>
     </template>
     <template v-slot:button>
-      <button
-        class="my-btn w-auto rounded-full py-1 px-5"
-        @click="$emit('navigate', 'next')"
-      >
+      <button class="my-btn w-auto rounded-full py-1 px-5" @click="goNextPart">
         {{ $t("general.next") }}
       </button>
     </template>
@@ -35,6 +32,7 @@ import { mapActions, mapGetters, mapMutations } from "vuex";
 import moment from "moment";
 import CalendarComponent from "./CalendarComponent.vue";
 import PartTemplateVue from "./PartTemplate.vue";
+import { CustomConfirmWarningDialog } from "@/sweetAlert";
 export default {
   components: { CalendarComponent, PartTemplateVue },
   props: {
@@ -60,6 +58,16 @@ export default {
     ...mapMutations("propertiesStore/reservationStorage", [
       "changeReservationDateRange",
     ]),
+    async goNextPart() {
+      if (!this.isCorrectRange) {
+        await CustomConfirmWarningDialog.fire({
+          text: this.$t("tenants.details.datesValidationMessage"),
+        });
+        return;
+      }
+      this.$emit("navigate", "next");
+      return;
+    },
     changeisCorrectRange(isCorrect) {
       this.isCorrectRange = isCorrect;
       if (isCorrect) {

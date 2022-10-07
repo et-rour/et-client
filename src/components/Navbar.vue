@@ -12,7 +12,7 @@
         @click="$router.push({ name: 'home' })"
       >
         <img
-          class="md:w-32 md:h-10 w-28 h-9 object-contain"
+          class="md:w-40 md:h-14 w-28 h-9 object-contain "
           src="@/assets/icons/logoHeader.png"
           alt="logo espacio temporal"
         />
@@ -25,44 +25,43 @@
       >
         <router-link
           active-class="text-my-blue-primary "
-          class="w-full py-2 text-center md:w-auto uppercase font-sans mt-10 md:mt-0"
+          class="w-full py-2 text-center md:w-auto uppercase font-bold mt-10 md:mt-0"
           :to="{ name: 'owner' }"
           ><a> {{ $t("navbar.owner") }} </a></router-link
         >
         <router-link
           active-class="text-my-blue-primary "
-          class="w-full py-2 text-center md:w-auto uppercase font-sans"
+          class="w-full py-2 text-center md:w-auto uppercase font-bold"
           :to="{ name: 'tenants' }"
           ><a> {{ $t("navbar.tenants") }} </a></router-link
         >
-        <!-- <router-link
-          class="w-full py-2 text-center md:w-auto uppercase font-sans"
-          to="/"
-          ><a> {{ $t("navbar.howWorks") }} </a></router-link
-        > -->
-        <router-link
-          active-class="text-my-blue-primary "
-          class="w-full py-2 text-center md:w-auto uppercase font-sans"
-          :to="{ name: 'about-us' }"
-          ><a> {{ $t("navbar.us") }} </a></router-link
-        >
-        <!-- {{siteCountry}} -->
 
-        <!-- <router-link
-          active-class="text-my-blue-primary "
-          v-if="user.user && user.user.isOwner"
-          class="w-full py-2 text-center md:w-auto uppercase font-sans"
-          :to="{ name: 'locations-list' }"
-          >{{ $t("navbar.myProperties") }}</router-link
-        > -->
-        <!-- <router-link
-          active-class="text-my-blue-primary "
-          v-if="user.user && user.user.isAdmin"
-          class="w-full py-2 text-center md:w-auto uppercase font-sans"
-          :to="{ name: 'admin-users' }"
-          >{{ $t("navbar.admin") }}</router-link
-        > -->
-
+        <div class=" relative group z-50">
+          <p class=" font-bold">{{ $t("navbar.us") }}</p>
+          <!-- <div class=" as flex flex-col gap-4 absolute w-48 top-6 -left-12 text-center bg-red-500 "> -->
+          <div class="flex flex-col gap-4 absolute w-48 top-6 -left-12 text-center bg-black text-white md:bg-gray-100 md:text-black shadow-xl invisible group-hover:visible  h-0 group-hover:h-44 overflow-hidden  transition-all ease-in duration-500 ">
+            <router-link
+              class=" hover:text-my-blue-primary mt-4"
+              :to="{ name: 'about-us' }"
+              ><a> {{ $t("navbar.usOption1") }} </a></router-link
+            >
+            <router-link
+              class=" hover:text-my-blue-primary "
+              :to="{ name: 'about-us' }"
+              ><a> {{ $t("navbar.usOption2") }} </a></router-link
+            >
+            <router-link
+              class=" hover:text-my-blue-primary "
+              :to="{ name: 'about-us' }"
+              ><a> {{ $t("navbar.usOption3") }} </a></router-link
+            >
+            <router-link
+              class=" hover:text-my-blue-primary "
+              :to="{ name: 'about-us' }"
+              ><a> {{ $t("navbar.usOption4") }} </a></router-link
+            >
+          </div>
+        </div>
 
         <div class="flex flex-col justify-center items-center relative">
           <button

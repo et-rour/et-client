@@ -10,7 +10,7 @@
         <img
           src="@/assets/icons/keys.png"
           alt="Dueños icon"
-          class="w-10 h-10 object-contain"
+          class="w-10 h-10 object-contain contain mx-auto"
         />
         <p>Dueños</p>
       </a>
@@ -23,7 +23,7 @@
         <img
           src="@/assets/icons/user.png"
           alt="Arrendatarios icon"
-          class="w-10 h-10 object-contain"
+          class="w-10 h-10 object-contain  mx-auto"
         />
         <p>Arrendatarios</p>
       </a>
@@ -36,7 +36,7 @@
         <img
           src="@/assets/icons/aboutUs.png"
           alt="Nosotros icon"
-          class="w-10 h-10 object-contain"
+          class="w-10 h-10 object-contain contain mx-auto"
         />
         <p>Comunidad</p>
       </a>

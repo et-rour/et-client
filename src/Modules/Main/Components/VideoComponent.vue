@@ -6,16 +6,16 @@
         <h2 class="my-title mb-8">
           {{ $t("landing.video.title") }}
         </h2>
-        <p class="text-sm font-extrabold">
+        <p class="text-md font-extrabold">
           {{ $t("landing.video.question_1") }}
         </p>
-        <p class="text-sm font-extralight mb-4">
+        <p class="text-md font-extralight mb-4">
           {{ $t("landing.video.response_1") }}
         </p>
-        <p class="text-sm font-extrabold inline">
+        <p class="text-md font-extrabold inline">
           {{ $t("landing.video.question_2") }}
         </p>
-        <p class="text-sm font-extralight inline">
+        <p class="text-md font-extralight inline">
           {{ $t("landing.video.response_2") }}
         </p>
       </div>
@@ -30,7 +30,7 @@
     </div>
 
     <ModelGlobal :showModal="showVideoModal" v-on:toogle="toogleShowModal">
-      <div class="w-2/3 h-1/3 md:h-2/3 bg-white" @click.stop>
+      <div class="w-2/3 h-1/3 md:h-2/3 bg-white relative" @click.stop>
         <!-- <iframe
           src="https://www.youtube.com/embed/u31qwQUeGuM"
           title="YouTube video player"
@@ -52,6 +52,12 @@
             type="video/mp4"
           />
         </video>
+        <div
+          class="w-10 h-10 bg-gray-300 shadow-2xl absolute top-0 -right-14 flex justify-center items-center cursor-pointer my-btn rounded-sm"
+          @click="showVideoModal = false"
+        >
+          <font-awesome-icon icon="times" class="text-black text-4xl" />
+        </div>
       </div>
     </ModelGlobal>
   </div>

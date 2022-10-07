@@ -118,20 +118,20 @@
               v-model="newText"
               class="w-full h-40 my-title my-input"
             ></textarea>
-            <h1 v-else class="my-title text-white mb-3">
+            <h1 v-else class="my-title text-2xl md:text-myheader1 text-white mb-3">
               {{ getHomeCoverData.text }}
             </h1>
           </div>
 
           <div class="flex gap-8 flex-col sm:flex-row">
             <button
-              class="my-btn bg-white w-full md:w-70 text-my-blue-primary"
+              class="my-btn font-semibold bg-white w-full md:w-70 text-my-blue-primary"
               @click="$router.push({ name: 'tenants' })"
             >
               {{ $t("landing.hero.searchProperty") }}
             </button>
             <button
-              class="my-btn w-full md:w-70 text-white p-2"
+              class="my-btn font-semibold w-full md:w-70 text-white p-2"
               @click="$router.push({ name: 'owner' })"
             >
               {{ $t("landing.hero.openProperty") }}

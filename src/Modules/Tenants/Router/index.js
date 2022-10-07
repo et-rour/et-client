@@ -37,14 +37,16 @@ export default [
         props: (route) => {
           return {
             idRoom: `${route.params.idRoom}`,
+            idProperty: route.params.id,
           };
         },
         beforeEnter(to, __, next) {
           const type = to.params.idRoom === "entire" ? "entire" : "room";
           if (!isValidCalendarLease(type, to.params.idRoom)) {
+            const idProperty = to.params.id;
             next({
               name: "tenants-detail",
-              params: { idProperty: to.params.idProperty },
+              params: { id: idProperty },
             });
           }
           if (isAuth()) {

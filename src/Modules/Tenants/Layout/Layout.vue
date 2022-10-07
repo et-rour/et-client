@@ -6,13 +6,25 @@
       <router-link :to="{ name: 'tenants-schedule' }">schedule</router-link>
     </nav> -->
     <SpinerVue v-if="isLoadingLocation"></SpinerVue>
-
-    <router-view v-else></router-view>
+    <div v-else>
+      <router-view></router-view>
+      <a
+        target="_blank"
+        :href="`https://wa.me/+56921811458/?text=Hola, tengo una consulta sobre la propiedad: ${propertyName}`"
+        class="w-16 h-16 fixed bottom-16 right-16 z-50 cursor-pointer"
+      >
+        <img
+          src="@/assets/images/WhatsApp.png"
+          alt="whatsapp fixed"
+          class="w-full"
+        />
+      </a>
+    </div>
   </div>
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 import { CustomErrorToast } from "@/sweetAlert";
 import SpinerVue from "../../../components/Spiner.vue";
 
@@ -42,6 +54,12 @@ export default {
         });
       }
       this.isLoadingLocation = false;
+    },
+  },
+  computed: {
+    ...mapGetters("propertiesStore", ["getPropertyDetails"]),
+    propertyName() {
+      return `${this.getPropertyDetails.name}, ${this.getPropertyDetails.zone.zone} - ${this.getPropertyDetails.zone.city}`;
     },
   },
   mounted() {

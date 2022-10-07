@@ -37,12 +37,19 @@
     "property": "property",
 
     "month": "no months | 1 month | {count} months",
-    "year": "no years | 1 year | {count} months"
+    "year": "no years | 1 year | {count} months",
+
+    "notFound": "It was not found",
+    "notAsign": "not assigned"
   },
   "navbar": {
     "owner": "PUBLISH YOUR PROPERTY",
     "tenants": "SPACES AVAILABLE",
     "us": "ABOUT US",
+    "usOption1": "What do we do",
+    "usOption2": "Team",
+    "usOption3": "Success stories",
+    "usOption4": "Trust us",
     "howWorks": "How does it work?",
     "posts": "posts",
     "myProperties": "My properties",
@@ -236,7 +243,15 @@
     "tipoPropiedad": "Property type",
     "propiedadEntera": "Property complete",
     "propiedadParcial": "Room",
-    "metros": "Area (square meters)"
+    "propertyTypes": {
+      "house": "House/Building",
+      "field": "Land",
+      "shed": "Shed"
+    },
+    "metros": "Property area (square meters built)",
+    "useType": "Use of soil",
+    "useType2": "Commercial",
+    "useType1": "Residential"
   },
   "createResult": {
     "title": "The approximate rental value for your property is",
@@ -245,7 +260,8 @@
     "description_1": "The technical visit consists of the verification of the address ",
     "description_2": "and the data delivered, in addition to a review of the ",
     "description_3": "property conditions and feasibility of use",
-    "confirm": "confirm the rental value through a technical visit by our inspectors"
+    "confirm": "confirm the rental value through a technical visit by our inspectors",
+    "noResult": "For this kind of property an inspector needs to make an evaluation during a visit. Book a visit to have a rent price."
   },
   "schedule": {
     "title": "Select the date for your visit",
@@ -307,6 +323,7 @@
       "end": "The end",
       "validDates": "valid dates for the day",
       "datesValidationMessage": "Select a valid end date",
+      "signatureValidationMessage": "Sign the contract before continuing",
       "monthly": "monthly"
     },
     "schedule": {
@@ -471,7 +488,9 @@
         "activateUser": "Are you sure you want to activate the user?",
         "desactivateUser": "Are you sure you want to deactivate the user?",
         "makeOwner": "Are you sure you want to make owner the user?",
-        "removeOwner": "Are you sure you want to remove owner access?"
+        "removeOwner": "Are you sure you want to remove owner access?",
+        "makeAdmin": "Are you sure you want the user to be an Admin?",
+        "removeAdmin": "Are you sure you want to remove the Admin role?"
       }
     },
     "zones": {
@@ -522,6 +541,11 @@
       "seeRooms": "Rooms",
       "newRoom": "Create room",
       "images3d": "Images 3d",
+      "sugestedValue": "Suggested value",
+      "expectedValue": "Expected value",
+      "createdBy": "Property created by",
+      "admin": "Administrator",
+      "user": "User",
       "roomsList": {
         "title": "all rooms",
         "noRooms": "This property doesn't have any room registered",

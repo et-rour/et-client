@@ -115,6 +115,7 @@ export const getCaledarData = (state) => (data) => {
   if (data.type === "entire") {
     calendarData = {
       name: state.propertyDetails.name,
+      address: `${state.propertyDetails.zone.zone}, ${state.propertyDetails.zone.city}, ${state.propertyDetails.zone.state}, ${state.propertyDetails.zone.country}`,
       value: state.propertyDetails.value,
       image: state.propertyDetails.image,
       reservations: [...state.propertyDetails.reservations],
@@ -129,6 +130,7 @@ export const getCaledarData = (state) => (data) => {
     );
     calendarData = {
       name: `${state.propertyDetails.name} \n -${room.name}`,
+      address: `${state.propertyDetails.zone.zone}, ${state.propertyDetails.zone.city}, ${state.propertyDetails.zone.state}, ${state.propertyDetails.zone.country}`,
       value: room.value,
       image: room.imagesRoom[0] && room.imagesRoom[0].image,
       reservations: [...room.reservations],
