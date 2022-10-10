@@ -1,5 +1,13 @@
 <template>
-  <div class="w-full h-full overflow-y-scroll bg-gray-100 py-5" id="details">
+  <div v-if="deletedProp" class="w-full h-full overflow-y-scroll bg-gray-100 py-5" id="details">
+    <h1 class="my-title mb-3 text-center">
+      {{ $t("adminPanel.locations.title") }}
+    </h1>
+    <p class="mb-3 text-center">
+      {{ $t("adminPanel.locations.sentToTrash") }}
+    </p>
+  </div>
+  <div v-else class="w-full h-full overflow-y-scroll bg-gray-100 py-5" id="details">
     <h1 class="my-title mb-3 text-center">
       {{ $t("adminPanel.locations.title") }}
     </h1>
@@ -85,7 +93,9 @@ export default {
     },
   },
   data() {
-    return {};
+    return {
+      deletedProp: false,
+    };
   },
   methods: {
     ...mapActions("adminPanelStore/locations", ["fetchLocationDetails"]),
@@ -103,10 +113,14 @@ export default {
     ...mapGetters("adminPanelStore/locations", [
       "getLocationDetails",
       "getIsLoadingLocationDetails",
+      "getAllLocations"
     ]),
     locationData() {
       return this.getLocationDetails;
     },
+    locations() {
+      return this.getAllLocations.length;
+    }
   },
   created() {
     this.loadLocationDetails();
@@ -114,7 +128,13 @@ export default {
   watch: {
     idLocation() {
       this.loadLocationDetails();
+      this.deletedProp = false;
     },
+    locations() {
+      const idx = this.getAllLocations.findIndex(location => location.id == this.idLocation);
+
+      if (idx === -1) this.deletedProp = true;
+    }
   },
 };
 </script>

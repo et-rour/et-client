@@ -9,7 +9,15 @@
     "confirmWarningTitle": "Before continuing",
     "confirmWarningConfirmText": "Got it!!",
     "confirmButton": "Yes do it",
-    "cancelButton": "Cancel"
+    "cancelButton": "Cancel",
+    "sendToTrash": "Send to trash bin",
+    "locationToTrash": "Are you sure to send this property to the trash bin? The property will be no longer available for any application's user.",
+    "sendToTrashPermanent": "Permanently delete",
+    "locationToTrashPermanent": "Are you sure to delete this property? The property will be no longer available for any application's user or admin.",
+    "restoreLocationTitle": "Restore property",
+    "restoreLocationText": "Are you sure to restore this property? The property will be visible for all application's users.",
+    "fullDeleted": "This property has been fully deleted",
+    "restored": "This property has been succesfully restored"
   },
   "validations": {
     "messages": {
@@ -438,7 +446,8 @@
       "review": "Review",
       "reservation": "Reservation",
       "publications": "Publications",
-      "payments": "Payments"
+      "payments": "Payments",
+      "trashbin": "Trash bin"
     },
     "users": {
       "select": "Select a user",
@@ -513,6 +522,7 @@
       }
     },
     "locations": {
+      "sentToTrash": "This property has been sent to the trash bin succesfully.",
       "select": "Select location",
       "title": "Location information",
       "name": "Name",
@@ -546,6 +556,8 @@
       "createdBy": "Property created by",
       "admin": "Administrator",
       "user": "User",
+      "fullDelete": "Permanently delete",
+      "restore": "Restore",
       "roomsList": {
         "title": "all rooms",
         "noRooms": "This property doesn't have any room registered",
