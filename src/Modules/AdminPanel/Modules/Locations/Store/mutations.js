@@ -2,6 +2,10 @@ export const getLocations = (state, locations) => {
   state.locations = locations;
 };
 
+export const getTrashLocations = (state, locations) => {
+  state.trash = locations;
+};
+
 export const changeLoadingLocationDetails = (state, loading) => {
   state.loadingLocationDetails = loading;
 };
@@ -39,6 +43,43 @@ export const modifyLocation = (state, newLocation) => {
     ...state.locationDetails,
     ...newLocation,
   };
+};
+
+export const hideLocation = (state, idLocation) => {
+  const index = state.locations.findIndex(
+    (location) => location.id == idLocation
+  );
+
+  if (index !== -1) {
+    let newLocations = state.locations;
+    newLocations.splice(index, 1)
+    state.locations = newLocations;
+  }
+};
+
+export const hideLocationTrash = (state, idLocation) => {
+  const index = state.trash.findIndex(
+    (element) => element.id == idLocation
+  );
+
+  if (index !== -1) {
+    let newTrash = state.trash;
+    newTrash.splice(index, 1)
+    state.trash = newTrash;
+  }
+};
+
+export const restoreLocation = (state, idLocation) => {
+  const index = state.trash.findIndex(
+    (element) => element.id == idLocation
+  );
+
+  if (index !== -1) {
+    let newTrash = state.trash;
+    const restoredElement = newTrash.splice(index, 1)
+    state.trash = newTrash;
+    state.locations = [...state.locations, restoredElement];
+  }
 };
 
 export const createLocation = (state, newLocation) => {

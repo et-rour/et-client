@@ -9,7 +9,15 @@
     "confirmWarningTitle": "Antes de continuar",
     "confirmWarningConfirmText": "Entendido!!",
     "confirmButton": "Si, hazlo",
-    "cancelButton": "Cancelar"
+    "cancelButton": "Cancelar",
+    "sendToTrash": "Enviar a la papelera",
+    "locationToTrash": "¿Está seguro de enviar esta propiedad a la papelera de reciclaje? La propiedad ya no será accesible para los usuarios de la aplicación.",
+    "sendToTrashPermanent": "Eliminar definitivamente",
+    "locationToTrashPermanent": "¿Está seguro de eliminar esta propiedad de forma definitiva? La propiedad ya no será accesible ni para los usuarios de la aplicación ni para sus administradores.",
+    "restoreLocationTitle": "Restaurar locación",
+    "restoreLocationText": "¿Está seguro de restaurar esta propiedad de la papelera de reciclaje? La propiedad volverá a ser visible para los usuarios de la aplicación.",
+    "fullDeleted": "Esta propiedad ha sido completamente eliminada",
+    "restored": "Esta propiedad ha sido restaurada con éxito"
   },
   "validations": {
     "messages": {
@@ -438,7 +446,8 @@
       "review": "Reseñas",
       "reservation": "Reservas",
       "publications": "Publicaciones",
-      "payments": "Pagos"
+      "payments": "Pagos",
+      "trashbin": "Papelera"
     },
     "users": {
       "select": "Selecciona un usuario",
@@ -513,6 +522,7 @@
       }
     },
     "locations": {
+      "sentToTrash": "Esta propiedad ha sido enviada a la papelera de reciclaje con éxito.",
       "select": "Selecciona una locación",
       "title": "Información de la locación",
       "name": "Nombre",
@@ -546,6 +556,8 @@
       "createdBy": "Propiedad creada por",
       "admin": "Administador",
       "user": "Usuario",
+      "fullDelete": "Eliminar definitivamente",
+      "restore": "Restaurar",
       "roomsList": {
         "title": "Todos los cuartos",
         "noRooms": "Esta propiedad no tiene ningun cuarto registrado",

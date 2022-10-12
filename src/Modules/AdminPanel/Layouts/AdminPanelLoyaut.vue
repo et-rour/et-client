@@ -68,6 +68,15 @@
             {{ $t("adminPanel.navbar.payments") }}
           </li>
         </router-link>
+        <router-link :to="{ name: 'admin-trash-bin', hash: '#sidebar' }">
+          <li
+            class="px-2 py-1"
+            :class="selected === 8 ? 'active-link' : null"
+            @click="switchMenu(8)"
+          >
+            {{ $t("adminPanel.navbar.trashbin") }}
+          </li>
+        </router-link>
       </ul>
       <div class="flex-grow">
         <router-view></router-view>

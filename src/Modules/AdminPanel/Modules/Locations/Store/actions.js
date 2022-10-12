@@ -6,6 +6,12 @@ export const getLocations = async ({ commit }) => {
   commit("getLocations", locations);
 };
 
+export const getTrashLocations = async ({ commit }) => {
+  const res = await EspacioAPI.get("/admin/listlocationstrash");
+  const locations = res.data.locations;
+  commit("getTrashLocations", locations);
+};
+
 export const fetchLocationDetails = async ({ commit }, idLocation) => {
   commit("changeLoadingLocationDetails", true);
   const res = await EspacioAPI.get(`/admin/location/${idLocation}`);
@@ -18,6 +24,21 @@ export const modifyLocation = async ({ commit }, location) => {
   const res = await EspacioAPI.put("/admin/modifylocation", location);
   const newLocation = res.data;
   commit("modifyLocation", newLocation);
+};
+
+export const permanentDeleteLocation = async ({ commit }, idLocation) => {
+  await EspacioAPI.put("/admin/deletelocationpermanent", { id: idLocation });
+  commit("hideLocationTrash", idLocation);
+};
+
+export const restoreLocation = async ({ commit }, idLocation) => {
+  await EspacioAPI.put("/admin/restorelocation", { id: idLocation });
+  commit("restoreLocation", idLocation);
+};
+
+export const deleteLocation = async ({ commit }, idLocation) => {
+  await EspacioAPI.put("/admin/deletelocation", { id: idLocation });
+  commit("hideLocation", idLocation);
 };
 
 export const changeIsActiveProperty = async (

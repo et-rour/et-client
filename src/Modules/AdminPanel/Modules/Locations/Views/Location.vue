@@ -281,7 +281,16 @@
 
       <div class="w-full flex justify-center">
         <button
-          class="my-btn"
+          class="my-btn mx-2 bg-red-600"
+          @click="sendToTrash"
+          :disabled="isUploadingLocation"
+          :class="isUploadingLocation ? 'bg-gray-500' : ''"
+        >
+          <!-- {{ $t("general.update") }} -->
+          Eliminar
+        </button>
+        <button
+          class="my-btn mx-2"
           @click="submitLocation"
           :disabled="isUploadingLocation"
           :class="isUploadingLocation ? 'bg-gray-500' : ''"
@@ -316,13 +325,14 @@ export default {
     return {
       location: null,
       fistValueLocation: null,
-
       isUploadingLocation: false,
+      hasDeleted: false,
     };
   },
   methods: {
     ...mapActions("adminPanelStore/locations", [
       "modifyLocation",
+      "deleteLocation",
       "changeIsActiveLocation",
       "changeIsVerifiedLocation",
       "setLocationValue",
@@ -345,6 +355,20 @@ export default {
     loadLocation() {
       this.location = this.getLocationDetails;
       this.fistValueLocation = this.location.value;
+    },
+    async sendToTrash() {
+      const { isConfirmed } = await CustomConfirmDialog.fire({
+        title: this.$t("sweetAlertMessages.sendToTrash"),
+        text: this.$t("sweetAlertMessages.locationToTrash"),
+      })
+
+      if (!isConfirmed) return;
+
+      const { id } = this.location
+
+      await this.deleteLocation(id);
+
+      this.hasDeleted = true;
     },
     async submitLocation() {
       const { isConfirmed } = await CustomConfirmDialog.fire();
