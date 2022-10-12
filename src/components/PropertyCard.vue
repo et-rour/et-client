@@ -16,7 +16,7 @@ import { mapGetters } from 'vuex';
         :to="{ name: 'tenants-detail', params: { id: property.id } }"
         class="text-gray-400"
       >
-        <span class="text-black" v-if="property.roomsDetails.length">Espacio privado</span>
+        <span class="text-black" v-if="property.roomsDetails.length">{{ $t("general.privateSpace") }}</span>
         <a class="text-black" v-else-if="property.value !== '0'"
           >{{ currency }} / {{ $t("landing.propertyCard.montly") }}
         </a>

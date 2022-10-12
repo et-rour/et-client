@@ -30,23 +30,19 @@
   },
   "general": {
     "copied": "Copied to clipboard",
-
     "next": "Following",
     "previus": "Previous",
     "finish": "Finish your payment",
-
     "yes": "Yes",
     "seeImage": "See image",
     "cancel": "Cancel",
     "save": "Save",
     "update": "Update",
-
     "image": "image | image | {count} images",
     "property": "property",
-
+    "privateSpace": "Private space",
     "month": "no months | 1 month | {count} months",
     "year": "no years | 1 year | {count} months",
-
     "notFound": "It was not found",
     "notAsign": "not assigned"
   },
