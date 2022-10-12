@@ -157,12 +157,13 @@
         <SwitchComponentVue
           :value="location.isVerified"
           v-on:toogle="toogleIsVerified"
+          :disabled="isVerifyDisabled"
         />
       </div>
 
       <div class="flex items-center justify-between">
         <label for="value" class="mr-3"
-          >{{ $t("adminPanel.locations.value") }}
+          >{{ $t("adminPanel.locations.value") }} ({{currency.symbol}})
         </label>
         <div>
           <input
@@ -319,7 +320,16 @@ export default {
     MapCoordsVue,
   },
   computed: {
-    ...mapGetters("adminPanelStore/locations", ["getLocationDetails"]),
+    ...mapGetters("adminPanelStore/locations", ["getLocationDetails", "getAllCurrencies"]),
+    isVerifyDisabled() {
+      if (this.location.isVerified) return false;
+      if (!this.location.name || !this.location.address || !this.location.description || !this.location.email || !this.location.phone || !this.location.rooms || !this.location.bathrooms || !this.location.floor || !this.location.painting || !this.location.garage || !this.location.squareMeters) return true;
+      return false;
+    },
+    currency() {
+      if (this.getAllCurrencies.length) return this.getAllCurrencies.filter(el => el.country === this.location.zone.country)[0];
+      else return this.getAllCurrencies.filter(el => el.country === 'Chile')[0];
+    }
   },
   data() {
     return {
@@ -336,6 +346,7 @@ export default {
       "changeIsActiveLocation",
       "changeIsVerifiedLocation",
       "setLocationValue",
+      "getCurrenciesList",
     ]),
     goToSchedule() {
       this.$router.push({
@@ -502,7 +513,7 @@ export default {
         try {
           const price = await this.setLocationValue({
             locationId: this.location.id,
-            locationValue: this.location.value,
+            locationValue: parseInt(this.location.value / this.currency.value),
           });
           CustomToast.fire({
             title: this.$t("sweetAlertMessages.saved"),
@@ -524,6 +535,7 @@ export default {
   },
   async created() {
     try {
+      await this.getCurrenciesList();
       await this.loadLocation();
     } catch (error) {
       console.log(error);

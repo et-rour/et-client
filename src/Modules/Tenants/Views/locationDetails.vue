@@ -70,7 +70,7 @@
             <img
               :src="image.image"
               :alt="`image_extra_${image.id}`"
-              class="w-full"
+              class="w-full h-40 object-cover"
               v-for="image in sidebarImages"
               :key="image.id"
             />
@@ -176,7 +176,7 @@
       <div class="w-2/3 h-96 bg-white relative" @click.stop>
         <SwiperVue :images="carouselModalImages" class="h-full"></SwiperVue>
         <button
-          class="bg-gray-500 w-10 h-10 absolute top-0 right-0 z-50"
+          class="bg-gray-100 w-10 h-10 absolute top-0 right-0 z-50"
           @click="toggleShowModalImages"
         >
           <font-awesome-icon icon="times"></font-awesome-icon>

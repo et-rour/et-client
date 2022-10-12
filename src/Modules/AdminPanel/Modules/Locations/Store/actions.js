@@ -6,6 +6,12 @@ export const getLocations = async ({ commit }) => {
   commit("getLocations", locations);
 };
 
+export const getCurrenciesList = async ({ commit }) => {
+  const res = await EspacioAPI.get("/currency");
+  const currencies = res.data;
+  commit("getCurrencies", currencies);
+};
+
 export const getTrashLocations = async ({ commit }) => {
   const res = await EspacioAPI.get("/admin/listlocationstrash");
   const locations = res.data.locations;

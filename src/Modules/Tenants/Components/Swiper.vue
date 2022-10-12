@@ -5,7 +5,7 @@
         <img
           :src="image.image"
           :alt="`image_${image}`"
-          class="w-full h-full object-cover rounded-3xl overflow-hidden"
+          class="w-full h-full object-contain rounded-3xl overflow-hidden"
         />
       </div>
     </swiper-slide>

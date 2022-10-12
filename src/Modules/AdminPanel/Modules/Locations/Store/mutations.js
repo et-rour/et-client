@@ -2,6 +2,10 @@ export const getLocations = (state, locations) => {
   state.locations = locations;
 };
 
+export const getCurrencies = (state, currencies) => {
+  state.currencies = currencies;
+};
+
 export const getTrashLocations = (state, locations) => {
   state.trash = locations;
 };

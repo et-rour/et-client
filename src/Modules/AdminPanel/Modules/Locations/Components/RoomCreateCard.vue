@@ -1,6 +1,6 @@
 <template>
   <div class="w-full flex flex-col">
-    <div class="w-9/12 sm:w-6/12 lg:w-1/3 mx-auto h-full bg-gray-200 relative">
+    <!-- <div class="w-9/12 sm:w-6/12 lg:w-1/3 mx-auto h-full bg-gray-200 relative">
       <img
         v-if="!localImage"
         src="@/assets/icons/image.png"
@@ -31,7 +31,7 @@
         :value="ImageUploadingState"
         class="w-full h-5"
       />
-    </div>
+    </div> -->
 
     <ValidationObserver v-slot="{ invalid }">
       <form @submit.prevent="createNewRoom" class="flex flex-col gap-2">
@@ -122,11 +122,9 @@
 <script>
 import { mapActions, mapGetters } from "vuex";
 import { CustomErrorToast, CustomToast } from "@/sweetAlert";
-import ProgesBarImage from "../../../../../components/ProgesBarImage.vue";
 import { ValidationObserver } from "vee-validate";
 export default {
   components: {
-    ProgesBarImage,
     ValidationObserver,
   },
   data() {
