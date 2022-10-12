@@ -62,7 +62,7 @@ export default {
       dropzoneOptions: {
         url: `${process.env.VUE_APP_API}/admin/image/`,
         thumbnailWidth: 150,
-        maxFilesize: 0.5,
+        // maxFilesize: 0.5,
       },
     };
   },
