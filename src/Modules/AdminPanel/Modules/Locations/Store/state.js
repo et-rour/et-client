@@ -3,4 +3,5 @@ export default () => ({
   locationDetails: null,
   loadingLocationDetails: false,
   trash: [],
+  currencies: [],
 });

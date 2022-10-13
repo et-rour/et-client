@@ -37,3 +37,6 @@ export const getFilteredTrashLocations = (state) => (word) => {
 export const getLocationById = (state) => (id) => {
   return state.locations.find((location) => location.id == id);
 };
+export const getAllCurrencies = (state) => {
+  return state.currencies;
+};

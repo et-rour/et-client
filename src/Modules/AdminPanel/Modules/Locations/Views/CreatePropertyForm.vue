@@ -1,7 +1,8 @@
 <template>
   <div class="w-full h-full overflow-y-scroll bg-gray-100">
     <div class="w-2/3 mx-auto">
-      <div class="py-4 flex flex-col gap-3">
+    <!-- <div class="w-full flex relative"> -->
+      <div class="py-4 flex flex-col gap-3 ">
         <h2 class="my-title-2 text-center my-2">
           {{ $t("adminPanel.locations.newLocationForm") }}
         </h2>
@@ -10,7 +11,7 @@
           <label for="owner" class="mr-3"
             >{{ $t("adminPanel.locations.owner") }}
           </label>
-          <select name="owner" v-model="owner">
+          <select name="owner" v-model="location.owner">
             <option selected disabled value="unselect">
               {{ $t("adminPanel.locations.selectOne") }}
             </option>
@@ -86,12 +87,12 @@
           <label for="zone" class="mr-3"
             >{{ $t("adminPanel.locations.zone") }}
           </label>
-          <select name="zone" v-model="zone" :disabled="city === 'unselect'">
+          <select name="zone" v-model="location.zone" :disabled="city === 'unselect'">
             <option selected disabled value="unselect">
               {{ $t("adminPanel.locations.selectOne") }}
             </option>
-            <option v-for="zone in zones" :key="zone" :value="zone">
-              {{ zone }}
+            <option v-for="zone in zones" :key="zone" :value="zone.id">
+              {{ zone.id }}.- {{ zone.zone }}
             </option>
           </select>
         </div>
@@ -357,7 +358,7 @@
 
         <!-- coords -->
         <MapCoordsVue @result-click="setNewCoords"></MapCoordsVue>
-        <p>lat:{{ location.lat }} lng:{{ location.long }}</p>
+        <!-- <p>lat:{{ location.lat }} lng:{{ location.long }}</p> -->
         <div class="w-full flex justify-center">
           <button class="my-btn" @click="submitLocation">
             <!-- {{ $t("general.update") }} -->
@@ -365,6 +366,7 @@
           </button>
         </div>
       </div>
+      <!-- <pre class="sticky top-10 left-0">{{JSON.stringify(location,null,"\t")}}</pre> -->
     </div>
   </div>
 </template>
@@ -389,8 +391,8 @@ export default {
         // expectedValue: '',
         floor: 3,
         garage: 0,
-        isActive: true,
-        isVerified: true,
+        isActive: false,
+        isVerified: false,
         lat: -13.44,
         long: -70.659,
         name: "",
@@ -432,8 +434,8 @@ export default {
           phone: this.location.phone,
           description: this.location.description,
           garage: this.location.garage,
-          owner: this.owner !== "unselect" ? this.owner : 1,
-          zone: this.zone !== "unselect" ? this.owner.id : 1,
+          owner: this.location.owner,
+          zone: this.location.zone,
           propertyType: this.location.propertyType,
           isActive: this.location.isActive,
           isVerified: this.location.isVerified,
@@ -510,7 +512,7 @@ export default {
     zones() {
       let filtered = this.getAllZones.filter((zone) => zone.city === this.city);
       let mapped = filtered.map((zone) => {
-        return zone.zone;
+        return zone;
       });
       let final = new Set(mapped);
       return [...final];

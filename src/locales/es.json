@@ -30,23 +30,19 @@
   },
   "general": {
     "copied": "Email copiado",
-
     "next": "Siguiente",
     "previus": "Volver",
     "finish": "Finaliza tu pago",
-
     "yes": "Si",
     "seeImage": "Ver imagen",
     "cancel": "Cancel",
     "save": "Guardar",
     "update": "Actualizar",
-
     "image": "imagen | imagen | {count} imagenes",
     "property": "propiedad",
-
+    "privateSpace": "Espacio privado",
     "month": "cero meses | 1 mes | {count} meses",
     "year": "cero años | 1 año | {count} años",
-
     "notFound": "No se encontro",
     "notAsign": "No se asigno"
   },

@@ -16,7 +16,8 @@ import { mapGetters } from 'vuex';
         :to="{ name: 'tenants-detail', params: { id: property.id } }"
         class="text-gray-400"
       >
-        <a class="text-black" v-if="property.value !== '0'"
+        <span class="text-black" v-if="property.roomsDetails.length">{{ $t("general.privateSpace") }}</span>
+        <a class="text-black" v-else-if="property.value !== '0'"
           >{{ currency }} / {{ $t("landing.propertyCard.montly") }}
         </a>
         <span class="text-black" v-else
@@ -65,7 +66,7 @@ export default {
     },
   },
   mounted() {
-    console.log("currency", this.siteCountry);
+    console.log("PROPERTY DATA", this.property);
   },
 };
 </script>

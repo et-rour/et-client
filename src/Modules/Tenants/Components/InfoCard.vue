@@ -13,7 +13,8 @@
         ><a> {{ property.name }} </a></router-link
       >
       <p class="text-gray-500">
-        <span class="text-black">{{ currency }}</span>
+        <span v-if="property.roomsDetails.length" class="text-black">{{ $t("general.privateSpace") }}</span>
+        <span v-else class="text-black">{{ currency }}</span>
         / {{ property.zone.city }}, {{ property.zone.zone }}
       </p>
     </div>
