@@ -1,24 +1,24 @@
 <template>
   <ul class="flex flex-col h-40 md:h-auto relative">
     <router-link
-      v-for="location in locationsList"
+      v-for="user in usersList"
+      :key="user.id"
+      active-class="active-class-admin"
       :to="{
-        name: 'admin-trash-location',
-        params: { id: location.id },
-        hash: `${location.id}`,
+        name: 'admin-trash-user',
+        params: { id: user.id },
+        hash: `${user.id}`,
       }"
-      :key="location.id"
-      active-class="active-class-admin "
     >
       <a>
         <div
           class="cursor-pointer p-1 hover:bg-my-blue-primary hover:text-white"
         >
           <div class="flex row items-center">
-            <font-awesome-icon icon="fa-solid fa-house" id="trashUserIcon" />
+            <font-awesome-icon icon="fa-regular fa-user" id="trashUserIcon" />
             <div class="column ml-2">
-              <span class="block"><b>{{ location.name }}</b></span>
-              <span>{{ location.zone.city }} ({{ location.zone.country }})</span>
+              <span class="block"><b>{{user.lastName}}, {{user.firstName}}</b></span>
+              <span>{{ user.email }}</span>
             </div>
           </div>
         </div>
@@ -30,7 +30,7 @@
 <script>
 export default {
   props: {
-    locationsList: {
+    usersList: {
       type: Array,
     },
   },

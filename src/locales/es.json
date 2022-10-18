@@ -11,13 +11,19 @@
     "confirmButton": "Si, hazlo",
     "cancelButton": "Cancelar",
     "sendToTrash": "Enviar a la papelera",
+    "userToTrash": "¿Está seguro de enviar este usuario a la papelera de reciclaje? El usuario ya no será accesible para iniciar sesión.",
     "locationToTrash": "¿Está seguro de enviar esta propiedad a la papelera de reciclaje? La propiedad ya no será accesible para los usuarios de la aplicación.",
     "sendToTrashPermanent": "Eliminar definitivamente",
     "locationToTrashPermanent": "¿Está seguro de eliminar esta propiedad de forma definitiva? La propiedad ya no será accesible ni para los usuarios de la aplicación ni para sus administradores.",
     "restoreLocationTitle": "Restaurar locación",
     "restoreLocationText": "¿Está seguro de restaurar esta propiedad de la papelera de reciclaje? La propiedad volverá a ser visible para los usuarios de la aplicación.",
     "fullDeleted": "Esta propiedad ha sido completamente eliminada",
-    "restored": "Esta propiedad ha sido restaurada con éxito"
+    "restored": "Esta propiedad ha sido restaurada con éxito",
+    "userToTrashPermanent": "¿Está seguro de eliminar este usuario de forma definitiva? El usuario ya no será accesible ni si se podrá utilizar la dirección de correo electrónico en el futuro.",
+    "restoreLocationTitleUser": "Restaurar usuario",
+    "restoreLocationTextUser": "¿Está seguro de restaurar este usuario de la papelera de reciclaje? El usuario con este correo electrónico será nuevamente accesible.",
+    "fullDeletedUser": "Este usuario ha sido completamente eliminado",
+    "restoredUser": "Este usuario ha sido restaurado con éxito"
   },
   "validations": {
     "messages": {
@@ -38,6 +44,7 @@
     "cancel": "Cancel",
     "save": "Guardar",
     "update": "Actualizar",
+    "change":"Cambiar",
     "image": "imagen | imagen | {count} imagenes",
     "property": "propiedad",
     "privateSpace": "Espacio privado",
@@ -474,6 +481,7 @@
       "createdReviews": "Reseñas creadas",
       "receivedReviews": "Reseñas resividas",
       "payments": "Pagos",
+      "sentToTrash": "Este usuario ha sido enviado a la papelera de reciclaje con éxito",
       "locationsList": {
         "title": "Locaciones del usuario:",
         "noLocationsFound": "El usuario no cuenta con propiedades"
@@ -542,6 +550,16 @@
       "newVisit": "Agendar visita tecnica",
       "goToVisit": "Ir al calendario",
       "value": "Valor de la propiedad",
+      "landUse":"Uso de la propiedad",
+      "unused":"Tiempo sin uso",
+      "stripeProductId":"Id del producto en stripe",
+      "stripePriceId":"Id del precio en stripe",
+      "startLease":"Inicio del arriendo",
+      "endLease":"Fin del arriendo",
+      "created":"Se creo el",
+      "zoneId":"Zona",
+      "ownerId":"Dueño",
+      "adminsId":"Admin",
       "details": "Detalles",
       "images": "Imagenes",
       "seeRooms": "Cuartos",

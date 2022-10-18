@@ -6,9 +6,9 @@ import { mapGetters } from 'vuex';
         @click="
           $router.push({ name: 'tenants-detail', params: { id: property.id } })
         "
-        :src="property.image"
+        :src="image"
         alt="location_image"
-        class="object-cover h-full w-full"
+        :class="!property.image ? 'object-contain h-full w-full' : 'object-cover h-full w-full'"
       />
     </div>
     <div class="bg-white p-3 pr-12 h-1/3 w-full border">
@@ -35,6 +35,7 @@ import { mapGetters } from 'vuex';
 
 <script>
 import { mapGetters } from "vuex";
+// import HousePlaceholder from "../assets/images/house_placeholder.png"
 
 export default {
   props: {
@@ -43,22 +44,28 @@ export default {
       required: true,
     },
   },
+  components: {
+    // HousePlaceholder,
+  },
   computed: {
     ...mapGetters("postsStore", ["currencies"]),
     ...mapGetters("authStore", ["siteCountry"]),
+    image() {
+      return this.property.image ?? require('../assets/images/house_placeholder512.png');
+    },
     currency() {
       if (this.siteCountry === "") {
         const clCurrency = this.currencies.filter( el => el.country === 'Chile');
         // return `$US ${this.property.value} `;
         return `${clCurrency[0].symbol} ${(
-            parseInt(this.property.value) * clCurrency[0].value
+            parseFloat(this.property.value) * clCurrency[0].value
           ).toFixed(0)} `;
       }
 
       for (let i = 0; i < this.currencies.length; i++) {
         if (this.currencies[i].country === this.siteCountry) {
           return `${this.currencies[i].symbol} ${(
-            parseInt(this.property.value) * this.currencies[i].value
+            parseFloat(this.property.value) * this.currencies[i].value
           ).toFixed(0)} `;
         }
       }

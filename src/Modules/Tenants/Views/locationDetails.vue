@@ -59,9 +59,9 @@
         <!-- COVER IMAGE -->
         <div class="col-span-12 md:col-span-7">
           <img
-            :src="property.image"
+            :src="image"
             alt="cover property"
-            class="w-full h-44 sm:h-64 md:h-80 object-cover mb-8"
+            :class="!property.image ? 'w-full h-44 sm:h-64 md:h-80 object-contain mb-8' : 'w-full h-44 sm:h-64 md:h-80 object-cover mb-8'"
           />
         </div>
 
@@ -162,7 +162,7 @@
           @click="goToCalendar"
           v-if="property.propertyType === 'entire'"
         >
-          <a>{{ $t("tenants.details.pay") }}</a>
+          <a>{{ $t("tenants.details.pay") }} ${{property.value}}</a>
         </button>
       </div>
     </div>
@@ -362,6 +362,9 @@ export default {
     ...mapGetters("authStore", ["user", "isAuth"]),
     zoom() {
       return this.property.lat !== "" && this.property.long !== "" ? 15 : 2;
+    },
+    image() {
+      return this.property.image ?? require('../../../assets/images/house_placeholder1024.png');
     },
     markerLatLng() {
       // RANDOM DEVIATION

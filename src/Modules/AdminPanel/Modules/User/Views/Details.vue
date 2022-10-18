@@ -90,6 +90,14 @@
           user.didReview ? $t("general.yes") : "No"
         }}</span>
       </div>
+      <div class="w-full flex justify-center mt-4">
+        <button
+          class="my-btn mx-2 bg-red-600"
+          @click="sendUserTrash"
+        >
+          {{ $t("sweetAlertMessages.sendToTrash") }}
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -106,6 +114,11 @@ export default {
   components: {
     SwitchComponentVue,
   },
+  data() {
+    return {
+      hasDeleted: false,
+    }
+  },
   computed: {
     ...mapGetters("adminPanelStore/users", ["getUserDetails"]),
     user() {
@@ -117,7 +130,20 @@ export default {
       "changeIsActiveUser",
       "changeIsOwnerStatus",
       "changeIsAdminRol",
+      "deleteUser"
     ]),
+    async sendUserTrash() {
+      const { isConfirmed } = await CustomConfirmDialog.fire({
+        title: this.$t("sweetAlertMessages.sendToTrash"),
+        text: this.$t("sweetAlertMessages.userToTrash"),
+      })
+
+      if (!isConfirmed) return;
+
+      await this.deleteUser({id: this.user.id});
+
+      this.hasDeleted = true;
+    },
     toogleIsActive(value) {
       const changeActiveUserTextAcction = this.user.isActive
         ? this.$t("adminPanel.users.confiramtionMessages.desactivateUser")
@@ -198,6 +224,11 @@ export default {
       );
     },
   },
+  watch: {
+    hasDeleted(newValue) {
+      if (newValue === true) this.$emit('userDeleted');
+    }
+  }
 };
 </script>
 
