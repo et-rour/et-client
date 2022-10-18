@@ -174,7 +174,7 @@
               </label>
               <input
                 type="number"
-                max="5"
+                max="99"
                 min="0"
                 class="my-input"
                 v-model="location.rooms"
@@ -189,7 +189,7 @@
               </label>
               <input
                 type="number"
-                max="5"
+                max="99"
                 min="0"
                 class="my-input"
                 v-model="location.bathrooms"
