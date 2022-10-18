@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-60 lg:h-80 border">
+  <div class="w-full h-60 lg:h-80 border relative">
     <img
       @click="
         $router.push({ name: 'tenants-detail', params: { id: property.id } })
@@ -18,6 +18,7 @@
         / {{ property.zone.city }}, {{ property.zone.zone }}
       </p>
     </div>
+    <img src="@/assets/images/AGOTADA_CUT.png" alt="agotada" class="absolute top-0 left-0" v-if="!property.isActive">
   </div>
 </template>
 

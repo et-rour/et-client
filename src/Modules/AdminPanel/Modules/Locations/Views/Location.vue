@@ -423,7 +423,7 @@
                   >{{ $t("adminPanel.locations.unused") }}
                 </label>
                 <select
-                  class="bg-gray-200 w-3/4"
+                  class="my-input w-2/3"
                   name="tiempoUso"
                   v-model="location.unused"
                 >
@@ -566,6 +566,7 @@
             </button>
           </div>
         </div>
+        <!-- <pre>{{JSON.stringify({fistValueLocation,newValueProperty},null,"\t")}}</pre> -->
 
         <FilterZonesComponent :listZones="getAllZones" :selectedZoneId="location.zone.id" :idLocation="this.location.id"/>
       </div>

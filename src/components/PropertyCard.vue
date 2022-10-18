@@ -1,6 +1,6 @@
 import { mapGetters } from 'vuex';
 <template>
-  <div class="flex flex-col h-80">
+  <div class="flex flex-col h-80 relative">
     <div class="h-2/3 w-full cursor-pointer">
       <img
         @click="
@@ -30,6 +30,8 @@ import { mapGetters } from 'vuex';
         </p> -->
       </router-link>
     </div>
+    <img src="@/assets/images/AGOTADA_CUT.png" alt="agotada" class="absolute top-0 left-0" v-if="!property.isActive">
+
   </div>
 </template>
 
