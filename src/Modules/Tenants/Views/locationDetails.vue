@@ -162,7 +162,7 @@
           @click="goToCalendar"
           v-if="property.propertyType === 'entire'"
         >
-          <a>{{ $t("tenants.details.pay") }} ${{property.value}}</a>
+          <a>{{ $t("tenants.details.pay") }} {{currency.symbol}} {{Math.round(property.value * currency.value)}}</a>
         </button>
       </div>
     </div>
@@ -212,12 +212,9 @@
 
 <script>
 import { mapActions, mapGetters, mapMutations } from "vuex";
-// import { Viewer } from "photo-sphere-viewer";
-// import { MarkersPlugin } from "photo-sphere-viewer/dist/plugins/markers";
 import "photo-sphere-viewer/dist/photo-sphere-viewer.css";
 import "photo-sphere-viewer/dist/plugins/markers.css";
 import RoomCard from "../Components/RoomCard.vue";
-// import ContactModal from "../Components/ContactModal.vue";
 import ModelGlobal from "../../../components/ModelGlobal.vue";
 import { CustomErrorToast } from "@/sweetAlert.js";
 import SwiperVue from "../Components/Swiper.vue";
@@ -227,7 +224,6 @@ export default {
   components: {
     ModelGlobal,
     RoomCard,
-    // ContactModal,
     SwiperVue,
     Mapa,
     IncludedServices,
@@ -240,8 +236,6 @@ export default {
   data() {
     return {
       property: null,
-
-      // EXTRA IMAGES
       showModalImages: false,
     };
   },
@@ -265,82 +259,6 @@ export default {
     closeContactModal() {
       this.showContactModal = false;
     },
-    // showContactModalFunc() {
-    //   this.showContactModal = true;
-    // },
-    // show3d() {
-    //   let onlyMarkers = [];
-    //   const markerList = this.property.images3D.map((image, index) => {
-    //     const markerWithImage = {
-    //       marker: {
-    //         id: index + 1,
-    //         tooltip: image.name,
-    //         circle: 30,
-    //         svgStyle: {
-    //           fill: "rgba(255,255,0,0.3)",
-    //           stroke: "yellow",
-    //           strokeWidth: "2px",
-    //         },
-    //         longitude: image.longitude,
-    //         latitude: image.latitude,
-    //         anchor: "center right",
-    //       },
-    //       image: image.image,
-    //     };
-
-    //     onlyMarkers.push(markerWithImage.marker);
-    //     return markerWithImage;
-    //   });
-
-    //   console.log({ onlyMarkers });
-    //   if (this.viewer !== "" || onlyMarkers.length === 0) {
-    //     return;
-    //   }
-    //   this.viewer = new Viewer({
-    //     container: document.querySelector("#viewer"),
-    //     panorama: markerList[0].image,
-    //     plugins: [
-    //       [
-    //         MarkersPlugin,
-    //         {
-    //           markers: onlyMarkers,
-    //         },
-    //       ],
-    //     ],
-    //   });
-    //   const markersPlugin = this.viewer.getPlugin(MarkersPlugin);
-
-    //   markersPlugin.on("select-marker", (e, marker) => {
-    //     console.log(marker.id);
-    //     this.viewer
-    //       .animate({
-    //         longitude: marker.config.longitude,
-    //         latitude: marker.config.latitude,
-    //         zoom: 100,
-    //         speed: "-2rpm",
-    //       })
-    //       .then(() =>
-    //         this.viewer.setPanorama(markerList[marker.id - 1].image).then(
-    //           () =>
-    //             markersPlugin.updateMarker({
-    //               // id: marker.id,
-    //               // longitude: -1.8,
-    //               // latitude: -0.28,
-    //             }),
-    //           this.viewer.animate({
-    //             zoom: 50,
-    //             speed: "2rpm",
-    //           })
-    //         )
-    //       );
-    //   });
-    // },
-    // toggleShowModalImages3d() {
-    //   this.showModalImages3d = !this.showModalImages3d;
-    //   setTimeout(() => {
-    //     this.show3d();
-    //   }, 1000);
-    // },
     toggleShowModalImages() {
       this.showModalImages = !this.showModalImages;
     },
@@ -360,6 +278,10 @@ export default {
     ]),
     ...mapGetters("propertiesStore", ["propertiesById"]),
     ...mapGetters("authStore", ["user", "isAuth"]),
+    ...mapGetters("postsStore", ["currencies"]),
+    currency() {
+      return this.currencies.filter(currency => currency.country === this.property.zone.country)[0];
+    },
     zoom() {
       return this.property.lat !== "" && this.property.long !== "" ? 15 : 2;
     },
