@@ -6,6 +6,8 @@ const Trash = () =>
   import(/* webpackChunkName: "Trash" */ "../Views/Trash.vue");
 const Location = () =>
   import(/* webpackChunkName: "Trash" */ "../Views/Location.vue");
+  const User = () =>
+  import(/* webpackChunkName: "Trash" */ "../Views/User.vue");
 
 export default {
   name: "admin-trashbin",
@@ -21,6 +23,11 @@ export default {
       name: "admin-trash-location",
       path: "/trash/location",
       component: Location,
+    },
+    {
+      name: "admin-trash-user",
+      path: "/trash/user",
+      component: User,
     },
   ],
 };

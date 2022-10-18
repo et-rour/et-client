@@ -132,7 +132,6 @@ export default {
     },
     locations() {
       const idx = this.getAllLocations.findIndex(location => location.id == this.idLocation);
-
       if (idx === -1) this.deletedProp = true;
     }
   },

@@ -40,6 +40,18 @@ extend("extInstagramUrl", {
   },
   message: (_, values) => i18n.t("validations.messages.required", values),
 });
+
+extend("extPhoneNumber", {
+  validate: (value) => {
+    let websiteRegEx = new RegExp("^\\+?[0-9-]+$");
+
+    if (websiteRegEx.test(value)) {
+      return true;
+    }
+    return false;
+  },
+  message: (_, values) => i18n.t("numero de telefono inavalido", values),
+});
 // VALIDATE WHATSAPP REGEX
 extend("extWhatsapp", {
   validate: (value) => {

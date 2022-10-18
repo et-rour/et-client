@@ -75,12 +75,33 @@ export const getUserDetailsReceivedReservetions = (state) => {
 };
 
 export const getFilteredUsers = (state) => (word) => {
-  return state.users.filter((user) => {
-    if (user.firstName.toLowerCase().indexOf(word.toLowerCase()) > -1) {
-      return user;
-    }
-  });
+  if (state.users.length && word.length) {
+    return state.users.filter((user) => {
+      if (user.firstName.toLowerCase().indexOf(word.toLowerCase()) > -1) {
+        return user;
+      }
+    });
+  } else {
+    return state.users;
+  }
 };
+
+export const getFilteredTrashUsers = (state) => (word) => {
+  if (state.trash.length && word.length) {
+    return state.trash.filter((user) => {
+      if (user.firstName.toLowerCase().indexOf(word.toLowerCase()) > -1) {
+        return user;
+      }
+    });
+  } else {
+    return state.trash;
+  }
+};
+
 export const getUserById = (state) => (id) => {
   return state.users.find((user) => user.id == id);
 };
+
+export const getAllUsers = (state) => {
+  return state.users;
+}

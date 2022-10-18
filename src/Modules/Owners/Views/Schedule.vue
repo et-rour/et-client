@@ -26,7 +26,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters("authStore", ["user"]),
+    ...mapGetters("authStore", ["user","isAuth"]),
     ...mapGetters("propertiesStore", ["createdProperty"]),
     completeAddress() {
       const { address, zone, city, state, country } =
@@ -36,15 +36,15 @@ export default {
   },
   methods: {
     initCalenly() {
+      const { name, calendlyLink } = this.$route.params.location;
       console.log(
         "%cSchedule.vue line:48 this.calendly",
         "color: #007acc;",
-        this.calendly
+        this.calendly,{name, calendlyLink}
       );
-      const { name } = this.$route.params.location;
 
       this.calendly.initInlineWidget({
-        url: `${process.env.VUE_APP_VISIT}?hide_event_type_details=1&hide_gdpr_banner=1&primary_color=2323d5&utm_campaign=tecnica`,
+        url: `${calendlyLink?calendlyLink:process.env.VUE_APP_VISIT}?hide_event_type_details=1&hide_gdpr_banner=1&utm_campaign=tecnica`,
         parentElement: document.getElementById("calendly-widget"),
         prefill: {
           name: this.isAuth

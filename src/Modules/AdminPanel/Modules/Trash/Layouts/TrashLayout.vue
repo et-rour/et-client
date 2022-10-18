@@ -60,14 +60,17 @@
       </div>
 
       <SpinerComponent v-if="isloadingLocationsList" />
-      <LocationsListComponent v-else :locationsList="filteredData" />
+      <LocationsListComponent v-else :locationsList="filteredData.locations" />
+      <UsersListComponent :usersList="filteredData.users" />
+
+
     </template>
     <template v-slot:main>
       <p
-        v-if="$router.currentRoute.path === '/locations'"
+        v-if="$router.currentRoute.path === '/trash'"
         class="my-title text-3xl"
       >
-        <font-awesome-icon icon="fa-solid fa-house" id="houseIcon" />
+        <font-awesome-icon icon="fa-solid fa-trash" id="houseIcon" />
       </p>
       <router-view></router-view>
     </template>
@@ -76,16 +79,17 @@
 
 <script>
 import { mapActions, mapGetters } from "vuex";
-import { CustomErrorToast } from "@/sweetAlert";
 import GeneralLayoutVue from "../../../Layouts/GeneralLayout.vue";
 import SpinerComponent from "../../../../../components/Spiner.vue";
 import LocationsListComponent from "../Components/LocationsList.vue";
+import UsersListComponent from "../Components/UsersList.vue";
 
 export default {
     components: {
         GeneralLayoutVue,
         SpinerComponent,
-        LocationsListComponent
+        LocationsListComponent,
+        UsersListComponent,
     },
     data() {
         return {
@@ -96,71 +100,75 @@ export default {
             zone: "unselect",
         }
     },
-      methods: {
-    ...mapActions("adminPanelStore/locations", ["getTrashLocations"]),
-    ...mapActions("adminPanelStore/zones", ["getZones"]),
-  },
-  computed: {
-    ...mapGetters("adminPanelStore/locations", ["getFilteredTrashLocations"]),
-    ...mapGetters("adminPanelStore/zones", ["getAllZones"]),
-    filteredData() {
-      let filtered = this.getFilteredTrashLocations(this.filterWord);
-      if (this.country !== "unselect") {
-        filtered = filtered.filter(
-          (location) => location.zone.country === this.country
-        );
-      }
-      if (this.city !== "unselect") {
-        filtered = filtered.filter(
-          (location) => location.zone.city === this.city
-        );
-      }
-      if (this.zone !== "unselect") {
-        filtered = filtered.filter(
-          (location) => location.zone.zone === this.zone
-        );
-      }
-      return filtered;
+    methods: {
+      ...mapActions("adminPanelStore/locations", ["getTrashLocations"]),
+      ...mapActions("adminPanelStore/zones", ["getZones"]),
+      ...mapActions("adminPanelStore/users", ["getTrashUsers"]),
     },
-    countries() {
-      let countries = [];
-      for (let i = 0; i < this.getAllZones.length; i++) {
-        if (countries.indexOf(this.getAllZones[i].country) === -1) {
-          countries.push(this.getAllZones[i].country);
+    computed: {
+      ...mapGetters("adminPanelStore/locations", ["getFilteredTrashLocations"]),
+      ...mapGetters("adminPanelStore/zones", ["getAllZones"]),
+      ...mapGetters("adminPanelStore/users", ["getFilteredTrashUsers"]),
+      filteredData() {
+        let filteredLocations = this.getFilteredTrashLocations(this.filterWord);
+        if (this.country !== "unselect") {
+          filteredLocations = filteredLocations.filter(
+            (location) => location.zone.country === this.country
+          );
         }
-      }
-      return countries;
+        if (this.city !== "unselect") {
+          filteredLocations = filteredLocations.filter(
+            (location) => location.zone.city === this.city
+          );
+        }
+        if (this.zone !== "unselect") {
+          filteredLocations = filteredLocations.filter(
+            (location) => location.zone.zone === this.zone
+          );
+        }
+        let filteredUsers = this.getFilteredTrashUsers(this.filterWord);
+        return {
+          locations: filteredLocations,
+          users: filteredUsers,
+        }
+      },
+      countries() {
+        let countries = [];
+        for (let i = 0; i < this.getAllZones.length; i++) {
+          if (countries.indexOf(this.getAllZones[i].country) === -1) {
+            countries.push(this.getAllZones[i].country);
+          }
+        }
+        return countries;
+      },
+      cities() {
+          let filtered = this.getAllZones.filter(
+            (zone) => zone.country === this.country
+          );
+          let mapped = filtered.map((zone) => {
+            return zone.city;
+          });
+          let final = new Set(mapped);
+          return [...final];
+      },
+      zones() {
+          let filtered = this.getAllZones.filter((zone) => zone.city === this.city);
+          let mapped = filtered.map((zone) => {
+            return zone.zone;
+          });
+          let final = new Set(mapped);
+          return [...final];
+      },
     },
-    cities() {
-      let filtered = this.getAllZones.filter(
-        (zone) => zone.country === this.country
-      );
-      let mapped = filtered.map((zone) => {
-        return zone.city;
-      });
-      let final = new Set(mapped);
-      return [...final];
-    },
-    zones() {
-      let filtered = this.getAllZones.filter((zone) => zone.city === this.city);
-      let mapped = filtered.map((zone) => {
-        return zone.zone;
-      });
-      let final = new Set(mapped);
-      return [...final];
-    },
-  },
   async mounted() {
     try {
       this.isloadingLocationsList = true;
+      await this.getTrashUsers();
       await this.getTrashLocations();
       await this.getZones();
       this.isloadingLocationsList = false;
     } catch (error) {
       this.isloadingLocationsList = false;
-      CustomErrorToast.fire({
-        text: error.response.data.message,
-      });
     }
   },
   watch: {

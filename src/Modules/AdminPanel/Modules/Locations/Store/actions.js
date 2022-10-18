@@ -14,7 +14,7 @@ export const getCurrenciesList = async ({ commit }) => {
 
 export const getTrashLocations = async ({ commit }) => {
   const res = await EspacioAPI.get("/admin/listlocationstrash");
-  const locations = res.data.locations;
+  const locations = res.data.locations.length ? res.data.locations : [];
   commit("getTrashLocations", locations);
 };
 
@@ -100,6 +100,15 @@ export const setLocationValue = async ({ commit }, data) => {
     stripeProductId,
   });
   return value;
+};
+
+export const updateZone = async (_, {id,zoneId}) => {
+  const res = await EspacioAPI.put("/admin/modifylocation", {
+    id:id,
+    zone:Number(zoneId),
+  });
+  console.log('%cactions.js line:110 res', 'color: #007acc;', res);
+  return true
 };
 /*
 export const changeIsActivePropertyInLocation = async (

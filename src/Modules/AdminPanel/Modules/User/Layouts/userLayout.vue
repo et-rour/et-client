@@ -104,7 +104,15 @@
       >
         <font-awesome-icon icon="fa-solid fa-user-pen" id="userIcon" />
       </p>
-      <router-view></router-view>
+      <div v-if="deletedProp" class="w-full h-full overflow-y-scroll bg-gray-100 py-5" id="details">
+        <h1 class="my-title mb-3 text-center">
+          {{ $t("adminPanel.users.title") }}
+        </h1>
+        <p class="mb-3 text-center">
+          {{ $t("adminPanel.users.sentToTrash") }}
+        </p>
+      </div>
+      <router-view v-else></router-view>
     </template>
   </GeneralLayoutVue>
 </template>
@@ -134,15 +142,22 @@ export default {
       isAdmin: "unselect",
       dateStart: "",
       dateEnd: "",
+      deletedProp: false,
     };
   },
   methods: {
     ...mapActions("adminPanelStore/users", ["getUsers"]),
   },
   computed: {
-    ...mapGetters("adminPanelStore/users", ["getFilteredUsers"]),
+    ...mapGetters("adminPanelStore/users", ["getFilteredUsers", "getAllUsers"]),
     dateFormat() {
       return moment(this.date).format();
+    },
+    users() {
+      return this.getAllUsers.length;
+    },
+    idUser() {
+      return this.$route.params.id;
     },
     filteredData() {
       let filtered = this.getFilteredUsers(this.filterWord);
@@ -195,6 +210,15 @@ export default {
     }
     this.isLoadingUsersList = false;
   },
+  watch: {
+    users() {
+      const idx = this.getAllUsers.findIndex(user => user.id == this.idUser);
+      if (idx === -1) this.deletedProp = true;
+    },
+    idUser() {
+      this.deletedProp = false;
+    }
+  }
 };
 </script>
 

@@ -11,13 +11,19 @@
     "confirmButton": "Yes do it",
     "cancelButton": "Cancel",
     "sendToTrash": "Send to trash bin",
+    "userToTrash": "Are you sure to sent this user to the trash bin? The user will be no longer available for signing in.",
     "locationToTrash": "Are you sure to send this property to the trash bin? The property will be no longer available for any application's user.",
     "sendToTrashPermanent": "Permanently delete",
     "locationToTrashPermanent": "Are you sure to delete this property? The property will be no longer available for any application's user or admin.",
     "restoreLocationTitle": "Restore property",
     "restoreLocationText": "Are you sure to restore this property? The property will be visible for all application's users.",
     "fullDeleted": "This property has been fully deleted",
-    "restored": "This property has been succesfully restored"
+    "restored": "This property has been succesfully restored",
+    "userToTrashPermanent": "Are you sure to fully delete this user? The user will be no longer available and the email address will be useless in the future.",
+    "restoreLocationTitleUser": "Restore user",
+    "restoreLocationTextUser": "Are you sure to restore this user? The user with this email address will be available again.",
+    "fullDeletedUser": "This user has been fully deleted",
+    "restoredUser": "This user has been succesfully restored"
   },
   "validations": {
     "messages": {
@@ -38,6 +44,7 @@
     "cancel": "Cancel",
     "save": "Save",
     "update": "Update",
+    "change":"Change",
     "image": "image | image | {count} images",
     "property": "property",
     "privateSpace": "Private space",
@@ -474,6 +481,7 @@
       "createdReviews": "Created reviews",
       "receivedReviews": "Received reviews",
       "payments": "Payments",
+      "sentToTrash": "This user has been succesfully sent to the trash bin",
       "locationsList": {
         "title": "locations for user:",
         "noLocationsFound": "The user does not have properties"
@@ -542,6 +550,16 @@
       "newVisit": "Schedule technical visit",
       "goToVisit": "go to calendar",
       "value": "property value",
+      "landUse": "Use for property",
+      "unused": "idle time",
+      "stripeProductId": "Product id in stripe",
+      "stripePriceId": "Price id in stripe",
+      "startLease": "Beginning of the lease",
+      "endLease": "end of lease",
+      "created": "I believe the",
+      "zoneId": "Zone",
+      "ownerId": "Owner",
+      "adminsId": "admin",
       "details": "Details",
       "images": "Images",
       "seeRooms": "Rooms",

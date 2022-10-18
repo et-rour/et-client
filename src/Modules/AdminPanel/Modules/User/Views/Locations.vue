@@ -7,14 +7,12 @@
       >
         {{ $t("adminPanel.users.locationsList.noLocationsFound") }}
       </h2>
-
-      <div v-else v-for="room in locationsList" :key="room.id">
-        <RoomCard :room="room"></RoomCard>
-
+      <div v-else v-for="location in locationsList" :key="location.id">
+        <p class=" font-bold text-center">Id:{{location.id}} - {{location.name}} {{location.address}}</p>
         <button
           class="my-btn w-auto px-4 mx-1 py-1"
           @click="
-            $router.push({ name: 'tenants-detail', params: { id: room.id } })
+            $router.push({ name: 'tenants-detail', params: { id: location.id } })
           "
         >
           ver detalles
@@ -25,7 +23,7 @@
           @click="
             $router.push({
               name: 'admin-locations-detail-info',
-              params: { id: room.id },
+              params: { id: location.id },
             })
           "
         >
@@ -38,11 +36,9 @@
 
 <script>
 import { mapGetters } from "vuex";
-import RoomCard from "../../../../Tenants/Components/RoomCard.vue";
 
 export default {
   components: {
-    RoomCard,
   },
   computed: {
     ...mapGetters("adminPanelStore/users", ["getUserDetails"]),

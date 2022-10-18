@@ -18,7 +18,7 @@ export const getPersonalMembers = (state) => {
     "color: white; background-color: #007acc;",
     state.authStore.user
   );
-  const userIsAdmin = state.authStore.user && state.authStore.user;
+  const userIsAdmin = state.authStore.user && state.authStore.user.isAdmin;
 
   if (!userIsAdmin) {
     let newPersonalArray = state.personal.filter((person) => {

@@ -46,6 +46,38 @@
       class="px-4 flex flex-col gap-2 py-3 border shadow-xl"
       v-if="isEditing"
     >
+      <template>
+        <div class="flex-grow w-full">
+          <img
+            v-if="localImage"
+            class="w-full h-20 object-contain"
+            :src="localImage"
+            alt="Local image"
+          />
+        </div>
+        <input
+          type="file"
+          @change="onImageSelectChangeHandler"
+          ref="imageSelector"
+          class="hidden"
+        />
+        <button
+          class="my-btn my-1 py-1 px-2 rounded-lg w-auto"
+          @click="$refs.imageSelector.click()"
+        >
+          {{ $t("general.change") }}
+        </button>
+        <button
+          class="my-btn my-1 py-1 px-4 rounded-lg w-auto"
+          v-if="localImage"
+          :disabled="!localImage"
+          :class="!localImage && 'bg-opacity-40'"
+          @click="uploadCoverImage"
+        >
+          {{ $t("general.save") }}
+        </button>
+      </template>
+      
       <input
         type="text"
         :placeholder="$t('about-us.name')"
@@ -86,6 +118,7 @@
 
 <script>
 import { CustomErrorToast, CustomToast } from "@/sweetAlert";
+import Swal from "sweetalert2";
 import { mapActions, mapGetters } from "vuex";
 
 export default {
@@ -100,9 +133,13 @@ export default {
       isEditing: false,
       isSaving: false,
       editingPerson: {},
+      
+      localImage: null,
+      file: null,
     };
   },
   methods: {
+    ...mapActions(["uploadImageTofirebase"]),
     ...mapActions(["updatePersonalMember"]),
     async updatePersonalMemberHandler() {
       this.isSaving = true;
@@ -130,9 +167,52 @@ export default {
 
       CustomToast.fire({ icon: "success", text: this.$t("general.copied") });
     },
+    async onImageSelectChangeHandler(event) {
+      const image = event.target.files[0];
+      if (!image) {
+        this.file = null;
+        return;
+      }
+      this.file = image;
+      const fr = new FileReader();
+      fr.onload = () => (this.localImage = fr.result);
+      fr.readAsDataURL(image);
+    },
+    async uploadCoverImage() {
+      new Swal({
+        title: this.$t("sweetAlertMessages.wait"),
+        allowOutsideClick: false,
+      });
+      Swal.showLoading();
+      try {
+        const newImageFirebaseUrl = await this.uploadImageTofirebase({
+          specificDirectory: `/PERSONAL/personal_${new Date().getTime()}`,
+          file: this.file,
+        });
+
+        
+        this.editingPerson.image = newImageFirebaseUrl;
+        await this.updatePersonalMember({
+          personalMemberInfo: this.editingPerson,
+          id: this.person.id,
+        });
+        
+        Swal.close();
+        CustomToast.fire({
+          title: this.$t("sweetAlertMessages.saved"),
+          icon: "success",
+        });
+        this.localImage = null;
+        this.file = null;
+      } catch (error) {
+        CustomErrorToast.fire({
+          text:  error,
+        });
+      }
+    },
   },
   computed: {
-    ...mapGetters("authStore", ["isAdmin"]),
+    ...mapGetters("authStore", ["user","isAdmin"]),
   },
   mounted() {
     this.editingPerson = {

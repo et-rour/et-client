@@ -14,6 +14,8 @@ import adminPanel from "../Modules/AdminPanel/Router/index";
 import PostsRouter from "../Modules/Posts/Router/index";
 import StripeRouter from "../Modules/Stripe/Router/index";
 import ProfileRouter from "../Modules/Profile/Router/index";
+import store from "@/store"; //or use a full path to ./store
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -61,7 +63,6 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes,
   scrollBehavior(to, from, savedPosition) {
-    console.log(to.hash);
     // Exists when Browser's back/forward pressed
     if (savedPosition) {
       return savedPosition;
@@ -77,5 +78,19 @@ const router = new VueRouter({
     return { x: 0, y: 0 };
   },
 });
+router.beforeEach((to, from, next) => { // This way, you don't need to write hook for each route
+  // get where user being stored ex:
+  const { user } = store.state.authStore;
+  if (to.name?.includes("admin")) {
+      if (user.isAdmin) {
+        next()
+      } else {
+        alert("No tienes permisos para entrar")
+        next('/propiedad')
+      }
+  } else {
+      next()
+  }
+})
 
 export default router;
