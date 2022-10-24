@@ -152,7 +152,8 @@
     "propertyCard": {
       "from": "From",
       "montly": "montly",
-      "noValue": "Not value asigned"
+      "noValue": "Not value asigned",
+      "noRooms": "rooms not available"
     }
   },
   "questions": {
@@ -342,7 +343,8 @@
       "validDates": "valid dates for the day",
       "datesValidationMessage": "Select a valid end date",
       "signatureValidationMessage": "Sign the contract before continuing",
-      "monthly": "monthly"
+      "monthly": "monthly",
+      "daily": "daily"
     },
     "schedule": {
       "title": "Select the date for your visit",

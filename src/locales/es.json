@@ -152,7 +152,8 @@
     "propertyCard": {
       "from": "Desde",
       "montly": "mensual",
-      "noValue": "No cuenta con valor asignado"
+      "noValue": "No cuenta con valor asignado",
+      "noRooms": "Cuartos no disponibles"
     }
   },
   "questions": {
@@ -342,7 +343,8 @@
       "validDates": "fechas de fin válidas para el día:",
       "datesValidationMessage": "Selecciona una fecha de fin válida",
       "signatureValidationMessage": "Firma el contrato antes de continuar",
-      "monthly": "mensual"
+      "monthly": "mensual",
+      "daily": "al dia"
     },
     "schedule": {
       "title": "Selecciona la fecha para tu visita",

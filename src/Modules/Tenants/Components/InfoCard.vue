@@ -1,21 +1,28 @@
 <template>
-  <div class="w-full h-60 lg:h-80 border relative">
+  <div class="w-full h-60 lg:h-80 border relative cursor-pointer"
+    @click="
+      $router.push({ name: 'tenants-detail', params: { id: property.id } })
+    "
+  >
     <img
-      @click="
-        $router.push({ name: 'tenants-detail', params: { id: property.id } })
-      "
       :src="image"
       alt="location image"
       class="h-32 lg:h-48 w-full object-cover"
     />
-    <div class="py-4 px-2">
-      <router-link :to="{ name: 'tenants-detail', params: { id: property.id } }"
-        ><a> {{ property.name }} </a></router-link
-      >
-      <p class="text-gray-500">
-        <span v-if="property.roomsDetails.length" class="text-black">{{ $t("general.privateSpace") }}</span>
-        <span v-else class="text-black">{{ currency }}</span>
-        / {{ property.zone.city }}, {{ property.zone.zone }}
+    <div class="py-4 px-2 flex flex-col">
+      <p>{{ property.name }}</p>
+      <p class="">{{type}} <span class=" text-gray-400">/ {{ property.zone.city }}, {{ property.zone.zone }}</span></p>
+      
+      <p class=" mt-6" >
+        <span v-if="priceAndTime.isRoom" class=" uppercase">{{$t('tenants.details.start')}} </span>
+        <span>{{ priceAndTime.format }}</span>
+        <span v-if="property.propertyType!=='room'"> - 
+          {{
+            property.isDaily ?
+            $t("tenants.details.daily") :
+            $t("tenants.details.monthly")
+          }}
+        </span>
       </p>
     </div>
     <img :src="availabilityImage" alt="agotada" class="absolute top-0 left-0">
@@ -35,27 +42,45 @@ export default {
   computed: {
     ...mapGetters("postsStore", ["currencies"]),
     ...mapGetters("authStore", ["siteCountry"]),
-    currency() {
+    priceAndTime() {
       if (!this.property.isActive) {
         return this.$t("general.agotada")
       }
 
-      if (this.siteCountry === "") {
-        const clCurrency = this.currencies.filter( el => el.country === 'Chile');
-        // return `$US ${this.property.value} `;
-        return `${clCurrency[0].symbol} ${(
-            parseInt(this.property.value) * clCurrency[0].value
-          ).toFixed(0)} `;
-      }
-
-      for (let i = 0; i < this.currencies.length; i++) {
-        if (this.currencies[i].country === this.siteCountry) {
-          return `${this.currencies[i].symbol} ${(
-            parseInt(this.property.value) * this.currencies[i].value
-          ).toFixed(0)} `;
+      let value = this.property.value;
+      let isRoom = false;
+      if (this.property.propertyType === 'room') {
+        // [90000,20000]
+        const roomPrices = this.property.roomsDetails.filter(room => room.isActive&&room.value!==0).map(room => room.value)
+        if (roomPrices.length === 0){
+          return{
+            isRoom:false,
+            format:this.$t("landing.propertyCard.noRooms"),
+            value: 0
+          }
+        } else{
+          isRoom = true
+          value = Math.min(...roomPrices)
         }
       }
-      return "";
+      if (value === 0) return  {format:this.$t("landing.propertyCard.noValue"),value,isRoom:false}
+
+      const selectedCurrency = this.currencies.find(currency => currency.country === this.siteCountry)
+      let valueFormat = 0
+      if (this.siteCountry !== "" && selectedCurrency) {
+        valueFormat = (selectedCurrency.value * parseInt(value)).toFixed(0)
+      } else {
+        const chileCurrency = this.currencies.find(currency => currency.country=== 'Chile')
+        valueFormat = (chileCurrency.value * parseInt(value)).toFixed(0)
+      }
+
+      valueFormat = valueFormat.replaceAll(".", "").replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+
+      return {
+        format:valueFormat,
+        value,
+        isRoom
+      }
     },
     image() {
       return this.property.image ?? require('@/assets/images/house_placeholder512.png');
@@ -63,6 +88,17 @@ export default {
     availabilityImage() {
       return this.property.isActive ? require('@/assets/images/DISPONIBLE_CUT.png'):require('@/assets/images/AGOTADA_CUT.png');
     },
+    type(){
+      switch (this.property.propertyType) {
+        case "entire":
+          return "Propiedad completa"
+        case "room":
+          return "Espacio privado"
+      
+        default:
+          return this.property.propertyType
+      }
+    }
   },
 };
 </script>
