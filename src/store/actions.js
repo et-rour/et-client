@@ -64,18 +64,10 @@ export const uploadImageTofirebase = async (
   commit("imageUploaded", { id, downloadURL });
   return downloadURL;
 };
-export const goToLocationCheckoutSession = async (
-  _,
-  { locationId, userId, range, signature }
-) => {
+export const goToLocationCheckoutSession = async (_, reservationData) => {
   const res = await EspacioTemporalAPI.post(
     "/reservation/location/create-checkout-session",
-    {
-      locationId,
-      userId,
-      range,
-      signature,
-    }
+    reservationData
   );
   // console.log("%cTest.vue line:22 res", "color: #007acc;", res);
   // window.location.href = res.url;

@@ -117,3 +117,10 @@ export const updateUser = async ({ commit }, currentUser) => {
 export const setSiteCountry = ({ commit }, country) => {
   commit("setSiteCountry", country);
 };
+
+export const updateUserExtraData = async ({commit}, data) => {
+  const res = await EspacioAPI.put(`/auth/extra`, data)
+  console.log('%cactions.js line:123 res', 'color: white; background-color: #007acc;', res.data);
+  commit("updateUserExtraData", res.data)
+};
+

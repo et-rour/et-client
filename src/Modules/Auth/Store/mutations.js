@@ -37,3 +37,10 @@ export const updateUser = (state, newUser) => {
 export const setSiteCountry = (state, country) => {
   state.siteCountry = country;
 };
+
+export const updateUserExtraData = (state, { companyName, identityCard, representativeName, rut }) => {
+  state.user.companyName = companyName;
+  state.user.identityCard = identityCard;
+  state.user.representativeName = representativeName;
+  state.user.rut = rut;
+};

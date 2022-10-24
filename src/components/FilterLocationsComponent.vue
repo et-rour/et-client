@@ -3,6 +3,7 @@
     class="w-full rounded-md lg:rounded-full bg-white justify-center items-center px-0 pb-4 lg:py-4 overflow-hidden"
   >
     <div class="flex flex-col lg:flex-row w-full px-8">
+      <!-- CITY -->
       <div class="w-full lg:flex-grow">
         <select class="w-full text-center border lg:border-l-0 h-full py-3" v-model="city">
           <option value="" selected>
@@ -32,11 +33,26 @@
           </option>
         </select>
       </div>
+      <!-- TYPE -->
+      <div class="w-full lg:flex-grow">
+        <select class="w-full text-center border h-full py-3" v-model="type">
+          <option value="" selected>
+            {{ $t("landing.hero_2.type") }}
+          </option>
+          <option
+            v-for="(option,index) in timeOptions"
+            :key="`time_${index}`"
+            :value="option.value"
+          >
+            {{ option.text }}
+          </option>
+        </select>
+      </div>
       <!-- buttons -->
       <div
         class="flex flex-col lg:flex-row justify-evenly fitems-center gap-2 py-4 px-2 text-center border lg:border-r-0 text-sm flex-shrink-0"
       >
-        <button
+        <!-- <button
           class="border rounded-full cursor-pointer w-auto px-2 py-2"
           @click="toggleType('room')"
           :class="this.type === 'room' ? 'selectedField' : ''"
@@ -56,7 +72,7 @@
           :class="this.type === 'hours' ? 'selectedField' : ''"
         >
           <p>{{ $t("landing.hero_2.hours") }}</p>
-        </button>
+        </button> -->
         <button
           class="border cursor-pointer w-auto px-3 py-2 bg-my-blue-primary text-white rounded-lg"
           @click="sendFilters"
@@ -76,39 +92,31 @@ export default {
       zone: "",
       city: "",
       type: "",
+      timeOptions:[
+         {
+          text:this.$t("landing.hero_2.private"),
+          value:"room",
+         },
+         {
+          text:this.$t("landing.hero_2.complete"),
+          value:"entire",
+         },
+         {
+          text:this.$t("landing.hero_2.hours"),
+          value:"hours",
+         },
+         {
+          text:this.$t("landing.hero_2.galpon"),
+          value:"galpon",
+         },
+         {
+          text:this.$t("landing.hero_2.terreno"),
+          value:"terreno",
+         },
+      ]
     };
   },
   methods: {
-    toggleType(option) {
-      switch (option) {
-        case "room":
-          if (this.type === "room") {
-            this.type = "";
-            break;
-          }
-          this.type = "room";
-          break;
-
-        case "entire":
-          if (this.type === "entire") {
-            this.type = "";
-            break;
-          }
-          this.type = "entire";
-          break;
-        case "hours":
-          if (this.type === "hours") {
-            this.type = "";
-            break;
-          }
-          this.type = "hours";
-          break;
-
-        default:
-          this.type = "";
-          break;
-      }
-    },
     sendFilters() {
       this.$emit("filter", {
         zone: this.zone,

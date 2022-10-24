@@ -1,16 +1,10 @@
 import EspacioAPI from "../../../../Api/index";
 
-export const fetchContractPFD = async (_, { locationId, roomId, range }) => {
+export const fetchContractPFD = async (_, data) => {
   // auth needed
-  const res = await EspacioAPI.post(
-    `/reservation/getpdf`,
-    {
-      locationId,
-      roomId,
-      range,
-    },
-    { responseType: "arraybuffer" }
-  );
+  const res = await EspacioAPI.post(`/reservation/getpdf`, data, {
+    responseType: "arraybuffer",
+  });
 
   return res;
 };

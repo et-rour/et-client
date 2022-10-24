@@ -106,13 +106,13 @@ export const getPropertyImages = (state) => (propertyType) => {
   return imagesArray;
 };
 
-export const getCaledarData = (state) => (data) => {
+export const getCaledarData = (state) => (idRoom) => {
   let calendarData;
 
   if (!state.propertyDetails) {
     return null;
   }
-  if (data.type === "entire") {
+  if (idRoom === "entire") {
     calendarData = {
       name: state.propertyDetails.name,
       address: `${state.propertyDetails.zone.zone}, ${state.propertyDetails.zone.city}, ${state.propertyDetails.zone.state}, ${state.propertyDetails.zone.country}`,
@@ -123,10 +123,12 @@ export const getCaledarData = (state) => (data) => {
         start: state.propertyDetails.startLease,
         end: state.propertyDetails.endLease,
       },
+      landUse: state.propertyDetails.landUse,
+
     };
   } else {
     const room = state.propertyDetails.roomsDetails.find(
-      (room) => room.id === Number(data.id)
+      (room) => room.id === Number(idRoom)
     );
     calendarData = {
       name: `${state.propertyDetails.name} \n -${room.name}`,
@@ -138,6 +140,7 @@ export const getCaledarData = (state) => (data) => {
         start: room.startLease,
         end: room.endLease,
       },
+      landUse: state.propertyDetails.landUse,
     };
   }
   return calendarData;

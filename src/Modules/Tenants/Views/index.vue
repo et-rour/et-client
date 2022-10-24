@@ -42,8 +42,11 @@
           <h2 class="my-title text-5xl">
             {{ $t("tenants.index.details.title") }}
           </h2>
-          <p class="my-5 font-light text-sm">
-            {{ $t("tenants.index.details.description") }}
+          <p class="mt-5 font-bold text-md">
+            {{ $t("tenants.index.details.description_1") }}
+          </p>
+          <p class="mb-5 font-light text-md">
+            {{ $t("tenants.index.details.description_2") }}
           </p>
         </div>
 

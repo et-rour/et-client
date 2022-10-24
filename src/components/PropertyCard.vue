@@ -1,4 +1,3 @@
-import { mapGetters } from 'vuex';
 <template>
   <div class="flex flex-col h-80 relative">
     <div class="h-2/3 w-full cursor-pointer">
@@ -30,7 +29,7 @@ import { mapGetters } from 'vuex';
         </p> -->
       </router-link>
     </div>
-    <img src="@/assets/images/AGOTADA_CUT.png" alt="agotada" class="absolute top-0 left-0" v-if="!property.isActive">
+    <img :src="availabilityImage" alt="agotada" class="absolute top-0 left-0">
 
   </div>
 </template>
@@ -55,7 +54,13 @@ export default {
     image() {
       return this.property.image ?? require('../assets/images/house_placeholder512.png');
     },
+    availabilityImage() {
+      return this.property.isActive ? require('../assets/images/DISPONIBLE_CUT.png'):require('../assets/images/AGOTADA_CUT.png');
+    },
     currency() {
+      if (!this.property.isActive) {
+        return this.$t("general.agotada")
+      }
       if (this.siteCountry === "") {
         const clCurrency = this.currencies.filter( el => el.country === 'Chile');
         // return `$US ${this.property.value} `;

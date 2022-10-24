@@ -13,34 +13,32 @@
           >Paso {{ step }}</span
         >
       </div>
-      <!-- <div>
-        <p>{{ reservationData.reservationDateRange }}</p>
-        <p>{{ reservationData.correctReservationDateRange }}</p>
-        <p>{{ reservationData.contract }}</p>
-        <p></p>
-      </div> -->
+      <div>
+        <!-- <pre class=" bg-blue-300">{{ JSON.stringify(calendarData, null, "\t") }}</pre> -->
+        <!-- <pre class="bg-red-300">{{ JSON.stringify(reservationData, null, "\t") }}</pre> -->
+ 
+      </div>
 
-      <div class="grid grid-cols-3 text-center md:text-left">
+      <div class="grid grid-cols-3 text-center md:text-left" v-if="calendarData">
         <Part1
-          v-if="calendarData"
           class="col-span-3"
           :class="partSelected === 1 ? 'order-first' : 'hidden'"
           @navigate="(stepDirection) => navigatePrevNext(stepDirection)"
-          :reservations="calendarData.reservations"
-          :leaseRange="calendarData.leaseRange"
+          :calendarData="calendarData"
         />
         <Part2
           class="col-span-3"
           :class="partSelected === 2 ? 'order-first' : 'hidden'"
           @navigate="(stepDirection) => navigatePrevNext(stepDirection)"
+          :calendarData="calendarData"
         />
         <Part3
           class="col-span-3"
           :class="partSelected === 3 ? 'order-first' : 'hidden'"
           @navigate="(stepDirection) => navigatePrevNext(stepDirection)"
+          :calendarData="calendarData"
         />
       </div>
-      <!-- {{ JSON.stringify(reservationData, null, "\t") }} -->
     </div>
   </div>
 </template>
@@ -57,9 +55,6 @@ export default {
     Part2,
     Part3,
   },
-  props: {
-    idRoom: { required: true, type: String },
-  },
   data() {
     return {
       partSelected: 1,
@@ -69,14 +64,9 @@ export default {
   },
   methods: {
     ...mapMutations("propertiesStore/reservationStorage", [
-      "changeReservationData",
+      "initRasarvationStorage",
     ]),
     navigatePrevNext(stepDirection) {
-      console.log(
-        "%cerror Calendar.vue line:68 ",
-        "color: red; display: block; width: 100%;",
-        stepDirection
-      );
       if (stepDirection === "next") {
         this.partSelected = this.partSelected + 1;
         return;
@@ -84,30 +74,12 @@ export default {
       this.partSelected = this.partSelected - 1;
     },
     loadCalendarData() {
-      const { idRoom } = this.$route.params;
-      console.log(
-        "%cPart1.vue line:95 this.$route",
-        "color: white; background-color: #007acc;",
-        this.$route
-      );
-      const isEntire = idRoom === "entire" ? "entire" : "room";
-      const { reservations, leaseRange, value, name, address } =
-        this.getCaledarData({
-          type: isEntire,
-          id: idRoom,
-        });
-      this.calendarData = {
-        reservations,
-        leaseRange,
-        value,
-      };
-      this.changeReservationData({
-        start: null,
-        end: null,
-        correctDate: false,
-        value,
-        name,
-        address,
+      this.calendarData = this.getCaledarData(this.$route.params.idRoom);
+
+      this.initRasarvationStorage({
+        value: this.calendarData.value,
+        name: this.calendarData.name,
+        address: this.calendarData.address,
       });
     },
   },

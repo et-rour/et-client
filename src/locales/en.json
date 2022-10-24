@@ -44,6 +44,7 @@
     "cancel": "Cancel",
     "save": "Save",
     "update": "Update",
+    "continue": "Continue",
     "change":"Change",
     "image": "image | image | {count} images",
     "property": "property",
@@ -51,7 +52,9 @@
     "month": "no months | 1 month | {count} months",
     "year": "no years | 1 year | {count} months",
     "notFound": "It was not found",
-    "notAsign": "not assigned"
+    "notAsign": "not assigned",
+    "agotada": "sold out",
+    "disponible": "Available"
   },
   "navbar": {
     "owner": "PUBLISH YOUR PROPERTY",
@@ -118,10 +121,13 @@
       "title": "FIND A FLEXIBLE SPACE FOR YOUR BUSINESS",
       "ver": "SEE AVAILABLE SPACES",
       "commune": "Commune",
+      "type": "Property type",
       "city": "city",
       "private": "private space",
       "complete": "full property",
       "hours": "Rent for hours",
+      "galpon": "Shed",
+      "terreno": "Land",
       "seeResult": "SEE RESULTS"
     },
     "spaces": {
@@ -293,7 +299,8 @@
       },
       "details": {
         "title": "We manage all types of unused properties",
-        "description": "Have you not been able to rent your property? We take care of managing your property with flexible and short-term contracts. In this way we generate VALUE from a frozen resource.",
+        "description_1": "Have you not been able to rent your property?",
+        "description_2": "We take care of managing your property with flexible and short-term contracts. In this way we generate VALUE from a frozen resource.",
         "icon_des_1": "We avoid misuse",
         "icon_des_2": "We generate an income",
         "icon_des_3": "Provide an opportunity for entrepreneurs"
@@ -347,7 +354,20 @@
       "Paso1": "choose a date",
       "see": "See contract",
       "Paso2": "sign your contract",
-      "Paso3": "Review and add to cart"
+      "form": {
+        "company": "Name of the company",
+        "identity": "Identity card",
+        "location_uses": "Location uses",
+        "people_fix": "Monthly flow of fixed people",
+        "people_prox": "Approximate monthly flow of people",
+        "represent": "Representative name",
+        "rut": "ruth",
+        "subContractor_email_1": "E-mail",
+        "subContractor_email_2": "Emma",
+        "signature": "Signature"
+      },
+      "Paso3": "Review and add to cart",
+      "changeContract": "Change contract data"
     },
     "stripe": {
       "success": {

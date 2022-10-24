@@ -40,12 +40,18 @@
           v-if="room.stripePriceId"
           class="my-btn text-white w-full py-3 px-8 truncate overflow-ellipsis rounded-none my-4"
           @click="goToCalendar"
+          
+          :disabled="!isActive"
+          :class="!isActive&&'my-disabled'"
         >
           {{ $t("tenants.details.payRoom") }}
         </button>
         <button
           class="my-btn py-3 px-8 mt-3 truncate overflow-ellipsis rounded-none bg-green-400 w-full"
           @click="goToSchedule"
+          
+          :disabled="!isActive"
+          :class="!isActive&&'my-disabled'"
         >
           {{ $t("tenants.details.vistit") }}
         </button>
@@ -87,6 +93,10 @@ export default {
       type: Object,
       required: true,
     },
+    isActive:{
+      type:Boolean,
+      default:true
+    }
   },
   data() {
     return {
@@ -109,6 +119,9 @@ export default {
   computed: {
     ...mapGetters("authStore", ["user"]),
     price() {
+      if (!this.isActive) {
+        return this.$t("general.agotada")
+      }
       return this.room.value === 0
         ? `${this.$t("tenants.details.included")}`
         : `$${this.room.value} ${this.$t("tenants.details.monthly")}`;

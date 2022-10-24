@@ -10,12 +10,9 @@ const isAuth = () => {
   }
 };
 
-const isValidCalendarLease = (type, id) => {
+const isValidCalendarLease = (id) => {
   const getCaledarData = store.getters["propertiesStore/getCaledarData"];
-  const propertyCalendarData = getCaledarData({
-    type,
-    id,
-  });
+  const propertyCalendarData = getCaledarData(id);
   if (!propertyCalendarData) {
     return false;
   }

@@ -4,7 +4,7 @@
       @click="
         $router.push({ name: 'tenants-detail', params: { id: property.id } })
       "
-      :src="property.image"
+      :src="image"
       alt="location image"
       class="h-32 lg:h-48 w-full object-cover"
     />
@@ -18,7 +18,7 @@
         / {{ property.zone.city }}, {{ property.zone.zone }}
       </p>
     </div>
-    <img src="@/assets/images/AGOTADA_CUT.png" alt="agotada" class="absolute top-0 left-0" v-if="!property.isActive">
+    <img :src="availabilityImage" alt="agotada" class="absolute top-0 left-0">
   </div>
 </template>
 
@@ -36,6 +36,10 @@ export default {
     ...mapGetters("postsStore", ["currencies"]),
     ...mapGetters("authStore", ["siteCountry"]),
     currency() {
+      if (!this.property.isActive) {
+        return this.$t("general.agotada")
+      }
+
       if (this.siteCountry === "") {
         const clCurrency = this.currencies.filter( el => el.country === 'Chile');
         // return `$US ${this.property.value} `;
@@ -52,6 +56,12 @@ export default {
         }
       }
       return "";
+    },
+    image() {
+      return this.property.image ?? require('@/assets/images/house_placeholder512.png');
+    },
+    availabilityImage() {
+      return this.property.isActive ? require('@/assets/images/DISPONIBLE_CUT.png'):require('@/assets/images/AGOTADA_CUT.png');
     },
   },
 };
