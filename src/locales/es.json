@@ -44,6 +44,7 @@
     "cancel": "Cancel",
     "save": "Guardar",
     "update": "Actualizar",
+    "continue": "Continuar",
     "change":"Cambiar",
     "image": "imagen | imagen | {count} imagenes",
     "property": "propiedad",
@@ -51,7 +52,9 @@
     "month": "cero meses | 1 mes | {count} meses",
     "year": "cero años | 1 año | {count} años",
     "notFound": "No se encontro",
-    "notAsign": "No se asigno"
+    "notAsign": "No se asigno",
+    "agotada": "Agotada",
+    "disponible": "Disponible"
   },
   "navbar": {
     "owner": "PUBLICA TU PROPIEDAD",
@@ -118,10 +121,13 @@
       "title": "ENCUENTRA UN ESPACIO FLEXIBLE PARA TU NEGOCIO",
       "ver": "VER ESPACIOS DISPONIBLES",
       "commune": "Comuna",
+      "type": "Tipo de propiedad",
       "city": "Ciudad",
       "private": "Espacio privado",
       "complete": "Propiedad completa",
       "hours": "Arriendo por horas",
+      "galpon": "Galpon",
+      "terreno": "Terreno",
       "seeResult": "VER RESULTADOS"
     },
     "spaces": {
@@ -146,7 +152,8 @@
     "propertyCard": {
       "from": "Desde",
       "montly": "mensual",
-      "noValue": "No cuenta con valor asignado"
+      "noValue": "No cuenta con valor asignado",
+      "noRooms": "Cuartos no disponibles"
     }
   },
   "questions": {
@@ -288,12 +295,13 @@
   "tenants": {
     "index": {
       "hero": {
-        "title": "ESPACIOS PARA EMPRENDEDORES EN SANTIAGO",
+        "title": "ESPACIOS PARA EMPRENDEDORES",
         "find": "ENCUENTRA UN ESPACIO"
       },
       "details": {
         "title": "Administramos todo tipo de inmuebles en desuso",
-        "description": "¿No has podido arrendar tu propiedad? Nosotros nos encargamos de administrar tu propiedad con contratos \n flexibles y de corta duración. De esta forma generamos VALOR a partir de un recurso congelado.",
+        "description_1": "¿No has podido arrendar tu propiedad?",
+        "description_2": "Nosotros nos encargamos de administrar tu propiedad con contratos \n flexibles y de corta duración. De esta forma generamos VALOR a partir de un recurso congelado.",
         "icon_des_1": "Evitamos malos usos",
         "icon_des_2": "Generamos un ingreso",
         "icon_des_3": "Entrega una oportunidad para emprendedores"
@@ -335,7 +343,8 @@
       "validDates": "fechas de fin válidas para el día:",
       "datesValidationMessage": "Selecciona una fecha de fin válida",
       "signatureValidationMessage": "Firma el contrato antes de continuar",
-      "monthly": "mensual"
+      "monthly": "mensual",
+      "daily": "al dia"
     },
     "schedule": {
       "title": "Selecciona la fecha para tu visita",
@@ -346,8 +355,21 @@
     "calendar": {
       "Paso1": "Elegir la fecha",
       "Paso2": "Firma tu contrato",
+      "form": {
+        "company": "Nombre de la compañia",
+        "identity": "Cedula de indentidad",
+        "location_uses": "Usos de la locación",
+        "people_fix": "Flujo mensual de personas fijas",
+        "people_prox": "Flujo mensual de personas aproximado",
+        "represent": "Nombre del representante",
+        "rut": "Rut",
+        "subContractor_email_1": "Email",
+        "subContractor_email_2": "Extra email",
+        "signature": "Firma"
+      },
       "see": "Ver contrato",
-      "Paso3": "Revisa y añade al carro"
+      "Paso3": "Revisa y añade al carro",
+      "changeContract": "Cambiar datos del contrato"
     },
     "stripe": {
       "success": {
@@ -576,7 +598,7 @@
         "title": "Todos los cuartos",
         "noRooms": "Esta propiedad no tiene ningun cuarto registrado",
         "buyLink": "Link de compra",
-        "isActive": "¿El cuarto esta agotado?",
+        "isActive": "¿El cuarto esta disponible?",
         "create": {
           "meters": "Metros cuadrados",
           "name": "Nombre",

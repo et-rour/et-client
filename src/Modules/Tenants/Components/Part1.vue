@@ -17,8 +17,8 @@
           @rangeChage="getDateRange"
           @correctRange="changeisCorrectRange"
           :range="range"
-          :reservations="reservations"
-          :locationLeaseRange="leaseRange"
+          :reservations="calendarData.reservations"
+          :locationLeaseRange="calendarData.leaseRange"
           :isPopOver="true"
           :showDetailsCard="false"
         />
@@ -28,21 +28,14 @@
 </template>
 
 <script>
-import { mapActions, mapGetters, mapMutations } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 import moment from "moment";
 import CalendarComponent from "./CalendarComponent.vue";
 import PartTemplateVue from "./PartTemplate.vue";
 import { CustomConfirmWarningDialog } from "@/sweetAlert";
 export default {
   components: { CalendarComponent, PartTemplateVue },
-  props: {
-    reservations: {
-      required: true,
-    },
-    leaseRange: {
-      required: true,
-    },
-  },
+  props: ["calendarData"],
   data() {
     return {
       range: {
@@ -50,11 +43,11 @@ export default {
         end: null,
       },
       isCorrectRange: false,
+      reservations: [],
+      leaseRange: null,
     };
   },
   methods: {
-    ...mapActions(["goToLocationCheckoutSession"]),
-    ...mapMutations("authStore", ["changeShowLoginModal"]),
     ...mapMutations("propertiesStore/reservationStorage", [
       "changeReservationDateRange",
     ]),
@@ -89,7 +82,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters("propertiesStore", ["getPropertyDetails"]),
+    ...mapGetters("propertiesStore", ["getPropertyDetails", "getCaledarData"]),
     ...mapGetters("authStore", ["user"]),
     dates() {
       return {

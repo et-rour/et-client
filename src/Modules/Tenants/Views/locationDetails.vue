@@ -92,6 +92,8 @@
           <button
             class="my-btn py-3 mt-3 rounded-none bg-green-400 w-full"
             @click="goToSchedule"
+            :disabled="!property.isActive"
+            :class="!property.isActive&&'my-disabled'"
           >
             {{ $t("tenants.details.vistit") }}
           </button>
@@ -111,10 +113,7 @@
         }"
       />
 
-      <!-- MAP -->
-      <div class="my-container my-16">
-        <Mapa :center="markerLatLng" :zoom="zoom" />
-      </div>
+      
 
       <!-- buttons -->
       <!-- <template>
@@ -152,18 +151,27 @@
             start: property.startLease,
             end: property.endLease,
           }"
+          :isActive="property.isActive&&room.isActive"
         ></RoomCard>
       </div>
 
       <!-- Pay -->
-      <div class="my-container">
+      <div class="my-container mt-10">
         <button
           class="w-full bg-green-500 mt-2 text-white font-bold my-btn"
           @click="goToCalendar"
           v-if="property.propertyType === 'entire'"
+          :disabled="!property.isActive"
+          :class="!property.isActive&&'my-disabled'"
         >
-          <a>{{ $t("tenants.details.pay") }} {{currency.symbol}} {{Math.round(property.value * currency.value)}}</a>
+          {{ $t("tenants.details.pay") }} <span v-if="property.isActive">{{currency.symbol}} {{Math.round(property.value * currency.value)}}</span>
+          <span></span>
         </button>
+      </div>
+
+      <!-- MAP -->
+      <div class="my-container my-16">
+        <Mapa :center="markerLatLng" :zoom="zoom" />
       </div>
     </div>
 

@@ -41,8 +41,7 @@ export default [
           };
         },
         beforeEnter(to, __, next) {
-          const type = to.params.idRoom === "entire" ? "entire" : "room";
-          if (!isValidCalendarLease(type, to.params.idRoom)) {
+          if (!isValidCalendarLease(to.params.idRoom)) {
             const idProperty = to.params.id;
             next({
               name: "tenants-detail",

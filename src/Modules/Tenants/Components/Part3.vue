@@ -58,35 +58,19 @@ export default {
         });
         return;
       }
-      if (this.reservationData.signature === "") {
-        CustomErrorToast.fire({
-          icon: "warning",
-          text: this.$t("tenants.details.signatureValidationMessage"),
-        });
-        return;
-      }
       try {
         new Swal({
           title: this.$t("sweetAlertMessages.wait"),
           allowOutsideClick: true,
         });
         Swal.showLoading();
-        const isEntireLocation = this.$route.params.idRoom === "entire";
-        if (isEntireLocation) {
-          await this.goToLocationCheckoutSession({
-            locationId: this.getPropertyDetails.id,
-            userId: this.user.user.id,
-            range: this.dates,
-            signature: this.reservationData.signature,
-          });
-        } else {
-          await this.goToRoomCheckoutSession({
-            roomId: this.$route.params.idRoom,
-            userId: this.user.user.id,
-            range: this.dates,
-            signature: this.reservationData.signature,
-          });
-        }
+        await this.goToLocationCheckoutSession({
+          locationId: this.$route.params.id,
+          roomId: this.$route.params.idRoom,
+          range: this.dates,
+          ...this.reservationData.contractData,
+        });
+        
         Swal.hideLoading();
       } catch (error) {
         CustomErrorToast.fire({
@@ -96,8 +80,6 @@ export default {
     },
   },
   computed: {
-    ...mapGetters("propertiesStore", ["getPropertyDetails"]),
-    ...mapGetters("authStore", ["user"]),
     ...mapGetters("propertiesStore/reservationStorage", ["reservationData"]),
     dates() {
       return {

@@ -6,7 +6,7 @@
       <router-link :to="{ name: 'tenants-schedule' }">schedule</router-link>
     </nav> -->
     <SpinerVue v-if="isLoadingLocation"></SpinerVue>
-    <div v-else>
+    <div v-else-if="getPropertyDetails">
       <router-view></router-view>
       <a
         target="_blank"

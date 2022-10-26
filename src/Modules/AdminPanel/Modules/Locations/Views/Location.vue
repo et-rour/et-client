@@ -446,7 +446,7 @@
           <!-- calendly -->
           <ValidationProvider
             v-slot='{ errors }'
-            rules='required'
+            rules=''
             class='my-input-box'
           >
               <div>
