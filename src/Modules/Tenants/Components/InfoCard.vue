@@ -16,7 +16,7 @@
       <p class=" mt-6" >
         <span v-if="priceAndTime.isRoom" class=" uppercase">{{$t('tenants.details.start')}} </span>
         <span>{{ priceAndTime.format }}</span>
-        <span v-if="property.propertyType!=='room'"> - 
+        <span v-if="property.propertyType!=='room' && priceAndTime.value"> - 
           {{
             property.isDaily ?
             $t("tenants.details.daily") :
@@ -44,29 +44,39 @@ export default {
     ...mapGetters("authStore", ["siteCountry"]),
     priceAndTime() {
       if (!this.property.isActive) {
-        return this.$t("general.agotada")
+        return {
+          format: this.$t("general.agotada"),
+          value:null
+        }
+      }
+
+      if (!this.property.value || this.property.value==="0") {
+        return {
+          format: this.$t("landing.propertyCard.noValue"),
+          value:null
+        }
       }
 
       let value = this.property.value;
       let isRoom = false;
+
       if (this.property.propertyType === 'room') {
-        // [90000,20000]
         const roomPrices = this.property.roomsDetails.filter(room => room.isActive&&room.value!==0).map(room => room.value)
         if (roomPrices.length === 0){
           return{
             isRoom:false,
             format:this.$t("landing.propertyCard.noRooms"),
-            value: 0
+            value: null
           }
         } else{
           isRoom = true
           value = Math.min(...roomPrices)
         }
       }
-      if (value === 0) return  {format:this.$t("landing.propertyCard.noValue"),value,isRoom:false}
 
       const selectedCurrency = this.currencies.find(currency => currency.country === this.siteCountry)
       let valueFormat = 0
+      
       if (this.siteCountry !== "" && selectedCurrency) {
         valueFormat = (selectedCurrency.value * parseInt(value)).toFixed(0)
       } else {

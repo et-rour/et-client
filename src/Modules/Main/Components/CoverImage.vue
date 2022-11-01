@@ -1,8 +1,8 @@
 <template>
   <!-- hero -->
   <div class="my-container hero-main mx-auto relative overflow-hidden">
-    <SpinerComponent v-if="loadingHomeCoverData" />
-    <template v-else-if="getHomeCoverData">
+    
+    <template v-if="coverData">
       <img
         v-if="localImage"
         class="w-full h-full object-cover rounded-3xl"
@@ -11,7 +11,7 @@
       />
       <img
         v-else
-        :src="getHomeCoverData.image"
+        :src="coverData.image"
         alt="Hero image"
         class="w-full h-full object-cover rounded-3xl"
       />
@@ -24,10 +24,10 @@
       <div
         class="w-full h-full absolute top-0 left-0 flex flex-col justify-end items-center pb-16"
       >
-        <div class="w-10/12 lg:w-8/12">
+        <div class="w-10/12 lg:w-9/12">
           <div class="absolute top-5 left-5">
             <ProgesBarImage
-              id="cover_image_home"
+              :id="idProgressBar"
               :imageUrl="imageUrl"
               :value="ImageUploadingState"
               class="w-full h-5"
@@ -67,7 +67,7 @@
               <font-awesome-icon icon="arrow-rotate-left" />
             </div>
             <div
-              v-if="localImage"
+              v-if="localImage && !savingCoverData"
               class="my-btn w-auto px-4 text-center cursor-pointer"
               @click="saveNewCoverImage"
             >
@@ -75,8 +75,8 @@
             </div>
           </div>
 
+          <!-- UPDATE TEXT BUTTONS -->
           <div class="relative">
-            <!-- UPDATE TEXT BUTTONS -->
             <div
               v-if="user.user && user.user.isAdmin"
               class="absolute top-0 -left-16 hidden lg:flex flex-col gap-4"
@@ -97,18 +97,16 @@
               </div>
               <div
                 class="my-btn w-auto px-4 text-center cursor-pointer"
-                @click="
-                  saveNewCoverText(
-                    'BUSCAMOS PROPIEDADES EN DESUSO Y LAS TRANSFORMAMOS EN ESPACIOS DE TRABAJO'
-                  )
-                "
+                @click="changeTextToDefault"
               >
                 <font-awesome-icon icon="arrow-rotate-left" />
               </div>
               <div
-                v-if="editingText"
+                v-if="editingText && !savingCoverData"
                 class="my-btn w-auto px-4 text-center cursor-pointer"
                 @click="saveNewCoverText(newText)"
+                :disabled="savingCoverData"
+                :class="savingCoverData&&'my-disabled'"                
               >
                 <font-awesome-icon icon="floppy-disk" />
               </div>
@@ -118,25 +116,16 @@
               v-model="newText"
               class="w-full h-40 my-title my-input"
             ></textarea>
-            <h1 v-else class="my-title text-2xl md:text-myheader1 text-white mb-3">
-              {{ getHomeCoverData.text }}
-            </h1>
           </div>
 
-          <div class="flex gap-8 flex-col sm:flex-row">
-            <button
-              class="my-btn font-semibold bg-white w-full md:w-70 text-my-blue-primary"
-              @click="$router.push({ name: 'tenants' })"
-            >
-              {{ $t("landing.hero.searchProperty") }}
-            </button>
-            <button
-              class="my-btn font-semibold w-full md:w-70 text-white p-2"
-              @click="$router.push({ name: 'owner' })"
-            >
-              {{ $t("landing.hero.openProperty") }}
-            </button>
+          <div v-if="!editingText">
+            <h1 class="my-title text-2xl md:text-myheader1 text-white mb-3 inline as">
+              {{ coverData.text }}
+            </h1>
+            <slot>
+            </slot>
           </div>
+
         </div>
       </div>
     </template>
@@ -144,33 +133,38 @@
 </template>
 
 <script>
-import { CustomErrorToast, CustomToast } from "@/sweetAlert";
+import { CustomErrorToast } from "@/sweetAlert";
 import { mapActions, mapGetters } from "vuex";
 import ProgesBarImage from "../../../components/ProgesBarImage.vue";
-import SpinerComponent from "../../../components/Spiner.vue";
+import EspacioTemporalAPI from "@/Api/index";
+
 export default {
+  // ids
+  // 1 - home page cover 
+  // 2 - tenants page cover 
+  // 3 - owner page cover 
+  props:["id","idProgressBar","specificDirectory","defaultImageUrl","defaultText"],
   components: {
     ProgesBarImage,
-    SpinerComponent,
   },
   data() {
     return {
+      coverData:null,
+      
       file: null,
       localImage: null,
+
       newText: "",
       editingText: false,
 
-      loadingHomeCoverData: false,
-      savingHomeCoverData: false,
+      savingCoverData: false,
     };
   },
   methods: {
     ...mapActions([
       "uploadImageTofirebase",
-      "fetchHomeCoverImage",
-      "updateHomeCoverImage",
-      "updateHomeCoverText",
     ]),
+
     onSelectedImage(event) {
       // await this.loginInfirebaseStorage(this.user.firebaseToken);
       const image = event.target.files[0];
@@ -184,85 +178,86 @@ export default {
       fr.onload = () => (this.localImage = fr.result);
       fr.readAsDataURL(image);
     },
+    
     async saveNewCoverImage() {
+      this.savingCoverData = true;
+
+      const dateSaved = new Date().getTime();
+
+      let coverName
+      switch (this.id) {
+        case 1:
+          coverName = "home"
+          break;
+        case 2:
+          coverName = "tenants"
+          break;
+        default:
+          coverName = "owner"
+          break;
+      }
+
       try {
-        this.savingHomeCoverData = true;
-
-        const dateSaved = new Date().getTime();
-
         const imageUrl = await this.uploadImageTofirebase({
-          id: "cover_image_home",
-          specificDirectory: `/COVER/home_${dateSaved}`,
+          id: this.idProgressBar,
+          specificDirectory: `${this.specificDirectory}/${coverName}_${dateSaved}`,
           file: this.file,
         });
 
-        await this.updateHomeCoverImage(imageUrl);
+        await EspacioTemporalAPI.put(`/general/${this.id}/coverImage`,{imageUrl})
+        this.$router.go()
 
-        CustomToast.fire({
-          title: this.$t("sweetAlertMessages.saved"),
-          icon: "success",
-        });
-
-        this.file = null;
-        this.localImage = null;
       } catch (error) {
+        this.savingCoverData = false;
         CustomErrorToast.fire({
           text: error.response.data.message || error,
         });
       }
-      this.savingHomeCoverData = false;
     },
+    
     async changeCoverImageToDefault() {
       try {
-        await this.updateHomeCoverImage(
-          "https://firebasestorage.googleapis.com/v0/b/espacio-temporal-9a372.appspot.com/o/COVER%2Fhome?alt=media&token=bd7582a5-2aae-4087-bfe9-8980a22be593"
-        );
+        await EspacioTemporalAPI.put(`/general/${this.id}/coverImage`,{ imageUrl: this.defaultImageUrl})
+        this.$router.go()
 
-        CustomToast.fire({
-          title: this.$t("sweetAlertMessages.saved"),
-          icon: "success",
-        });
-
-        this.file = null;
-        this.localImage = null;
       } catch (error) {
         CustomErrorToast.fire({
           text: error.response.data.message || error,
         });
       }
     },
+
     async saveNewCoverText(text) {
       try {
-        await this.updateHomeCoverText(text);
+        await EspacioTemporalAPI.put(`/general/${this.id}/text`,{text})
+        this.$router.go()
 
-        CustomToast.fire({
-          title: this.$t("sweetAlertMessages.saved"),
-          icon: "success",
+      } catch (error) {
+        this.savingCoverData = false;
+        CustomErrorToast.fire({
+          text: error.response.data.message || error,
         });
-        this.editingText = false;
+      }
+    },
+    
+    async changeTextToDefault() {
+      try {
+        await EspacioTemporalAPI.put(`/general/${this.id}/text`,{text:this.defaultText})
+        this.$router.go()
+
       } catch (error) {
         CustomErrorToast.fire({
           text: error.response.data.message || error,
         });
       }
-      this.savingHomeCoverData = false;
     },
   },
   computed: {
     ...mapGetters(["getHomeCoverData", "imageUrl", "ImageUploadingState"]),
     ...mapGetters("authStore", ["user"]),
   },
-  async mounted() {
-    try {
-      this.loadingHomeCoverData = true;
-      await this.fetchHomeCoverImage();
-      this.newText = this.getHomeCoverData.text;
-    } catch (error) {
-      CustomErrorToast.fire({
-        text: error.response.data.message || error,
-      });
-    }
-    this.loadingHomeCoverData = false;
+  mounted() {
+    this.coverData = this.getHomeCoverData(this.id)
   },
 };
 </script>

@@ -2,6 +2,7 @@
   <div :id="`room_${room.id}`" class="flex flex-col items-center mb-10">
     <hr class="solid mb-8 w-full" />
     <div class="w-full grid grid-cols-1 md:grid-cols-4 p-1">
+      
       <div
         class="flex flex-row gap-4 items-center md:col-span-3"
         :class="isSelectedRoom ? 'bg-green-300' : ''"
@@ -27,15 +28,24 @@
             />
             {{ $t("tenants.details.pictures") }}
           </button>
+          <img :src="availabilityImage" alt="agotada" class="absolute top-0 left-0">
+
+
         </div>
         <div class="flex flex-col justify-between w-full">
+
           <span class="text-gray-400">{{ room.squareMeter }} mts&sup2;</span>
-          <p class="text-2xl sm:text-3xl">{{ price }}</p>
+
+          <p class="text-2xl sm:text-3xl">
+            {{ price.format }} 
+            <span v-if="price.value">{{ room.isDaily? $t("tenants.details.daily"): $t("tenants.details.monthly") }}</span>
+          </p>
+
           <p class="text-2xl sm:text-3xl">{{ room.name }}</p>
           <!-- <p class="align-middle">{{ room.description }}</p> -->
         </div>
       </div>
-      <div class="">
+      <div >
         <button
           v-if="room.stripePriceId"
           class="my-btn text-white w-full py-3 px-8 truncate overflow-ellipsis rounded-none my-4"
@@ -118,16 +128,45 @@ export default {
   },
   computed: {
     ...mapGetters("authStore", ["user"]),
+    ...mapGetters("postsStore", ["currencies"]),
     price() {
       if (!this.isActive) {
-        return this.$t("general.agotada")
+        return {
+          format:this.$t("general.agotada"),
+          value:null
+        }
       }
-      return this.room.value === 0
-        ? `${this.$t("tenants.details.included")}`
-        : `$${this.room.value} ${this.$t("tenants.details.monthly")}`;
+
+      if (!this.room.value) {
+        return {
+          format: this.$t("landing.propertyCard.noValue"),
+          value:null
+        }
+      }
+
+      const value = this.room.value
+
+      const selectedCurrency = this.currencies.find(currency => currency.country === this.siteCountry)
+      let valueFormat = 0
+      if (this.siteCountry !== "" && selectedCurrency) {
+        valueFormat = (selectedCurrency.value * parseInt(value)).toFixed(0)
+      } else {
+        const chileCurrency = this.currencies.find(currency => currency.country=== 'Chile')
+        valueFormat = (chileCurrency.value * parseInt(value)).toFixed(0)
+      }
+
+      valueFormat = valueFormat.replaceAll(".", "").replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+      
+      return {
+        format:valueFormat,
+        value,
+      }
     },
     isSelectedRoom() {
       return this.$route.hash === `#room_${this.room.id}`;
+    },
+    availabilityImage() {
+      return this.room.isActive ? require('@/assets/images/DISPONIBLE_CUT.png'):require('@/assets/images/AGOTADA_CUT.png');
     },
   },
 };

@@ -14,7 +14,7 @@
       <p class="font-semibold">{{property.name}}</p>
       <p class="">{{type}} <span class=" text-gray-400">/ {{ property.zone.city }}, {{ property.zone.zone }}</span></p>
       <p><span v-if="priceAndTime.isRoom" class=" uppercase">{{$t('tenants.details.start')}}</span> {{ priceAndTime.format }}
-        <span v-if="property.propertyType!=='room'"> - 
+        <span v-if="property.propertyType!=='room' && priceAndTime.value"> - 
           {{
             property.isDaily ?
             $t("tenants.details.daily") :
@@ -54,7 +54,17 @@ export default {
     },
     priceAndTime() {
       if (!this.property.isActive) {
-        return this.$t("general.agotada")
+        return {
+          format: this.$t("general.agotada"),
+          value:null
+        }
+      }
+
+      if (!this.property.value || this.property.value==="0") {
+        return {
+          format: this.$t("landing.propertyCard.noValue"),
+          value:null
+        }
       }
 
       let value = this.property.value;
@@ -66,14 +76,13 @@ export default {
           return{
             isRoom:false,
             format:this.$t("landing.propertyCard.noRooms"),
-            value: 0
+            value: null
           }
         } else{
           isRoom = true
           value = Math.min(...roomPrices)
         }
       }
-      if (value === 0) return  {format:this.$t("landing.propertyCard.noValue"),value,isRoom:false}
 
       const selectedCurrency = this.currencies.find(currency => currency.country === this.siteCountry)
       let valueFormat = 0

@@ -446,7 +446,7 @@
           <!-- calendly -->
           <ValidationProvider
             v-slot='{ errors }'
-            rules=''
+            rules='extCalendlyUrl'
             class='my-input-box'
           >
               <div>
