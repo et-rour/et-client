@@ -119,7 +119,7 @@
           </div>
 
           <div v-if="!editingText">
-            <h1 class="my-title text-2xl md:text-myheader1 text-white mb-3 inline as">
+            <h1 class="my-title text-2xl md:text-myheader1 text-white mb-3 inline ">
               {{ coverData.text }}
             </h1>
             <slot>
