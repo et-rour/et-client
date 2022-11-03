@@ -4,9 +4,31 @@
     <div class="absolute top-0 left-0 text-gray-100">
       version: {{ appVersion }}
     </div>
-    <CoverImageVue />
+    
+    <CoverImageVue
+      :id="1"
+      :idProgressBar="'cover_image_home'"
+      :specificDirectory="'/COVER'"
+      :defaultImageUrl="'https://firebasestorage.googleapis.com/v0/b/espacio-temporal-e37f5.appspot.com/o/COVER%2Fhome.png?alt=media&token=1c2c5620-1904-43b1-9de9-9c3449ad8dd9'"
+      :defaultText="'BUSCAMOS PROPIEDADES EN DESUSO Y LAS TRANSFORMAMOS EN ESPACIOS DE TRABAJO'"
+    >
+      <div class="flex gap-8 flex-col sm:flex-row">
+        <button
+          class="my-btn font-semibold bg-white w-full md:w-70 text-my-blue-primary"
+          @click="$router.push({ name: 'tenants' })"
+        >
+          {{ $t("landing.hero.searchProperty") }}
+        </button>
+        <button
+          class="my-btn font-semibold w-full md:w-70 text-white p-2"
+          @click="$router.push({ name: 'owner' })"
+        >
+          {{ $t("landing.hero.openProperty") }}
+        </button>
+      </div>
+    </CoverImageVue>
 
-    <VideoComponent></VideoComponent>
+    <VideoComponent />
 
     <!-- find space -->
     <div

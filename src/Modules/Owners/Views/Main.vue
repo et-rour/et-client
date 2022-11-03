@@ -1,41 +1,23 @@
 <template>
-  <div class="my-container mb-24">
-    <div
-      class="rounded-3xl overflow-hidden relative mb-8 my-container w-full hero-main"
+  <div class=" mb-24">
+    <CoverImage
+      :id="3"
+      :idProgressBar="'cover_image_owner'"
+      :specificDirectory="'/COVER'"
+      :defaultImageUrl="'https://firebasestorage.googleapis.com/v0/b/espacio-temporal-e37f5.appspot.com/o/COVER%2Fpropiedad.png?alt=media&token=83bf1a5f-8e02-4f72-b103-efbace00ae3a'"
+      :defaultText="'PUBLICA TU PROPIEDAD CON NOSOTROS'"
+      class="mb-8"
     >
-      <img
-        src="@/assets/images/location.png"
-        alt="Hero image"
-        class="w-full h-full object-cover"
-      />
+        <button
+          class="my-btn inline-block bg-white text-my-blue-primary text-xl font-bold"
+          @click="goToCreateProperty"
+        >
+          {{ $t("landing.hero_3.load") }}
+        </button>
+    </CoverImage>
 
-      <!-- MASK -->
-      <div
-        class="w-full h-full absolute top-0 left-0 flex flex-col justify-end gap-3 py-4 rounded-b-3xl mask"
-      ></div>
 
-      <div
-        class="w-full h-full absolute top-0 left-0 flex flex-col justify-end items-center pb-16"
-      >
-        <div class="w-10/12 lg:w-9/12">
-          <h1 class="my-title text-white">
-            {{ $t("landing.hero_3.title_1") }}
-            <br />
-            <span class="mr-4">
-              {{ $t("landing.hero_3.title_2") }}
-            </span>
-            <button
-              class="my-btn inline-block bg-white text-my-blue-primary text-xl font-bold"
-              @click="goToCreateProperty"
-            >
-              {{ $t("landing.hero_3.load") }}
-            </button>
-          </h1>
-        </div>
-      </div>
-    </div>
-
-    <div>
+    <div class="my-container">
       <h1 class="text-center my-title-2 my-4">
         {{ $t("owners.title") }}
       </h1>
@@ -93,8 +75,12 @@
 
 <script>
 import { mapMutations, mapGetters } from "vuex";
+import CoverImage from "../../Main/Components/CoverImage.vue";
 
 export default {
+  components:{
+    CoverImage
+  },
   methods: {
     ...mapMutations("authStore", ["changeShowLoginModal"]),
     goToCreateProperty() {

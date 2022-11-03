@@ -1,5 +1,5 @@
 export default () => ({
-  HomeCoverData: null,
+  coversData: null,
   personal: [],
 
   imageUrl: null,

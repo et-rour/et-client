@@ -41,6 +41,18 @@ extend("extInstagramUrl", {
   message: (_, values) => i18n.t("validations.messages.required", values),
 });
 
+extend("extCalendlyUrl", {
+  validate: (value) => {
+    let websiteRegEx = new RegExp("https://calendly\\.com/.+");
+
+    if (websiteRegEx.test(value)) {
+      return true;
+    }
+    return false;
+  },
+  message: (_, values) => `${i18n.t("validations.messages.required", values)} \nEj: https://calendly.com/espaciotemporal/espacio-temporal-visita`,
+});
+
 extend("extPhoneNumber", {
   validate: (value) => {
     let websiteRegEx = new RegExp("^\\+?[0-9-]+$");

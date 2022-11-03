@@ -92,25 +92,9 @@ export const goToRoomCheckoutSession = async (
   window.open(res.data.url, "_blank");
 };
 
-export const fetchHomeCoverImage = async ({ commit }) => {
-  const res = await EspacioTemporalAPI.get("/general/coverImage");
-  commit("fetchHomeCoverImage", res.data);
-};
-
-export const updateHomeCoverImage = async ({ commit }, imageUrl) => {
-  const res = await EspacioTemporalAPI.post("/general/coverImage", {
-    imageUrl,
-  });
-  console.log({ newImage: res.data });
-  commit("updateHomeCoverImage", res.data);
-};
-
-export const updateHomeCoverText = async ({ commit }, text) => {
-  const res = await EspacioTemporalAPI.post("/general/text", {
-    text,
-  });
-  console.log({ text: res.data });
-  commit("updateHomeCoverText", res.data);
+export const fetchCoversData = async ({ commit }) => {
+  const res = await EspacioTemporalAPI.get("/general/all");
+  commit("fetchCoversData", res.data);
 };
 
 export const fetchPersonalMembers = async ({ commit }) => {

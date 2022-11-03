@@ -50,22 +50,17 @@
       </div>
 
       <!-- images -->
-      <div class="grid grid-cols-12 gap-x-4 p-2 my-container mb-8">
-        <!-- <SwiperVue
-          :images="getPropertyDetailsImages"
-          class="col-span-12"
-        ></SwiperVue> -->
-
+      <div class="grid grid-cols-12 gap-x-4 p-2 my-container mb-8 ">
         <!-- COVER IMAGE -->
-        <div class="col-span-12 md:col-span-7">
+        <div class="col-span-12 md:col-span-7 ">
           <img
             :src="image"
             alt="cover property"
-            :class="!property.image ? 'w-full h-44 sm:h-64 md:h-80 object-contain mb-8' : 'w-full h-44 sm:h-64 md:h-80 object-cover mb-8'"
+            :class="!property.image ? 'w-full h-44 sm:h-64 md:h-80 object-contain mb-8' : 'w-full h-44 sm:h-64 md:h-full object-cover mb-8 '"
           />
         </div>
 
-        <div class="col-span-12 md:col-span-5">
+        <div class="col-span-12 md:col-span-5 ">
           <div class="grid grid-cols-4 gap-2 md:grid-cols-2 relative">
             <img
               :src="image.image"
@@ -98,7 +93,7 @@
             {{ $t("tenants.details.vistit") }}
           </button>
         </div>
-        <p class="col-span-12">{{ property.description }}</p>
+        <p class="block mt-6 col-span-12 md:col-span-7">{{ property.description }}</p>
       </div>
 
       <!-- INCLUDED SERVICES -->

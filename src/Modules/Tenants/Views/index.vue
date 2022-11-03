@@ -1,37 +1,23 @@
 <template>
   <div class="w-full mb-32 lg:mb-2">
     <!-- hero -->
-    <div class="my-container hero-main rounded-3xl overflow-hidden relative">
-      <img
-        src="@/assets/images/womanStanding.png"
-        alt="Hero image"
-        class="w-full h-full object-cover"
-      />
-
-      <!-- MASK -->
-      <div
-        class="w-full h-full absolute top-0 left-0 flex flex-col justify-end gap-3 py-4 rounded-b-3xl mask"
-      ></div>
-
-      <div
-        class="w-full h-full absolute top-0 left-0 flex flex-col justify-end items-center pb-16"
-      >
-        <div class="w-10/12 lg:w-9/12">
-          <h1 class="my-title text-white">
-            {{ $t("tenants.index.hero.title") }}
-          </h1>
-
-          <div class="flex gap-2 flex-wrap">
-            <button
-              class="bg-white w-64 py-2 rounded-md font-bold text-blue-600"
-              v-scroll-to="'#spaces'"
-            >
-              {{ $t("tenants.index.hero.find") }}
-            </button>
-          </div>
-        </div>
+    <CoverImage
+      :id="2"
+      :idProgressBar="'cover_image_tenants'"
+      :specificDirectory="'/COVER'"
+      :defaultImageUrl="'https://firebasestorage.googleapis.com/v0/b/espacio-temporal-e37f5.appspot.com/o/COVER%2Fpropietario.png?alt=media&token=cf55b933-fc47-4d32-be89-1550487b86c9'"
+      :defaultText="'ESPACIOS PARA EMPRENDEDORES'"
+    >
+      <div class="flex gap-2 flex-wrap">
+        <button
+          class="bg-white w-64 py-2 rounded-md font-bold text-blue-600"
+          v-scroll-to="'#spaces'"
+        >
+          {{ $t("tenants.index.hero.find") }}
+        </button>
       </div>
-    </div>
+    </CoverImage>
+
 
     <!-- details -->
     <div class="bg-my-blue-primary w-full relative py-24 text-white mt-8">
@@ -130,10 +116,11 @@
 import { mapGetters, mapActions } from "vuex";
 import FilterLocationsComponent from "../../../components/FilterLocationsComponent.vue";
 import Spiner from "../../../components/Spiner.vue";
+import CoverImage from "../../Main/Components/CoverImage.vue";
 import InfoCard from "../Components/InfoCard.vue";
 
 export default {
-  components: { InfoCard, Spiner, FilterLocationsComponent },
+  components: { InfoCard, Spiner, FilterLocationsComponent, CoverImage },
   data() {
     return {
       propertiesListFiltered: [],

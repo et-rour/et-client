@@ -36,6 +36,7 @@ export default {
     };
   },
   methods: {
+    ...mapActions(["fetchCoversData"]),
     ...mapActions("authStore", ["loadSession", "setSiteCountry"]),
     ...mapActions("propertiesStore", ["loadProperties", "loadZones"]),
     ...mapActions("postsStore", ["loadCurrencies"]),
@@ -62,6 +63,8 @@ export default {
       await this.loadProperties();
       await this.loadCurrencies();
       await this.loadZones();
+      await this.fetchCoversData();
+    
       console.log(
         "%cApp.vue line:48 RUNNINF",
         "color: #007acc;",
@@ -69,7 +72,8 @@ export default {
             this.loadSession()
             this.loadProperties()
             this.loadCurrencies()
-            this.loadZones()`
+            this.loadZones()
+            this.fetchCoversData()`
       );
     } catch (error) {
       CustomErrorToast.fire({
