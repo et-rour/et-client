@@ -21,7 +21,8 @@
 
       <div class="flex justify-between">
         <span>
-          $ <input type="number" class="my-input w-40" v-model="room.value" />
+          $ {{ currency.apiCode }}<input type="number" class="my-input w-40" v-model="room.value" />
+          <!-- <span>{{room.value}} {{roomValueSelectedCurrency}}</span> -->
         </span>
         <span>
           mts&sup2;
@@ -104,8 +105,16 @@ export default {
   },
   computed: {
     ...mapGetters(["imageUrl", "ImageUploadingState"]),
+    
     ...mapGetters("authStore", ["user"]),
-    ...mapGetters("adminPanelStore/locations", ["getLocationDetails"]),
+    ...mapGetters("adminPanelStore/locations", ["getLocationDetails","getAllCurrencies"]),
+    currency() {
+      if (this.getAllCurrencies.length) return this.getAllCurrencies.filter(el => el.country === this.getLocationDetails.zone.country)[0];
+      else return this.getAllCurrencies.filter(el => el.country === 'Chile')[0];
+    },
+    roomValueSelectedCurrency(){
+      return parseFloat( this.room.value / this.currency.value).toFixed(3)
+    }
   },
   methods: {
     ...mapActions(["uploadImageTofirebase", "goToRoomCheckoutSession"]),
@@ -163,17 +172,14 @@ export default {
             id: this.room.id,
             name: this.room.name,
             image: this.room.image,
-            value: this.room.value,
+            value: this.roomValueSelectedCurrency,
             squareMeter: this.room.squareMeter,
             description: this.room.description,
             locationId: this.getLocationDetails.id,
           });
 
-          CustomToast.fire({
-            title: this.$t("sweetAlertMessages.saved"),
-            icon: "success",
-          });
-          this.isSaving = false;
+          this.$router.go()
+          
         } catch (error) {
           this.isSaving = false;
           CustomErrorToast.fire({
@@ -229,6 +235,9 @@ export default {
       }
     },
   },
+  mounted(){
+    this.room.value = parseInt(this.room.value * this.currency.value)
+  }
 };
 </script>
 
