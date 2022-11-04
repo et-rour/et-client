@@ -549,7 +549,7 @@
         <!-- value -->
         <div class="flex items-center justify-between">
           <label for="value" class="mr-3"
-            >{{ $t("adminPanel.locations.value") }} ({{currency.symbol}})
+            >{{ $t("adminPanel.locations.value") }} ({{currency.symbol}} {{currency.apiCode}})
           </label>
           <div>
             <input

@@ -82,7 +82,7 @@
         </div>
 
         <!-- value -->
-        <div class="flex justify-between">
+        <!-- <div class="flex justify-between">
           <div>
             <label for="isIncluded">{{
               $t("adminPanel.locations.roomsList.create.isIncluded")
@@ -106,7 +106,7 @@
               :class="isIncluded ? 'bg-gray-300' : ''"
             />
           </span>
-        </div>
+        </div> -->
         <button
           class="my-btn w-24 px-1 py-1 self-end"
           :disabled="isSaving || invalid"
