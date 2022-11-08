@@ -148,17 +148,17 @@ export default {
 
       const selectedCurrency = this.currencies.find(currency => currency.country === this.siteCountry)
       let valueFormat = 0
+
       if (this.siteCountry !== "" && selectedCurrency) {
         valueFormat = (selectedCurrency.value * parseInt(value)).toFixed(0)
       } else {
-        const chileCurrency = this.currencies.find(currency => currency.country=== 'Chile')
-        valueFormat = (chileCurrency.value * parseInt(value)).toFixed(0)
+        valueFormat = value
       }
 
-      valueFormat = valueFormat.replaceAll(".", "").replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+      const newValueFormat = valueFormat.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
       
       return {
-        format:valueFormat,
+        format:newValueFormat,
         value,
       }
     },

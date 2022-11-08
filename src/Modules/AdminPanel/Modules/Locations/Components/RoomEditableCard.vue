@@ -21,8 +21,7 @@
 
       <div class="flex justify-between">
         <span>
-          $ {{ currency.apiCode }}<input type="number" class="my-input w-40" v-model="room.value" />
-          <!-- <span>{{room.value}} {{roomValueSelectedCurrency}}</span> -->
+          $<input type="number" class="my-input w-40" v-model="room.value" />
         </span>
         <span>
           mts&sup2;
@@ -108,13 +107,6 @@ export default {
     
     ...mapGetters("authStore", ["user"]),
     ...mapGetters("adminPanelStore/locations", ["getLocationDetails","getAllCurrencies"]),
-    currency() {
-      if (this.getAllCurrencies.length) return this.getAllCurrencies.filter(el => el.country === this.getLocationDetails.zone.country)[0];
-      else return this.getAllCurrencies.filter(el => el.country === 'Chile')[0];
-    },
-    roomValueSelectedCurrency(){
-      return parseFloat( this.room.value / this.currency.value).toFixed(3)
-    }
   },
   methods: {
     ...mapActions(["uploadImageTofirebase", "goToRoomCheckoutSession"]),
@@ -172,7 +164,7 @@ export default {
             id: this.room.id,
             name: this.room.name,
             image: this.room.image,
-            value: this.roomValueSelectedCurrency,
+            value: this.room.value,
             squareMeter: this.room.squareMeter,
             description: this.room.description,
             locationId: this.getLocationDetails.id,
@@ -235,9 +227,6 @@ export default {
       }
     },
   },
-  mounted(){
-    this.room.value = parseInt(this.room.value * this.currency.value)
-  }
 };
 </script>
 

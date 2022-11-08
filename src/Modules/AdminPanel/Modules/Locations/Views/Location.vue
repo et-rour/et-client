@@ -660,7 +660,7 @@ export default {
     loadLocation() {
       this.location = this.getLocationDetails;
       this.fistValueLocation = this.location.value;
-      this.newValueProperty = parseInt(this.location.value * this.currency.value);
+      this.newValueProperty = this.location.value;
     },
     async sendToTrash() {
       const { isConfirmed } = await CustomConfirmDialog.fire({
@@ -814,7 +814,7 @@ export default {
         try {
           const price = await this.setLocationValue({
             locationId: this.location.id,
-            locationValue: (parseFloat(this.newValueProperty / this.currency.value)).toFixed(3),
+            locationValue: this.newValueProperty,
           });
           CustomToast.fire({
             title: this.$t("sweetAlertMessages.saved"),

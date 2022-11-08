@@ -159,7 +159,7 @@
           :disabled="!property.isActive"
           :class="!property.isActive&&'my-disabled'"
         >
-          {{ $t("tenants.details.pay") }} <span v-if="property.isActive">{{currency.symbol}} {{Math.round(property.value * currency.value)}}</span>
+          {{ $t("tenants.details.pay") }} <span v-if="property.isActive">{{currency.symbol}} {{property.value}}</span>
           <span></span>
         </button>
       </div>
