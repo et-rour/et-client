@@ -82,7 +82,7 @@ export default {
         valueFormat = value
       }
 
-      valueFormat = valueFormat.replaceAll(".", "").replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+      valueFormat = valueFormat.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
 
       return {
         format:valueFormat,
