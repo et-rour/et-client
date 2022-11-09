@@ -60,13 +60,6 @@ export default {
         }
       }
 
-      if (!this.property.value || this.property.value==="0") {
-        return {
-          format: this.$t("landing.propertyCard.noValue"),
-          value:null
-        }
-      }
-
       let value = this.property.value;
       let isRoom = false;
       if (this.property.propertyType === 'room') {
@@ -81,6 +74,13 @@ export default {
         } else{
           isRoom = true
           value = Math.min(...roomPrices)
+        }
+      }
+
+      if (!value || value==="0") {
+        return {
+          format: this.$t("landing.propertyCard.noValue"),
+          value:null
         }
       }
 
