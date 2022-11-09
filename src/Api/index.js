@@ -2,6 +2,7 @@ import axios from "axios";
 import store from "../store/index";
 const instance = axios.create({
   baseURL: process.env.VUE_APP_API,
+  // baseURL: "https://espacio-temporal-api-production.up.railway.app",
 });
 instance.interceptors.request.use(
   (config) => {

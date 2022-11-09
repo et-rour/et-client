@@ -50,16 +50,8 @@ export default {
         }
       }
 
-      if (!this.property.value || this.property.value==="0") {
-        return {
-          format: this.$t("landing.propertyCard.noValue"),
-          value:null
-        }
-      }
-
       let value = this.property.value;
       let isRoom = false;
-
       if (this.property.propertyType === 'room') {
         const roomPrices = this.property.roomsDetails.filter(room => room.isActive&&room.value!==0).map(room => room.value)
         if (roomPrices.length === 0){
@@ -71,6 +63,13 @@ export default {
         } else{
           isRoom = true
           value = Math.min(...roomPrices)
+        }
+      }
+
+      if (!value || value==="0") {
+        return {
+          format: this.$t("landing.propertyCard.noValue"),
+          value:null
         }
       }
 
