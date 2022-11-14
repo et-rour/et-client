@@ -155,8 +155,8 @@
       class="bg-my-blue-primary w-full relative px-2 py-20 text-white"
     >
       <div class="my-container grid grid-cols-12">
-        <div class=" col-span-6">
-          <h2 class="text-6xl font-bold mb-6">{{ $t("landing.details.title") }}</h2>
+        <div class=" col-span-6 ">
+          <h2 class="text-5xl font-bold mb-6 uppercase">{{ $t("landing.details.title") }}</h2>
           <p class="mb-4">
             {{ $t("landing.details.description") }}
           </p>
