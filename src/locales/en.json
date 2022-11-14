@@ -110,7 +110,8 @@
       "openProperty": "OPENING MY PROPERTY"
     },
     "video": {
-      "title": "We manage all types of unused properties",
+      "header": "We manage",
+      "title": "all types of unused properties",
       "question_1": "Have you not been able to rent your property?",
       "response_1": "We take care of managing your property with flexible and short-term contracts.",
       "question_2": "Looking for a flexible work space?",
@@ -215,11 +216,12 @@
     "description": "Founded in 2019, Espacio Temporal has created commercial spaces especially to make the rental experience easier and more comfortable for SMEs, artists and entrepreneurs."
   },
   "owners": {
-    "title": "We manage all types of unused properties",
+    "header": "We manage",
+    "title": "all types of unused properties",
     "subtitle": "Have you not been able to rent your property? We take care of managing your property with flexible and short-term contracts. In this way we generate VALUE from a frozen resource.",
-    "description_1": "Take care of and avoid misuse of the property: access by squatters or criminals to steal from neighbors (focus of crime), etc.",
-    "description_2": "Generate an extra monthly monetary income for the property owner from a frozen resource.",
-    "description_3": "Provide an economic opportunity for spaces for entrepreneurs and art development centers in various parts of the capital.",
+    "description_1": "Avoid misuse",
+    "description_2": "We generate an income",
+    "description_3": "Provide an opportunity for entrepreneurs",
     "load": "LOAD PROPERTY"
   },
   "createForm": {

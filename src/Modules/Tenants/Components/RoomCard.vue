@@ -28,7 +28,7 @@
             />
             {{ $t("tenants.details.pictures") }}
           </button>
-          <img :src="availabilityImage" alt="agotada" class="absolute top-0 left-0">
+          <AvailabilityImageComponent :isActive="room.isActive"/>
 
 
         </div>
@@ -70,7 +70,13 @@
 
     <hr class="solid mt-8 w-full" />
 
-    <ModelGlobal
+    <SwiperImagesComponent
+      v-if="room.imagesRoom.length>0"
+      :showModal="showModalImages"
+      v-on:toogle="showModalImages = !showModalImages"
+      :images="room.imagesRoom"
+    />
+    <!-- <ModelGlobal
       v-if="showModalImages && room.imagesRoom.length > 0"
       :showModal="showModalImages"
       v-on:toogle="showModalImages = !showModalImages"
@@ -84,18 +90,18 @@
           <font-awesome-icon icon="times"></font-awesome-icon>
         </button>
       </div>
-    </ModelGlobal>
+    </ModelGlobal> -->
   </div>
 </template>
 
 <script>
 import { mapActions, mapGetters } from "vuex";
-import ModelGlobal from "../../../components/ModelGlobal.vue";
-import SwiperVue from "./Swiper.vue";
+import AvailabilityImageComponent from "./AvailabilityImageComponent.vue";
+import SwiperImagesComponent from './SwiperImagesComponent.vue';
 export default {
   components: {
-    ModelGlobal,
-    SwiperVue,
+    AvailabilityImageComponent,
+    SwiperImagesComponent
   },
 
   props: {
@@ -164,9 +170,6 @@ export default {
     },
     isSelectedRoom() {
       return this.$route.hash === `#room_${this.room.id}`;
-    },
-    availabilityImage() {
-      return this.room.isActive ? require('@/assets/images/DISPONIBLE_CUT.png'):require('@/assets/images/AGOTADA_CUT.png');
     },
   },
 };

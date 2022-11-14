@@ -13,7 +13,6 @@ export default {
   computed: {
     maskNumber() {
       return this.number
-        .replaceAll(",", "")
         .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     },
   },

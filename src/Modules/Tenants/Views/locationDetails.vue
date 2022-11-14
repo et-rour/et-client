@@ -50,28 +50,30 @@
       </div>
 
       <!-- images -->
-      <div class="grid grid-cols-12 gap-x-4 p-2 my-container mb-8 ">
+      <div class="my-container grid grid-cols-12 gap-x-4 mb-12">
         <!-- COVER IMAGE -->
-        <div class="col-span-12 md:col-span-7 ">
-          <img
-            :src="image"
-            alt="cover property"
-            :class="!property.image ? 'w-full h-44 sm:h-64 md:h-80 object-contain mb-8' : 'w-full h-44 sm:h-64 md:h-full object-cover mb-8 '"
-          />
+        <div class="col-span-12 md:col-span-7 h-96">
+            <img
+              :src="image"
+              alt="cover property"
+              class="h-full w-full rounded-l-3xl"
+              :class="!property.image ? 'object-contain' : 'object-cover'"
+            />
+
         </div>
 
-        <div class="col-span-12 md:col-span-5 ">
-          <div class="grid grid-cols-4 gap-2 md:grid-cols-2 relative">
+        <div class="col-span-12 md:col-span-5 h-96">
+          <div class="grid grid-cols-4 gap-2 md:grid-cols-2 grid-rows-1 md:grid-rows-2 relative h-full">
             <img
               :src="image.image"
               :alt="`image_extra_${image.id}`"
-              class="w-full h-40 object-cover"
+              class="w-full h-full object-cover"
               v-for="image in sidebarImages"
               :key="image.id"
             />
 
             <button
-              class="py-2 px-3 rounded-lg flex items-center absolute right-2 bottom-2 text-xs shadow-xl border bg-white"
+              class="py-2 px-3 rounded-lg flex items-center absolute right-2 bottom-16 text-xs shadow-xl border bg-white"
               @click="toggleShowModalImages"
               v-if="sidebarImages.length > 0"
             >
@@ -82,18 +84,20 @@
               />
               {{ $t("tenants.details.pictures") }}
             </button>
+            
+            <button
+              class="col-span-4 md:col-span-2 my-btn py-3 rounded-none font-black bg-my-green-primary w-full h-12"
+              @click="goToSchedule"
+              :disabled="!property.isActive"
+              :class="!property.isActive&&'my-disabled'"
+            >
+              {{ $t("tenants.details.vistit") }}
+            </button>
           </div>
 
-          <button
-            class="my-btn py-3 mt-3 rounded-none bg-green-400 w-full"
-            @click="goToSchedule"
-            :disabled="!property.isActive"
-            :class="!property.isActive&&'my-disabled'"
-          >
-            {{ $t("tenants.details.vistit") }}
-          </button>
         </div>
-        <p class="block mt-6 col-span-12 md:col-span-7">{{ property.description }}</p>
+        
+        <p class="col-span-12 md:col-span-7  mt-12">{{ property.description }}</p>
       </div>
 
       <!-- INCLUDED SERVICES -->
@@ -107,9 +111,6 @@
           security: property.security,
         }"
       />
-
-      
-
       <!-- buttons -->
       <!-- <template>
         <button
@@ -159,7 +160,7 @@
           :disabled="!property.isActive"
           :class="!property.isActive&&'my-disabled'"
         >
-          {{ $t("tenants.details.pay") }} <span v-if="property.isActive">{{currency.symbol}} {{property.value}}</span>
+          {{ $t("tenants.details.pay") }} <span v-if="property.isActive">$ <NumberMaskComponent :number="property.value" /></span>
           <span></span>
         </button>
       </div>
@@ -171,21 +172,12 @@
     </div>
 
     <!-- MODAL EXTRA IMAGES -->
-    <ModelGlobal
-      v-if="showModalImages"
+    <SwiperImagesComponent
+      v-if="carouselModalImages.length>0"
       :showModal="showModalImages"
       v-on:toogle="toggleShowModalImages"
-    >
-      <div class="w-2/3 h-96 bg-white relative" @click.stop>
-        <SwiperVue :images="carouselModalImages" class="h-full"></SwiperVue>
-        <button
-          class="bg-gray-100 w-10 h-10 absolute top-0 right-0 z-50"
-          @click="toggleShowModalImages"
-        >
-          <font-awesome-icon icon="times"></font-awesome-icon>
-        </button>
-      </div>
-    </ModelGlobal>
+      :images="carouselModalImages"
+    />
 
     <!-- MODAL 3D PICTURES -->
     <!-- <ModelGlobal
@@ -218,18 +210,19 @@ import { mapActions, mapGetters, mapMutations } from "vuex";
 import "photo-sphere-viewer/dist/photo-sphere-viewer.css";
 import "photo-sphere-viewer/dist/plugins/markers.css";
 import RoomCard from "../Components/RoomCard.vue";
-import ModelGlobal from "../../../components/ModelGlobal.vue";
 import { CustomErrorToast } from "@/sweetAlert.js";
-import SwiperVue from "../Components/Swiper.vue";
+
 import Mapa from "../Components/GoogleCustomMap.vue";
 import IncludedServices from "../Components/IncludedServices.vue";
+import SwiperImagesComponent from "../Components/SwiperImagesComponent.vue";
+import NumberMaskComponent from '../../../components/NumberMaskComponent.vue';
 export default {
   components: {
-    ModelGlobal,
     RoomCard,
-    SwiperVue,
+    SwiperImagesComponent,
     Mapa,
     IncludedServices,
+    NumberMaskComponent,
   },
   props: {
     idProperty: {

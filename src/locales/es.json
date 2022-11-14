@@ -110,7 +110,8 @@
       "openProperty": "QUIERO ARRENDAR MI PROPIEDAD"
     },
     "video": {
-      "title": "Administramos todo tipo de inmuebles en desuso",
+      "header":"Administramos",
+      "title": "todo tipo de inmuebles en desuso",
       "question_1": "¿No has podido arrendar tu propiedad?",
       "response_1": "Nosotros nos encargamos de administrar tu propiedad con contratos flexibles y de corta duración.",
       "question_2": "¿Buscas un espacio flexible de trabajo?",
@@ -215,11 +216,12 @@
     "description": "Fundada en 2019, Espacio Temporal ha creado espacios comerciales especialmente para hacer la experiencia de arriendo más fácil, cómoda para PYMES, artistas y emprendedores"
   },
   "owners": {
-    "title": "Administramos todo tipo de inmuebles en desuso",
+    "header": "Administramos",
+    "title": "todo tipo de inmuebles en desuso",
     "subtitle": "¿No has podido arrendar tu propiedad? Nosotros nos encargamos de administrar tu propiedad con contratos flexibles y de corta duración. De esta forma generamos VALOR a partir de un recurso congelado.",
-    "description_1": "Cuidar y evitar malos usos de la propiedad: acceso de okupas o de delincuentes para robar a vecinos (foco delictual), etc.",
-    "description_2": "Generar un ingreso monetario mensual extra para el dueño de la propiedad a partir de un recurso congelado.",
-    "description_3": "Entregar una oportunidad económica de espacios para emprendedoresy centros de desarrollo de arte en diversos puntos de la capital.",
+    "description_1": "Evita malos usos",
+    "description_2": "Generamos un ingreso",
+    "description_3": "Entrega una oportunidad para emprendedores",
     "load": "CARGAR PROPIEDAD"
   },
   "createForm": {
@@ -317,7 +319,7 @@
       "description": "Esta propiedad está ubicada en el centro de Providencia. Los plazos mínimos de arriendo son de 3 meses y no se permite el uso de maquinaria ni labores ruidosas.",
       "subtitle": "Espacios disponibles",
       "pictures": "Mostrar todas las fotos",
-      "vistit": "AGENDA UNA VISITA",
+      "vistit": "Agenda una visita",
       "pay": "Reservar y pagar",
       "payRoom": "Reservar espacio",
       "includedServises": "SERVICIOS INCLUÍDOS",

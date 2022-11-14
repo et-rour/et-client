@@ -7,6 +7,7 @@
       {{ $t("adminPanel.locations.sentToTrash") }}
     </p>
   </div>
+  
   <div v-else class="w-full h-full overflow-y-scroll bg-gray-100 py-5" id="details">
     <h1 class="my-title mb-3 text-center">
       {{ $t("adminPanel.locations.title") }}
@@ -50,6 +51,8 @@
             }"
             active-class="text-my-blue-primary"
             exact
+            :is="locationData.propertyType === 'entire' ? 'span' : 'router-link'"
+            :class="locationData.propertyType==='entire' && 'my-disabled'"
             >{{ $t("adminPanel.locations.seeRooms") }}</router-link
           >
           <router-link
@@ -59,6 +62,8 @@
               hash: '#details',
             }"
             active-class="text-my-blue-primary"
+            :is="locationData.propertyType === 'entire' ? 'span' : 'router-link'"
+            :class="locationData.propertyType==='entire' && 'my-disabled'"
             >{{ $t("adminPanel.locations.newRoom") }}</router-link
           >
           <router-link

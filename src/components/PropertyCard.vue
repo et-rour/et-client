@@ -24,33 +24,30 @@
       </p>
 
     </div>
-    <img :src="availabilityImage" alt="agotada" class="absolute top-0 left-0">
-
+    <AvailabilityImageComponent :isActive="property.isActive"/>
   </div>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
-// import HousePlaceholder from "../assets/images/house_placeholder.png"
+import AvailabilityImageComponent from '../Modules/Tenants/Components/AvailabilityImageComponent.vue';
+
 
 export default {
+  components:{
+    AvailabilityImageComponent
+  },
   props: {
     property: {
       type: Object,
       required: true,
     },
   },
-  components: {
-    // HousePlaceholder,
-  },
   computed: {
     ...mapGetters("postsStore", ["currencies"]),
     ...mapGetters("authStore", ["siteCountry"]),
     image() {
       return this.property.image ?? require('../assets/images/house_placeholder512.png');
-    },
-    availabilityImage() {
-      return this.property.isActive ? require('../assets/images/DISPONIBLE_CUT.png'):require('../assets/images/AGOTADA_CUT.png');
     },
     priceAndTime() {
       if (!this.property.isActive) {

@@ -152,56 +152,59 @@
 
     <!-- details brands -->
     <div
-      class="bg-my-blue-primary w-full relative px-2 py-10 text-white text-center"
+      class="bg-my-blue-primary w-full relative px-2 py-20 text-white"
     >
-      <div class="w-7/12 mx-auto">
-        <h2 class="my-title-2 mb-4">{{ $t("landing.details.title") }}</h2>
-        <p class="text-[#E3E3E3] mb-4">
-          {{ $t("landing.details.description") }}
-        </p>
+      <div class="my-container grid grid-cols-12">
+        <div class=" col-span-6">
+          <h2 class="text-6xl font-bold mb-6">{{ $t("landing.details.title") }}</h2>
+          <p class="mb-4">
+            {{ $t("landing.details.description") }}
+          </p>
+        </div>
+
         <div
-          class="w-full h-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+          class=" col-span-6 grid grid-cols-1 md:grid-cols-2"
         >
           <div class="w-full h-full flex justify-center">
             <img
               src="@/assets/images/Grupo.svg"
               alt="icon"
-              class="h-36 w-36 object-contain"
+              class="h-24 w-24 object-contain"
             />
           </div>
           <div class="w-full h-full flex justify-center">
             <img
               src="@/assets/images/Idesa.svg"
               alt="icon"
-              class="h-36 w-36 object-contain"
+              class="h-24 w-24 object-contain"
             />
           </div>
           <div class="w-full h-full flex justify-center">
             <img
               src="@/assets/images/Indumotora.svg"
               alt="icon"
-              class="h-36 w-36 object-contain"
+              class="h-24 w-24 object-contain"
             />
           </div>
           <div class="w-full h-full flex justify-center">
             <img
               src="@/assets/images/Tarragona.svg"
               alt="icon"
-              class="h-36 w-36 object-contain"
+              class="h-24 w-24 object-contain"
             />
           </div>
           <div class="w-full h-full flex justify-center">
             <img
               src="@/assets/images/Conquista.svg"
               alt="icon"
-              class="h-36 w-36 object-contain"
+              class="h-24 w-24 object-contain"
             />
           </div>
           <div class="w-full h-full flex justify-center">
             <img
               src="@/assets/images/Numancia.svg"
               alt="icon"
-              class="h-36 w-36 object-contain"
+              class="h-24 w-24 object-contain"
             />
           </div>
         </div>

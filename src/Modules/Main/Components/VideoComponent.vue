@@ -1,27 +1,17 @@
 <template>
   <!-- video -->
-  <div class="mt-12 mb-24 bg-my-blue-primary text-white py-24">
-    <div class="my-container grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-0">
-      <div>
-        <h2 class="my-title mb-8">
-          {{ $t("landing.video.title") }}
+  <div class="mt-12 mb-24 bg-my-blue-primary text-white py-12">
+    <div class="my-container grid grid-cols-1 lg:grid-cols-12 gap-y-20 lg:gap-x-20 ">
+      <div class=" md:col-span-5 ">
+        <h2 class="text-4xl font-extralight mb-2 ">
+          {{ $t("landing.video.header") }}
         </h2>
-        <p class="text-md font-extrabold">
-          {{ $t("landing.video.question_1") }}
-        </p>
-        <p class="text-md font-extralight mb-4">
-          {{ $t("landing.video.response_1") }}
-        </p>
-        <p class="text-md font-extrabold inline">
-          {{ $t("landing.video.question_2") }}
-        </p>
-        <p class="text-md font-extralight inline">
-          {{ $t("landing.video.response_2") }}
-        </p>
-      </div>
-      <div class="flex justify-center items-center">
+        <h3 class="text-5xl font-bold mb-8 uppercase">
+          {{ $t("landing.video.title") }}
+        </h3>
+        
         <video
-          class="w-2/3 border border-white rounded-lg"
+          class="w-full rounded-3xl "
           playsinline
           controls
         >
@@ -30,6 +20,28 @@
             type="video/mp4"
           />
         </video>
+
+      </div>
+      <div class="md:col-span-7 flex justify-center items-center flex-col gap-8">
+        <div class=" w-4/5">
+          <img src="" class="w-32 h-32 mx-auto">
+          <p class="text-sm font-extrabold tracking-wider">
+            {{ $t("landing.video.question_1") }}
+          </p>
+          <p class="text-sm font-extralight">
+            {{ $t("landing.video.response_1") }}
+          </p>
+        </div>
+        <div class=" w-4/5">
+          <img src="" class="w-32 h-32 mx-auto">
+          <p class="text-sm font-extrabold tracking-wider">
+            {{ $t("landing.video.question_2") }}
+          </p>
+          <p class="text-sm font-extralight">
+            {{ $t("landing.video.response_2") }}
+          </p>
+        </div>
+
       </div>
     </div>
 

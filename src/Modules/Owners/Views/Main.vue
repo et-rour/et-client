@@ -17,58 +17,68 @@
     </CoverImage>
 
 
-    <div class="my-container">
-      <h1 class="text-center my-title-2 my-4">
-        {{ $t("owners.title") }}
-      </h1>
-      <p class="md:text-center text-left w-10/12 mx-auto">
-        {{ $t("owners.subtitle") }}
-      </p>
+    <div class="bg-my-celest py-20">
+      <div class="my-container grid grid-cols-1 lg:grid-cols-2 text-white gap-5">
+        <div class="">
+          <h1 class="text-4xl font-thin">
+            {{ $t("owners.header") }}
+          </h1>
+          <h2 class="text-5xl font-bold uppercase">
+            {{ $t("owners.title") }}
+          </h2>
 
-      <div class="w-10/12 my-5 flex flex-col gap-10 mx-auto mt-20">
-        <div class="flex flex-row justify-between items-center gap-6">
-          <img
-            src="@/assets/icons/thief.png"
-            alt="ladron icon"
-            class="w-20 object-contain"
-          />
-          <p class="text-left flex-1">
-            {{ $t("owners.description_1") }}
+          <p>
+            {{ $t("owners.subtitle") }}
           </p>
         </div>
 
-        <div class="flex flex-row justify-between items-center gap-6">
-          <img
-            src="@/assets/icons/house.png"
-            alt="ladron icon"
-            class="w-20 object-contain"
-          />
+        <div class="actions flex flex-col justify-around items-center">
+          <div class="flex flex-row justify-between items-center gap-6">
+            <img
+              src="@/assets/icons/thief.png"
+              alt="ladron icon"
+              class="w-12 object-contain"
+            />
+            <p class="text-left w-64 font-bold">
+              {{ $t("owners.description_1") }}
+            </p>
+          </div>
+    
+          <div class="flex flex-row justify-between items-center gap-6">
+            <img
+              src="@/assets/icons/house.png"
+              alt="ladron icon"
+              class="w-12 object-contain"
+            />
+    
+            <p class="text-left w-64 font-bold">
+              {{ $t("owners.description_2") }}
+            </p>
+          </div>
+          
+          <div class="flex flex-row justify-between items-center gap-6">
+            <img
+              src="@/assets/icons/bed.png"
+              alt="ladron icon"
+              class="w-12 object-contain"
+            />
+    
+            <p class="text-left w-64 font-bold">
+              {{ $t("owners.description_3") }}
+            </p>
+          </div>
 
-          <p class="text-left flex-1">
-            {{ $t("owners.description_2") }}
-          </p>
-        </div>
-        <div class="flex flex-row justify-between items-center gap-6">
-          <img
-            src="@/assets/icons/bed.png"
-            alt="ladron icon"
-            class="w-20 object-contain"
-          />
-
-          <p class="text-left flex-1">
-            {{ $t("owners.description_3") }}
-          </p>
         </div>
       </div>
+    </div>
 
-      <div class="w-full flex justify-center my-10">
-        <button
-          class="w-11/12 md:w-auto my-btn px-12 text-white font-bold"
-          @click="goToCreateProperty"
-        >
-          {{ $t("owners.load") }}
-        </button>
-      </div>
+    <div class="w-full flex justify-center my-5">
+      <button
+        class="w-11/12 md:w-auto my-btn px-12 text-white font-bold bg-my-celest"
+        @click="goToCreateProperty"
+      >
+        {{ $t("owners.load") }}
+      </button>
     </div>
   </div>
 </template>
