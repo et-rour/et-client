@@ -1,14 +1,13 @@
 <template>
   <div :id="`room_${room.id}`" class="flex flex-col items-center mb-10">
     <hr class="solid mb-8 w-full" />
-    <div class="w-full grid grid-cols-1 md:grid-cols-4 p-1">
-      
-      <div
-        class="flex flex-row gap-4 items-center md:col-span-3"
+
+    <div class="w-full grid grid-cols-1 md:grid-cols-4">
+      <div class="flex flex-row gap-4 items-center md:col-span-3"
         :class="isSelectedRoom ? 'bg-green-300' : ''"
       >
         <div
-          class="w-56 h-32 bg-gray-200 flex-shrink-0 relative"
+          class="h-32 w-4/12 md:w-56 md:h-44 bg-gray-200 flex-shrink-0 relative rounded-2xl overflow-hidden"
           :class="isSelectedRoom ? 'bg-green-300' : 'bg-gray-200'"
         >
           <img
@@ -17,13 +16,13 @@
             alt="room cover"
           />
           <button
-            class="py-2 px-3 rounded-lg flex items-center absolute right-2 bottom-2 text-xs shadow-xl border bg-white"
+            class="py-2 px-3 rounded-lg flex items-center absolute right-2 bottom-2 text-xs shadow-xl border bg-white truncate"
             @click="showModalImages = true"
             v-if="room.imagesRoom.length > 0"
           >
             <img
               src="@/assets/icons/menupoints.png"
-              class="w-3 h-3 mr-1"
+              class="w-3 h-3 mr-1 "
               alt="menu"
             />
             {{ $t("tenants.details.pictures") }}
@@ -32,23 +31,24 @@
 
 
         </div>
-        <div class="flex flex-col justify-between w-full">
-
+        <div class="ml-10 flex flex-col justify-between w-full gap-1">
+          
+          <p class="text-2xl font-bold ">{{ room.name }}</p>
           <span class="text-gray-400">{{ room.squareMeter }} mts&sup2;</span>
 
-          <p class="text-2xl sm:text-3xl">
-            {{ price.format }} 
+          <p class="text-2xl ">
+            ${{ price.format }} 
             <span v-if="price.value">{{ room.isDaily? $t("tenants.details.daily"): $t("tenants.details.monthly") }}</span>
           </p>
 
-          <p class="text-2xl sm:text-3xl">{{ room.name }}</p>
           <!-- <p class="align-middle">{{ room.description }}</p> -->
         </div>
       </div>
-      <div >
+
+      <div class=" flex md:flex-col gap-2 justify-center md:justify-end items-end col-span-4 md:col-span-1 mt-2 md:mt-0">
         <button
           v-if="room.stripePriceId"
-          class="my-btn text-white w-full py-3 px-8 truncate overflow-ellipsis rounded-none my-4"
+          class="font-bold block my-btn w-full py-2 rounded-xl uppercase tracking-widest"
           @click="goToCalendar"
           
           :disabled="!isActive"
@@ -57,18 +57,16 @@
           {{ $t("tenants.details.payRoom") }}
         </button>
         <button
-          class="my-btn py-3 px-8 mt-3 truncate overflow-ellipsis rounded-none bg-green-400 w-full"
+          class="bg-my-green-primary font-bold block my-btn w-full py-2 rounded-xl uppercase tracking-widest"
           @click="goToSchedule"
           
           :disabled="!isActive"
           :class="!isActive&&'my-disabled'"
         >
-          {{ $t("tenants.details.vistit") }}
+          {{ $t("tenants.details.vistitRoom") }}
         </button>
       </div>
     </div>
-
-    <hr class="solid mt-8 w-full" />
 
     <SwiperImagesComponent
       v-if="room.imagesRoom.length>0"
@@ -76,21 +74,6 @@
       v-on:toogle="showModalImages = !showModalImages"
       :images="room.imagesRoom"
     />
-    <!-- <ModelGlobal
-      v-if="showModalImages && room.imagesRoom.length > 0"
-      :showModal="showModalImages"
-      v-on:toogle="showModalImages = !showModalImages"
-    >
-      <div class="w-2/3 h-96 bg-white relative" @click.stop>
-        <SwiperVue :images="room.imagesRoom" class="h-full"></SwiperVue>
-        <button
-          class="bg-gray-500 w-10 h-10 absolute top-0 right-0 z-50"
-          @click="showModalImages = false"
-        >
-          <font-awesome-icon icon="times"></font-awesome-icon>
-        </button>
-      </div>
-    </ModelGlobal> -->
   </div>
 </template>
 
