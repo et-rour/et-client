@@ -50,54 +50,70 @@
       </div>
 
       <!-- images -->
-      <div class="my-container grid grid-cols-12 gap-x-4 mb-12">
+      <div class="my-container grid grid-cols-12 gap-x-4 mb-12 ">
         <!-- COVER IMAGE -->
-        <div class="col-span-12 md:col-span-7 h-96">
+        <div class="col-span-12 lg:col-span-7 h-96 ">
             <img
               :src="image"
               alt="cover property"
-              class="h-full w-full rounded-l-3xl"
+              class="h-full w-full rounded-t-3xl lg:rounded-l-3xl lg:rounded-t-none"
               :class="!property.image ? 'object-contain' : 'object-cover'"
             />
 
         </div>
 
-        <div class="col-span-12 md:col-span-5 h-96">
-          <div class="grid grid-cols-4 gap-2 md:grid-cols-2 grid-rows-1 md:grid-rows-2 relative h-full">
-            <img
-              :src="image.image"
-              :alt="`image_extra_${image.id}`"
-              class="w-full h-full object-cover"
-              v-for="image in sidebarImages"
-              :key="image.id"
-            />
+        <!-- SIDE IMAGES -->
+        <div class="col-span-12 lg:col-span-5  flex flex-col justify-between">
+          
+            <div v-if="!sidebarImages.length > 0"
+              class="flex justify-center items-center  flex-grow"  
+            >
+              <h2 class="font-bold text-2xl text-gray-600 text-center">{{$t('tenants.details.noPictures')}}</h2>
+            </div>
+
+            <div class=" h-full w-full flex-grow grid grid-cols-4 grid-rows-1 lg:grid-cols-2 lg:grid-rows-2 gap-4 my-4 lg:mt-0" v-else>
+              <div
+                v-for="(image,index) in sidebarImages"
+                :key="image.id"
+                class="relative"
+              >
+                <img
+                  :src="image.image"
+                  :alt="`image_extra_${image.id}`"
+                  class="w-full h-full object-cover"
+                />
+                
+                <button
+                  class="py-2 px-3 rounded-lg flex items-center absolute bottom-2 right-2 text-xs shadow-xl border bg-white"
+                  @click="toggleShowModalImages"
+                  v-if="index === sidebarImages.length-1"
+                >
+                  <img
+                    src="@/assets/icons/menupoints.png"
+                    class="w-3 h-3 mr-1"
+                    alt="menu"
+                  />
+                  <p class="truncate">
+                    {{ $t("tenants.details.pictures") }}
+                  </p>
+                </button>
+              </div>    
+            </div>
+
+            
 
             <button
-              class="py-2 px-3 rounded-lg flex items-center absolute right-2 bottom-16 text-xs shadow-xl border bg-white"
-              @click="toggleShowModalImages"
-              v-if="sidebarImages.length > 0"
-            >
-              <img
-                src="@/assets/icons/menupoints.png"
-                class="w-3 h-3 mr-1"
-                alt="menu"
-              />
-              {{ $t("tenants.details.pictures") }}
-            </button>
-            
-            <button
-              class="col-span-4 md:col-span-2 my-btn py-3 rounded-none font-black bg-my-green-primary w-full h-12"
+              class="my-btn py-3 rounded-none font-black row-span-1 bg-my-green-primary w-full h-12"
               @click="goToSchedule"
               :disabled="!property.isActive"
               :class="!property.isActive&&'my-disabled'"
             >
               {{ $t("tenants.details.vistit") }}
             </button>
-          </div>
 
         </div>
         
-        <p class="col-span-12 md:col-span-7  mt-12">{{ property.description }}</p>
+        <p class="col-span-12 lg:col-span-7  mt-12">{{ property.description }}</p>
       </div>
 
       <!-- INCLUDED SERVICES -->
