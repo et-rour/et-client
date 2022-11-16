@@ -24,7 +24,7 @@
       </div>
       <div class="md:col-span-7 flex justify-center items-center flex-col gap-8">
         <div class=" w-4/5">
-          <img src="" class="w-32 h-32 mx-auto">
+          <img src="@/assets/images/home_1.svg" class="w-32 h-32 mx-auto">
           <p class="text-sm font-extrabold tracking-wider">
             {{ $t("landing.video.question_1") }}
           </p>
@@ -33,7 +33,7 @@
           </p>
         </div>
         <div class=" w-4/5">
-          <img src="" class="w-32 h-32 mx-auto">
+          <img src="@/assets/images/home_2.svg" class="w-32 h-32 mx-auto">
           <p class="text-sm font-extrabold tracking-wider">
             {{ $t("landing.video.question_2") }}
           </p>

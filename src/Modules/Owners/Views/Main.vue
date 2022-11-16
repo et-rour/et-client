@@ -23,7 +23,7 @@
           <h1 class="text-4xl font-thin">
             {{ $t("owners.header") }}
           </h1>
-          <h2 class="text-5xl font-bold uppercase">
+          <h2 class="text-5xl font-bold uppercase mb-2">
             {{ $t("owners.title") }}
           </h2>
 
@@ -35,9 +35,9 @@
         <div class="actions flex flex-col justify-around items-center">
           <div class="flex flex-row justify-between items-center gap-6">
             <img
-              src="@/assets/icons/thief.png"
+              src="@/assets/images/icono1.svg"
               alt="ladron icon"
-              class="w-12 object-contain"
+              class="w-14 object-contain"
             />
             <p class="text-left w-64 font-bold">
               {{ $t("owners.description_1") }}
@@ -46,9 +46,9 @@
     
           <div class="flex flex-row justify-between items-center gap-6">
             <img
-              src="@/assets/icons/house.png"
+              src="@/assets/images/icono2.svg"
               alt="ladron icon"
-              class="w-12 object-contain"
+              class="w-14 object-contain"
             />
     
             <p class="text-left w-64 font-bold">
@@ -58,9 +58,9 @@
           
           <div class="flex flex-row justify-between items-center gap-6">
             <img
-              src="@/assets/icons/bed.png"
+              src="@/assets/images/icono3.svg"
               alt="ladron icon"
-              class="w-12 object-contain"
+              class="w-14 object-contain"
             />
     
             <p class="text-left w-64 font-bold">
