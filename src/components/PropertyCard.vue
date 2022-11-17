@@ -1,6 +1,6 @@
 <template>
-  <div class="flex flex-col h-96 relative cursor-pointer" @click="$router.push({ name: 'tenants-detail', params: { id: property.id }})">
-    <div class="h-2/3 w-full">
+  <div class="flex flex-col relative cursor-pointer " @click="$router.push({ name: 'tenants-detail', params: { id: property.id }})">
+    <div class="h-60 w-full rounded-3xl overflow-hidden">
       <img
         @click="
           $router.push({ name: 'tenants-detail', params: { id: property.id } })
@@ -10,18 +10,17 @@
         :class="!property.image ? 'object-contain h-full w-full' : 'object-cover h-full w-full'"
       />
     </div>
-    <div class="bg-white p-3 pr-12 h-1/3 w-full border ">
-      <p class="font-semibold">{{property.name}}</p>
-      <p class="">{{type}} <span class=" text-gray-400">/ {{ property.zone.city }}, {{ property.zone.zone }}</span></p>
-      <p><span v-if="priceAndTime.isRoom" class=" uppercase">{{$t('tenants.details.start')}}</span> {{ priceAndTime.format }}
-        <span v-if="property.propertyType!=='room' && priceAndTime.value"> - 
-          {{
-            property.isDaily ?
-            $t("tenants.details.daily") :
-            $t("tenants.details.monthly")
-          }}
+    
+    <div class="bg-white p-4 pr-12 h-1/3 w-full ">
+      <p class="font-semibold">{{property.name}}, {{ property.zone.zone }}</p>
+      <p>{{ property.zone.city }}</p>
+      <p class="my-2">{{type}}/ 
+        <span class="font-bold">
+          <span v-if="priceAndTime.isRoom" class="uppercase">{{$t('tenants.details.start')}} </span> 
+          <span v-if="priceAndTime.value">$</span>{{ priceAndTime.format }}
         </span>
       </p>
+      
 
     </div>
     <AvailabilityImageComponent :isActive="property.isActive"/>

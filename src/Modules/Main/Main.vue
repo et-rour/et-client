@@ -78,8 +78,8 @@
           ref="paginator"
           name="propertiesData"
           :list="propertiesListFiltered"
-          :per="9"
-          class="w-full gap-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+          :per="8"
+          class="w-full gap-8 grid grid-cols-1 md:grid-cols-2"
         >
           <PropertyCard
             v-for="property in paginated('propertiesData')"
