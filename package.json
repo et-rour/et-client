@@ -1,6 +1,6 @@
 {
   "name": "espacio-temporal-vue",
-  "version": "3.2.2",
+  "version": "3.2.3",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -23,6 +23,7 @@
     "axios": "^0.26.0",
     "core-js": "^3.6.5",
     "firebase": "^9.6.7",
+    "heic-convert": "^1.2.4",
     "leaflet": "^1.7.1",
     "mdb-vue-ui-kit": "^1.13.0",
     "moment": "^2.29.3",
