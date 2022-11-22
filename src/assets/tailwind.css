@@ -109,6 +109,19 @@ html {
   }
 }
 
+progress {
+  border-radius: 7px;
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+}
+progress::-webkit-progress-bar {
+  background-color: rgb(175, 196, 255);
+  border-radius: 7px;
+}
+progress::-webkit-progress-value {
+  background-color: rgba(30, 58, 138, 1);
+  border-radius: 7px;
+}
+
 @layer components {
   /* .btn-primary {
     @apply py-2 px-4 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-my-blue-primary focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75;

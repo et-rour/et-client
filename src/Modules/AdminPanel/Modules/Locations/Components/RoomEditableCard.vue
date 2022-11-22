@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-auto flex flex-col bg-gray-200">
+  <div class="w-full h-auto flex flex-col bg-gray-200" v-if="!hideDeleted">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 relative p-6">
       <ImageVisibility
         v-for="image in room.imagesRoom"
@@ -41,7 +41,7 @@
           @toogle="changeIsActiveRoom"
         ></SwitchComponent>
       </div>
-      <div class="flex justify-between">
+      <div class="flex justify-between ">
         <button
           class="my-btn w-auto px-4 py-1 self-end"
           @click="goToBuyLink"
@@ -57,6 +57,16 @@
           :class="isSaving ? 'bg-gray-400' : ''"
         >
           {{ $t("general.save") }}
+        </button>
+      </div>
+      <div class="flex justify-end">
+        <button
+          class="my-btn w-auto px-4 py-1 bg-red-600"
+          @click="deleteRoomHandler"
+          :disabled="isSaving"
+          :class="isSaving ? 'bg-red-400' : ''"
+        >
+          {{ $t("general.delete") }}
         </button>
       </div>
     </div>
@@ -83,7 +93,7 @@ import {
 import SwitchComponent from "../../../../../components/SwitchComponent.vue";
 import ModelUploadImages from "../../../../../components/ModelUploadImages.vue";
 import ImageVisibility from "../../../../../components/ImageVisibility.vue";
-
+import espacioTemporalApi from "@/Api/index"
 export default {
   components: {
     SwitchComponent,
@@ -100,6 +110,7 @@ export default {
     return {
       isSaving: false,
       showUploadImagesModal: false,
+      hideDeleted:false
     };
   },
   computed: {
@@ -172,6 +183,29 @@ export default {
 
           this.$router.go()
           
+        } catch (error) {
+          this.isSaving = false;
+          CustomErrorToast.fire({
+            text: error.response.data.message,
+          });
+        }
+      });
+    },
+    deleteRoomHandler() {
+      CustomConfirmDialog.fire({
+        text: this.$t(
+          "adminPanel.locations.roomsList.confiramtionMessages.delete"
+        ),
+      }).then(async (result) => {
+        if (!result.isConfirmed) return;
+        this.isSaving = true;
+        try {
+          await espacioTemporalApi.put(`/room/${this.room.id}`,{
+            locationId: this.getLocationDetails.id,
+            isDeleted:true
+          });
+          this.isSaving = false;
+          this.hideDeleted = true          
         } catch (error) {
           this.isSaving = false;
           CustomErrorToast.fire({

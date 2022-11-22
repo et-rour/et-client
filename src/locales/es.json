@@ -44,6 +44,7 @@
     "cancel": "Cancel",
     "save": "Guardar",
     "update": "Actualizar",
+    "delete": "Eliminar",
     "continue": "Continuar",
     "change":"Cambiar",
     "image": "imagen | imagen | {count} imagenes",
@@ -54,7 +55,8 @@
     "notFound": "No se encontro",
     "notAsign": "No se asigno",
     "agotada": "Agotada",
-    "disponible": "Disponible"
+    "disponible": "Disponible",
+    "newImage":"Nueva imagen"
   },
   "navbar": {
     "owner": "PUBLICA TU PROPIEDAD",
@@ -613,6 +615,7 @@
           "title": "Crea un nuevo cuarto para propiedad #"
         },
         "confiramtionMessages": {
+          "delete": "¿Seguro que quieres eliminar este cuarto?",
           "update": "¿Seguro que quieres actualizar este cuarto?",
           "changeToInactive": "¿Estás seguro de que quieres desactivar esta habitación?",
           "changeToActive": "¿Estás seguro de que quieres que esta habitación esté disponible?"
@@ -626,7 +629,8 @@
         "buttonText": "Por ahora no",
         "confiramtionMessages": {
           "hide": "¿Seguro que quieres ocultar esta imagen?",
-          "show": "¿Seguro que quieres mostrar esta imagen?"
+          "show": "¿Seguro que quieres mostrar esta imagen?",
+          "delete": "¿Seguro que quieres eliminar esta imagen?"
         }
       },
       "create": "Crear locación",

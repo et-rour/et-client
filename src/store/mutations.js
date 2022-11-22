@@ -12,7 +12,7 @@ export const imageUploadedState = (state, progress) => {
 
 export const cleanImageInfo = (state) => {
   state.imageUrl = null;
-  state.ImageUploadingStatus = null;
+  state.ImageUploadingStatus = 0;
 };
 
 // COVERS
