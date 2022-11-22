@@ -18,7 +18,7 @@ export const uploadImageTofirebase = async (
 
   const imageType = file.name.split(".").pop();
   try {
-    if (imageType === "heic") {
+    if (imageType === "heic"||imageType === "HEIC") {
       // alert("Este formato de imagen no muestra una preview.\n Pero se guardara correctamente")
       const buffer = await file.arrayBuffer();
       let byteArray = new Int8Array(buffer);
