@@ -1,25 +1,42 @@
 import { storage } from "../Firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import EspacioTemporalAPI from "../Api/index";
+const convert = require('heic-convert');
 
 export const uploadImageTofirebase = async (
   { commit },
-  { user, file, directory, id = "0", specificDirectory = null }
+  { file, directory}
 ) => {
   commit("cleanImageInfo");
-  commit("changeLastUsedBy", id);
+  console.log('%cactions.js line:19 file', 'color: white; background-color: #007acc;', file);
 
   const dateSaved = new Date().getTime();
-  const storageRef = ref(
-    storage,
-    specificDirectory
-      ? specificDirectory
-      : `${user}/${directory}/${dateSaved}_${file.name}`
-  );
-  const metadata = {
-    contentType: "image/jpeg",
-  };
-  const uploadTask = uploadBytesResumable(storageRef, file, metadata);
+  
+  
+  let imageBuffer = file;
+  let imagePath = `${directory}/${dateSaved}_${file.name}`;
+
+  const imageType = file.name.split(".").pop();
+  try {
+    if (imageType === "heic"||imageType === "HEIC") {
+      // alert("Este formato de imagen no muestra una preview.\n Pero se guardara correctamente")
+      const buffer = await file.arrayBuffer();
+      let byteArray = new Int8Array(buffer);
+  
+      const outputBuffer = await convert({
+        buffer: byteArray,
+        format: 'JPEG',
+        quality: 0.92
+      });
+      imageBuffer = outputBuffer
+      imagePath = `${directory}/${dateSaved}_${file.name.split(".")[0]}.jpeg`;
+    }
+  } catch (error) {
+    console.log('%cerror actions.js line:36 ', 'color: red; display: block; width: 100%;', error);
+  }
+
+  const storageRef = ref(storage, imagePath); //vi_manuel28@hotmail.com/{{directory}}/458845522Image.png 
+  const uploadTask = uploadBytesResumable(storageRef, imageBuffer);
 
   uploadTask.on(
     "state_changed",
@@ -47,9 +64,6 @@ export const uploadImageTofirebase = async (
         case "storage/canceled":
           // User canceled the upload
           break;
-
-        // ...
-
         case "storage/unknown":
           // Unknown error occurred, inspect error.serverResponse
           break;
@@ -59,11 +73,11 @@ export const uploadImageTofirebase = async (
   await uploadTask;
 
   let downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-
-  console.log("File available at", downloadURL);
-  commit("imageUploaded", { id, downloadURL });
+  commit("cleanImageInfo");
   return downloadURL;
+
 };
+
 export const goToLocationCheckoutSession = async (_, reservationData) => {
   const res = await EspacioTemporalAPI.post(
     "/reservation/location/create-checkout-session",
@@ -109,11 +123,6 @@ export const updatePersonalMember = async (
   const res = await EspacioTemporalAPI.put(
     `/personal/${id}`,
     personalMemberInfo
-  );
-  console.log(
-    "%cactions.js line:132 response",
-    "color: white; background-color: #007acc;",
-    res
   );
   commit("updatePersonalMember", { updatedPersonal: res.data });
 };

@@ -83,11 +83,11 @@
           :per="8"
           class="w-full grid grid-cols-1 md:grid-cols-2 gap-4"
         >
-          <InfoCard
+          <PropertyCardVue
             v-for="property in paginated('propertiesListFiltered')"
             :key="property.id"
             :property="property"
-          ></InfoCard>
+          ></PropertyCardVue>
         </paginate>
       </div>
 
@@ -115,12 +115,13 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 import FilterLocationsComponent from "../../../components/FilterLocationsComponent.vue";
+import PropertyCardVue from '../../../components/PropertyCard.vue';
 import Spiner from "../../../components/Spiner.vue";
 import CoverImage from "../../Main/Components/CoverImage.vue";
-import InfoCard from "../Components/InfoCard.vue";
+
 
 export default {
-  components: { InfoCard, Spiner, FilterLocationsComponent, CoverImage },
+  components: { Spiner, FilterLocationsComponent, CoverImage, PropertyCardVue },
   data() {
     return {
       propertiesListFiltered: [],

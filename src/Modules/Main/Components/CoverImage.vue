@@ -26,13 +26,7 @@
       >
         <div class="w-10/12 lg:w-9/12">
           <div class="absolute top-5 left-5">
-            <ProgesBarImage
-              :id="idProgressBar"
-              :imageUrl="imageUrl"
-              :value="ImageUploadingState"
-              class="w-full h-5"
-              :showImageLink="false"
-            />
+            <progress max="100" :value="ImageUploadingState" class="progress my-4" v-show="savingCoverData" />
           </div>
 
           <!-- UPJJADTE IMAGE BUTTONS -->
@@ -45,6 +39,7 @@
               @change="onSelectedImage"
               ref="imageSelector"
               class="hidden"
+              accept="image/png, image/gif, image/jpeg, image/heic"
             />
             <div
               v-if="!localImage"
@@ -135,7 +130,6 @@
 <script>
 import { CustomErrorToast } from "@/sweetAlert";
 import { mapActions, mapGetters } from "vuex";
-import ProgesBarImage from "../../../components/ProgesBarImage.vue";
 import EspacioTemporalAPI from "@/Api/index";
 
 export default {
@@ -144,9 +138,7 @@ export default {
   // 2 - tenants page cover 
   // 3 - owner page cover 
   props:["id","idProgressBar","specificDirectory","defaultImageUrl","defaultText"],
-  components: {
-    ProgesBarImage,
-  },
+  components: {},
   data() {
     return {
       coverData:null,
@@ -182,8 +174,6 @@ export default {
     async saveNewCoverImage() {
       this.savingCoverData = true;
 
-      const dateSaved = new Date().getTime();
-
       let coverName
       switch (this.id) {
         case 1:
@@ -199,8 +189,7 @@ export default {
 
       try {
         const imageUrl = await this.uploadImageTofirebase({
-          id: this.idProgressBar,
-          specificDirectory: `${this.specificDirectory}/${coverName}_${dateSaved}`,
+          directory: `COVER/${coverName}`,
           file: this.file,
         });
 

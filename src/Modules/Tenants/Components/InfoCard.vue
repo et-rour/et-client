@@ -25,14 +25,17 @@
         </span>
       </p>
     </div>
-    <img :src="availabilityImage" alt="agotada" class="absolute top-0 left-0">
+    <AvailabilityImageComponent :isActive="property.isActive"/>
   </div>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
-
+import AvailabilityImageComponent from './AvailabilityImageComponent.vue';
 export default {
+  components:{
+    AvailabilityImageComponent
+  },
   props: {
     property: {
       type: Object,
@@ -92,9 +95,6 @@ export default {
     },
     image() {
       return this.property.image ?? require('@/assets/images/house_placeholder512.png');
-    },
-    availabilityImage() {
-      return this.property.isActive ? require('@/assets/images/DISPONIBLE_CUT.png'):require('@/assets/images/AGOTADA_CUT.png');
     },
     type(){
       switch (this.property.propertyType) {

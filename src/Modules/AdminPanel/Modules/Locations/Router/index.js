@@ -14,8 +14,8 @@ const Rooms = () =>
   import(/* webpackChunkName: "Rooms" */ "../Views/Rooms.vue");
 const CreateRoom = () =>
   import(/* webpackChunkName: "CreateRoom" */ "../Views/CreateRoom.vue");
-const Images3d = () =>
-  import(/* webpackChunkName: "Images3d" */ "../Views/Images3d.vue");
+// const Images3d = () =>
+//   import(/* webpackChunkName: "Images3d" */ "../Views/Images3d.vue");
 const Images = () =>
   import(/* webpackChunkName: "Images" */ "../Views/Images.vue");
 
@@ -59,11 +59,11 @@ export default {
           path: "/locations/detail/:id/rooms/new",
           component: CreateRoom,
         },
-        {
-          name: "admin-locations-detail-image3d",
-          path: "/locations/detail/:id/image3d",
-          component: Images3d,
-        },
+        // {
+        //   name: "admin-locations-detail-image3d",
+        //   path: "/locations/detail/:id/image3d",
+        //   component: Images3d,
+        // },
       ],
     },
   ],

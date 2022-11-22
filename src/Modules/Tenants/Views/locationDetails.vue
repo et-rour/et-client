@@ -50,50 +50,70 @@
       </div>
 
       <!-- images -->
-      <div class="grid grid-cols-12 gap-x-4 p-2 my-container mb-8 ">
+      <div class="my-container grid grid-cols-12 gap-x-4 mb-12 ">
         <!-- COVER IMAGE -->
-        <div class="col-span-12 md:col-span-7 ">
-          <img
-            :src="image"
-            alt="cover property"
-            :class="!property.image ? 'w-full h-44 sm:h-64 md:h-80 object-contain mb-8' : 'w-full h-44 sm:h-64 md:h-full object-cover mb-8 '"
-          />
-        </div>
-
-        <div class="col-span-12 md:col-span-5 ">
-          <div class="grid grid-cols-4 gap-2 md:grid-cols-2 relative">
+        <div class="col-span-12 lg:col-span-7 h-96 ">
             <img
-              :src="image.image"
-              :alt="`image_extra_${image.id}`"
-              class="w-full h-40 object-cover"
-              v-for="image in sidebarImages"
-              :key="image.id"
+              :src="image"
+              alt="cover property"
+              class="h-full w-full rounded-t-3xl lg:rounded-l-3xl lg:rounded-t-none"
+              :class="!property.image ? 'object-contain' : 'object-cover'"
             />
 
-            <button
-              class="py-2 px-3 rounded-lg flex items-center absolute right-2 bottom-2 text-xs shadow-xl border bg-white"
-              @click="toggleShowModalImages"
-              v-if="sidebarImages.length > 0"
-            >
-              <img
-                src="@/assets/icons/menupoints.png"
-                class="w-3 h-3 mr-1"
-                alt="menu"
-              />
-              {{ $t("tenants.details.pictures") }}
-            </button>
-          </div>
-
-          <button
-            class="my-btn py-3 mt-3 rounded-none bg-green-400 w-full"
-            @click="goToSchedule"
-            :disabled="!property.isActive"
-            :class="!property.isActive&&'my-disabled'"
-          >
-            {{ $t("tenants.details.vistit") }}
-          </button>
         </div>
-        <p class="block mt-6 col-span-12 md:col-span-7">{{ property.description }}</p>
+
+        <!-- SIDE IMAGES -->
+        <div class="col-span-12 lg:col-span-5  flex flex-col justify-between">
+          
+            <div v-if="!sidebarImages.length > 0"
+              class="flex justify-center items-center  flex-grow"  
+            >
+              <h2 class="font-bold text-2xl text-gray-600 text-center">{{$t('tenants.details.noPictures')}}</h2>
+            </div>
+
+            <div class=" h-full w-full flex-grow grid grid-cols-4 grid-rows-1 lg:grid-cols-2 lg:grid-rows-2 gap-4 my-4 lg:mt-0" v-else>
+              <div
+                v-for="(image,index) in sidebarImages"
+                :key="image.id"
+                class="relative"
+              >
+                <img
+                  :src="image.image"
+                  :alt="`image_extra_${image.id}`"
+                  class="w-full h-full object-cover"
+                />
+                
+                <button
+                  class="py-2 px-3 rounded-lg flex items-center absolute bottom-2 right-2 text-xs shadow-xl border bg-white"
+                  @click="toggleShowModalImages"
+                  v-if="index === sidebarImages.length-1"
+                >
+                  <img
+                    src="@/assets/icons/menupoints.png"
+                    class="w-3 h-3 mr-1"
+                    alt="menu"
+                  />
+                  <p class="truncate">
+                    {{ $t("tenants.details.pictures") }}
+                  </p>
+                </button>
+              </div>    
+            </div>
+
+            
+
+            <button
+              class="my-btn py-3 rounded-none font-black row-span-1 bg-my-green-primary w-full h-12"
+              @click="goToSchedule"
+              :disabled="!property.isActive"
+              :class="!property.isActive&&'my-disabled'"
+            >
+              {{ $t("tenants.details.vistit") }}
+            </button>
+
+        </div>
+        
+        <p class="col-span-12 lg:col-span-7  mt-12">{{ property.description }}</p>
       </div>
 
       <!-- INCLUDED SERVICES -->
@@ -107,9 +127,6 @@
           security: property.security,
         }"
       />
-
-      
-
       <!-- buttons -->
       <!-- <template>
         <button
@@ -159,7 +176,7 @@
           :disabled="!property.isActive"
           :class="!property.isActive&&'my-disabled'"
         >
-          {{ $t("tenants.details.pay") }} <span v-if="property.isActive">{{currency.symbol}} {{property.value}}</span>
+          {{ $t("tenants.details.pay") }} <span v-if="property.isActive">$ <NumberMaskComponent :number="property.value" /></span>
           <span></span>
         </button>
       </div>
@@ -171,21 +188,12 @@
     </div>
 
     <!-- MODAL EXTRA IMAGES -->
-    <ModelGlobal
-      v-if="showModalImages"
+    <SwiperImagesComponent
+      v-if="carouselModalImages.length>0"
       :showModal="showModalImages"
       v-on:toogle="toggleShowModalImages"
-    >
-      <div class="w-2/3 h-96 bg-white relative" @click.stop>
-        <SwiperVue :images="carouselModalImages" class="h-full"></SwiperVue>
-        <button
-          class="bg-gray-100 w-10 h-10 absolute top-0 right-0 z-50"
-          @click="toggleShowModalImages"
-        >
-          <font-awesome-icon icon="times"></font-awesome-icon>
-        </button>
-      </div>
-    </ModelGlobal>
+      :images="carouselModalImages"
+    />
 
     <!-- MODAL 3D PICTURES -->
     <!-- <ModelGlobal
@@ -218,18 +226,19 @@ import { mapActions, mapGetters, mapMutations } from "vuex";
 import "photo-sphere-viewer/dist/photo-sphere-viewer.css";
 import "photo-sphere-viewer/dist/plugins/markers.css";
 import RoomCard from "../Components/RoomCard.vue";
-import ModelGlobal from "../../../components/ModelGlobal.vue";
 import { CustomErrorToast } from "@/sweetAlert.js";
-import SwiperVue from "../Components/Swiper.vue";
+
 import Mapa from "../Components/GoogleCustomMap.vue";
 import IncludedServices from "../Components/IncludedServices.vue";
+import SwiperImagesComponent from "../Components/SwiperImagesComponent.vue";
+import NumberMaskComponent from '../../../components/NumberMaskComponent.vue';
 export default {
   components: {
-    ModelGlobal,
     RoomCard,
-    SwiperVue,
+    SwiperImagesComponent,
     Mapa,
     IncludedServices,
+    NumberMaskComponent,
   },
   props: {
     idProperty: {

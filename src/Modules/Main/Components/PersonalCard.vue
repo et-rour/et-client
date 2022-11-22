@@ -3,19 +3,24 @@
     class="w-48 flex flex-col items-center py-6"
     :class="!person.isVisible && 'bg-gray-200'"
   >
+
     <div class="relative">
-      <img
-        v-if="person.image"
-        :src="person.image"
-        alt="user-circle"
-        class="w-24 h-24 object-cover rounded-full"
-      />
-      <img
-        v-else
-        src="@/assets/icons/circle-user.png"
-        alt="user-circle"
-        class="w-24 h-24 object-cover"
-      />
+      <!-- images -->
+      <template>
+        <img
+          v-if="person.image"
+          :src="person.image"
+          alt="user-circle"
+          class="w-24 h-24 object-cover rounded-full"
+        />
+        <img
+          v-else
+          src="@/assets/icons/circle-user.png"
+          alt="user-circle"
+          class="w-24 h-24 object-cover"
+        />
+      </template>
+      
       <div
         class="cursor-pointer"
         v-if="person.isEmailVisible"
@@ -43,40 +48,13 @@
     </div>
 
     <div
-      class="px-4 flex flex-col gap-2 py-3 border shadow-xl"
+      class="px-4 flex flex-col gap-2 py-3 border shadow-xl "
       v-if="isEditing"
     >
-      <template>
-        <div class="flex-grow w-full">
-          <img
-            v-if="localImage"
-            class="w-full h-20 object-contain"
-            :src="localImage"
-            alt="Local image"
-          />
-        </div>
-        <input
-          type="file"
-          @change="onImageSelectChangeHandler"
-          ref="imageSelector"
-          class="hidden"
-        />
-        <button
-          class="my-btn my-1 py-1 px-2 rounded-lg w-auto"
-          @click="$refs.imageSelector.click()"
-        >
-          {{ $t("general.change") }}
-        </button>
-        <button
-          class="my-btn my-1 py-1 px-4 rounded-lg w-auto"
-          v-if="localImage"
-          :disabled="!localImage"
-          :class="!localImage && 'bg-opacity-40'"
-          @click="uploadCoverImage"
-        >
-          {{ $t("general.save") }}
-        </button>
-      </template>
+      <!-- updateImage -->
+      <div class="h-52">
+        <image-upload-component :isRelativeDirectory="false" :directory="'PERSONAL'" :showPreviewComponent="true" @sendPreview="updatePersonalImage"/>
+      </div>
       
       <input
         type="text"
@@ -118,10 +96,11 @@
 
 <script>
 import { CustomErrorToast, CustomToast } from "@/sweetAlert";
-import Swal from "sweetalert2";
 import { mapActions, mapGetters } from "vuex";
+import ImageUploadComponent from '../../../components/ImageUploadComponent.vue';
 
 export default {
+  components: { ImageUploadComponent },
   props: {
     person: {
       required: true,
@@ -133,9 +112,6 @@ export default {
       isEditing: false,
       isSaving: false,
       editingPerson: {},
-      
-      localImage: null,
-      file: null,
     };
   },
   methods: {
@@ -167,44 +143,22 @@ export default {
 
       CustomToast.fire({ icon: "success", text: this.$t("general.copied") });
     },
-    async onImageSelectChangeHandler(event) {
-      const image = event.target.files[0];
-      if (!image) {
-        this.file = null;
-        return;
-      }
-      this.file = image;
-      const fr = new FileReader();
-      fr.onload = () => (this.localImage = fr.result);
-      fr.readAsDataURL(image);
-    },
-    async uploadCoverImage() {
-      new Swal({
-        title: this.$t("sweetAlertMessages.wait"),
-        allowOutsideClick: false,
-      });
-      Swal.showLoading();
+    async updatePersonalImage(newImageFirebaseUrl) {
       try {
-        const newImageFirebaseUrl = await this.uploadImageTofirebase({
-          specificDirectory: `/PERSONAL/personal_${new Date().getTime()}`,
-          file: this.file,
-        });
-
-        
+        this.isSaving = true
         this.editingPerson.image = newImageFirebaseUrl;
         await this.updatePersonalMember({
           personalMemberInfo: this.editingPerson,
           id: this.person.id,
         });
         
-        Swal.close();
         CustomToast.fire({
           title: this.$t("sweetAlertMessages.saved"),
           icon: "success",
         });
-        this.localImage = null;
-        this.file = null;
+        this.isSaving = false
       } catch (error) {
+        this.isSaving = false
         CustomErrorToast.fire({
           text:  error,
         });

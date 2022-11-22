@@ -7,38 +7,15 @@
       <div class="my-container font-semibold">
         <!-- image -->
         <div class="flex flex-col md:flex-row justify-between">
-          <h1 class="text-center">
-            {{ $t("createForm.title") }}
-          </h1>
-          <div class="w-full md:w-80 flex flex-col items-end gap-4">
-            <div
-              class="h-40 w-full bg-gray-200 flex justify-center items-center"
-            >
-              <img
-                v-if="localImage"
-                class="h-full object-contain"
-                :src="localImage"
-                alt="Local image"
-              />
-            </div>
-            <input
-              type="file"
-              @change="onSelectedImage"
-              ref="imageSelector"
-              class="hidden"
-              accept="image/png, image/gif, image/jpeg"
-            />
-            <div
-              class="my-btn text-center mb-2 cursor-pointer px-4 w-72"
-              @click="$refs.imageSelector.click()"
-            >
-              {{ $t("createForm.image") }}
-            </div>
-            <ProgesBarVue
-              :id="`coverImage`"
-              :value="propertyImageState"
-              :imageUrl="propertyImage"
-            />
+          <div>
+            <h1 class="">
+              {{ $t("createForm.title") }}
+            </h1>
+            <p class="text-gray-400 text-sm">Selecciona y guarda tu imagen de portada</p>
+          </div>
+
+          <div class="w-full md:w-80 flex flex-col items-end gap-4 h-52 mb-4">
+            <image-upload-component :directory="`CreatedByMe`" @sendPreview="setImageUrl" :showPreviewComponent="true" />
           </div>
         </div>
 
@@ -57,7 +34,7 @@
               class="hidden"
               ref="imagesSelector"
               @change="onSelectedImages"
-              accept="image/png, image/gif, image/jpeg"
+              accept="image/png, image/gif, image/jpeg, image/heic"
             />
             <div
               class="my-btn text-center mb-2 cursor-pointer self-end w-72"
@@ -615,19 +592,19 @@
 <script>
 import { mapActions, mapGetters, mapMutations } from "vuex";
 import { ValidationObserver } from "vee-validate";
-import ProgesBarVue from "@/components/ProgesBarImage.vue";
 import { CustomErrorToast, CustomConfirmWarningDialog } from "@/sweetAlert";
 import MapCoordsVue from "../../../components/MapCoords.vue";
 import createPropertyOptions from "@/utils/createFormOptions.js";
 import InputNumber from "../../../components/InputNumberMask.vue";
 import Swal from "sweetalert2";
+import ImageUploadComponent from '../../../components/ImageUploadComponent.vue';
 
 export default {
   components: {
     ValidationObserver,
-    ProgesBarVue,
     MapCoordsVue,
     InputNumber,
+    ImageUploadComponent,
   },
   data() {
     return {
@@ -655,9 +632,11 @@ export default {
       lat: undefined,
       lng: undefined,
       meters: "",
+
       image: null,
       localImage: null,
       file: null,
+
       typeOptions: createPropertyOptions.type,
       roomsOptions: createPropertyOptions.rooms,
       bathroomsOptions: createPropertyOptions.bathrooms,
@@ -668,17 +647,20 @@ export default {
 
       // uploadImages
       images: [],
+      imageUrl: null
     };
   },
   methods: {
     ...mapActions("propertiesStore", [
       "loadZones",
       "createNewProperty",
-      "uploadfile",
       "uploadPropertyArrayImages",
     ]),
     ...mapActions("authStore", ["loginInfirebaseStorage"]),
     ...mapMutations("authStore", ["changeShowLoginModal"]),
+    setImageUrl(savedImageUrl){
+      this.imageUrl = savedImageUrl
+    },
     async onSubmitForm() {
       if (!this.user.user) {
         this.changeShowLoginModal(open);
@@ -692,7 +674,7 @@ export default {
         bathrooms: this.bathrooms,
         painting: this.painting,
         floor: this.floor,
-        imageUrl: this.propertyImage,
+        imageUrl: this.imageUrl,
         user: this.user.user.id,
         garage: this.garage,
         propertyType: this.tipoPropiedad,
@@ -728,7 +710,7 @@ export default {
         if (this.images.length > 0) {
           new Swal({
             title: this.$t("sweetAlertMessages.saving", {
-              object: this.$t("general.image", 2, {
+              object: this.$tc("general.image", this.images.length, {
                 count: this.images.length,
               }),
             }),
@@ -744,24 +726,6 @@ export default {
         Swal.close();
 
         this.$router.push({ name: "result" });
-      } catch (error) {
-        CustomErrorToast.fire({
-          text: error.response.data.message,
-        });
-      }
-    },
-    async onSelectedImage(event) {
-      const image = event.target.files[0];
-      if (!image) {
-        this.file = null;
-        return;
-      }
-      this.file = image;
-      const fr = new FileReader();
-      fr.onload = () => (this.localImage = fr.result);
-      fr.readAsDataURL(image);
-      try {
-        await this.uploadfile({ user: this.user.user.email, file: this.file });
       } catch (error) {
         CustomErrorToast.fire({
           text: error.response.data.message,

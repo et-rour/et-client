@@ -37,6 +37,7 @@ import {
   faTrainSubway,
   faCaretDown,
   faFileContract,
+  faImages,
 } from "@fortawesome/free-solid-svg-icons";
 import {
   faEnvelope,
@@ -86,7 +87,8 @@ library.add(
   faTrainSubway,
   faCaretDown,
   faFileContract,
-  faWhatsapp
+  faWhatsapp,
+  faImages
 );
 
 Vue.config.productionTip = false;

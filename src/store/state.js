@@ -3,6 +3,6 @@ export default () => ({
   personal: [],
 
   imageUrl: null,
-  ImageUploadingStatus: null,
+  ImageUploadingStatus: 0,
   id: null,
 });

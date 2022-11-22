@@ -3,9 +3,10 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        "my-blue-primary": "#2323D5",
+        "my-blue-primary": "#2423CA",
         "my-blue-primary-hover": "#4242ed",
-        "my-green-primary": "#68B865",
+        "my-green-primary": "#78AC75",
+        "my-celest": "#16AFED",
       },
       fontSize: {
         myheader1: [

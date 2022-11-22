@@ -1,38 +1,5 @@
 <template>
   <div class="w-full flex flex-col">
-    <!-- <div class="w-9/12 sm:w-6/12 lg:w-1/3 mx-auto h-full bg-gray-200 relative">
-      <img
-        v-if="!localImage"
-        src="@/assets/icons/image.png"
-        class="w-full h-full object-contain"
-        alt="project"
-      />
-      <img
-        v-else
-        class="w-full h-full object-contain"
-        :src="localImage"
-        alt="Entry picture"
-      />
-      <div
-        @click="$refs.roomImageSelector.click()"
-        class="w-10 h-10 rounded-full bg-gray-200 absolute right-0 bottom-0 flex justify-center items-center border-4 border-white cursor-pointer text-my-blue-primary"
-      >
-        <font-awesome-icon icon="camera" />
-      </div>
-      <input
-        type="file"
-        class="hidden"
-        ref="roomImageSelector"
-        @change="onSelectedImage($event)"
-      />
-      <ProgesBarImage
-        id="room_new"
-        :imageUrl="imageUrl"
-        :value="ImageUploadingState"
-        class="w-full h-5"
-      />
-    </div> -->
-
     <ValidationObserver v-slot="{ invalid }">
       <form @submit.prevent="createNewRoom" class="flex flex-col gap-2">
         <!-- meters -->

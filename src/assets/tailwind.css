@@ -42,6 +42,12 @@
     url("/fonts/Roboto/AvenirNextLTPro-Bold.otf") format("woff");
 }
 
+.global-modal-open {
+  height: 100vh;
+  overflow-y: hidden;
+    /* padding-right: 15px;  */
+}
+
 html {
   font-family: "Avenir Next", sans-serif;
   /* font-family: "Roboto"; */
@@ -101,6 +107,19 @@ html {
   .hero-main {
     height: calc(100vh - 100px);
   }
+}
+
+progress {
+  border-radius: 7px;
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+}
+progress::-webkit-progress-bar {
+  background-color: rgb(175, 196, 255);
+  border-radius: 7px;
+}
+progress::-webkit-progress-value {
+  background-color: rgba(30, 58, 138, 1);
+  border-radius: 7px;
 }
 
 @layer components {

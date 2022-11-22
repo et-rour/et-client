@@ -1,5 +1,5 @@
 <template>
-  <swiper :options="swiperOptions">
+  <swiper :options="swiperOptions" :zoom="true">
     <swiper-slide v-for="image in images" :key="image.id">
       <div class="w-full h-full pb-8">
         <img
@@ -45,6 +45,7 @@ export default {
             return `<span class="${className} swiper-pagination-bullet-custom"></span>`;
           },
         },
+        zoom:true
       },
     };
   },
@@ -64,8 +65,7 @@ export default {
   transition: all ease 1s;
   bottom: 2px;
 }
-</style>
-<style scoped>
+
 .swiper-slide {
   display: flex;
   justify-content: center;
