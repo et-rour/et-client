@@ -1,9 +1,9 @@
 <template>
   <div
-    class="w-full h-96 bg-gray-900 flex-col justify-center items-center text-white hidden md:flex relative"
+    class="w-full bg-gray-900 flex-col justify-center items-center text-white hidden md:flex relative py-10"
   >
-    <div class="w-9/12 grid grid-cols-3 grid-rows-2 px-20">
-      <img src="@/assets/icons/logoFooter.png" alt="logotipo footer" />
+    <div class="w-9/12 grid grid-cols-1 lg:grid-cols-3 px-20">
+      <img src="@/assets/icons/logoFooter.png" alt="footer_espacio" />
       <ul>
         <li>
           <router-link :to="{ name: 'questions' }"><a> FAQS </a></router-link>
@@ -34,7 +34,7 @@
           </router-link>
         </li>
       </ul>
-      <form
+      <!-- <form
         class="row-start-2 col-start-1 col-end-4 flex flex-col border-b"
         :action="`https://formsubmit.co/${email}`"
         method="POST"
@@ -87,18 +87,23 @@
         >
           {{ $t("footer.form.send") }}
         </button>
-      </form>
+      </form> -->
+      <footer-mail-chimp />
     </div>
   </div>
 </template>
 
 <script>
-import { VueRecaptcha } from "vue-recaptcha";
+// import { VueRecaptcha } from "vue-recaptcha";
 import EspacioTemporalAPI from "@/Api/index.js";
 import { CustomErrorToast } from "@/sweetAlert";
+import FooterMailChimp from './FooterMailChimp.vue';
 
 export default {
-  components: { VueRecaptcha },
+  components: { 
+    // VueRecaptcha, 
+    FooterMailChimp 
+  },
   data() {
     return {
       langs: ["es", "en"],

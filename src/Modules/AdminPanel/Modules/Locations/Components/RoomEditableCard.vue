@@ -21,7 +21,10 @@
 
       <div class="flex justify-between">
         <span>
-          $<input type="number" class="my-input w-40" v-model="room.value" />
+          $
+          <!-- <input type="number" class="my-input w-40" v-model="room.value" /> -->
+          <InputNumberMask v-model="room.value" @changeValue="updateRoomValue"/>
+          <p>{{room.value}}</p>
         </span>
         <span>
           mts&sup2;
@@ -94,11 +97,13 @@ import SwitchComponent from "../../../../../components/SwitchComponent.vue";
 import ModelUploadImages from "../../../../../components/ModelUploadImages.vue";
 import ImageVisibility from "../../../../../components/ImageVisibility.vue";
 import espacioTemporalApi from "@/Api/index"
+import InputNumberMask from '../../../../../components/InputNumberMask.vue';
 export default {
   components: {
     SwitchComponent,
     ModelUploadImages,
     ImageVisibility,
+    InputNumberMask
   },
   props: {
     room: {
@@ -260,6 +265,9 @@ export default {
         });
       }
     },
+    updateRoomValue(val){
+      this.room.value = val
+    }
   },
 };
 </script>

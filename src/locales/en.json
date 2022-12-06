@@ -27,6 +27,7 @@
   },
   "validations": {
     "messages": {
+      "emailRequired": "Valid email required",
       "required": "This fiel is not valid",
       "email": "This field is not a valid e-mail adress",
       "minValue": "This field must be greater than {min}",
@@ -35,6 +36,7 @@
     }
   },
   "general": {
+    "send": "Send",
     "copied": "Copied to clipboard",
     "next": "Following",
     "previus": "Previous",
@@ -86,6 +88,8 @@
     "phone": "Phone number",
     "passwordRegister": "Password *",
     "password": "Password",
+    "restorePassword": "Restore password",
+    "sended": "Restore email sended to",
     "firstName": "First name",
     "lastName": "Last name",
     "country": "Country",

@@ -1,7 +1,7 @@
 <template>
   <input
     type="text"
-    :value="value"
+    :value="formatedValue"
     autocomplete="off"
     @input="onInput"
     ref="input"
@@ -9,35 +9,46 @@
 </template>
 
 <script>
+
 export default {
+  emit:["changeValue"],
   props: ["value"],
   methods: {
     onInput(e) {
-      const value = e.target.value;
-      console.log(
-        "%cInputNumber.vue line:11 {value,value2:this.value}",
-        "color: #007acc;",
-        { value, value2: this.value }
-      );
+      const INPUT_NUMBER_MASK_MAX_NUMBER = 999999999
+      const inputValue = e.target.value;
+      
+
+      if (inputValue === "") {
+        console.log('%cerror InputNumberMask.vue line:23 ', 'color: red; display: block; width: 100%;');
+        this.$emit("changeValue", "");
+        return
+      }
+
       const regExOnlyNumbers = new RegExp("^[,0-9]+$");
 
-      if (!value.match(regExOnlyNumbers)) {
-        console.log(
-          "%cerror CreateForm.vue line:735 ",
-          "color: red; display: block; width: 100%;"
-        );
-        this.$refs.input.value = this.value;
+      if (!inputValue.match(regExOnlyNumbers)) {
+        this.$refs.input.value = this.formatedValue;
         return;
       }
-      const newValue = value
-        .replaceAll(",", "")
-        .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      this.$emit("input", newValue);
 
-      const realValue = newValue.replaceAll(",", "");
-      this.$emit("change-value", realValue);
+      const cleanValue = inputValue.replaceAll(",", "")
+
+      if (cleanValue > INPUT_NUMBER_MASK_MAX_NUMBER) {
+        // console.log('%cerror InputNumberMask.vue line:20 ', 'color: red; display: block; width: 100%;', );
+        this.$refs.input.value = this.formatedValue;
+        return
+      }
+      
+      // console.log('%cInputNumberMask.vue line:29 cleanValue', 'color: white; background-color: #007acc;', cleanValue);
+      this.$emit("changeValue", cleanValue);
     },
   },
+  computed:{
+    formatedValue(){
+      return this.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+  }
 };
 </script>
 

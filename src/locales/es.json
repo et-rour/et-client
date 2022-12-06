@@ -27,6 +27,7 @@
   },
   "validations": {
     "messages": {
+      "emailRequired": "Es necesario un email valido",
       "required": "Este campo no es válido",
       "email": "Este campo no es una dirección de correo electrónico válida",
       "minValue": "Este campo debe ser mayor de {min}",
@@ -35,6 +36,7 @@
     }
   },
   "general": {
+    "send": "Enviar",
     "copied": "Email copiado",
     "next": "Siguiente",
     "previus": "Volver",
@@ -86,6 +88,8 @@
     "phone": "Teléfono",
     "passwordRegister": "Contraseña *",
     "password": "Contraseña",
+    "restorePassword": "Restablecer contraseña",
+    "sended": "Correo enviado a",
     "firstName": "Primer nombre *",
     "lastName": "Apellido *",
     "country": "País",

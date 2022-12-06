@@ -59,28 +59,25 @@
               class="h-full w-full rounded-t-3xl lg:rounded-l-3xl lg:rounded-t-none"
               :class="!property.image ? 'object-contain' : 'object-cover'"
             />
-
         </div>
 
         <!-- SIDE IMAGES -->
-        <div class="col-span-12 lg:col-span-5  flex flex-col justify-between">
+        <div class="col-span-12 lg:col-span-5 flex flex-col justify-between ">
           
-            <div v-if="!sidebarImages.length > 0"
-              class="flex justify-center items-center  flex-grow"  
-            >
+            <div v-if="!sidebarImages.length > 0" class="flex justify-center items-center flex-grow" >
               <h2 class="font-bold text-2xl text-gray-600 text-center">{{$t('tenants.details.noPictures')}}</h2>
             </div>
 
-            <div class=" h-full w-full flex-grow grid grid-cols-4 grid-rows-1 lg:grid-cols-2 lg:grid-rows-2 gap-4 my-4 lg:mt-0" v-else>
+            <div class="flex-grow grid grid-cols-4 grid-rows-1 lg:grid-cols-2 lg:grid-rows-2 gap-4 my-4 lg:mt-0 " v-else>
               <div
                 v-for="(image,index) in sidebarImages"
                 :key="image.id"
-                class="relative"
+                class="relative h-36 w-full"
               >
                 <img
                   :src="image.image"
                   :alt="`image_extra_${image.id}`"
-                  class="w-full h-full object-cover"
+                  class="h-full w-full object-cover "
                 />
                 
                 <button
@@ -254,12 +251,7 @@ export default {
   methods: {
     ...mapMutations("authStore", ["changeShowLoginModal"]),
     ...mapActions(["goToLocationCheckoutSession"]),
-    goToSchedule(e) {
-      e.preventDefault();
-      if (!this.isAuth) {
-        this.changeShowLoginModal(true);
-        return;
-      }
+    goToSchedule() {
       this.$router.push({ name: "tenants-schedule" });
     },
     async goToCalendar() {

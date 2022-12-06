@@ -14,7 +14,7 @@
             <p class="text-gray-400 text-sm">Selecciona y guarda tu imagen de portada</p>
           </div>
 
-          <div class="w-full md:w-80 flex flex-col items-end gap-4 h-52 mb-4">
+          <div class="w-full  md:w-96 flex flex-col items-center gap-4 h-52 mb-4">
             <image-upload-component :directory="`CreatedByMe`" @sendPreview="setImageUrl" :showPreviewComponent="true" />
           </div>
         </div>
@@ -161,7 +161,7 @@
             class="w-1/5"
           >
             <select
-              class="bg-gray-200 px-12 w-full"
+              class="my-input bg-gray-200 text-center w-full"
               name="ciudad"
               v-model="tipoPropiedad"
             >
@@ -188,7 +188,7 @@
             class="w-1/5"
           >
             <select
-              class="bg-gray-200 px-12 w-full"
+              class="my-input bg-gray-200 text-center w-full"
               name="landUse"
               v-model="landUse"
             >
@@ -210,7 +210,7 @@
             class="w-1/5"
           >
             <select
-              class="bg-gray-200 px-12 w-full"
+              class="my-input bg-gray-200 text-center w-full"
               name="ciudad"
               v-model="ciudad"
             >
@@ -244,7 +244,7 @@
             class="w-1/5"
           >
             <select
-              class="bg-gray-200 px-12 w-full"
+              class="my-input bg-gray-200 text-center w-full"
               name="zona"
               v-model="zone"
               :disabled="ciudad === 'Ciudad' || ciudad === ''"
@@ -277,14 +277,15 @@
             rules="required"
             class="w-1/5"
           >
-            <div class="flex row justify-between items-center">
-              <button @click="(e) => changeRooms('minus', e)" class="bg-my-blue-primary rounded-full w-6 h-6 mx-2 text-white">-</button>
-              <InputNumber
-                  disabled
-                  class="bg-gray-200 my-input w-full text-center"
-                  v-model="rooms"
-                />
-              <button @click="(e) => changeRooms('add', e)" class="bg-my-blue-primary rounded-full w-6 h-6 mx-2 text-white">+</button>
+            <div class="flex row justify-between items-center ">
+              <button @click="(e) => changeRooms('minus', e)" class="bg-my-blue-primary flex-shrink-0 text-white w-6 h-6 rounded-full">-</button>
+              <input
+                type="number"
+                disabled
+                class="bg-gray-200 my-input text-center w-1/2"
+                v-model="rooms"
+              />
+              <button @click="(e) => changeRooms('add', e)" class="bg-my-blue-primary flex-shrink-0 text-white w-6 h-6 rounded-full">+</button>
             </div>
             <span class="my-error relative top-0 left-0 block">{{
               errors[0]
@@ -303,7 +304,7 @@
             class="w-1/5"
           >
             <select
-              class="bg-gray-200 px-12 w-full"
+              class="my-input bg-gray-200 text-center w-full"
               name="bathrooms"
               v-model="bathrooms"
             >
@@ -335,7 +336,7 @@
             class="w-1/5"
           >
             <select
-              class="bg-gray-200 px-12 w-full"
+              class="my-input bg-gray-200 text-center w-full"
               name="pintura"
               v-model="painting"
             >
@@ -365,7 +366,7 @@
             class="w-1/5"
           >
             <select
-              class="bg-gray-200 px-12 w-full"
+              class="my-input bg-gray-200 text-center w-full"
               name="suelo"
               v-model="floor"
             >
@@ -395,11 +396,12 @@
             class="flex flex-col md:flex-row items-center justify-between w-1/5 relative"
           >
             <ValidationProvider v-slot="{ errors }" rules="required">
-              <InputNumber
+              <InputNumberMask
                 class="bg-gray-200 my-input w-full"
-                v-model="displayedValueMin"
-                @change-value="updateValueMin"
+                v-model="valueMin"
+                @changeValue="updateValueMin"
               />
+              <!-- <p>{{valueMin}}</p> -->
 
               <div
                 class="my-error absolute w-10 h-10 top-0 -left-10 flex justify-center items-center"
@@ -412,11 +414,12 @@
             </ValidationProvider>
             <p class="mx-1">a</p>
             <ValidationProvider v-slot="{ errors }" rules="required">
-              <InputNumber
+              <InputNumberMask
                 class="bg-gray-200 my-input w-full"
-                v-model="displayedValueMax"
-                @change-value="updateValueMax"
+                v-model="valueMax"
+                @changeValue="updateValueMax"
               />
+              <!-- <p>{{valueMax}}</p> -->
 
               <div
                 class="my-error absolute w-10 h-10 top-0 left-full flex justify-center items-center"
@@ -439,7 +442,7 @@
             class="w-1/5"
           >
             <select
-              class="bg-gray-200 px-12 w-full"
+              class="my-input bg-gray-200 text-center w-full"
               name="tiempo"
               v-model="time"
             >
@@ -471,7 +474,7 @@
             class="w-1/5"
           >
             <select
-              class="bg-gray-200 px-12 w-full"
+              class="my-input bg-gray-200 text-center w-full"
               name="tiempoUso"
               v-model="timeUse"
             >
@@ -503,7 +506,7 @@
             class="w-1/5"
           >
             <select
-              class="bg-gray-200 px-12 w-full"
+              class="my-input bg-gray-200 text-center w-full"
               name="garage"
               v-model="garage"
             >
@@ -531,13 +534,14 @@
           }}</label>
           <ValidationProvider
             v-slot="{ errors }"
-            rules="required"
+            rules="required|min_value:1"
             class="w-1/5"
           >
-            <InputNumber class="bg-gray-200 my-input w-full" v-model="displayedMeters" @change-value="updateMeters" />
+            <InputNumberMask class="bg-gray-200 my-input w-full" v-model="meters" changeValue="updateMeters" />
             <span class="my-error relative top-0 left-0 block">{{
               errors[0]
             }}</span>
+            <!-- <p>{{meters}}</p> -->
           </ValidationProvider>
         </div>
 
@@ -595,7 +599,7 @@ import { ValidationObserver } from "vee-validate";
 import { CustomErrorToast, CustomConfirmWarningDialog } from "@/sweetAlert";
 import MapCoordsVue from "../../../components/MapCoords.vue";
 import createPropertyOptions from "@/utils/createFormOptions.js";
-import InputNumber from "../../../components/InputNumberMask.vue";
+import InputNumberMask from "../../../components/InputNumberMask.vue";
 import Swal from "sweetalert2";
 import ImageUploadComponent from '../../../components/ImageUploadComponent.vue';
 
@@ -603,7 +607,7 @@ export default {
   components: {
     ValidationObserver,
     MapCoordsVue,
-    InputNumber,
+    InputNumberMask,
     ImageUploadComponent,
   },
   data() {
@@ -757,22 +761,6 @@ export default {
       const { lat, lng } = event;
       this.lat = lat.toFixed(5);
       this.lng = lng.toFixed(5);
-    },
-    removeLetters(e) {
-      const value = e.target.value;
-      const regExOnlyNumbers = new RegExp("^[,0-9]+$");
-
-      if (!value.match(regExOnlyNumbers)) {
-        console.log(
-          "%cerror CreateForm.vue line:735 ",
-          "color: red; display: block; width: 100%;"
-        );
-        return;
-      }
-      const newValue = value
-        .replaceAll(",", "")
-        .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      this.meters = newValue;
     },
     changeRooms(type, e) {
       e.preventDefault();

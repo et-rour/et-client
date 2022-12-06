@@ -29,11 +29,11 @@ export const loadSession = async ({ commit }) => {
       console.log({ uid });
       if (!auth) return;
       const refreshtoken = await auth.currentUser.getIdToken(true);
-      console.log(
-        "%cactions.js line:32 refreshtoken",
-        "color: #007acc;",
-        refreshtoken
-      );
+      // console.log(
+      //   "%cactions.js line:32 refreshtoken",
+      //   "color: #007acc;",
+      //   refreshtoken
+      // );
 
       commit("changeAccessToken", refreshtoken);
       // ...
