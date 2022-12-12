@@ -118,7 +118,7 @@
     "video": {
       "header":"Administramos",
       "title": "todo tipo de inmuebles en desuso",
-      "question_1": "¿No has podido arrendar tu propiedad?",
+      "question_1": "¿No has podido arrendar tu propiedad comercial?",
       "response_1": "Nosotros nos encargamos de administrar tu propiedad con contratos flexibles y de corta duración.",
       "question_2": "¿Buscas un espacio flexible de trabajo?",
       "response_2": "Tenemos espacios en excelentes ubicaciones para emprendedores y artistas.",
@@ -333,7 +333,7 @@
       "includedServises": "SERVICIOS INCLUÍDOS",
       "includedServisesDescription": "Al pagar los gastos comunes estos son los servicios que se incluyen",
       "vault": "Bodega",
-      "parking": "Estacionamiento",
+      "parking": "parking",
       "cleaning": "Limpieza",
       "toilets": "Baños",
       "wifi": "Wifi",
@@ -393,7 +393,13 @@
       }
     }
   },
-
+  "howItWorks": {
+    "title":"¿CÓMO FUNCIONA?",
+    "subtitle":"CASOS DE ÉXITO",
+    "pdfDescription":"Descarga nuestro PDF con el detalle\nde proyectos y casos de éxito.",
+    "button":"DESCARGAR PDF",
+    "testimonials":"TESTIMONIOS"
+  },
   "footer": {
     "nav": {
       "owner": "Dueños",
@@ -483,6 +489,7 @@
       "reservation": "Reservas",
       "publications": "Publicaciones",
       "payments": "Pagos",
+      "testimonials": "Testimonios",
       "trashbin": "Papelera"
     },
     "users": {
@@ -711,6 +718,13 @@
       "sweetAlert": {
         "confirmation": "¿Deseas crear reporte de los 100 ultimos pagos?"
       }
+    },
+    "testimonials":{
+      "newTestimonial": "Crear testimonio",
+      "urlVideo": "Url del video",
+      "name": "Nombre",
+      "position": "Posición / puesto",
+      "location": "Locación"
     }
   },
   "profile": {

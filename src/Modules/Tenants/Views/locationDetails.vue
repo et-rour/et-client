@@ -81,12 +81,12 @@
                 />
                 
                 <button
-                  class="py-2 px-3 rounded-lg flex items-center absolute bottom-2 right-2 text-xs shadow-xl border bg-white"
+                  class="py-2 px-3 rounded-md flex items-center absolute bottom-2 right-2 text-xs shadow-xl border bg-white font-bold"
                   @click="toggleShowModalImages"
                   v-if="index === sidebarImages.length-1"
                 >
-                  <img
-                    src="@/assets/icons/menupoints.png"
+                  <img              
+                    src="@/assets/icons/menu-dots-svgrepo-com.svg"
                     class="w-3 h-3 mr-1"
                     alt="menu"
                   />
@@ -110,8 +110,8 @@
 
         </div>
         
-        <p class="col-span-12 lg:col-span-7  mt-12">{{ property.description }}</p>
       </div>
+      <p class=" my-container mt-12 mb-20">{{ property.description }}</p>
 
       <!-- INCLUDED SERVICES -->
       <IncludedServices

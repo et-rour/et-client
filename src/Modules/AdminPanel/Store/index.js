@@ -9,6 +9,7 @@ import reviewsStore from "../Modules/Reviews/Store/index";
 import publicationsStore from "../Modules/Publications/Store/index";
 import reservationsStore from "../Modules/Reservations/Store/index";
 import paymentsStore from "../Modules/Payments/Store/index";
+import testimonialsStore from "../Modules/Testimonials/Store/index";
 const adminPanelStore = {
   namespaced: true,
   state,
@@ -27,6 +28,7 @@ const adminPanelStore = {
     publications: publicationsStore,
     reservations: reservationsStore,
     payments: paymentsStore,
+    testimonials: testimonialsStore,
   },
 };
 

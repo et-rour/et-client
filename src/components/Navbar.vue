@@ -52,7 +52,7 @@
             >
             <router-link
               class=" hover:text-my-blue-primary "
-              :to="{ name: 'about-us' }"
+              :to="{ name: 'how-it-works' }"
               ><a> {{ $t("navbar.usOption3") }} </a></router-link
             >
             <router-link

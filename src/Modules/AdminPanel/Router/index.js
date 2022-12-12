@@ -7,6 +7,7 @@ import locationsRouter from "../Modules/Locations/Router/index.js";
 import reviewRouter from "../Modules/Reviews/Router/index.js";
 import publicationRouter from "../Modules/Publications/Router/index.js";
 import paymentsRouter from "../Modules/Payments/Router/index.js";
+import testimonialsRouter from "../Modules/Testimonials/Router/index.js";
 import trashRouter from "../Modules/Trash/Router/index.js";
 
 const Reservation = () =>
@@ -36,6 +37,9 @@ export default [
       },
       {
         ...paymentsRouter,
+      },
+      {
+        ...testimonialsRouter,
       },
       {
         ...trashRouter,

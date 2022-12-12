@@ -393,6 +393,13 @@
       }
     }
   },
+  "howItWorks": {
+    "title":"HOW DOES IT WORK?",
+    "subtitle":"SUCCESS STORIES",
+    "pdfDescription":"Download our PDF with the details\nof projects and success stories",
+    "button":"DOWNLOAD PDF",
+    "testimonials":"TESTIMONIALS"
+  },
 
   "footer": {
     "nav": {
@@ -483,6 +490,7 @@
       "reservation": "Reservation",
       "publications": "Publications",
       "payments": "Payments",
+      "testimonials": "Testimonials",
       "trashbin": "Trash bin"
     },
     "users": {
@@ -711,6 +719,13 @@
       "sweetAlert": {
         "confirmation": "Do you want to create a report of the last 100 payments?"
       }
+    },
+    "testimonials":{
+      "newTestimonial":"Create new testimonial",
+      "urlVideo": "video url",
+      "name": "Name",
+      "position": "position",
+      "location": "location"
     }
   },
   "profile": {

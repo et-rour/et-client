@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full bg-my-celest text-white py-20">
+  <div class="w-full bg-my-blue-primary text-white py-20">
     <div class="my-container grid grid-cols-1 md:grid-cols-6 gap-6">
       <div class=" col-span-2">
         <h4 class="text-5xl font-bold mb-4">
@@ -9,11 +9,11 @@
 
       </div>
 
-      <div class=" col-span-4 grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-2 md:px-10">
+      <div class=" col-span-4 grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10 md:px-10">
         <div
           v-for="service in data"
           :key="service.id"
-          class="flex items-center justify-center md:justify-start "
+          class="flex items-center justify-center md:justify-start"
           v-show="services[service.id] === true"
         >
           <template>
