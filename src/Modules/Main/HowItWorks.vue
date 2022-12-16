@@ -2,12 +2,12 @@
   <div class="mb-24 w-full">
     <h2 class="text-myheader1 font-bold text-center my-8">{{$t('howItWorks.title')}}</h2>
     <div
-      class="my-container rounded-3xl overflow-hidden relative object-contain"
+      class="my-container "
     >
       <img
-        src="@/assets/images/how-it-works-2.png"
+        src="@/assets/images/how-it-works-2.svg"
         alt="Hero image"
-        class="w-full h-full object-cover"
+        class="w-full h-full"
       />
     </div>
 
