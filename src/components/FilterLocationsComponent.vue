@@ -1,11 +1,11 @@
 <template>
   <div
-    class="w-full rounded-md lg:rounded-full bg-white justify-center items-center px-0 pb-4 lg:py-4 overflow-hidden"
+    class="w-full rounded-md lg:rounded-full bg-white justify-center items-center px-0 pb-4 lg:py-2 overflow-hidden"
   >
-    <div class="flex flex-col lg:flex-row w-full px-8">
+    <div class="flex flex-col lg:flex-row md:items-center w-full px-8">
       <!-- CITY -->
       <div class="w-full lg:flex-grow">
-        <select class="w-full text-center border lg:border-l-0 h-full py-3" v-model="city">
+        <select class="w-full text-center border lg:border-l-0 h-12" v-model="city">
           <option value="" selected>
             {{ $t("landing.hero_2.city") }}
           </option>
@@ -20,7 +20,7 @@
       </div>
       <!-- COMUNA -->
       <div class="w-full lg:flex-grow">
-        <select class="w-full text-center border h-full py-3" v-model="zone">
+        <select class="w-full text-center border h-12" v-model="zone">
           <option value="" selected>
             {{ $t("landing.hero_2.commune") }}
           </option>
@@ -35,7 +35,7 @@
       </div>
       <!-- TYPE -->
       <div class="w-full lg:flex-grow">
-        <select class="w-full text-center border h-full py-3" v-model="type">
+        <select class="w-full text-center border h-12" v-model="type">
           <option value="" selected>
             {{ $t("landing.hero_2.type") }}
           </option>
@@ -50,31 +50,10 @@
       </div>
       <!-- buttons -->
       <div
-        class="flex flex-col lg:flex-row justify-evenly fitems-center gap-2 py-4 px-2 text-center border lg:border-r-0 text-sm flex-shrink-0"
+        class="flex justify-center items-center px-2 h-12 border lg:border-r-0 flex-shrink-0"
       >
-        <!-- <button
-          class="border rounded-full cursor-pointer w-auto px-2 py-2"
-          @click="toggleType('room')"
-          :class="this.type === 'room' ? 'selectedField' : ''"
-        >
-          <p>{{ $t("landing.hero_2.private") }}</p>
-        </button>
         <button
-          class="border rounded-full cursor-pointer w-auto px-2 py-2"
-          @click="toggleType('entire')"
-          :class="this.type === 'entire' ? 'selectedField' : ''"
-        >
-          <p>{{ $t("landing.hero_2.complete") }}</p>
-        </button>
-        <button
-          class="border rounded-full cursor-pointer w-auto px-2 py-2"
-          @click="toggleType('hours')"
-          :class="this.type === 'hours' ? 'selectedField' : ''"
-        >
-          <p>{{ $t("landing.hero_2.hours") }}</p>
-        </button> -->
-        <button
-          class="border cursor-pointer w-auto px-3 py-2 bg-my-blue-primary text-white rounded-lg"
+          class="border cursor-pointer w-auto px-3 py-1 bg-my-blue-primary text-white rounded-lg"
           @click="sendFilters"
         >
           <p>{{ $t("landing.hero_2.seeResult") }}</p>

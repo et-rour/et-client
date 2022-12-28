@@ -17,25 +17,28 @@
     </CoverImage>
 
 
-    <div class="bg-my-celest py-20">
+    <div class="bg-my-blue-primary pt-20 pb-12">
       <div class="my-container grid grid-cols-1 lg:grid-cols-2 text-white gap-5">
         <div class="">
-          <h1 class="text-4xl font-thin">
+          <h2 class="text-4xl font-thin">
             {{ $t("owners.header") }}
-          </h1>
-          <h2 class="text-5xl font-bold uppercase mb-2">
+          </h2>
+          <h2 class="text-5xl font-bold uppercase mb-4">
             {{ $t("owners.title") }}
           </h2>
 
-          <p>
+          <p class="font-bold">
             {{ $t("owners.subtitle") }}
+          </p>
+          <p>
+            {{ $t("owners.subtitle_2") }}
           </p>
         </div>
 
         <div class="actions flex flex-col justify-around items-center">
           <div class="flex flex-row justify-between items-center gap-6">
             <img
-              src="@/assets/images/icono1.svg"
+              src="@/assets/icons/white_thief.png"
               alt="ladron icon"
               class="w-14 object-contain"
             />
@@ -46,7 +49,7 @@
     
           <div class="flex flex-row justify-between items-center gap-6">
             <img
-              src="@/assets/images/icono2.svg"
+              src="@/assets/icons/white_house.png"
               alt="ladron icon"
               class="w-14 object-contain"
             />
@@ -58,11 +61,11 @@
           
           <div class="flex flex-row justify-between items-center gap-6">
             <img
-              src="@/assets/images/icono3.svg"
+              src="@/assets/icons/white_bed.png"
               alt="ladron icon"
               class="w-14 object-contain"
             />
-    
+
             <p class="text-left w-64 font-bold">
               {{ $t("owners.description_3") }}
             </p>
@@ -70,11 +73,14 @@
 
         </div>
       </div>
+      <div class=" w-full my-container text-white text-right mt-8 ">
+        <router-link class="underline" :to="{name:'trust-us'}">{{ $t('owners.trustUs') }}</router-link>
+      </div>
     </div>
 
     <div class="w-full flex justify-center my-5">
       <button
-        class="w-11/12 md:w-auto my-btn px-12 text-white font-bold bg-my-celest"
+        class="w-11/12 md:w-auto my-btn px-12 text-white font-bold bg-my-blue-primary"
         @click="goToCreateProperty"
       >
         {{ $t("owners.load") }}

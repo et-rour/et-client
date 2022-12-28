@@ -9,14 +9,14 @@
         {{ $t("landing.video.title") }}
       </h3>  
 
-      <button class="my-btn bg-white text-my-blue-primary font-bold px-4 py-2 w-auto mx-auto block" @click="(showVideoModal=true)">
+      <button class="my-btn bg-white text-my-blue-primary font-bold px-4 py-2 w-auto mx-auto block" @click="onClickShowVideo">
         ▶ {{$t('landing.video.ver')}}
       </button>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-40 gap-y-10">
           <div class="">
             <img src="@/assets/icons/comercial.svg" class="w-40 h-40 object-contain mx-auto">
-            <p class="text-3xl font-extrabold ">
+            <p class="text-4xl font-extrabold ">
               {{ $t("landing.video.question_1") }}
             </p>
             <p class="font-extralight">
@@ -25,7 +25,7 @@
           </div>
           <div class="">
             <img src="@/assets/icons/emprendedores.svg" class="w-40 h-40 object-contain mx-auto">
-            <p class="text-3xl font-extrabold ">
+            <p class="text-4xl font-extrabold ">
               {{ $t("landing.video.question_2") }}
             </p>
             <p class="font-extralight">
@@ -34,51 +34,19 @@
           </div>  
       </div>
     </div>
-
-    <ModelGlobal :showModal="showVideoModal" v-on:toogle="toogleShowModal">
-      <div class="w-2/3 h-1/3 md:h-2/3 bg-white relative" @click.stop>
-        <video
-          class="w-full h-full"
-          playsinline
-          autoplay
-          loop
-          controls
-          :muted="!showVideoModal"
-          ref="myVideo"
-        >
-          <source
-            src="https://firebasestorage.googleapis.com/v0/b/espacio-temporal-9a372.appspot.com/o/Espacios%20Temporales.mp4?alt=media&token=7dda93d1-91b9-4e40-a125-67b7911c1908"
-            type="video/mp4"
-          />
-        </video>
-        <div
-          class="w-10 h-10 bg-gray-300 shadow-2xl absolute top-0 -right-14 flex justify-center items-center cursor-pointer my-btn rounded-sm"
-          @click="showVideoModal = false"
-        >
-          <font-awesome-icon icon="times" class="text-black text-4xl" />
-        </div>
-      </div>
-    </ModelGlobal>
+    <VideoPlayer ref="VideoPlayer" />
   </div>
 </template>
 
 <script>
-import ModelGlobal from "../../../components/ModelGlobal.vue";
+import VideoPlayer from './VideoPlayer.vue';
 export default {
-  components: { 
-    ModelGlobal 
-  },
-  data() {
-    return {
-      showVideoModal: false,
-    };
-  },
-  methods: {
-    toogleShowModal() {
-      this.$refs.myVideo.pause();
-      this.showVideoModal = !this.showVideoModal;
-    },
-  },
+  components: { VideoPlayer },
+  methods:{
+    onClickShowVideo(){
+      this.$refs.VideoPlayer.showVideo()
+    }
+  }
 };
 </script>
 

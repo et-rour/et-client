@@ -12,7 +12,7 @@
           alt="Dueños icon"
           class="w-10 h-10 object-contain contain mx-auto"
         />
-        <p>Dueños</p>
+        <p class="text-center text-xs font-semibold">{{$t('navbar.owner')}}</p>
       </a>
     </router-link>
     <router-link
@@ -25,7 +25,8 @@
           alt="Arrendatarios icon"
           class="w-10 h-10 object-contain  mx-auto"
         />
-        <p>Arrendatarios</p>
+        <p class="text-center text-xs font-semibold">{{$t('navbar.tenants')}}</p>
+        
       </a>
     </router-link>
     <router-link
@@ -38,7 +39,8 @@
           alt="Nosotros icon"
           class="w-10 h-10 object-contain contain mx-auto"
         />
-        <p>Comunidad</p>
+        <p class="text-center text-xs font-semibold">{{$t('navbar.us')}}</p>
+
       </a>
     </router-link>
   </div>

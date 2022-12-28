@@ -5,13 +5,11 @@ import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 export const loadProperties = async ({ commit }) => {
   commit("changeLoading", true);
   const response = await EspacioAPI.get("/locations/");
-  console.log({ responsePorperties: response });
   commit("loadProperties", response.data.locations);
 };
 
 export const loadZones = async ({ commit }) => {
   const res = await EspacioAPI.get("/zones/");
-  console.log({ responseZones: res });
   commit("loadZones", res.data.zones);
 };
 

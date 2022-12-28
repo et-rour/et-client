@@ -17,14 +17,15 @@
       <h2 class="my-title-2">{{ $t("about-us.who") }}</h2>
       <p class="lg:w-6/12 inline-block">{{ $t("about-us.description") }}</p>
 
-      <div class="w-full flex justify-center flex-wrap gap-4 my-20">
+      <!-- <div class="w-full flex justify-center flex-wrap gap-4 my-20">
         <PersonalCard
           v-for="person in getPersonalMembers"
           :key="person.id"
           :person="person"
         />
-      </div>
+      </div> -->
     </div>
+    
     <div class="my-container text-center">
       <h4 class="font-bold text-xl mb-4">Contacto</h4>
       <p class="flex justify-center mb-4">
@@ -48,7 +49,7 @@
 <script>
 import { mapActions, mapGetters } from "vuex";
 import { CustomErrorToast } from "@/sweetAlert";
-import PersonalCard from "./Components/PersonalCard.vue";
+// import PersonalCard from "./Components/PersonalCard.vue";
 export default {
   data() {
     return {
@@ -78,7 +79,7 @@ export default {
   metaInfo: {
     title: "Nosotros",
   },
-  components: { PersonalCard },
+  // components: { PersonalCard },
 };
 </script>
 

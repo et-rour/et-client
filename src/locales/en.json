@@ -224,10 +224,12 @@
   "owners": {
     "header": "We manage",
     "title": "all types of unused properties",
-    "subtitle": "Have you not been able to rent your property? We take care of managing your property with flexible and short-term contracts. In this way we generate VALUE from a frozen resource.",
-    "description_1": "Avoid misuse",
-    "description_2": "We generate an income",
-    "description_3": "Provide an opportunity for entrepreneurs",
+    "subtitle": "HAVE YOU NOT BEEN ABLE TO RENT YOUR PROPERTY THROUGH TRADITIONAL RENTAL CHANNELS?",
+    "subtitle_2": "We take care of giving life and care to properties, land and sheds that for different reasons are unused. Load your property with us and you will quickly receive a rental offer!",
+    "description_1": "Avoid criminal sources and squatter access",
+    "description_2": "Generate extra income",
+    "description_3": "We maintain and value your property",
+    "trustUs": "Large organizations trust us",
     "load": "LOAD PROPERTY"
   },
   "createForm": {
@@ -304,15 +306,15 @@
     "index": {
       "hero": {
         "title": "SPACES FOR ENTREPRENEURS IN SANTIAGO",
-        "find": "FIND A SPACE"
+        "find": "SPACES AVAILABLE"
       },
       "details": {
-        "title": "We manage all types of unused properties",
-        "description_1": "Have you not been able to rent your property?",
-        "description_2": "We take care of managing your property with flexible and short-term contracts. In this way we generate VALUE from a frozen resource.",
-        "icon_des_1": "We avoid misuse",
-        "icon_des_2": "We generate an income",
-        "icon_des_3": "Provide an opportunity for entrepreneurs"
+        "title": "Rental of spaces for entrepreneurs, SMEs and artists",
+        "description_1": "We have a variety of options so that in a SIMPLE, QUICK AND ECONOMIC way you can find the place to carry out your trades. Forget about the bureaucracy and the demands of the traditional rental market!",
+        "icon_des_1": "Workshops, showrooms, warehouses, land and sheds.",
+        "icon_des_2": "Lower prices than the traditional market.",
+        "icon_des_3": "Simple and flexible contracts.",
+        "icon_des_4": "Rental periods to suit you."
       },
       "avalibleSpaces": {
         "title": "Available spaces near you"

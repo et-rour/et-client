@@ -6,6 +6,9 @@ import Terms from "../Modules/Main/Terms.vue";
 import WorkWithUs from "../Modules/Main/WorkWithUs.vue";
 import AboutUs from "../Modules/Main/AboutUs.vue";
 import HowItWorks from "../Modules/Main/HowItWorks.vue";
+import WhatWeDo from "../Modules/Main/WhatWeDo.vue";
+import Team from "../Modules/Main/Team.vue";
+import TrustUs from "../Modules/Main/TrustUs.vue";
 
 import OwnerRoutes from "../Modules/Owners/Router/index";
 import TenantsRouter from "../Modules/Tenants/Router/index";
@@ -26,28 +29,43 @@ const routes = [
   },
   {
     name: "questions",
-    path: "/questions",
+    path: "/preguntas",
     component: Questions,
   },
   {
     name: "terms",
-    path: "/terms",
+    path: "/terminos",
     component: Terms,
   },
   {
-    name: "workwithus",
-    path: "/workwithus",
-    component: WorkWithUs,
+    name: "about-us",
+    path: "/nosotros",
+    component: AboutUs,
   },
   {
-    name: "about-us",
-    path: "/about",
-    component: AboutUs,
+    name: "what-we-do",
+    path: "/que-hacemos",
+    component: WhatWeDo,
+  },
+  {
+    name: "team",
+    path: "/equipo",
+    component: Team,
+  },
+  {
+    name: "workwithus",
+    path: "/trabaja-con-nosotros",
+    component: WorkWithUs,
   },
   {
     name: "how-it-works",
     path: "/como-funciona",
     component: HowItWorks,
+  },
+  {
+    name: "trust-us",
+    path: "/confian-en-nosotros",
+    component: TrustUs,
   },
   ...OwnerRoutes,
   ...TenantsRouter,

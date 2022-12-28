@@ -1,17 +1,6 @@
 <template>
-  <div class="mb-24 w-full">
-    <h2 class="text-myheader1 font-bold text-center my-8">{{$t('howItWorks.title')}}</h2>
-    <div
-      class="my-container "
-    >
-      <img
-        src="@/assets/images/how-it-works-2.svg"
-        alt="Hero image"
-        class="w-full h-full"
-      />
-    </div>
-
-    <div class=" w-full bg-my-blue-primary py-20 my-20 text-center text-white">
+  <div class="w-full my-container-mobile">
+    <div class=" w-full bg-my-blue-primary py-20 text-center text-white">
       <h3 class="text-myheader1 font-bold mb-6">{{$t('howItWorks.subtitle')}}</h3>
       <p class="text-2xl mb-4">{{$t('howItWorks.pdfDescription')}}</p>
       
@@ -20,10 +9,9 @@
 
     <h2 class="text-myheader1 font-bold text-center my-8">{{$t('howItWorks.testimonials')}}</h2>
     
-    <Spiner v-if="loadTestimoials" />
+    <Spiner v-if="isLoadingTestimonials" />
     <div class="my-container grid grid-cols-1 md:grid-cols-2 gap-6">
-      <div 
-        class="" 
+      <div  
         v-for="testimonial in testimonials"
         :key="testimonial.id"
       >
@@ -48,7 +36,7 @@ export default {
   components: { Spiner },
   data() {
     return {
-      loadingTestimonials: true,
+      isLoadingTestimonials: true,
       testimonials:[],
 
     };
@@ -56,12 +44,12 @@ export default {
   methods:{
     async loadTestimoials(){
       try {
-        this.loadTestimoials = true;
+        this.isLoadingTestimonials = true;
         const { data } = await EspacioAPI.get("/testimonial/");
         this.testimonials = data
-        this.loadTestimoials = false;
+        this.isLoadingTestimonials = false;
       } catch (error) {
-        this.loadTestimoials = false;
+        this.isLoadingTestimonials = false;
         CustomErrorToast.fire({
           text: error.response.data.message || error,
         });

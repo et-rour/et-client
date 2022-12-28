@@ -1,8 +1,5 @@
 export const loadProperties = (state, properties) => {
-  console.log(
-    "%cmutations.js line:2 loadProperties",
-    "color: #007acc; properties"
-  );
+
   state.properties = properties;
   state.loadingProperties = false;
 };

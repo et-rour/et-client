@@ -224,10 +224,12 @@
   "owners": {
     "header": "Administramos",
     "title": "todo tipo de inmuebles en desuso",
-    "subtitle": "¿No has podido arrendar tu propiedad? Nosotros nos encargamos de administrar tu propiedad con contratos flexibles y de corta duración. De esta forma generamos VALOR a partir de un recurso congelado.",
-    "description_1": "Evita malos usos",
-    "description_2": "Generamos un ingreso",
-    "description_3": "Entrega una oportunidad para emprendedores",
+    "subtitle": "¿NO HAS PODIDO ARRENDAR TU PROPIEDAD POR LOS CANALES TRADICIONALES DE ARRIENDO?",
+    "subtitle_2": "Nosotros nos encargamos de darle vida y cuidado a propiedades, terrenos y galpones que por distintas razones se encuentran sin uso. ¡Carga tu propiedad con nosotros y forma rápida te llegará una oferta de arriendo!",
+    "description_1": "Evita focos delictuales y accesos de okupas",
+    "description_2": "Genera un ingreso extra",
+    "description_3": "Mantenemos y valorizamos tu propiedad",
+    "trustUs": "Grandes organizaciones confían en nosotros",
     "load": "CARGAR PROPIEDAD"
   },
   "createForm": {
@@ -304,15 +306,15 @@
     "index": {
       "hero": {
         "title": "ESPACIOS PARA EMPRENDEDORES",
-        "find": "ENCUENTRA UN ESPACIO"
+        "find": "ESPACIOS DISPONIBLES"
       },
       "details": {
-        "title": "Administramos todo tipo de inmuebles en desuso",
-        "description_1": "¿No has podido arrendar tu propiedad?",
-        "description_2": "Nosotros nos encargamos de administrar tu propiedad con contratos \n flexibles y de corta duración. De esta forma generamos VALOR a partir de un recurso congelado.",
-        "icon_des_1": "Evitamos malos usos",
-        "icon_des_2": "Generamos un ingreso",
-        "icon_des_3": "Entrega una oportunidad para emprendedores"
+        "title": "Arriendo de espacios para emprendedores, pymes y artistas",
+        "description_1": "Tenemos una variedad de opciones para que de manea SIMPLE, RÁPIDA Y ECONÓMICA puedas encontrar el lugar donde realizar tus oficios. ¡Olvídate de la burocracia y las exigencias del mercado tradicional de arriendos!",
+        "icon_des_1": "Talleres, showrooms, bodegas, terrenos y galpones.",
+        "icon_des_2": "Precios más bajos que el mercado tradicional.",
+        "icon_des_3": "Contratos simples y flexibles.",
+        "icon_des_4": "Periodos de arriendo a tú medida."
       },
       "avalibleSpaces": {
         "title": "Espacios disponibles cerca de ti"
