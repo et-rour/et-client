@@ -33,6 +33,11 @@
             <a> {{ $t("footer.nav.terms") }} </a>
           </router-link>
         </li>
+        <li>
+          <router-link :to="{ name: 'workwithus' }">
+            <a> {{ $t("footer.nav.workwithus") }} </a>
+          </router-link>
+        </li>
       </ul>
       <!-- <form
         class="row-start-2 col-start-1 col-end-4 flex flex-col border-b"

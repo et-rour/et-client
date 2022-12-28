@@ -13,22 +13,22 @@
         ▶ {{$t('landing.video.ver')}}
       </button>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-40 gap-y-10">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-40 gap-y-10 ">
           <div class="">
             <img src="@/assets/icons/comercial.svg" class="w-40 h-40 object-contain mx-auto">
-            <p class="text-4xl font-extrabold ">
+            <p class="text-3xl font-extrabold text-center ">
               {{ $t("landing.video.question_1") }}
             </p>
-            <p class="font-extralight">
+            <p class="font-extralight text-center">
               {{ $t("landing.video.response_1") }}
             </p>
           </div>
           <div class="">
             <img src="@/assets/icons/emprendedores.svg" class="w-40 h-40 object-contain mx-auto">
-            <p class="text-4xl font-extrabold ">
+            <p class="text-3xl font-extrabold text-center">
               {{ $t("landing.video.question_2") }}
             </p>
-            <p class="font-extralight">
+            <p class="font-extralight text-center">
               {{ $t("landing.video.response_2") }}
             </p>
           </div>  

@@ -17,7 +17,7 @@
     </CoverImage>
 
 
-    <div class="bg-my-blue-primary pt-20 pb-12">
+    <div class="bg-my-blue-primary py-20">
       <div class="my-container grid grid-cols-1 lg:grid-cols-2 text-white gap-5">
         <div class="">
           <h2 class="text-4xl font-thin">
@@ -73,9 +73,6 @@
 
         </div>
       </div>
-      <div class=" w-full my-container text-white text-right mt-8 ">
-        <router-link class="underline" :to="{name:'trust-us'}">{{ $t('owners.trustUs') }}</router-link>
-      </div>
     </div>
 
     <div class="w-full flex justify-center my-5">
@@ -85,6 +82,64 @@
       >
         {{ $t("owners.load") }}
       </button>
+    </div>
+
+    <div class="bg-my-blue-primary w-full relative px-2 py-20 mt-8 text-white">
+      <div class="my-container grid grid-cols-12 gap-12">
+        <div class=" col-span-6 ">
+          <h2 class="text-5xl font-bold mb-6 uppercase">{{ $t("landing.details.title") }}</h2>
+          <p class="mb-4">
+            {{ $t("landing.details.description") }}
+          </p>
+        </div>
+
+        <div
+          class=" col-span-6 grid grid-cols-1 md:grid-cols-2"
+        >
+          <div class="w-full h-full flex justify-center">
+            <img
+              src="@/assets/images/Grupo.svg"
+              alt="icon"
+              class="h-24 w-24 object-contain"
+            />
+          </div>
+          <div class="w-full h-full flex justify-center">
+            <img
+              src="@/assets/images/Idesa.svg"
+              alt="icon"
+              class="h-24 w-24 object-contain"
+            />
+          </div>
+          <div class="w-full h-full flex justify-center">
+            <img
+              src="@/assets/images/Indumotora.svg"
+              alt="icon"
+              class="h-24 w-24 object-contain"
+            />
+          </div>
+          <div class="w-full h-full flex justify-center">
+            <img
+              src="@/assets/images/Tarragona.svg"
+              alt="icon"
+              class="h-24 w-24 object-contain"
+            />
+          </div>
+          <div class="w-full h-full flex justify-center">
+            <img
+              src="@/assets/images/Conquista.svg"
+              alt="icon"
+              class="h-24 w-24 object-contain"
+            />
+          </div>
+          <div class="w-full h-full flex justify-center">
+            <img
+              src="@/assets/images/Numancia.svg"
+              alt="icon"
+              class="h-24 w-24 object-contain"
+            />
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>

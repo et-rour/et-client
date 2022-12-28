@@ -4,7 +4,10 @@
       <h3 class="text-myheader1 font-bold mb-6">{{$t('howItWorks.subtitle')}}</h3>
       <p class="text-2xl mb-4">{{$t('howItWorks.pdfDescription')}}</p>
       
-      <button class="my-btn font-bold bg-my-green-primary w-auto px-4 tracking-widest">{{$t('howItWorks.button')}}</button>
+      <a class="my-btn font-bold bg-my-green-primary w-auto px-4 mt-4 tracking-widest inline-block" 
+        href="https://firebasestorage.googleapis.com/v0/b/espacio-temporal-prod.appspot.com/o/extras%2FCasos%20de%20Exito%20-%20Espacio%20Temporal.pdf?alt=media&token=45c6f541-4d4e-41d7-a630-0e9d296ffdea"
+        target="_blank"
+      >{{$t('howItWorks.button')}}</a>
     </div>
 
     <h2 class="text-myheader1 font-bold text-center my-8">{{$t('howItWorks.testimonials')}}</h2>
@@ -60,7 +63,7 @@ export default {
     this.loadTestimoials()
   },
   metaInfo: {
-    title: "¿Como Funciona?",
+    title: "Casos de exito",
   },
 };
 </script>

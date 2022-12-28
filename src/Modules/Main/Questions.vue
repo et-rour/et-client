@@ -83,6 +83,8 @@ export default {
       return process.env.VUE_APP_MAIL_TO;
     },
   },
+  metaInfo: {title: "Preguntas frecuentes"},
+
 };
 </script>
 

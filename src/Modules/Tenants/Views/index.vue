@@ -29,12 +29,6 @@
           <p class="my-5 font-light ">
             {{ $t("tenants.index.details.description_1") }}
           </p>
-          
-          <button class="my-btn bg-white text-my-blue-primary font-bold px-4 py-2 w-auto mx-auto block" @click="onClickShowVideo">
-            ▶ {{$t('landing.video.ver')}}
-          </button>
-
-          <VideoPlayer ref="VideoPlayer" />
         </div>
 
         <div
@@ -67,7 +61,15 @@
         </div>
       </div>
       
-      <div class="my-container mt-4 text-black py-10 grid grid-cols-1 gap-16">
+      <div class="flex justify-center mt-10">
+        
+        <button class="my-btn bg-white text-my-blue-primary font-bold px-4 py-2 w-auto mx-auto block" @click="onClickShowVideo">
+          ▶ {{$t('landing.video.ver')}}
+        </button>
+
+        <VideoPlayer ref="VideoPlayer" />
+      </div>
+      <div class="my-container text-black py-10 grid grid-cols-1 gap-16">
         <FilterLocationsComponent @filter="loadPropertiesFiltered" />
       </div>
     </div>

@@ -4,7 +4,6 @@ import Landing from "../Modules/Main/Main.vue";
 import Questions from "../Modules/Main/Questions.vue";
 import Terms from "../Modules/Main/Terms.vue";
 import WorkWithUs from "../Modules/Main/WorkWithUs.vue";
-import AboutUs from "../Modules/Main/AboutUs.vue";
 import HowItWorks from "../Modules/Main/HowItWorks.vue";
 import WhatWeDo from "../Modules/Main/WhatWeDo.vue";
 import Team from "../Modules/Main/Team.vue";
@@ -38,11 +37,6 @@ const routes = [
     component: Terms,
   },
   {
-    name: "about-us",
-    path: "/nosotros",
-    component: AboutUs,
-  },
-  {
     name: "what-we-do",
     path: "/que-hacemos",
     component: WhatWeDo,
@@ -59,7 +53,7 @@ const routes = [
   },
   {
     name: "how-it-works",
-    path: "/como-funciona",
+    path: "/casos-de-exito",
     component: HowItWorks,
   },
   {
