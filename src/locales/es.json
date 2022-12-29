@@ -27,6 +27,7 @@
   },
   "validations": {
     "messages": {
+      "emailRequired": "Es necesario un email valido",
       "required": "Este campo no es válido",
       "email": "Este campo no es una dirección de correo electrónico válida",
       "minValue": "Este campo debe ser mayor de {min}",
@@ -35,6 +36,7 @@
     }
   },
   "general": {
+    "send": "Enviar",
     "copied": "Email copiado",
     "next": "Siguiente",
     "previus": "Volver",
@@ -86,6 +88,8 @@
     "phone": "Teléfono",
     "passwordRegister": "Contraseña *",
     "password": "Contraseña",
+    "restorePassword": "Restablecer contraseña",
+    "sended": "Correo enviado a",
     "firstName": "Primer nombre *",
     "lastName": "Apellido *",
     "country": "País",
@@ -114,7 +118,7 @@
     "video": {
       "header":"Administramos",
       "title": "todo tipo de inmuebles en desuso",
-      "question_1": "¿No has podido arrendar tu propiedad?",
+      "question_1": "¿No has podido arrendar tu propiedad comercial?",
       "response_1": "Nosotros nos encargamos de administrar tu propiedad con contratos flexibles y de corta duración.",
       "question_2": "¿Buscas un espacio flexible de trabajo?",
       "response_2": "Tenemos espacios en excelentes ubicaciones para emprendedores y artistas.",
@@ -220,10 +224,12 @@
   "owners": {
     "header": "Administramos",
     "title": "todo tipo de inmuebles en desuso",
-    "subtitle": "¿No has podido arrendar tu propiedad? Nosotros nos encargamos de administrar tu propiedad con contratos flexibles y de corta duración. De esta forma generamos VALOR a partir de un recurso congelado.",
-    "description_1": "Evita malos usos",
-    "description_2": "Generamos un ingreso",
-    "description_3": "Entrega una oportunidad para emprendedores",
+    "subtitle": "¿NO HAS PODIDO ARRENDAR TU PROPIEDAD POR LOS CANALES TRADICIONALES DE ARRIENDO?",
+    "subtitle_2": "Nosotros nos encargamos de darle vida y cuidado a propiedades, terrenos y galpones que por distintas razones se encuentran sin uso. ¡Carga tu propiedad con nosotros y de forma rápida te llegará una oferta de arriendo!",
+    "description_1": "Evita focos delictuales y accesos de okupas",
+    "description_2": "Genera un ingreso extra",
+    "description_3": "Mantenemos y valorizamos tu propiedad",
+    "trustUs": "Grandes organizaciones confían en nosotros",
     "load": "CARGAR PROPIEDAD"
   },
   "createForm": {
@@ -300,15 +306,15 @@
     "index": {
       "hero": {
         "title": "ESPACIOS PARA EMPRENDEDORES",
-        "find": "ENCUENTRA UN ESPACIO"
+        "find": "ESPACIOS DISPONIBLES"
       },
       "details": {
-        "title": "Administramos todo tipo de inmuebles en desuso",
-        "description_1": "¿No has podido arrendar tu propiedad?",
-        "description_2": "Nosotros nos encargamos de administrar tu propiedad con contratos \n flexibles y de corta duración. De esta forma generamos VALOR a partir de un recurso congelado.",
-        "icon_des_1": "Evitamos malos usos",
-        "icon_des_2": "Generamos un ingreso",
-        "icon_des_3": "Entrega una oportunidad para emprendedores"
+        "title": "Arriendo de espacios para emprendedores, pymes y artistas",
+        "description_1": "Tenemos una variedad de opciones para que de manera SIMPLE, RÁPIDA Y ECONÓMICA puedas encontrar el lugar donde realizar tus oficios. ¡Olvídate de la burocracia y las exigencias del mercado tradicional de arriendos!",
+        "icon_des_1": "Talleres, showrooms, bodegas, terrenos y galpones.",
+        "icon_des_2": "Precios más bajos que el mercado tradicional.",
+        "icon_des_3": "Contratos simples y flexibles.",
+        "icon_des_4": "Periodos de arriendo a tú medida."
       },
       "avalibleSpaces": {
         "title": "Espacios disponibles cerca de ti"
@@ -329,7 +335,7 @@
       "includedServises": "SERVICIOS INCLUÍDOS",
       "includedServisesDescription": "Al pagar los gastos comunes estos son los servicios que se incluyen",
       "vault": "Bodega",
-      "parking": "Estacionamiento",
+      "parking": "parking",
       "cleaning": "Limpieza",
       "toilets": "Baños",
       "wifi": "Wifi",
@@ -389,13 +395,20 @@
       }
     }
   },
-
+  "howItWorks": {
+    "title":"¿CÓMO FUNCIONA?",
+    "subtitle":"CASOS DE ÉXITO",
+    "pdfDescription":"Descarga nuestro PDF con el detalle\nde proyectos y casos de éxito.",
+    "button":"DESCARGAR PDF",
+    "testimonials":"TESTIMONIOS"
+  },
   "footer": {
     "nav": {
       "owner": "Dueños",
       "tenants": "Arrendatarios",
       "howWorks": "¿Comó funciona?",
       "us": "Mercado de emprendedores",
+      "workwithus": "Tabaja con nosotros",
       "terms": "TÉRMINOS Y CONDICIONES"
     },
     "form": {
@@ -479,6 +492,7 @@
       "reservation": "Reservas",
       "publications": "Publicaciones",
       "payments": "Pagos",
+      "testimonials": "Testimonios",
       "trashbin": "Papelera"
     },
     "users": {
@@ -707,6 +721,13 @@
       "sweetAlert": {
         "confirmation": "¿Deseas crear reporte de los 100 ultimos pagos?"
       }
+    },
+    "testimonials":{
+      "newTestimonial": "Crear testimonio",
+      "urlVideo": "Url del video",
+      "name": "Nombre",
+      "position": "Posición / puesto",
+      "location": "Locación"
     }
   },
   "profile": {

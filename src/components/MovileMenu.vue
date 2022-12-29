@@ -12,7 +12,7 @@
           alt="Dueños icon"
           class="w-10 h-10 object-contain contain mx-auto"
         />
-        <p>Dueños</p>
+        <p class="text-center text-xs font-semibold">{{$t('navbar.owner')}}</p>
       </a>
     </router-link>
     <router-link
@@ -25,22 +25,44 @@
           alt="Arrendatarios icon"
           class="w-10 h-10 object-contain  mx-auto"
         />
-        <p>Arrendatarios</p>
+        <p class="text-center text-xs font-semibold">{{$t('navbar.tenants')}}</p>
+        
       </a>
     </router-link>
-    <router-link
+    <div
       :to="{ name: 'home' }"
-      class="flex justify-center flex-col items-center"
+      class="flex justify-center flex-col items-center group relative"
     >
-      <a>
-        <img
-          src="@/assets/icons/aboutUs.png"
-          alt="Nosotros icon"
-          class="w-10 h-10 object-contain contain mx-auto"
-        />
-        <p>Comunidad</p>
-      </a>
-    </router-link>
+      <img
+        src="@/assets/icons/aboutUs.png"
+        alt="Nosotros icon"
+        class="w-10 h-10 object-contain contain mx-auto"
+      />
+      <p class="text-center text-xs font-semibold">{{$t('navbar.us')}}</p>
+
+      <div class="flex flex-col gap-4 absolute w-48 -top-44 right-2 text-center bg-white md:bg-gray-100 md:text-black shadow-xl invisible group-hover:visible  h-0 group-hover:h-44 overflow-hidden  transition-all ease-in duration-500 ">
+        <router-link
+          class=" hover:text-my-blue-primary mt-4"
+          :to="{ name: 'what-we-do' }"
+          ><a> {{ $t("navbar.usOption1") }} </a></router-link
+        >
+        <router-link
+          class=" hover:text-my-blue-primary "
+          :to="{ name: 'team' }"
+          ><a> {{ $t("navbar.usOption2") }} </a></router-link
+        >
+        <router-link
+          class=" hover:text-my-blue-primary "
+          :to="{ name: 'how-it-works' }"
+          ><a> {{ $t("navbar.usOption3") }} </a></router-link
+        >
+        <router-link
+          class=" hover:text-my-blue-primary "
+          :to="{ name: 'trust-us' }"
+          ><a> {{ $t("navbar.usOption4") }} </a></router-link
+        >
+      </div>
+    </div>
   </div>
 </template>
 

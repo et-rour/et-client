@@ -1,7 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@font-face {
+/* @font-face {
   font-family: "Avenir Next";
   font-weight: 100;
   font-style: normal;
@@ -40,7 +40,7 @@
   src: local("Avenir Next"),
     url("/fonts/AvenirNext/AvenirNextLTPro-Bold.otf") format("woff2"),
     url("/fonts/Roboto/AvenirNextLTPro-Bold.otf") format("woff");
-}
+} */
 
 .global-modal-open {
   height: 100vh;
@@ -49,7 +49,8 @@
 }
 
 html {
-  font-family: "Avenir Next", sans-serif;
+  /* font-family: "Avenir Next", sans-serif; */
+  font-family: 'Montserrat', sans-serif;
   /* font-family: "Roboto"; */
   scroll-behavior: smooth !important;
   box-sizing: border-box;

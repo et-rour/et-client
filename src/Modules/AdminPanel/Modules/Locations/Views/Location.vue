@@ -552,11 +552,12 @@
             >{{ $t("adminPanel.locations.value") }} ({{currency.symbol}} {{currency.apiCode}})
           </label>
           <div>
-            <input
-              type="number"
+            <input-number-mask
               class="my-input"
               v-model="newValueProperty"
+              @changeValue="updateNewValue"
             />
+            <!-- {{newValueProperty}} -->
             <button
               class="my-btn w-auto px-4 py-2 ml-4"
               v-if="fistValueLocation != newValueProperty"
@@ -596,6 +597,7 @@ import {
 import MapCoordsVue from "../../../../../components/MapCoords.vue";
 import { ValidationObserver } from "vee-validate";
 import FilterZonesComponent from "../Components/FilterZonesComponent.vue";
+import InputNumberMask from '../../../../../components/InputNumberMask.vue';
 
 
 export default {
@@ -603,7 +605,8 @@ export default {
     SwitchComponentVue,
     MapCoordsVue,
     ValidationObserver,
-    FilterZonesComponent
+    FilterZonesComponent,
+    InputNumberMask
 },
   computed: {
     ...mapGetters("adminPanelStore/locations", ["getLocationDetails", "getAllCurrencies"]),
@@ -835,6 +838,9 @@ export default {
     },
     async getZoneAndAdmin(){
       
+    },
+    updateNewValue(val){
+      this.newValueProperty = val
     }
   },
   async created() {

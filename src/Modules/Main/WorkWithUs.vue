@@ -56,7 +56,10 @@
 </template>
 
 <script>
-export default {};
+export default {
+  metaInfo: {title: "Trabaja con nosotros"},
+
+};
 </script>
 
 <style></style>

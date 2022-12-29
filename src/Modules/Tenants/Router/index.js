@@ -58,12 +58,6 @@ export default [
         name: "tenants-schedule",
         path: "/propietario/:id/schedule",
         component: Schedule,
-        beforeEnter(_, __, next) {
-          if (isAuth()) {
-            next(true);
-          }
-          next(false);
-        },
       },
     ],
   },

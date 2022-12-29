@@ -116,133 +116,6 @@
       </h3>
     </div>
 
-    <!-- load space -->
-    <div class="my-container hero rounded-3xl overflow-hidden relative my-24">
-      <img
-        src="@/assets/images/location.png"
-        alt="Hero image"
-        class="w-full h-full object-cover"
-      />
-
-      <!-- MASK -->
-      <div
-        class="w-full h-full absolute top-0 left-0 flex flex-col justify-end gap-3 py-4 rounded-b-3xl mask"
-      ></div>
-
-      <div
-        class="w-full h-full absolute top-0 left-0 flex flex-col justify-end items-center pb-16"
-      >
-        <div class="w-10/12 lg:w-8/12">
-          <h1 class="my-title text-3xl md:text-myheader1 text-white">
-            {{ $t("landing.hero_3.title_1") }}
-            <br />
-            <span class="mr-4">
-              {{ $t("landing.hero_3.title_2") }}
-            </span>
-            <button
-              class="my-btn inline-block bg-white text-my-blue-primary font-normal text-xl"
-              @click="$router.push({ name: 'property' })"
-            >
-              {{ $t("landing.hero_3.load") }}
-            </button>
-          </h1>
-        </div>
-      </div>
-    </div>
-
-    <!-- details brands -->
-    <div
-      class="bg-my-blue-primary w-full relative px-2 py-20 text-white"
-    >
-      <div class="my-container grid grid-cols-12 gap-12">
-        <div class=" col-span-6 ">
-          <h2 class="text-5xl font-bold mb-6 uppercase">{{ $t("landing.details.title") }}</h2>
-          <p class="mb-4">
-            {{ $t("landing.details.description") }}
-          </p>
-        </div>
-
-        <div
-          class=" col-span-6 grid grid-cols-1 md:grid-cols-2"
-        >
-          <div class="w-full h-full flex justify-center">
-            <img
-              src="@/assets/images/Grupo.svg"
-              alt="icon"
-              class="h-24 w-24 object-contain"
-            />
-          </div>
-          <div class="w-full h-full flex justify-center">
-            <img
-              src="@/assets/images/Idesa.svg"
-              alt="icon"
-              class="h-24 w-24 object-contain"
-            />
-          </div>
-          <div class="w-full h-full flex justify-center">
-            <img
-              src="@/assets/images/Indumotora.svg"
-              alt="icon"
-              class="h-24 w-24 object-contain"
-            />
-          </div>
-          <div class="w-full h-full flex justify-center">
-            <img
-              src="@/assets/images/Tarragona.svg"
-              alt="icon"
-              class="h-24 w-24 object-contain"
-            />
-          </div>
-          <div class="w-full h-full flex justify-center">
-            <img
-              src="@/assets/images/Conquista.svg"
-              alt="icon"
-              class="h-24 w-24 object-contain"
-            />
-          </div>
-          <div class="w-full h-full flex justify-center">
-            <img
-              src="@/assets/images/Numancia.svg"
-              alt="icon"
-              class="h-24 w-24 object-contain"
-            />
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- work with us -->
-    <div
-      class="my-container hero rounded-3xl overflow-hidden relative mt-12 mb-20"
-    >
-      <img
-        src="@/assets/images/workWithUsImage.png"
-        alt="Hero image"
-        class="w-full h-full object-cover"
-      />
-
-      <!-- MASK -->
-      <div
-        class="w-full h-full absolute top-0 left-0 flex flex-col justify-end gap-3 py-4 rounded-b-3xl mask"
-      ></div>
-
-      <div
-        class="w-full h-full absolute top-0 left-0 flex flex-col justify-end items-center pb-16"
-      >
-        <div class="flex justify-evenly flex-wrap w-full">
-          <h1 class="my-title text-white">
-            {{ $t("landing.hero_4.title_1") }} <br />
-            {{ $t("landing.hero_4.title_2") }}
-          </h1>
-          <button
-            class="my-btn bg-white w-64 py-2 rounded-md text-my-blue-primary self-end"
-            @click="showWorkWithUsModal"
-          >
-            {{ $t("landing.hero_4.see") }}
-          </button>
-        </div>
-      </div>
-    </div>
   </div>
 </template>
 
@@ -282,11 +155,7 @@ export default {
   methods: {
     ...mapActions("propertiesStore", ["loadProperties", "loadZones"]),
     loadPropertiesFiltered({ zone, city, type, siteCountry }) {
-      console.log("%cMain.vue line:260 {object}", "color: #007acc;", {
-        zone,
-        city,
-        type,
-      });
+      
       let listProperties = this.propertiesList;
 
       if (type !== "") {
@@ -313,9 +182,6 @@ export default {
         );
       }
 
-      console.log("%cMain.vue line:381 {listProperties}", "color: #007acc;", {
-        listProperties,
-      });
       this.propertiesListFiltered = listProperties;
     },
     showWorkWithUsModal() {
@@ -340,7 +206,6 @@ export default {
     },
   },
   async mounted() {
-    console.log("%cMain.vue line:313 counted", "color: #007acc;");
     this.loadPropertiesFiltered({
       zone: "",
       city: "",

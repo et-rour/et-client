@@ -38,6 +38,10 @@
         <span class="my-error">{{ errors[0] }}</span>
       </ValidationProvider>
 
+      <div class="flex justify-end">
+        <span class="mt-3 px-2 py-1 text-my-blue-primary cursor-pointer" @click="sendRestoreEmail">{{$t('login.restorePassword')}}</span>
+      </div>
+
       <button
         class="my-btn w-full py-4 my-4"
         type="submit"
@@ -56,6 +60,8 @@ import { ValidationObserver } from "vee-validate";
 import { mapActions, mapGetters } from "vuex";
 import { CustomErrorToast } from "@/sweetAlert";
 import { isValidToRedirect } from "../utils/redirect";
+import espacioTemporalApi from "@/Api/index"
+import Swal from 'sweetalert2';
 export default {
   components: {
     ValidationObserver,
@@ -97,6 +103,47 @@ export default {
         });
       }
     },
+    async sendRestoreEmail(){
+
+      Swal.fire({
+        title: 'Email',
+        input: 'text',
+        inputAttributes: {
+          autocapitalize: 'off'
+        },
+        showCancelButton: true,
+        confirmButtonText: this.$t("general.send"),
+        showLoaderOnConfirm: true,
+        preConfirm: (email) => {
+          if (email.trim().length === 0) {
+            Swal.showValidationMessage(
+              this.$t("validations.messages.emailRequired")
+            )
+            return
+          }
+
+          return espacioTemporalApi.post("/auth/restore",{email})
+            .then(response => {
+              return response.data
+            })
+            .catch(error => {
+              Swal.showValidationMessage(
+                `Error: ${error.response.data.message}`
+              )
+            })
+        },
+        allowOutsideClick: () => !Swal.isLoading()
+      }).then((result) => {
+        console.log('%cLoginForm.vue line:133 result', 'color: #26bfa5;', result);
+        if (result.isConfirmed) {
+          Swal.fire({
+            title: this.$t("login.sended"),
+            text: result.value
+          })
+        }
+      })
+
+    }
   },
 };
 </script>

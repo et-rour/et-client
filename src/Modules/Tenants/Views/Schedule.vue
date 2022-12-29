@@ -30,7 +30,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters("authStore", ["user", "isAuth"]),
+    ...mapGetters("authStore", ["user"]),
     ...mapGetters("propertiesStore", ["getPropertyDetails"]),
     completeAddress() {
       return `${this.locationData.address},${this.locationData.zone.zone} - ${this.locationData.zone.city} (${this.locationData.zone.state}), ${this.locationData.zone.country}`;
@@ -42,10 +42,10 @@ export default {
         url: `${this.locationData.calendlyLink?this.locationData.calendlyLink:process.env.VUE_APP_VISIT}?hide_event_type_details=1&hide_gdpr_banner=1&utm_campaign=normal`,
         parentElement: document.getElementById("calendly-widget"),
         prefill: {
-          name: this.isAuth
+          name: this.userData
             ? `${this.userData.firstName} ${this.userData.lastName}`
             : "",
-          email: this.isAuth ? `${this.userData.email}` : "",
+          email: this.userData ? `${this.userData.email}` : "",
           customAnswers: {
             a1: `${this.locationData.name}`,
             a2: `${this.completeAddress}`,
@@ -79,11 +79,6 @@ export default {
     // const widgetScript = document.getElementById(WIDGET_ID);
     // window.Calendly.destroyBadgeWidget();
     // widgetScript.remove();
-  },
-  watch: {
-    isAuth() {
-      this.loadLocationAndUserData();
-    },
   },
 };
 </script>

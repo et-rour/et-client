@@ -3,9 +3,9 @@
     <div
       class="bg-white my-container flex justify-center md:justify-between items-center mx-auto pt-6 pb-10"
     >
-      <div @click="toogleMovileMenuOpen" class="md:hidden cursor-pointer">
+      <!-- <div @click="toogleMovileMenuOpen" class="md:hidden cursor-pointer">
         <font-awesome-icon icon="bars" class="text-3xl" />
-      </div>
+      </div> -->
       <!-- Logo -->
       <div
         class="py-2 flex-grow md:flex-grow-0 flex justify-center cursor-pointer flex-shrink-0"
@@ -37,27 +37,28 @@
         >
 
         <div class=" relative group z-50">
-          <p class=" font-bold">{{ $t("navbar.us") }}</p>
+          <!-- <p class=" font-bold">{{ $t("navbar.us") }}</p> -->
+          <p class="font-bold hover:text-my-blue-primary"> {{ $t("navbar.us") }} </p>
           <!-- <div class=" as flex flex-col gap-4 absolute w-48 top-6 -left-12 text-center bg-red-500 "> -->
           <div class="flex flex-col gap-4 absolute w-48 top-6 -left-12 text-center bg-black text-white md:bg-gray-100 md:text-black shadow-xl invisible group-hover:visible  h-0 group-hover:h-44 overflow-hidden  transition-all ease-in duration-500 ">
             <router-link
               class=" hover:text-my-blue-primary mt-4"
-              :to="{ name: 'about-us' }"
+              :to="{ name: 'what-we-do' }"
               ><a> {{ $t("navbar.usOption1") }} </a></router-link
             >
             <router-link
               class=" hover:text-my-blue-primary "
-              :to="{ name: 'about-us' }"
+              :to="{ name: 'team' }"
               ><a> {{ $t("navbar.usOption2") }} </a></router-link
             >
             <router-link
               class=" hover:text-my-blue-primary "
-              :to="{ name: 'about-us' }"
+              :to="{ name: 'how-it-works' }"
               ><a> {{ $t("navbar.usOption3") }} </a></router-link
             >
             <router-link
               class=" hover:text-my-blue-primary "
-              :to="{ name: 'about-us' }"
+              :to="{ name: 'trust-us' }"
               ><a> {{ $t("navbar.usOption4") }} </a></router-link
             >
           </div>

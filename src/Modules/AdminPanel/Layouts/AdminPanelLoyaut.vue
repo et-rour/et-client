@@ -50,11 +50,20 @@
               {{ $t("adminPanel.navbar.publications") }}
             </li>
           </router-link>
-          <router-link :to="{ name: 'admin-reservations', hash: '#sidebar' }">
+          <router-link :to="{ name: 'admin-testimonial', hash: '#sidebar' }">
             <li
               class="px-2 py-1"
               :class="selected === 6 ? 'active-link' : null"
               @click="switchMenu(6)"
+            >
+              {{ $t("adminPanel.navbar.testimonials") }}
+            </li>
+          </router-link>
+          <router-link :to="{ name: 'admin-reservations', hash: '#sidebar' }">
+            <li
+              class="px-2 py-1"
+              :class="selected === 7 ? 'active-link' : null"
+              @click="switchMenu(7)"
             >
               {{ $t("adminPanel.navbar.reservation") }}
             </li>
@@ -62,8 +71,8 @@
           <router-link :to="{ name: 'admin-payments-detail', hash: '#sidebar' }">
             <li
               class="px-2 py-1"
-              :class="selected === 7 ? 'active-link' : null"
-              @click="switchMenu(7)"
+              :class="selected === 8 ? 'active-link' : null"
+              @click="switchMenu(8)"
             >
               {{ $t("adminPanel.navbar.payments") }}
             </li>
@@ -71,8 +80,8 @@
           <router-link :to="{ name: 'admin-trash-bin', hash: '#sidebar' }">
             <li
               class="px-2 py-1"
-              :class="selected === 8 ? 'active-link' : null"
-              @click="switchMenu(8)"
+              :class="selected === 9 ? 'active-link' : null"
+              @click="switchMenu(9)"
             >
               {{ $t("adminPanel.navbar.trashbin") }}
             </li>

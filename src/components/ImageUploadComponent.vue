@@ -1,5 +1,5 @@
 <template>
-  <div class="h-full flex flex-col gap-3">
+  <div class="h-full w-full flex flex-col gap-3 ">
 
     <div v-if="showPreviewComponent" class="imageContainer bg-gray-300 flex-grow h-full">
       <img v-if="localImage" :src="localImage" >

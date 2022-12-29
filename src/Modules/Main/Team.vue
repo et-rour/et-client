@@ -25,6 +25,7 @@
         />
       </div>
     </div>
+    
     <div class="my-container text-center">
       <h4 class="font-bold text-xl mb-4">Contacto</h4>
       <p class="flex justify-center mb-4">
@@ -75,9 +76,7 @@ export default {
   mounted() {
     this.fetchPersonalData();
   },
-  metaInfo: {
-    title: "Nosotros",
-  },
+  metaInfo: {title: "Equipo"},
   components: { PersonalCard },
 };
 </script>

@@ -19,7 +19,10 @@
 </template>
 
 <script>
-export default {};
+export default {
+  metaInfo: {title: "Términos y condiciones"},
+};
+
 </script>
 
 <style></style>

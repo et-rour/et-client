@@ -20,19 +20,14 @@
 
 
     <!-- details -->
-    <div class="bg-my-blue-primary w-full relative py-24 text-white mt-8">
-      <div
-        class="my-container mx-auto grid grid-cols-1 gap-5 lg:grid-cols-7 lg:gap-16"
-      >
+    <div class="bg-my-blue-primary w-full relative pt-24 text-white mt-8">
+      <div class="my-container mx-auto grid grid-cols-1 gap-5 lg:grid-cols-7 lg:gap-16">
         <div class="lg:col-span-4">
-          <h2 class="my-title text-5xl">
+          <h2 class="my-title text-4xl md:text-5xl">
             {{ $t("tenants.index.details.title") }}
           </h2>
-          <p class="mt-5 font-bold text-md">
+          <p class="my-5 font-light ">
             {{ $t("tenants.index.details.description_1") }}
-          </p>
-          <p class="mb-5 font-light text-md">
-            {{ $t("tenants.index.details.description_2") }}
           </p>
         </div>
 
@@ -65,11 +60,22 @@
           </div>
         </div>
       </div>
+      
+      <div class="flex justify-center mt-10">
+        
+        <button class="my-btn bg-white text-my-blue-primary font-bold px-4 py-2 w-auto mx-auto block" @click="onClickShowVideo">
+          ▶ {{$t('landing.video.ver')}}
+        </button>
+
+        <VideoPlayer ref="VideoPlayer" />
+      </div>
+      <div class="my-container text-black py-10 grid grid-cols-1 gap-16">
+        <FilterLocationsComponent @filter="loadPropertiesFiltered" />
+      </div>
     </div>
 
     <!-- avalible spaces -->
     <div class="my-container mt-6" id="spaces">
-      <FilterLocationsComponent @filter="loadPropertiesFiltered" />
 
       <div class="w-full" v-if="isLoading">
         <Spiner></Spiner>
@@ -118,10 +124,11 @@ import FilterLocationsComponent from "../../../components/FilterLocationsCompone
 import PropertyCardVue from '../../../components/PropertyCard.vue';
 import Spiner from "../../../components/Spiner.vue";
 import CoverImage from "../../Main/Components/CoverImage.vue";
+import VideoPlayer from "../../Main/Components/VideoPlayer.vue";
 
 
 export default {
-  components: { Spiner, FilterLocationsComponent, CoverImage, PropertyCardVue },
+  components: { Spiner, FilterLocationsComponent, CoverImage, PropertyCardVue, VideoPlayer },
   data() {
     return {
       propertiesListFiltered: [],
@@ -138,6 +145,11 @@ export default {
   },
   methods: {
     ...mapActions("propertiesStore", ["loadProperties"]),
+    
+    onClickShowVideo(){
+      this.$refs.VideoPlayer.showVideo()
+    },
+
     goto(refName) {
       var element = this.$refs[refName];
       var top = element.offsetTop;
@@ -160,11 +172,7 @@ export default {
       }
     },
     loadPropertiesFiltered({ zone, city, type, siteCountry }) {
-      console.log("%cMain.vue line:260 {object}", "color: #007acc;", {
-        zone,
-        city,
-        type,
-      });
+     
       let listProperties = this.propertiesList;
 
       if (type !== "") {
@@ -190,9 +198,6 @@ export default {
         );
       }
 
-      console.log("%cMain.vue line:381 {listProperties}", "color: #007acc;", {
-        listProperties,
-      });
       this.propertiesListFiltered = listProperties;
     },
   },

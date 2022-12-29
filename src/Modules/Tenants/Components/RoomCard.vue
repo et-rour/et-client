@@ -16,13 +16,13 @@
             alt="room cover"
           />
           <button
-            class="py-2 px-3 rounded-lg flex items-center absolute right-2 bottom-2 text-xs shadow-xl border bg-white truncate"
+            class="py-2 px-3 rounded-md flex items-center absolute right-2 bottom-2 text-xs shadow-xl border bg-white truncate font-bold"
             @click="showModalImages = true"
             v-if="room.imagesRoom.length > 0"
           >
             <img
-              src="@/assets/icons/menupoints.png"
-              class="w-3 h-3 mr-1 "
+              src="@/assets/icons/menu-dots-svgrepo-com.svg"
+              class="w-3 h-3 mr-1"
               alt="menu"
             />
             {{ $t("tenants.details.pictures") }}
@@ -45,7 +45,7 @@
         </div>
       </div>
 
-      <div class=" flex md:flex-col gap-2 justify-center md:justify-end items-end col-span-4 md:col-span-1 mt-2 md:mt-0">
+      <div class=" flex md:flex-col gap-2 justify-center items-end col-span-4 md:col-span-1 mt-2 md:mt-0">
         <button
           v-if="room.stripePriceId"
           class="font-bold block my-btn w-full py-2 rounded-xl uppercase tracking-widest"
