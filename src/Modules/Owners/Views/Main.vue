@@ -1,5 +1,5 @@
 <template>
-  <div class=" mb-24">
+  <div class="my-container-mobile">
     <CoverImage
       :id="3"
       :idProgressBar="'cover_image_owner'"
@@ -85,16 +85,16 @@
     </div>
 
     <div class="bg-my-blue-primary w-full relative px-2 py-20 mt-8 text-white">
-      <div class="my-container grid grid-cols-12 gap-12">
-        <div class=" col-span-6 ">
-          <h2 class="text-5xl font-bold mb-6 uppercase">{{ $t("landing.details.title") }}</h2>
+      <div class="my-container grid grid-cols-12">
+        <div class="col-span-12 lg:col-span-6">
+          <h2 class="text-3xl md:text-5xl font-bold mb-6 uppercase">{{ $t("landing.details.title") }}</h2>
           <p class="mb-4">
             {{ $t("landing.details.description") }}
           </p>
         </div>
 
         <div
-          class=" col-span-6 grid grid-cols-1 md:grid-cols-2"
+          class="col-span-12 lg:col-span-6 grid grid-cols-1 md:grid-cols-2"
         >
           <div class="w-full h-full flex justify-center">
             <img

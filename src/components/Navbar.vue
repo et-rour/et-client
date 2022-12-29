@@ -3,9 +3,9 @@
     <div
       class="bg-white my-container flex justify-center md:justify-between items-center mx-auto pt-6 pb-10"
     >
-      <div @click="toogleMovileMenuOpen" class="md:hidden cursor-pointer">
+      <!-- <div @click="toogleMovileMenuOpen" class="md:hidden cursor-pointer">
         <font-awesome-icon icon="bars" class="text-3xl" />
-      </div>
+      </div> -->
       <!-- Logo -->
       <div
         class="py-2 flex-grow md:flex-grow-0 flex justify-center cursor-pointer flex-shrink-0"

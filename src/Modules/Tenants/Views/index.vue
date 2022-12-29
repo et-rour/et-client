@@ -23,7 +23,7 @@
     <div class="bg-my-blue-primary w-full relative pt-24 text-white mt-8">
       <div class="my-container mx-auto grid grid-cols-1 gap-5 lg:grid-cols-7 lg:gap-16">
         <div class="lg:col-span-4">
-          <h2 class="my-title text-5xl">
+          <h2 class="my-title text-4xl md:text-5xl">
             {{ $t("tenants.index.details.title") }}
           </h2>
           <p class="my-5 font-light ">

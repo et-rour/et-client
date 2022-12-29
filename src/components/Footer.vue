@@ -1,10 +1,10 @@
 <template>
   <div
-    class="w-full bg-gray-900 flex-col justify-center items-center text-white hidden md:flex relative py-10"
+    class="w-full bg-gray-900 flex-col justify-center items-center text-white flex relative py-10 mb-24 md:mb-0"
   >
-    <div class="w-9/12 grid grid-cols-1 lg:grid-cols-3 px-20">
-      <img src="@/assets/icons/logoFooter.png" alt="footer_espacio" />
-      <ul>
+    <div class="w-full md:w-9/12 grid grid-cols-1 lg:grid-cols-3 px-4 md:px-20">
+      <img class="col-span-3 md:col-span-1 mx-auto md:mx-0" src="@/assets/icons/logoFooter.png" alt="footer_espacio" />
+      <ul class=" flex flex-col items-center md:items-start">
         <li>
           <router-link :to="{ name: 'questions' }"><a> FAQS </a></router-link>
         </li>
