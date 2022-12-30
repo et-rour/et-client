@@ -60,10 +60,14 @@ export default {
     ...mapGetters("propertiesStore", ["createdProperty"]),
     parsedResult() {
       if (this.result === 0) return 0;
+      console.log('aca', this.result.currencyType.value)
       return {
         min: Math.round(this.result.min * this.result.currencyType.value),
         max: Math.round(this.result.max * this.result.currencyType.value),
         symbol: this.result.currencyType.symbol,
+        // min: Math.round(this.result.min),
+        // max: Math.round(this.result.max),
+        // symbol: this.result.currencyType.symbol,
       };
     },
   },

@@ -537,7 +537,7 @@
             rules="required|min_value:1"
             class="w-1/5"
           >
-            <InputNumberMask class="bg-gray-200 my-input w-full" v-model="meters" changeValue="updateMeters" />
+            <InputNumberMask class="bg-gray-200 my-input w-full" v-model="meters" @changeValue="updateMeters" />
             <span class="my-error relative top-0 left-0 block">{{
               errors[0]
             }}</span>
