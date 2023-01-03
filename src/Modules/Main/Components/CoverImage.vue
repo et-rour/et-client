@@ -15,6 +15,12 @@
         alt="Hero image"
         class="w-full h-full object-cover rounded-3xl"
       />
+      <!-- <img
+        v-else
+        src="../../../assets/images/homeImage1.png"
+        alt="Hero image"
+        class="w-full h-full object-cover rounded-3xl"
+      /> -->
 
       <!-- MASK -->
       <div

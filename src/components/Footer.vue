@@ -2,9 +2,24 @@
   <div
     class="w-full bg-gray-900 flex-col justify-center items-center text-white flex relative py-10 mb-24 md:mb-0"
   >
-    <div class="w-full md:w-9/12 grid grid-cols-1 lg:grid-cols-3 px-4 md:px-20">
-      <img class="col-span-3 md:col-span-1 mx-auto md:mx-0" src="@/assets/icons/logoFooter.png" alt="footer_espacio" />
-      <ul class=" flex flex-col items-center md:items-start">
+    <div class="w-full md:w-9/12 md:grid md:grid-cols-1 lg:grid-cols-3 px-4 md:px-20">
+      <div class="flex-col items-center justify-center">
+        <div class="flex row items-center justify-center">
+          <img class="col-span-3 md:col-span-1 mx-auto md:mx-0" src="@/assets/icons/logoFooter.png" alt="footer_espacio" />
+        </div>
+        <div class="flex row items-center justify-center mt-4">
+          <a href="https://instagram.com/espaciotemporal?igshid=YmMyMTA2M2Y=" target="blank">
+            <img src="../assets/icons/instagram-white.png" alt="" class="w-12 h-12 mr-1">  
+          </a>
+          <a class="ml-1" href="https://instagram.com/espaciotemporal?igshid=YmMyMTA2M2Y=" target="blank">@espaciotemporal</a>
+        </div>
+      </div>
+
+      <div class="md:hidden">
+        <footer-mail-chimp />
+      </div>
+
+      <ul class="flex flex-col items-center md:items-start">
         <li>
           <router-link :to="{ name: 'questions' }"><a> FAQS </a></router-link>
         </li>
@@ -93,7 +108,9 @@
           {{ $t("footer.form.send") }}
         </button>
       </form> -->
-      <footer-mail-chimp />
+      <div class="hidden md:contents">
+        <footer-mail-chimp />
+      </div>
     </div>
   </div>
 </template>
