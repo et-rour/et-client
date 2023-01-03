@@ -16,9 +16,6 @@
           src="@/assets/icons/logoHeader.png"
           alt="logo espacio temporal"
         />
-        <a href="https://instagram.com/espaciotemporal?igshid=YmMyMTA2M2Y=" target="blank" class="md:hidden w-8 h-8 -mr-8 absolute left-4 top-8">
-          <img src="../assets/icons/instagram.png" alt="">  
-        </a>
       </div>
 
       <!-- Links -->
@@ -66,10 +63,6 @@
             >
           </div>
         </div>
-
-        <a href="https://instagram.com/espaciotemporal?igshid=YmMyMTA2M2Y=" target="blank" class="w-8 h-8 -mr-8">
-          <img src="../assets/icons/instagram.png" alt="">  
-        </a>
 
         <div class="flex flex-col justify-center items-center relative">
           <button
