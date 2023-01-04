@@ -1,6 +1,6 @@
 <template>
   <div class="w-full">
-    <div class="w-full h-screen flex flex-col md:flex-row">
+    <div class="w-full h-full md:h-screen flex flex-col md:flex-row">
       <div class="flex flex-col md:h-full md:w-40 bg-my-blue-primary border-t-2 border-black text-white text-center md:text-left flex-shrink-0">
         <span class="text-center pt-2">ADMIN MENU</span>
         <span class="text-center pb-2">{{versionConstant}}</span>

@@ -3,12 +3,7 @@
     <div
       class="bg-white my-container flex justify-center md:justify-between items-center mx-auto pt-6 pb-10"
     >
-      <!-- <div @click="toogleMovileMenuOpen" class="md:hidden cursor-pointer">
-        <font-awesome-icon icon="bars" class="text-3xl" />
-      </div> -->
-      <!-- Logo -->
-      <div
-        class="py-2 flex-grow md:flex-grow-0 flex justify-center cursor-pointer flex-shrink-0"
+      <div class="py-2 flex-grow md:flex-grow-0 flex justify-center cursor-pointer flex-shrink-0"
         @click="$router.push({ name: 'home' })"
       >
         <img
@@ -18,28 +13,26 @@
         />
       </div>
 
+
       <!-- Links -->
       <div
-        class="gap-12 items-center fixed top-0 h-screen w-screen bg-black bg-opacity-80 flex flex-col md:flex-grow md:flex-row md:relative md:h-auto md:top-0 md:justify-end md:bg-opacity-0 md:left-0 z-50 text-white md:text-black transition-all font-medium"
-        :class="movileMenuClasses"
+        class="flex justify-end items-center gap-6 z-50"
       >
         <router-link
           active-class="text-my-blue-primary "
-          class="w-full py-2 text-center md:w-auto uppercase font-bold mt-10 md:mt-0"
+          class="py-2 text-center uppercase font-bold hidden md:block"
           :to="{ name: 'owner' }"
           ><a> {{ $t("navbar.owner") }} </a></router-link
         >
         <router-link
           active-class="text-my-blue-primary "
-          class="w-full py-2 text-center md:w-auto uppercase font-bold"
+          class="py-2 text-center uppercase font-bold hidden md:block"
           :to="{ name: 'tenants' }"
           ><a> {{ $t("navbar.tenants") }} </a></router-link
         >
 
-        <div class=" relative group z-50">
-          <!-- <p class=" font-bold">{{ $t("navbar.us") }}</p> -->
+        <div class="relative group z-50 hidden md:block">
           <p class="font-bold hover:text-my-blue-primary"> {{ $t("navbar.us") }} </p>
-          <!-- <div class=" as flex flex-col gap-4 absolute w-48 top-6 -left-12 text-center bg-red-500 "> -->
           <div class="flex flex-col gap-4 absolute w-48 top-6 -left-12 text-center bg-black text-white md:bg-gray-100 md:text-black shadow-xl invisible group-hover:visible  h-0 group-hover:h-44 overflow-hidden  transition-all ease-in duration-500 ">
             <router-link
               class=" hover:text-my-blue-primary mt-4"
@@ -77,20 +70,26 @@
             class="mx-5 w-10 h-10 flex justify-center items-center rounded-full border border-black relative cursor-pointer"
             @mouseenter="showAccoutOptions = true"
             @mouseleave="showAccoutOptions = false"
-          >
+            @focus="showAccoutOptions = true"
+            >
+            <font-awesome-icon
+              icon="fa-regular fa-user"
+              class="p-3 md:text-black md:hidden"
+              @click="showAccoutOptions = true"
+            ></font-awesome-icon>
+            
             <font-awesome-icon
               icon="fa-regular fa-user"
               @click="goToProfileDetails"
-              class="p-3 text-white md:text-black"
+              class="p-3 text-white md:text-black hidden md:block"
             ></font-awesome-icon>
 
-            <!-- OPTIONS -->
             <div
-              class="absolute top-8 -left-52 pt-10 cursor-default invisible md:visible z-30"
-              v-if="showAccoutOptions"
+              class="absolute top-8 -left-52 pt-10 cursor-default z-30"
+              v-show="showAccoutOptions"
             >
               <div
-                class="bg-white rounded-4xl options-shadow px-6 py-6 w-64 h-80"
+                class="bg-white rounded-4xl options-shadow px-6 py-6 w-64 "
               >
                 <p class="font-normal text-center">
                   {{ user.user.firstName }} {{ user.user.lastName }}
@@ -98,6 +97,12 @@
                 <p class="font-normal text-center text-sm">
                   {{ user.user.email }}
                 </p>
+                <router-link
+                  v-if="user.user.isAdmin"
+                  :to="{ name: 'admin-locations' }"
+                  class="my-2 md:hidden"
+                  ><a> {{ $t("navbar.admin") }} </a></router-link
+                >
                 <router-link
                   :to="{ name: 'profile-main' }"
                   class="my-2 block"
@@ -152,12 +157,6 @@
             </div>
           </div>
         </div>
-        <button
-          class="my-btn w-20 md:hidden absolute top-2 right-2 bg-gray-400 px-0"
-          @click="toogleMovileMenuOpen"
-        >
-          <font-awesome-icon icon="times" />
-        </button>
       </div>
     </div>
 

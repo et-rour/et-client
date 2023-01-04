@@ -8,17 +8,6 @@
     <SpinerVue v-if="isLoadingLocation"></SpinerVue>
     <div v-else-if="getPropertyDetails">
       <router-view></router-view>
-      <a
-        target="_blank"
-        :href="`https://wa.me/+56921811458/?text=Hola, tengo una consulta sobre la propiedad: ${propertyName}`"
-        class="w-16 h-16 fixed bottom-16 right-16 z-40 cursor-pointer"
-      >
-        <img
-          src="@/assets/images/WhatsApp.png"
-          alt="whatsapp fixed"
-          class="w-full"
-        />
-      </a>
     </div>
   </div>
 </template>
@@ -58,9 +47,6 @@ export default {
   },
   computed: {
     ...mapGetters("propertiesStore", ["getPropertyDetails"]),
-    propertyName() {
-      return `${this.getPropertyDetails.name}, ${this.getPropertyDetails.zone.zone} - ${this.getPropertyDetails.zone.city}`;
-    },
   },
   mounted() {
     this.loadPropertyData();
