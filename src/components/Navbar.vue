@@ -1,7 +1,7 @@
 <template>
   <div>
     <div
-      class="bg-white my-container flex justify-center md:justify-between items-center mx-auto pt-6 pb-10"
+      class="bg-white my-container flex justify-center md:justify-between items-center mx-auto pt-6 pb-10 relative"
     >
       <div class="py-2 flex-grow md:flex-grow-0 flex justify-center cursor-pointer flex-shrink-0"
         @click="$router.push({ name: 'home' })"
@@ -16,7 +16,7 @@
 
       <!-- Links -->
       <div
-        class="flex justify-end items-center gap-6 z-50"
+        class="flex justify-end items-center gap-6 z-50 absolute top-8 right-0 md:relative md:top-0"
       >
         <router-link
           active-class="text-my-blue-primary "
@@ -59,7 +59,7 @@
 
         <div class="flex flex-col justify-center items-center relative">
           <button
-            class="my-btn w-20"
+            class="my-btn py-1 w-auto px-2 rounded-lg"
             @click="toogleLoginModalOpen"
             v-if="!isAuth"
           >

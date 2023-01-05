@@ -39,7 +39,7 @@
       </div>
     </div>
     <!-- LOGIN MODAL -->
-    <div class="bg-white my-container w-2/3 px-4 relative" v-else @click.stop>
+    <div class="bg-white my-container w-11/12 md:w-2/3 px-4 relative" v-else @click.stop>
       <div
         class="absolute top-3 left-3 p-2 cursor-pointer"
         @click="toogleLoginModalOpen"
