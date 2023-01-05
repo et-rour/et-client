@@ -11,7 +11,7 @@
       <a
         target="_blank"
         :href="`https://wa.me/+56921811458/?text=Hola, tengo una consulta sobre la propiedad: ${propertyName}`"
-        class="w-16 h-16 fixed bottom-16 right-16 z-50 cursor-pointer"
+        class="w-16 h-16 fixed bottom-28 right-12 lg:bottom-16 lg:right-16 z-40 cursor-pointer"
       >
         <img
           src="@/assets/images/WhatsApp.png"
