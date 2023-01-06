@@ -4,13 +4,13 @@
     id="sidebar"
   >
     <div
-      class="w-full md:w-64 h-40 md:h-full overflow-y-auto relative py-4 border-r-2 border-black flex-shrink-0" style="overscroll-behavior: contain"
+      class="w-full md:w-64 h-40 md:h-full overflow-y-auto relative py-4 border-r-2 border-b-2 border-black flex-shrink-0" style="overscroll-behavior: contain"
       v-if="showSidebar"
     >
       <slot name="sidebar"></slot>
     </div>
 
-    <div class="flex-grow flex justify-center items-center">
+    <div class="flex-grow flex justify-center items-center ">
       <slot name="main"></slot>
     </div>
   </div>
