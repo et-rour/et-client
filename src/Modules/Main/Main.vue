@@ -64,7 +64,7 @@
     </div>
 
     <!-- Spaces -->
-    <div class="my-container" id="list-spaces">
+    <div class="my-container" id="spaces">
       <h2 class="my-title-2 my-16 md:text-center">
         {{ $t("landing.spaces.title") }}
       </h2>

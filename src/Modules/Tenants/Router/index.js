@@ -1,4 +1,4 @@
-import Index from "../Views/index.vue";
+import Main from "../Views/Main.vue";
 import LocationLayout from "../Layout/Layout.vue";
 import LocationDetails from "../Views/locationDetails.vue";
 import Calendar from "../Views/Calendar.vue";
@@ -8,7 +8,7 @@ export default [
   {
     name: "tenants",
     path: "/propietario",
-    component: Index,
+    component: Main,
   },
   {
     name: "tenants-layout",

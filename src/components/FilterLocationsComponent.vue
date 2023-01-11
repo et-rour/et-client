@@ -55,6 +55,7 @@
         <button
           class="border cursor-pointer w-auto px-3 py-1 bg-my-blue-primary text-white rounded-lg"
           @click="sendFilters"
+          v-scroll-to="'#spaces'"
         >
           <p>{{ $t("landing.hero_2.seeResult") }}</p>
         </button>
