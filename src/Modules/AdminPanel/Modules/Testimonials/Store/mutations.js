@@ -16,3 +16,6 @@ export const MUTATION_PUT_TESTIMONIAL = (state, details) => {
     return {...testimonial}
   });
 };
+export const MUTATION_DELETE_TESTIMONIAL = (state, idTestimonial) => {
+  state.testimonials = state.testimonials.filter(testimonial => testimonial.id!==idTestimonial) 
+};

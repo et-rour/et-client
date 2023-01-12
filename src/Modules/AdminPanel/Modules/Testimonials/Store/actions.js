@@ -21,3 +21,7 @@ export const ACTION_PUT_TESTIMONIAL = async ({ commit }, {id,testimonial}) => {
   const { data } = await EspacioAPI.put(`/testimonial/${id}`,testimonial);
   commit("MUTATION_PUT_TESTIMONIAL", data);
 };
+export const ACTION_DELETE_TESTIMONIAL = async ({ commit }, id) => {
+  await EspacioAPI.delete(`/testimonial/${id}`);
+  commit("MUTATION_DELETE_TESTIMONIAL", id);
+};

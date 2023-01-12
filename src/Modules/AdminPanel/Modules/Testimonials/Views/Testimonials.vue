@@ -8,10 +8,10 @@
         :src="testimonial.video_url">
       </iframe>
 
-      <div class="flex justify-between flex-col group ">
+      <div class="flex justify-between flex-col">
         <p>{{$t('adminPanel.testimonials.urlVideo')}}</p> 
-        <div class="group ">
-          <span class="underline cursor-pointer text-my-blue-primary">Ver ejemplo:</span>
+        <details>
+          <summary>Ver ejemplo</summary>
           <div class="flex">
             <a
               href="https://firebasestorage.googleapis.com/v0/b/espacio-temporal-prod.appspot.com/o/extras%2FCaptura%20de%20pantalla%202022-12-12%20002650.png?alt=media&token=8c039c1c-33dc-40bb-a2b6-7b3578e03f12"
@@ -19,7 +19,7 @@
               rel="noreferrer"
             >
               <img 
-                class="w-96 h-0 group-hover:h-52 transition-all dura  tion-700" 
+                class="w-96 h-52 transition-all" 
                 src="https://firebasestorage.googleapis.com/v0/b/espacio-temporal-prod.appspot.com/o/extras%2FCaptura%20de%20pantalla%202022-12-12%20002650.png?alt=media&token=8c039c1c-33dc-40bb-a2b6-7b3578e03f12"
                 alt="video example1"
               >
@@ -30,14 +30,13 @@
               rel="noreferrer"
             >
               <img 
-                class="w-96 h-0 group-hover:h-52 transition-all dura  tion-700" 
+                class="w-96 h-52 transition-all" 
                 src="https://firebasestorage.googleapis.com/v0/b/espacio-temporal-prod.appspot.com/o/extras%2FCaptura%20de%20pantalla%202022-12-12%20001426.png?alt=media&token=84f0b0a7-5faf-4afe-9e26-3ff7c37db60d" 
                 alt="video example"
               >
             </a>
-
           </div>
-        </div>
+        </details>
         <input type="text" class="my-input border" v-model="testimonial.video_url">
       </div>
 
@@ -56,7 +55,11 @@
         <input type="text" class="my-input border" v-model="testimonial.location">
       </div>
 
-      <div class=" flex justify-end">
+      <div class=" flex justify-end gap-2">
+        <button @click="onClickDelteTestimonial" class="my-btn bg-red-400">
+          {{$t('general.delete')}}
+        </button>
+
         <button @click="submit" class="my-btn"
           :disabled="isSaving"
           :class="isSaving&&'my-disabled'"
@@ -71,7 +74,7 @@
 </template>
 
 <script>
-import { CustomErrorToast } from "@/sweetAlert";
+import { CustomErrorToast, CustomConfirmDialog } from "@/sweetAlert";
 import Spiner from "../../../../../components/Spiner.vue";
 import { mapActions } from 'vuex';
 
@@ -85,7 +88,7 @@ export default {
     }
   },
   methods:{
-    ...mapActions("adminPanelStore/testimonials",["ACTION_GET_TESTIMONIAL_BY_ID","ACTION_POST_TESTIMONIAL","ACTION_PUT_TESTIMONIAL"]),
+    ...mapActions("adminPanelStore/testimonials",["ACTION_GET_TESTIMONIAL_BY_ID","ACTION_POST_TESTIMONIAL","ACTION_PUT_TESTIMONIAL","ACTION_DELETE_TESTIMONIAL"]),
     async loadTestimonials(){
       if (this.isNewTestimonial) {
         this.testimonial = {
@@ -121,6 +124,24 @@ export default {
         const newTestomonial = await this.ACTION_POST_TESTIMONIAL(this.testimonial)
         this.isSaving = false
         this.$router.push({name:'admin-testimonial-detail',params:{id:newTestomonial.id}})
+      } catch (error) {
+        this.isSaving = false
+        CustomErrorToast.fire({
+          text: error.response.data.message || error,
+        });
+      }
+    },
+    async onClickDelteTestimonial(){
+      try {
+        const { isConfirmed } = await CustomConfirmDialog.fire({
+          text: this.$t("sweetAlertMessages.confirmTitle"),
+        });
+        if (!isConfirmed) return;
+        
+        this.isSaving = true
+        await this.ACTION_DELETE_TESTIMONIAL(this.testimonial.id)
+        this.isSaving = false
+        this.$router.push({name:'admin-testimonial'})
       } catch (error) {
         this.isSaving = false
         CustomErrorToast.fire({
