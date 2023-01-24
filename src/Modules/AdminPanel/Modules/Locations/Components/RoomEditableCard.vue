@@ -205,7 +205,7 @@ export default {
         if (!result.isConfirmed) return;
         this.isSaving = true;
         try {
-          await espacioTemporalApi.put(`/room/${this.room.id}`,{
+          await espacioTemporalApi.put(`/admin/room/${this.room.id}`,{
             locationId: this.getLocationDetails.id,
             isDeleted:true
           });

@@ -31,14 +31,14 @@ import { mapActions, mapGetters } from "vuex";
 import { CustomErrorToast } from "@/sweetAlert";
 export default {
   methods: {
-    ...mapActions("ownerPanelStore", ["getOwnerslocations"]),
+    ...mapActions("ownerPanelStore", ["ACTION_GET_OWNER_LOCATIONS"]),
   },
   computed: {
     ...mapGetters("authStore", ["user"]),
   },
   async mounted() {
     try {
-      await this.getOwnerslocations(this.user.user.id);
+      await this.ACTION_GET_OWNER_LOCATIONS(this.user.user.id);
     } catch (error) {
       CustomErrorToast.fire({
         text: error.response.data.message,

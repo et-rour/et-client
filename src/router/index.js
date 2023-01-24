@@ -8,6 +8,7 @@ import HowItWorks from "../Modules/Main/HowItWorks.vue";
 import WhatWeDo from "../Modules/Main/WhatWeDo.vue";
 import Team from "../Modules/Main/Team.vue";
 import TrustUs from "../Modules/Main/TrustUs.vue";
+import Privacy from "../Modules/Main/Privacy.vue";
 
 import OwnerRoutes from "../Modules/Owners/Router/index";
 import TenantsRouter from "../Modules/Tenants/Router/index";
@@ -55,6 +56,11 @@ const routes = [
     name: "how-it-works",
     path: "/casos-de-exito",
     component: HowItWorks,
+  },
+  {
+    name: "privacy",
+    path: "/politicas-cookies",
+    component: Privacy,
   },
   {
     name: "trust-us",
