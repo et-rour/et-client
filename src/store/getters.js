@@ -1,3 +1,6 @@
+export const GETTER_SHOW_COOKIES_BANNER = (state) => {
+  return state.showCookiesBanner;
+};
 export const lastUsedBy = (state) => {
   return state.id;
 };
