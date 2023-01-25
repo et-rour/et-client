@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="fixed left-6 bottom-6 w-96 h-40 bg-gray-100 shadow-2xl rounded-lg p-4 z-50" v-show="GETTER_SHOW_COOKIES_BANNER">
+    <div class="fixed left-6 bottom-28 md:bottom-6 md:w-96 w-72 bg-gray-100 shadow-2xl rounded-lg p-4 z-50" v-show="GETTER_SHOW_COOKIES_BANNER">
       <p>
         {{ $t("cookies.banner.text") }}
         <router-link class="text-my-blue-primary underline" :to="{ name:'privacy' }">{{ $t("cookies.banner.link") }}</router-link>
@@ -13,7 +13,7 @@
     
     <font-awesome-icon
       icon="fa-solid fa-gear"
-      class="z-40 fixed left-6 bottom-6 text-5xl cursor-pointer"
+      class="z-40 fixed left-6 bottom-28 md:bottom-6 text-4xl cursor-pointer"
       @click="onClickShowModal"
     ></font-awesome-icon>
   </div>
