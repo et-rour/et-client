@@ -1,14 +1,15 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Landing from "../Modules/Main/Main.vue";
-import Questions from "../Modules/Main/Questions.vue";
-import Terms from "../Modules/Main/Terms.vue";
-import WorkWithUs from "../Modules/Main/WorkWithUs.vue";
-import HowItWorks from "../Modules/Main/HowItWorks.vue";
-import WhatWeDo from "../Modules/Main/WhatWeDo.vue";
-import Team from "../Modules/Main/Team.vue";
-import TrustUs from "../Modules/Main/TrustUs.vue";
-import Privacy from "../Modules/Main/Privacy.vue";
+
+const Landing = () => import(/* webpackChunkName: "Landing" */ "../Modules/Main/Main.vue");
+const Questions = () => import(/* webpackChunkName: "Questions" */ "../Modules/Main/Questions.vue");
+const Terms = () => import(/* webpackChunkName: "Terms" */ "../Modules/Main/Terms.vue");
+const WorkWithUs = () => import(/* webpackChunkName: "WorkWithUs" */ "../Modules/Main/WorkWithUs.vue");
+const HowItWorks = () => import(/* webpackChunkName: "HowItWorks" */ "../Modules/Main/HowItWorks.vue");
+const WhatWeDo = () => import(/* webpackChunkName: "WhatWeDo" */ "../Modules/Main/WhatWeDo.vue");
+const Team = () => import(/* webpackChunkName: "Team" */ "../Modules/Main/Team.vue");
+const TrustUs = () => import(/* webpackChunkName: "TrustUs" */ "../Modules/Main/TrustUs.vue");
+const Privacy = () => import(/* webpackChunkName: "Privacy" */ "../Modules/Main/Privacy.vue");
 
 import OwnerRoutes from "../Modules/Owners/Router/index";
 import TenantsRouter from "../Modules/Tenants/Router/index";

@@ -21,37 +21,28 @@
 
       <ul class="flex flex-col items-center md:items-start">
         <li>
-          <router-link :to="{ name: 'questions' }"><a> FAQS </a></router-link>
+          <router-link :to="{ name: 'questions' }">FAQS</router-link>
         </li>
         <li>
-          <router-link :to="{ name: 'owner' }"
-            ><a> {{ $t("footer.nav.owner") }} </a></router-link
+          <router-link :to="{ name: 'owner' }">{{ $t("footer.nav.owner") }}</router-link
+          >
+        </li>
+        <li><router-link :to="{ name: 'tenants' }">{{ $t("footer.nav.tenants") }}</router-link
           >
         </li>
         <li>
-          <router-link :to="{ name: 'tenants' }"
-            ><a> {{ $t("footer.nav.tenants") }} </a></router-link
+          <router-link :to="{ name: 'how-it-works' }">{{ $t("footer.nav.howWorks") }}</router-link
           >
         </li>
         <li>
-          <router-link :to="{ name: 'how-it-works' }"
-            ><a> {{ $t("footer.nav.howWorks") }} </a></router-link
+          <router-link :to="{ name: 'posts' }">{{ $t("footer.nav.us") }}</router-link
           >
         </li>
         <li>
-          <router-link :to="{ name: 'posts' }"
-            ><a> {{ $t("footer.nav.us") }} </a></router-link
-          >
+          <router-link :to="{ name: 'terms' }">{{ $t("footer.nav.terms") }}</router-link>
         </li>
         <li>
-          <router-link :to="{ name: 'terms' }">
-            <a> {{ $t("footer.nav.terms") }} </a>
-          </router-link>
-        </li>
-        <li>
-          <router-link :to="{ name: 'workwithus' }">
-            <a> {{ $t("footer.nav.workwithus") }} </a>
-          </router-link>
+          <router-link :to="{ name: 'workwithus' }">{{ $t("footer.nav.workwithus") }}</router-link>
         </li>
       </ul>
       <!-- <form
@@ -120,7 +111,6 @@
 import EspacioTemporalAPI from "@/Api/index.js";
 import { CustomErrorToast } from "@/sweetAlert";
 import FooterMailChimp from './FooterMailChimp.vue';
-
 export default {
   components: { 
     // VueRecaptcha, 
@@ -132,7 +122,7 @@ export default {
       validateSendMessage: false,
       status: "",
       sucessfulServerResponse: "",
-      serverError: "",
+      serverError: "",      
     };
   },
   methods: {

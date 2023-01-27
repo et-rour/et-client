@@ -1,10 +1,6 @@
 <template>
   <div class="w-full mx-auto mb-24 md:mb-2">
     <!-- hero -->
-    <div class="absolute top-0 left-0 text-gray-100">
-      version: {{ appVersion }}
-    </div>
-    
     <CoverImageVue
       :id="1"
       :idProgressBar="'cover_image_home'"
@@ -126,7 +122,6 @@ import Spiner from "../../components/Spiner.vue";
 import VideoComponent from "./Components/VideoComponent.vue";
 import CoverImageVue from "./Components/CoverImage.vue";
 import FilterLocationsComponent from "../../components/FilterLocationsComponent.vue";
-import { version } from "../../../package.json";
 export default {
   components: {
     PropertyCard,
@@ -140,7 +135,6 @@ export default {
       propertiesListFiltered: [],
       resetVisible: true,
       paginate: ["propertiesData"],
-      appVersion: version,
     };
   },
   computed: {
