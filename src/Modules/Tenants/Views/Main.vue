@@ -5,7 +5,7 @@
       :id="2"
       :idProgressBar="'cover_image_tenants'"
       :specificDirectory="'/COVER'"
-      :defaultImageUrl="'https://firebasestorage.googleapis.com/v0/b/espacio-temporal-e37f5.appspot.com/o/COVER%2Fpropietario.png?alt=media&token=cf55b933-fc47-4d32-be89-1550487b86c9'"
+      :defaultImageUrl="'https://firebasestorage.googleapis.com/v0/b/espacio-temporal-prod.appspot.com/o/COVER%2Fhome%2Fpropietario_min.png?alt=media&token=90573a24-f6bd-48bd-b5bf-d46048e73b06'"
       :defaultText="'ESPACIOS PARA EMPRENDEDORES'"
     >
       <div class="flex gap-2 flex-wrap">

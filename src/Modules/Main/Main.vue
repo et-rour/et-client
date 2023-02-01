@@ -5,7 +5,7 @@
       :id="1"
       :idProgressBar="'cover_image_home'"
       :specificDirectory="'/COVER'"
-      :defaultImageUrl="'https://firebasestorage.googleapis.com/v0/b/espacio-temporal-e37f5.appspot.com/o/COVER%2Fhome.png?alt=media&token=1c2c5620-1904-43b1-9de9-9c3449ad8dd9'"
+      :defaultImageUrl="'https://firebasestorage.googleapis.com/v0/b/espacio-temporal-prod.appspot.com/o/COVER%2Fhome%2Fhome_min.png?alt=media&token=917d5f3a-d760-4536-9d0a-daf0869cb227'"
       :defaultText="'BUSCAMOS PROPIEDADES EN DESUSO Y LAS TRANSFORMAMOS EN ESPACIOS DE TRABAJO'"
     >
       <div class="flex gap-8 flex-col sm:flex-row">

@@ -12,6 +12,9 @@
       <img
         v-else
         :src="coverData.image"
+        rel="preload" 
+        as="image"
+        sizes="100vw"
         alt="Hero image"
         class="w-full h-full object-cover rounded-3xl"
       />
