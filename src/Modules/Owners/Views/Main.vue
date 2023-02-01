@@ -4,7 +4,7 @@
       :id="3"
       :idProgressBar="'cover_image_owner'"
       :specificDirectory="'/COVER'"
-      :defaultImageUrl="'https://firebasestorage.googleapis.com/v0/b/espacio-temporal-e37f5.appspot.com/o/COVER%2Fpropiedad.png?alt=media&token=83bf1a5f-8e02-4f72-b103-efbace00ae3a'"
+      :defaultImageUrl="'https://firebasestorage.googleapis.com/v0/b/espacio-temporal-prod.appspot.com/o/COVER%2Fhome%2Fpropiedad_min.png?alt=media&token=7a66f561-a898-47df-9e65-35f2ecf226e9'"
       :defaultText="'PUBLICA TU PROPIEDAD CON NOSOTROS'"
       class="mb-8"
     >

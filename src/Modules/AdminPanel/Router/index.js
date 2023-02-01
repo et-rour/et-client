@@ -1,5 +1,4 @@
-const Layout = () =>
-  import(/* webpackChunkName: "Layout" */ "../Layouts/AdminPanelLoyaut.vue");
+const Layout = () => import(/* webpackChunkName: "Admin_Layout" */ "../Layouts/AdminPanelLoyaut.vue");
 
 import userRouter from "../Modules/User/Router/index.js";
 import zonesRouter from "../Modules/Zones/Router/index.js";

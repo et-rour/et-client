@@ -21,13 +21,21 @@
     <p class="my-3"> {{ $t("cookies.parragraph_12") }} </p>
     <p class="my-3"> {{ $t("cookies.parragraph_13") }} </p>
     <p class="my-3"> {{ $t("cookies.parragraph_14") }} </p>
+    
+    <p>version: {{ appVersion }}</p>
   </div>
   
 </template>
 
 <script>
+import { version } from "../../../package.json";
 export default {
   metaInfo: {title: "Política de cookies"},
+  data(){
+    return{
+      appVersion: version,
+    }
+  }
 };
 
 </script>
