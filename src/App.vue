@@ -17,6 +17,7 @@
     </div>
     <MovileMenu />
     <Footer></Footer>
+    <CookiesBanner />
   </div>
 </template>
 
@@ -28,18 +29,15 @@ import Navbar from "./components/Navbar.vue";
 import { CustomErrorToast } from "@/sweetAlert";
 import {
   analytics,
-  auth,
-  setUserProperties,
-  setUserId,
   setCurrentScreen,
   logEvent,
-  onAuthStateChanged,
 } from "./Firebase/index";
 import isPWA from "./utils/isPWA";
 import { version } from "../package.json";
+import CookiesBanner from "./components/CookiesBanner.vue";
 
 export default {
-  components: { Navbar, MovileMenu, Footer },
+  components: { Navbar, MovileMenu, Footer, CookiesBanner },
   data() {
     return {
       loadingApp: true,
@@ -54,37 +52,21 @@ export default {
   },
   computed: {
     ...mapGetters("authStore", ["user"]),
-    userCountry() {
-      return this.user.user.country;
-    },
   },
   async mounted() {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setUserId(analytics, user.uid);
-        setUserProperties(analytics, {
-          account_type: "Basic", // can help you to define audiences
-        });
-      }
-    });
     this.loadingApp = true;
     try {
       await this.loadSession();
+      console.log('%cApp.vue line:60 this.loadSession()', 'color: white; background-color: #007acc;');
       await this.loadProperties();
+      console.log('%cApp.vue line:62 this.loadProperties()', 'color: white; background-color: #007acc;');
       await this.loadCurrencies();
+      console.log('%cApp.vue line:64 this.loadCurrencies()', 'color: white; background-color: #007acc;');
       await this.loadZones();
+      console.log('%cApp.vue line:66 this.loadZones()', 'color: white; background-color: #007acc;');
       await this.fetchCoversData();
+      console.log('%cApp.vue line:68 this.fetchCoversData()', 'color: white; background-color: #007acc;');
     
-      console.log(
-        "%cApp.vue line:48 RUNNINF",
-        "color: #007acc;",
-        `RUNNING
-            this.loadSession()
-            this.loadProperties()
-            this.loadCurrencies()
-            this.loadZones()
-            this.fetchCoversData()`
-      );
     } catch (error) {
       CustomErrorToast.fire({
         text: error.response.data.message || error,
@@ -95,11 +77,6 @@ export default {
     }
     this.loadingApp = false;
   },
-  watch: {
-    userCountry() {
-      // this.setSiteCountry(this.user.user.country);
-    },
-  },
   metaInfo: {
     // all titles will be injected into this template
     titleTemplate: "%s - Espacio Temporal",
@@ -108,8 +85,8 @@ export default {
     },
     meta: [
       {
-        name: "description",
-        content: "An example Vue application with vue-meta.",
+        name: "Espacio Temporal",
+        content: "Administramos todo tipo de inmuebles en desuso.",
       },
       { charset: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },

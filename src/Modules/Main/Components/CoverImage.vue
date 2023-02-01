@@ -12,6 +12,9 @@
       <img
         v-else
         :src="coverData.image"
+        rel="preload" 
+        as="image"
+        sizes="100vw"
         alt="Hero image"
         class="w-full h-full object-cover rounded-3xl"
       />
@@ -199,7 +202,7 @@ export default {
           file: this.file,
         });
 
-        await EspacioTemporalAPI.put(`/general/${this.id}/coverImage`,{imageUrl})
+        await EspacioTemporalAPI.put(`/admin/general/${this.id}/coverImage`,{imageUrl})
         this.$router.go()
 
       } catch (error) {
@@ -212,7 +215,7 @@ export default {
     
     async changeCoverImageToDefault() {
       try {
-        await EspacioTemporalAPI.put(`/general/${this.id}/coverImage`,{ imageUrl: this.defaultImageUrl})
+        await EspacioTemporalAPI.put(`/admin/general/${this.id}/coverImage`,{ imageUrl: this.defaultImageUrl})
         this.$router.go()
 
       } catch (error) {
@@ -224,7 +227,7 @@ export default {
 
     async saveNewCoverText(text) {
       try {
-        await EspacioTemporalAPI.put(`/general/${this.id}/text`,{text})
+        await EspacioTemporalAPI.put(`/admin/general/${this.id}/text`,{text})
         this.$router.go()
 
       } catch (error) {
@@ -237,7 +240,7 @@ export default {
     
     async changeTextToDefault() {
       try {
-        await EspacioTemporalAPI.put(`/general/${this.id}/text`,{text:this.defaultText})
+        await EspacioTemporalAPI.put(`/admin/general/${this.id}/text`,{text:this.defaultText})
         this.$router.go()
 
       } catch (error) {

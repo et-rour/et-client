@@ -199,6 +199,29 @@
     "airbnbDescription3": "2.3 Accommodation Reservations. An Accommodation Reservation constitutes a limited license to access, use and stay in the Accommodation. The Host reserves the right to access the Accommodation during the Guest's stay, provided that: i) it is reasonably necessary, ii) it is permitted by the contract signed between you and the Host, and iii) it is permitted by applicable law. If you remain in the Accommodation past the check-out time, the Host may force you to leave by legal means, including the imposition of reasonable penalties. You may not exceed the maximum number of Guests allowed.",
     "airbnbDescription4": "2.4 Reservations of Experiences and other Host Services. The Reservation of an Experience or other Host Service entitles you to participate, attend or enjoy that Host Service. You are responsible for confirming that you and any"
   },
+  "cookies": {
+    "banner":{
+      "text": "This website uses cookies to ensure that you get the best experience on our website.",
+      "link": "Cookie notice",
+      "acept": "Accept cookies",
+      "decline": "Decline"
+    },
+    "title": "POLÍTICA DE COOKIES",
+    "parragraph_1": "Access to this Website may imply the use of cookies. Cookies are small amounts of information that are stored in the browser used by each User —in the different devices that may be used to navigate— so that the server remembers certain information that later and only the server that implemented it will read. Cookies facilitate browsing, make it more user-friendly, and do not harm the browsing device.",
+    "parragraph_2": "Cookies are automatic procedures for collecting information related to the preferences determined by the User during his visit to the Website in order to recognize him as a User, and personalize his experience and use of the Website, and can also, for example, help to identify and resolve errors.",
+    "parragraph_3": "The information collected through cookies may include the date and time of visits to the Website, the pages viewed, the time spent on the Website and the sites visited just before and after it. However, no cookie allows it to contact the User's telephone number or any other means of personal contact. No cookie can extract information from the User's hard drive or steal personal information. The only way for the User's private information to become part of the Cookie file is for the user to personally provide that information to the server.",
+    "parragraph_4": "Cookies that allow a person to be identified are considered personal data. Therefore, the Privacy Policy described above will apply to them. In this sense, for the use of the same, the consent of the User will be necessary. This consent will be communicated, based on an authentic choice, offered by means of an affirmative and positive decision, before the initial, removable and documented treatment.",
+    "parragraph_5": "own cookies",
+    "parragraph_6": "These are cookies that are sent to the User's computer or device and managed exclusively by Espacio Temporal for the best functioning of the Website. The information collected is used to improve the quality of the Website and its Content and your experience as a User. These cookies allow the User to be recognized as a recurring visitor to the Website and adapt the content to offer content that meets her preferences.",
+    "parragraph_7": "Third party cookies",
+    "parragraph_8": "They are cookies used and managed by external entities that provide Espacio Temporal with services requested by it to improve the Website and the user experience when browsing the Website. The main objectives for which third-party cookies are used are to obtain access statistics and analyze browsing information, that is, how the User interacts with the Website.",
+    "parragraph_9": "The information obtained refers, for example, to the number of pages visited, the language, the place to which the IP address from which the User accesses, the number of Users who access, the frequency and recidivism of visits, the time of visit, the browser they use, the operator or type of device from which the visit is made. This information is used to improve the Website, and to detect new needs to offer Users a Content and/or service of optimum quality. In any case, the information is collected anonymously and Website trend reports are prepared without identifying individual users.",
+    "parragraph_10": "You can obtain more information about cookies, information on privacy, or consult the description of the type of cookies used, their main characteristics, expiration period, etc. at the following link(s):",
+    "parragraph_11": "The entity(ies) in charge of supplying cookies may transfer this information to third parties, as long as it is required by law or it is a third party that processes this information for said entities.",
+    "parragraph_12": "Disable, reject and delete cookies",
+    "parragraph_13": "The User can disable, reject and eliminate the cookies - totally or partially - installed on their device through the configuration of their browser (among which are, for example, Chrome, Firefox, Safari, Explorer). In this sense, the procedures for rejecting and deleting cookies may differ from one Internet browser to another. Consequently, the User must follow the instructions provided by the Internet browser that he is using. In the event that you reject the use of cookies —totally or partially— you may continue to use the Website, although the use of some of its features may be limited.",
+    "parragraph_14": "This Cookie Policy document has been created using the free online web cookie policy template generator on 01/24/2023."
+  },
   "workWithus": {
     "title": "Work with us",
     "jobTitle": "property manager",

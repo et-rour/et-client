@@ -74,7 +74,7 @@
 </template>
 
 <script>
-import { CustomErrorToast, CustomConfirmDialog } from "@/sweetAlert";
+import { CustomToast, CustomErrorToast, CustomConfirmDialog } from "@/sweetAlert";
 import Spiner from "../../../../../components/Spiner.vue";
 import { mapActions } from 'vuex';
 
@@ -157,6 +157,10 @@ export default {
           testimonial:this.testimonial
         })
         this.isSaving = false
+        CustomToast.fire({
+          title: this.$t("sweetAlertMessages.saved"),
+          icon: "success",
+        });
       } catch (error) {
         this.isSaving = false
         CustomErrorToast.fire({

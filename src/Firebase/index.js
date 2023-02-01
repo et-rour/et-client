@@ -15,6 +15,7 @@ import {
   setUserId,
   setCurrentScreen,
   logEvent,
+  setAnalyticsCollectionEnabled,
 } from "firebase/analytics";
 import Vue from "vue";
 // TODO: Add SDKs for Firebase products that you want to use
@@ -39,6 +40,7 @@ const auth = getAuth();
 const analytics = getAnalytics();
 
 Vue.prototype.$analytics = analytics;
+setAnalyticsCollectionEnabled(analytics,false)
 
 export const uploadBytesfunciont = uploadBytes;
 export {
@@ -50,6 +52,7 @@ export {
   signOut,
   analytics,
   setUserProperties,
+  setAnalyticsCollectionEnabled,
   setUserId,
   setCurrentScreen,
   logEvent,

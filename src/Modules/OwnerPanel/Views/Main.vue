@@ -1,11 +1,11 @@
 <template>
   <div class="">
     <!-- <h1 class="my-title">{{ $t("admin.locations.title") }}</h1> -->
-    <div class="flex flex-col" v-if="ownersLocations">
-      <div v-if="ownersLocations.length < 1">
+    <div class="flex flex-col">
+      <div v-if="GETTER_MY_LOCATIONS.length < 1">
         <h2 class="my-title-2">{{ $t("admin.locations.notFound") }}</h2>
       </div>
-      <div v-else v-for="location in ownersLocations" :key="location.id">
+      <div v-else v-for="location in GETTER_MY_LOCATIONS" :key="location.id">
         <PropertyToogleVue
           :locationNumber="1"
           :location="location"
@@ -23,8 +23,7 @@ export default {
     PropertyToogleVue,
   },
   computed: {
-    ...mapGetters("propertiesStore", ["propertiesList", "zonesList"]),
-    ...mapGetters("ownerPanelStore", ["ownersLocations"]),
+    ...mapGetters("ownerPanelStore", ["GETTER_MY_LOCATIONS"]),
   },
 };
 </script>

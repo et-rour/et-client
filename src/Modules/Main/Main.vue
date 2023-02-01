@@ -1,15 +1,11 @@
 <template>
   <div class="w-full mx-auto mb-24 md:mb-2">
     <!-- hero -->
-    <div class="absolute top-0 left-0 text-gray-100">
-      version: {{ appVersion }}
-    </div>
-    
     <CoverImageVue
       :id="1"
       :idProgressBar="'cover_image_home'"
       :specificDirectory="'/COVER'"
-      :defaultImageUrl="'https://firebasestorage.googleapis.com/v0/b/espacio-temporal-e37f5.appspot.com/o/COVER%2Fhome.png?alt=media&token=1c2c5620-1904-43b1-9de9-9c3449ad8dd9'"
+      :defaultImageUrl="'https://firebasestorage.googleapis.com/v0/b/espacio-temporal-prod.appspot.com/o/COVER%2Fhome%2Fhome_min.png?alt=media&token=917d5f3a-d760-4536-9d0a-daf0869cb227'"
       :defaultText="'BUSCAMOS PROPIEDADES EN DESUSO Y LAS TRANSFORMAMOS EN ESPACIOS DE TRABAJO'"
     >
       <div class="flex gap-8 flex-col sm:flex-row">
@@ -126,7 +122,6 @@ import Spiner from "../../components/Spiner.vue";
 import VideoComponent from "./Components/VideoComponent.vue";
 import CoverImageVue from "./Components/CoverImage.vue";
 import FilterLocationsComponent from "../../components/FilterLocationsComponent.vue";
-import { version } from "../../../package.json";
 export default {
   components: {
     PropertyCard,
@@ -140,7 +135,6 @@ export default {
       propertiesListFiltered: [],
       resetVisible: true,
       paginate: ["propertiesData"],
-      appVersion: version,
     };
   },
   computed: {

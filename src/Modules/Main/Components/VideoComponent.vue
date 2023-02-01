@@ -15,7 +15,7 @@
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-40 gap-y-10 ">
           <div class="">
-            <img src="@/assets/icons/comercial.svg" class="w-40 h-40 object-contain mx-auto">
+            <img src="@/assets/icons/comercial.svg" class="w-40 h-40 object-contain mx-auto" alt="comercial alt">
             <p class="text-3xl font-extrabold text-center ">
               {{ $t("landing.video.question_1") }}
             </p>
@@ -24,7 +24,7 @@
             </p>
           </div>
           <div class="">
-            <img src="@/assets/icons/emprendedores.svg" class="w-40 h-40 object-contain mx-auto">
+            <img src="@/assets/icons/emprendedores.svg" class="w-40 h-40 object-contain mx-auto" alt="emprendedores alt">
             <p class="text-3xl font-extrabold text-center">
               {{ $t("landing.video.question_2") }}
             </p>

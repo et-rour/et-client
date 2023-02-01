@@ -22,13 +22,13 @@
           active-class="text-my-blue-primary "
           class="py-2 text-center uppercase font-bold hidden md:block"
           :to="{ name: 'owner' }"
-          ><a> {{ $t("navbar.owner") }} </a></router-link
+          >{{ $t("navbar.owner") }}</router-link
         >
         <router-link
           active-class="text-my-blue-primary "
           class="py-2 text-center uppercase font-bold hidden md:block"
           :to="{ name: 'tenants' }"
-          ><a> {{ $t("navbar.tenants") }} </a></router-link
+          >{{ $t("navbar.tenants") }}</router-link
         >
 
         <div class="relative group z-50 hidden md:block">
@@ -37,22 +37,22 @@
             <router-link
               class=" hover:text-my-blue-primary mt-4"
               :to="{ name: 'what-we-do' }"
-              ><a> {{ $t("navbar.usOption1") }} </a></router-link
+              > {{ $t("navbar.usOption1") }}</router-link
             >
             <router-link
               class=" hover:text-my-blue-primary "
               :to="{ name: 'team' }"
-              ><a> {{ $t("navbar.usOption2") }} </a></router-link
+              >{{ $t("navbar.usOption2") }}</router-link
             >
             <router-link
               class=" hover:text-my-blue-primary "
               :to="{ name: 'how-it-works' }"
-              ><a> {{ $t("navbar.usOption3") }} </a></router-link
+              >{{ $t("navbar.usOption3") }}</router-link
             >
             <router-link
               class=" hover:text-my-blue-primary "
               :to="{ name: 'trust-us' }"
-              ><a> {{ $t("navbar.usOption4") }} </a></router-link
+              >{{ $t("navbar.usOption4") }}</router-link
             >
           </div>
         </div>
@@ -101,24 +101,24 @@
                   v-if="user.user.isAdmin"
                   :to="{ name: 'admin-locations' }"
                   class="my-2 md:hidden"
-                  ><a> {{ $t("navbar.admin") }} </a></router-link
+                  >{{ $t("navbar.admin") }}</router-link
                 >
                 <router-link
                   :to="{ name: 'profile-main' }"
                   class="my-2 block"
-                  ><a> {{ $t("navbar.profile") }} </a></router-link
+                  > {{ $t("navbar.profile") }} </router-link
                 >
-                <router-link to="#" class="my-2  block"><a> {{
+                <router-link to="#" class="my-2  block">{{
                   $t("navbar.editProfile")
-                }} </a></router-link>
+                }} </router-link>
                 <p @click="logoutApp" class="cursor-pointer mb-4">
-                 <a>  {{ $t("profile.layout.logout") }} </a>
+                  {{ $t("profile.layout.logout") }}
                 </p>
                 <hr />
                 <router-link
                   :to="{ name: 'locations-list' }"
                   class="my-4 block"
-                  ><a> {{ $t("navbar.myProperties") }} </a></router-link
+                  >{{ $t("navbar.myProperties") }} </router-link
                 >
                 <hr />
                 <div class="flex justify-between mt-3">

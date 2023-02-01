@@ -38,6 +38,7 @@ import {
   faCaretDown,
   faFileContract,
   faImages,
+  faGear
 } from "@fortawesome/free-solid-svg-icons";
 import {
   faEnvelope,
@@ -88,7 +89,8 @@ library.add(
   faCaretDown,
   faFileContract,
   faWhatsapp,
-  faImages
+  faImages,
+  faGear
 );
 
 Vue.config.productionTip = false;
