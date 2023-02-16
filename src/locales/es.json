@@ -58,7 +58,8 @@
     "notAsign": "No se asigno",
     "agotada": "Agotada",
     "disponible": "Disponible",
-    "newImage":"Nueva imagen"
+    "newImage":"Nueva imagen",
+    "uploadFile":"Subir archivo"
   },
   "navbar": {
     "owner": "PUBLICA TU PROPIEDAD",
@@ -443,23 +444,31 @@
     }
   },
   "admin": {
+    "title": "PANEL",
+    "navbar":{
+      "properties": "Mis propiedades",
+      "reservations":"Mis reservaciónes",
+      "payment": "Mis pagos"
+    },
+    "reservations":{
+      "notFound": "No tienes ninguna reservación",
+      "uploadFileHeader":"Sube los archivos relaciónados a esta reservación"
+    },  
+    "payments": {
+      "title": "historial de pagos"
+    },
     "locations": {
       "title": "Todas las localizaciones",
       "notFound": "Aún no hay ubicaciones",
-      "owner": "PROPIETARIO",
-      "properties": "Propiedades",
-      "payment": "Pagos",
       "property": {
         "leaseTerm": "plazo arriendo",
         "address": "dirección",
         "images3d": "Imagenes 3d",
         "until": "hasta",
         "download": "Descargar contrato",
-        "extend": "Extender contrato",
-        "finish": "Finalizar período de arrendamiento"
-      },
-      "payments": {
-        "title": "Actividad de pagos"
+        "extend": "Extender período de arrendamiento",
+        "disable": "Desactivar propiedad",
+        "enable": "Activar propiedad"
       },
       "calendar": {
         "title": "Extiende el plazo de tu arriendo",

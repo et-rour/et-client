@@ -7,4 +7,6 @@ export default () => ({
   token: null,
   firebaseStoratgeToken: null,
   siteCountry: "",
+
+  showCookiesBanner: true,
 });

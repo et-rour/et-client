@@ -58,7 +58,8 @@
     "notAsign": "not assigned",
     "agotada": "sold out",
     "disponible": "Available",
-    "newImage":"New Image"
+    "newImage":"New Image",
+    "uploadFile":"Upload file"
   },
   "navbar": {
     "owner": "PUBLISH YOUR PROPERTY",
@@ -444,12 +445,22 @@
     }
   },
   "admin": {
+    "title": "OWNER",
+    "navbar":{
+      "properties": "My properties",
+      "reservations":"reservations",
+      "payment": "Payments"
+    },
+    "reservations":{
+      "notFound": "you don't have reservations",
+      "uploadFileHeader":"Upload the files related to this reservation"
+    },  
+    "payments": {
+      "title": "payment activity"
+    },
     "locations": {
       "title": "All locations",
       "notFound": "No locations yet",
-      "owner": "OWNER",
-      "properties": "Properties",
-      "payment": "Payments",
       "property": {
         "leaseTerm": "lease term",
         "address": "address",
@@ -457,10 +468,8 @@
         "until": "until",
         "download": "Download contract",
         "extend": "Extend contract",
-        "finish": "End lease period"
-      },
-      "payments": {
-        "title": "payment activity"
+        "disable": "Disable property",
+        "enable": "activate property"
       },
       "calendar": {
         "title": "Extend the term of your lease",

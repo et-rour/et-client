@@ -20,3 +20,7 @@ export const isWelcomeModalOpen = (state) => {
 export const siteCountry = (state) => {
   return state.siteCountry;
 };
+
+export const GETTER_SHOW_COOKIES_BANNER = (state) => {
+  return state.showCookiesBanner;
+};

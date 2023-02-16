@@ -3,16 +3,16 @@
     :showModal="showUploadImagesModal"
     @toogle="toogleShowUploadImagesModal"
   >
-    <div class="bg-white w-3/4 h-3/4" @click.stop>
+    <div class="bg-white w-3/4 h-5/6 p-2 flex flex-col" @click.stop>
       <h2 class="font-semibold text-center my-title">
-        {{ $t("adminPanel.locations.imagesList.select") }}
+        {{ $t("admin.reservations.uploadFileHeader") }}
       </h2>
       <vue-dropzone
         ref="myVueDropzone"
-        id="dropzone"
+        id="dropzone-files"
         :options="dropzoneOptions"
         v-on:vdropzone-sending="sendingEvent"
-        class="border-2 border-black border-dashed w-5/6 h-3/4 mx-auto overflow-y-auto"
+        class="border-2 border-black border-dashed w-5/6 flex-grow mx-auto "
         @vdropzone-error="erroHandler"
       ></vue-dropzone>
       <div class="w-3/4 flex justify-end items-center mt-6 mx-auto">
@@ -47,16 +47,9 @@ export default {
       required: true,
       // /Location/Location_1/Images
     },
-    id: {
+    reservation: {
+      type: Object,
       required: true,
-      // id for table, publication or room
-    },
-    table: {
-      required: true,
-      type: String,
-      // 0 Table location
-      // 1 Table publication
-      // 2 Table room
     },
     buttonText: {
       default: "Close",
@@ -65,7 +58,7 @@ export default {
   data() {
     return {
       dropzoneOptions: {
-        url: `${process.env.VUE_APP_API}/admin/image/`,
+        url: `${process.env.VUE_APP_API}/reservation/file/${this.reservation.id}`,
         thumbnailWidth: 150,
         // maxFilesize: 0.5,
       },
@@ -76,12 +69,8 @@ export default {
       this.$emit("toogle");
     },
     sendingEvent(file, xhr, formData) {
-      // formData.append("image", file);
-      formData.append("token", this.user.firebaseToken);
-      formData.append("userEmail", this.user.user.email);
-      formData.append("route", this.route); // ej: /Location_1/ , /Location_1/Room_1/,  /Publication_1/,
-      formData.append("table", this.table);
-      formData.append("id", this.id);
+      formData.append("route", this.route);
+      formData.append("reservation", this.reservation);
     },
     erroHandler(file, message) {
       CustomErrorToast.fire({
@@ -101,6 +90,12 @@ export default {
       "adminPanel.locations.imagesList.drop"
     );
   },
+  watch: {
+    showUploadImagesModal() {
+      this.$refs.myVueDropzone.removeAllFiles()
+    }
+  }
+
 };
 </script>
 

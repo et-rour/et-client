@@ -38,12 +38,15 @@ import {
   faCaretDown,
   faFileContract,
   faImages,
-  faGear
+  faGear,
+  faDollarSign
 } from "@fortawesome/free-solid-svg-icons";
 import {
   faEnvelope,
   faUser,
   faFileExcel,
+  faCalendarDays,
+  faFile
 } from "@fortawesome/free-regular-svg-icons";
 import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
 
@@ -85,12 +88,15 @@ library.add(
   faArrowRotateLeft,
   faDoorOpen,
   faRestroom,
-  faTrainSubway,
+  faTrainSubway, 
   faCaretDown,
   faFileContract,
   faWhatsapp,
   faImages,
-  faGear
+  faGear,
+  faDollarSign,
+  faCalendarDays,
+  faFile,
 );
 
 Vue.config.productionTip = false;

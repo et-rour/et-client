@@ -50,3 +50,7 @@ export const updateUserExtraData = (state, { companyName, identityCard, represen
   state.user.representativeName = representativeName;
   state.user.rut = rut;
 };
+
+export const MUTATION_CHANGE_SHOW_COOKIES_BANNER = (state, showBanner) => {
+  state.showCookiesBanner = showBanner;
+};
