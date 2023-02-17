@@ -46,7 +46,8 @@ import {
   faUser,
   faFileExcel,
   faCalendarDays,
-  faFile
+  faFile,
+  faFilePdf
 } from "@fortawesome/free-regular-svg-icons";
 import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
 
@@ -97,6 +98,7 @@ library.add(
   faDollarSign,
   faCalendarDays,
   faFile,
+  faFilePdf,
 );
 
 Vue.config.productionTip = false;

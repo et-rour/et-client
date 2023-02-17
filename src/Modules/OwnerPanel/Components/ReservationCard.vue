@@ -26,6 +26,30 @@
           </span>
         </p>
       </div>
+
+      <button class="px-2 py-1 border border-gray-400 rounded-md mt-5" @click="getAllFiles">{{ $t('admin.reservations.myFiles')}}</button>
+      <Spiner v-if="isLoadingFiles" />
+      <div class="gap-3 my-4 grid grid-cols-1 lg:grid-cols-3">
+
+        <div class="flex p-4 border border-gray-200 shadow-sm" v-for="(file,index) in files" :key="`file_${index}`">
+          
+          <div class="w-20 h-14 flex-shrink-0 border border-gray-300">
+            <a :href="file.src" class="cursor-pointer" target="_blank" v-if="file.type==='pdf'">
+              <div class="w-full h-full flex justify-center items-center text-4xl" ><font-awesome-icon icon="fa-regular fa-file-pdf" /></div>
+            </a>
+            <a :href="file.src" class="cursor-pointer" target="_blank" v-else>
+              <img :src="file.src" :alt="`file_id_${index}`" class="w-full h-full object-cover" >
+            </a>
+          </div>
+
+          <div class="ml-3 flex-1 w-24">
+            <p class="text-sm text-gray-600 truncate">{{ file.name }}</p>
+            <button class="my-btn mt-2 py-0 px-2 text-sm rounded-sm w-auto bg-red-500">{{ $t("general.delete") }}</button>
+          </div>
+        </div>
+        
+      </div>
+      <!-- <pre>{{ JSON.stringify(files,null,'\t') }}</pre> -->
     </div>
   </div>
 
@@ -66,16 +90,50 @@
 <script>
 import ModelUploadFiles from '../../../components/ModelUploadFiles.vue';
 import MomentComponent from '../../../components/MomentComponent.vue';
+import { storage, listAll, ref, getDownloadURL } from '../../../Firebase';
+import { CustomErrorToast } from "@/sweetAlert";
+import Spiner from '../../../components/Spiner.vue';
 
 export default {
-    components: { MomentComponent, ModelUploadFiles },
+    components: { MomentComponent, ModelUploadFiles, Spiner },
     props: ["reservation"],
     data(){
       return{
         showUploadImagesModal:false,
-        
+
+        isLoadingFiles:false,
+        files:[],
       }
     },
+    methods:{
+      async getAllFiles(){
+        const listRef = ref(storage, `Reservations/Reservation_${this.reservation.id}`);
+        this.files = [];
+        const filesUrls = [];
+        this.isLoadingFiles = true;
+        try {
+          const allItemsRefs = await listAll(listRef)
+          allItemsRefs.items.forEach(async (itemRef) => {
+            const downloadURL = await getDownloadURL(itemRef);
+            console.log('%cReservationCard.vue line:101 downloadURL', 'color: white; background-color: #007acc;', downloadURL);
+            const fileName = itemRef._location.path_.split("/").pop()
+            const typeFile = fileName.split(".").pop()
+            filesUrls.push({
+              type:typeFile,
+              name:fileName,
+              src:downloadURL
+            });
+          });
+          this.files = filesUrls;
+          this.isLoadingFiles = false;       
+        } catch (error) {
+          this.isLoadingFiles = false;
+          CustomErrorToast.fire({
+            text: error.response.data.message || error,
+          });
+        }
+      },
+    }
 }
 </script>
 

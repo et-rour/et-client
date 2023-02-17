@@ -452,7 +452,8 @@
     },
     "reservations":{
       "notFound": "No tienes ninguna reservación",
-      "uploadFileHeader":"Sube los archivos relaciónados a esta reservación"
+      "uploadFileHeader":"Sube los archivos relaciónados a esta reservación",
+      "myFiles":"Mis archivos"
     },  
     "payments": {
       "title": "historial de pagos"

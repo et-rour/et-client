@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import "firebase/compat/auth";
-import { getStorage, uploadBytes } from "firebase/storage";
+import { getStorage, uploadBytes, listAll, ref, getDownloadURL } from "firebase/storage";
 import {
   getAuth,
   signInWithCustomToken,
@@ -56,4 +56,7 @@ export {
   setUserId,
   setCurrentScreen,
   logEvent,
+  listAll,
+  ref,
+  getDownloadURL,
 };

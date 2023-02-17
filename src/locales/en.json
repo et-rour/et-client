@@ -453,7 +453,8 @@
     },
     "reservations":{
       "notFound": "you don't have reservations",
-      "uploadFileHeader":"Upload the files related to this reservation"
+      "uploadFileHeader":"Upload the files related to this reservation",
+      "myFiles":"My Files"
     },  
     "payments": {
       "title": "payment activity"
