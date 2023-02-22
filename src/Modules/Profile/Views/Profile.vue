@@ -310,6 +310,7 @@
           {{ $t("profile.profile.save") }}
         </button>
       </div>
+      <pre>{{ JSON.stringify(currentUser, null, "\t") }}</pre>
     </form>
   </div>
 </template>
@@ -327,7 +328,15 @@ export default {
     ...mapActions("authStore", ["updateUser"]),
     async updateUserHandler() {
       try {
-        await this.updateUser(this.currentUser);
+        await this.updateUser({
+          id:this.currentUser.id,
+          data:{
+            isOwner: this.currentUser.isOwner,
+            firstName: this.currentUser.firstName,
+            lastName: this.currentUser.lastName,
+            country: this.currentUser.country,
+          }
+        });
 
         CustomToast.fire({
           title: this.$t("sweetAlertMessages.saved"),

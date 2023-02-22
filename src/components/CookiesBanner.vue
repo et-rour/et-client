@@ -27,7 +27,7 @@ import {
 import { mapGetters, mapMutations } from 'vuex';
 export default {
   methods:{
-    ...mapMutations(["MUTATION_CHANGE_SHOW_COOKIES_BANNER"]),
+    ...mapMutations("authStore",["MUTATION_CHANGE_SHOW_COOKIES_BANNER"]),
     onClickDeclineCookies(){
       this.MUTATION_CHANGE_SHOW_COOKIES_BANNER(false)
       setAnalyticsCollectionEnabled(analytics,false)
@@ -41,7 +41,7 @@ export default {
     }
   },
   computed:{
-    ...mapGetters(["GETTER_SHOW_COOKIES_BANNER"]),
+    ...mapGetters("authStore",["GETTER_SHOW_COOKIES_BANNER"]),
   }
 }
 </script>

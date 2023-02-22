@@ -16,6 +16,8 @@ import VueMeta from "vue-meta";
 import moment from "moment";
 moment.locale("es");
 
+import "ag-grid-community/dist/styles/ag-grid.css";
+import "ag-grid-community/dist/styles/ag-theme-material.css";
 Vue.use(VueMeta);
 
 Vue.component("downloadExcel", JsonExcel);

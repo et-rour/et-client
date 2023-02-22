@@ -1,10 +1,11 @@
 <template>
   <div class="w-full flex flex-col">
+    <!-- @click="showModal=true" -->
     <div
       @click="toogleIsOpen"
       class="flex justify-between items-center cursor-pointer mb-2"
     >
-      <p class="font-bold text-xl">
+      <p class="font-bold text-xl" :class="location.isActive?'text-black':'text-gray-400'">
         {{ location.name }}
       </p>
       <div>
@@ -31,22 +32,15 @@
             alt="loactionImage"
             class="w-full h-full object-contain"
           />
-          <abbr :title="$t('admin.locations.property.images3d')">
-            <router-link
-              class="absolute bottom-2 right-4 bg-gray-300 text-xl px-1"
-              :to="{ name: 'create-image-3d', params: { id: location.id } }"
-            >
-              <a> <font-awesome-icon icon="panorama"></font-awesome-icon> </a>
-            </router-link>
-          </abbr>
         </div>
         <div class="flex justify-between items-center flex-wrap mt-1">
           <p>
             <span class="font-bold"
               >{{ $t("admin.locations.property.leaseTerm") }}:</span
             >
-            {{ startLease }}
-            {{ $t("admin.locations.property.until") }} {{ endLease }}
+            <MomentComponent :date="location.startLease" />
+            {{ $t("admin.locations.property.until") }} 
+            <MomentComponent :date="location.endLease" />
           </p>
           <button class="bg-my-blue-primary px-3 py-1 rounded-none text-white">
             {{ $t("admin.locations.property.download") }}
@@ -56,23 +50,29 @@
           class="w-full flex justify-between items-center my-2 gap-3 flex-col xs:flex-row"
         >
           <button
-            class="my-btn p-0 rounded-none py-1 w-full"
+            class="my-btn w-full rounded-none"
+            :disabled="isLoading"
             @click="toggleShowModal"
           >
             {{ $t("admin.locations.property.extend") }}
           </button>
 
-          <button class="my-btn bg-red-500 p-0 rounded-none py-1 w-full px-4">
-            {{ $t("admin.locations.property.finish") }}
+          <button 
+            class="my-btn w-full rounded-none"
+            :disabled="isLoading"
+            @click="onClickFinishLeasePeriod"
+            :class="location.isActive?'bg-red-500':'bg-my-green-primary'"
+          >
+            {{ location.isActive?$t("admin.locations.property.disable") : $t("admin.locations.property.enable") }}
           </button>
         </div>
       </div>
     </div>
 
     <!-- CALENDAR MODAL -->
-    <ModelGlobalVue v-if="showModal">
+    <ModelGlobalVue :showModal="showModal">
       <div
-        class="w-11/12 h-5/6 bg-white text-center px-4 text-sm overflow-y-auto relative md:w-6/12"
+        class="w-11/12 h-5/6 bg-white text-center p-4 text-sm overflow-y-auto relative md:w-6/12"
       >
         <h2 class="my-title-2">{{ $t("admin.locations.calendar.title") }}</h2>
         <p class="my-1">
@@ -80,11 +80,9 @@
           <span class="font-bold">{{ location.name }}</span>
           {{ $t("admin.locations.calendar.descriptionPart2") }}
         </p>
-        <input
-          type="text"
-          v-model="endLease"
-          class="my-input border border-gray-400 w-full md:w-6/12 text-center"
-        />
+
+        <p class="font-bold"> <MomentComponent :date="location.startLease" /> - <MomentComponent :date="location.endLease" /> </p>
+        
         <p class="my-2">{{ $t("admin.locations.calendar.select") }}:</p>
         <div>
           <vc-date-picker
@@ -94,11 +92,7 @@
           ></vc-date-picker>
         </div>
         <p>{{ $t("admin.locations.calendar.extendInfo") }}</p>
-        <input
-          type="text"
-          v-model="endNewEndLease"
-          class="my-input border mb-3 border-gray-400 w-full md:w-6/12 text-center"
-        />
+        <p class="font-bold"> <MomentComponent :date="newLeaseRange.start" /> - <MomentComponent :date="newLeaseRange.end" /> </p>
         <br />
         <button
           class="my-btn bg-my-blue-primary rounded-none w-full md:w-6/12"
@@ -113,11 +107,9 @@
         >
           <font-awesome-icon icon="times"></font-awesome-icon>
         </button>
-        <!-- <p>{{ this.location.startLease }} {{ this.location.endLease }}</p>
-        <p>
-          {{ this.newLeaseRange.start }}
-          {{ this.newLeaseRange.end }}
-        </p> -->
+
+        <!-- <pre>{{ JSON.stringify(newLeaseRange,null,'\t') }}</pre> -->
+
       </div>
     </ModelGlobalVue>
   </div>
@@ -125,9 +117,10 @@
 
 <script>
 import ModelGlobalVue from "../../../components/ModelGlobal.vue";
-import moment from "moment";
-import { mapActions } from "vuex";
-import { CustomErrorToast } from "@/sweetAlert";
+import { CustomErrorToast,CustomToast } from "@/sweetAlert";
+import { PUT_UPDATE_LEASE_DATES, PUT_UPDATE_LOCATION } from "../Services/owner_services";
+import MomentComponent from "../../../components/MomentComponent.vue";
+
 export default {
   props: {
     locationNumber: {
@@ -141,7 +134,8 @@ export default {
   },
   components: {
     ModelGlobalVue,
-  },
+    MomentComponent
+},
   data() {
     return {
       isOpen: false,
@@ -156,9 +150,7 @@ export default {
             end: { fillMode: "outline", color: "red" },
           },
           dates: {
-            start: this.location.startLease
-              ? this.location.startLease
-              : new Date(),
+            start: this.location.startLease ? this.location.startLease : new Date(),
             end: this.location.endLease ? this.location.endLease : new Date(),
           },
         },
@@ -167,10 +159,11 @@ export default {
         start: new Date(),
         end: new Date(),
       },
+
+      isLoading:false
     };
   },
   methods: {
-    ...mapActions("ownerPanelStore", ["updateLocationLease"]),
     toogleIsOpen() {
       this.isOpen = !this.isOpen;
     },
@@ -179,56 +172,54 @@ export default {
       this.showModal = !this.showModal;
     },
     async submitNewLeaseRange() {
-      const data = {
-        start: moment(this.newLeaseRange.start).format(""),
-        end: moment(this.newLeaseRange.end).format(""),
-        locationId: this.location.id,
-      };
       try {
-        await this.updateLocationLease(data);
+        this.isLoading = true;
+        const newLocationData = await PUT_UPDATE_LEASE_DATES({
+          start: this.newLeaseRange.start,
+          end: this.newLeaseRange.end,
+          locationId: this.location.id,
+        });
+        
+        CustomToast.fire({
+          title: this.$t("sweetAlertMessages.saved"),
+          icon: "success",
+        });
+        this.location.startLease = newLocationData.startLease
+        this.location.endLease = newLocationData.endLease
+        this.isLoading = false;
+        
       } catch (error) {
+        this.isLoading = false;
         CustomErrorToast.fire({
           text: error.response.data.message,
         });
       }
     },
+
+    async onClickFinishLeasePeriod(){
+      try {
+        this.isLoading = true
+        this.location.isActive = !this.location.isActive 
+        await PUT_UPDATE_LOCATION(this.location)
+        CustomToast.fire({
+          title: this.$t("sweetAlertMessages.saved"),
+          icon: "success",
+        });
+        this.isLoading = false
+      } catch (error) {
+        this.isLoading = false
+        this.location.isActive = !this.location.isActive
+        CustomErrorToast.fire({
+          text: error.response.data.message || error,
+        });
+      }
+    }
   },
   computed: {
     openDropdown() {
       return this.isOpen ? "h-96 sm:h-80" : "h-0";
     },
-    startLease() {
-      return moment(this.location.startLease).format("DD-MM-YYYY");
-    },
-    endLease() {
-      return moment(this.location.endLease).format("DD-MM-YYYY");
-    },
-    endNewEndLease() {
-      return moment(this.newLeaseRange.end).format("DD-MM-YYYY");
-    },
-  },
-  watch: {
-    location: function (value) {
-      this.attributes = [
-        {
-          key: 1,
-          highlight: {
-            start: { fillMode: "outline", color: "red" },
-            base: { fillMode: "light", color: "red" },
-            end: { fillMode: "outline", color: "red" },
-          },
-          dates: {
-            start: value.startLease ? value.startLease : new Date(),
-            end: value.endLease ? value.endLease : new Date(),
-          },
-        },
-      ];
-      this.newLeaseRange = {
-        start: new Date(),
-        end: new Date(),
-      };
-    },
-  },
+  }
 };
 </script>
 

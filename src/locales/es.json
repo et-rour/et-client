@@ -58,7 +58,8 @@
     "notAsign": "No se asigno",
     "agotada": "Agotada",
     "disponible": "Disponible",
-    "newImage":"Nueva imagen"
+    "newImage":"Nueva imagen",
+    "uploadFile":"Subir archivo"
   },
   "navbar": {
     "owner": "PUBLICA TU PROPIEDAD",
@@ -443,23 +444,33 @@
     }
   },
   "admin": {
+    "title": "PANEL",
+    "navbar":{
+      "properties": "Mis propiedades",
+      "reservations":"Mis reservaciónes",
+      "payment": "Mis pagos"
+    },
+    "reservations":{
+      "notFound": "No tienes ninguna reservación",
+      "uploadFileHeader":"Sube los archivos relaciónados a esta reservación",
+      "myFiles":"Mis archivos"
+    },  
+    "payments": {
+      "title": "Historial de pagos",
+      "loading": "Cargando historial de pagos"
+    },
     "locations": {
       "title": "Todas las localizaciones",
       "notFound": "Aún no hay ubicaciones",
-      "owner": "PROPIETARIO",
-      "properties": "Propiedades",
-      "payment": "Pagos",
       "property": {
         "leaseTerm": "plazo arriendo",
         "address": "dirección",
         "images3d": "Imagenes 3d",
         "until": "hasta",
         "download": "Descargar contrato",
-        "extend": "Extender contrato",
-        "finish": "Finalizar período de arrendamiento"
-      },
-      "payments": {
-        "title": "Actividad de pagos"
+        "extend": "Extender período de arrendamiento",
+        "disable": "Desactivar propiedad",
+        "enable": "Activar propiedad"
       },
       "calendar": {
         "title": "Extiende el plazo de tu arriendo",
@@ -532,6 +543,7 @@
       "client": "¿El usuario es cliente?",
       "admin": "¿El usuario es admin?",
       "review": "¿El usuario ha completado una review?",
+      "changeStripeId": "ID cliente stripe",
       "search": "Búsqueda",
       "filters": "Filtros",
       "isVerified": "¿Está verificado?",

@@ -91,10 +91,7 @@
         }}</span>
       </div>
       <div class="w-full flex justify-center mt-4">
-        <button
-          class="my-btn mx-2 bg-red-600"
-          @click="sendUserTrash"
-        >
+        <button class="my-btn mx-2 bg-red-600" @click="sendUserTrash">
           {{ $t("sweetAlertMessages.sendToTrash") }}
         </button>
       </div>
@@ -117,7 +114,7 @@ export default {
   data() {
     return {
       hasDeleted: false,
-    }
+    };
   },
   computed: {
     ...mapGetters("adminPanelStore/users", ["getUserDetails"]),
@@ -130,17 +127,17 @@ export default {
       "changeIsActiveUser",
       "changeIsOwnerStatus",
       "changeIsAdminRol",
-      "deleteUser"
+      "deleteUser",
     ]),
     async sendUserTrash() {
       const { isConfirmed } = await CustomConfirmDialog.fire({
         title: this.$t("sweetAlertMessages.sendToTrash"),
         text: this.$t("sweetAlertMessages.userToTrash"),
-      })
+      });
 
       if (!isConfirmed) return;
 
-      await this.deleteUser({id: this.user.id});
+      await this.deleteUser({ id: this.user.id });
 
       this.hasDeleted = true;
     },
@@ -226,9 +223,9 @@ export default {
   },
   watch: {
     hasDeleted(newValue) {
-      if (newValue === true) this.$emit('userDeleted');
-    }
-  }
+      if (newValue === true) this.$emit("userDeleted");
+    },
+  },
 };
 </script>
 
