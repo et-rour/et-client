@@ -1,6 +1,11 @@
 <template>
   <label class="rocker rocker-small">
-    <input type="checkbox" :disabled="disabled" :checked="isOpen" @click.prevent="toogleEvent" />
+    <input
+      type="checkbox"
+      :disabled="disabled"
+      :checked="isOpen"
+      @click.prevent="toogleEvent"
+    />
     <span class="switch-left">Yes</span>
     <span class="switch-right">No</span>
   </label>
@@ -16,7 +21,7 @@ export default {
     disabled: {
       default: false,
       type: Boolean,
-    }
+    },
   },
   methods: {
     toogleEvent() {

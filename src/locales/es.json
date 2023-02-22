@@ -456,7 +456,8 @@
       "myFiles":"Mis archivos"
     },  
     "payments": {
-      "title": "historial de pagos"
+      "title": "Historial de pagos",
+      "loading": "Cargando historial de pagos"
     },
     "locations": {
       "title": "Todas las localizaciones",
@@ -542,6 +543,7 @@
       "client": "¿El usuario es cliente?",
       "admin": "¿El usuario es admin?",
       "review": "¿El usuario ha completado una review?",
+      "changeStripeId": "ID cliente stripe",
       "search": "Búsqueda",
       "filters": "Filtros",
       "isVerified": "¿Está verificado?",

@@ -108,7 +108,7 @@
           <font-awesome-icon icon="times"></font-awesome-icon>
         </button>
 
-        <pre>{{ JSON.stringify(newLeaseRange,null,'\t') }}</pre>
+        <!-- <pre>{{ JSON.stringify(newLeaseRange,null,'\t') }}</pre> -->
 
       </div>
     </ModelGlobalVue>

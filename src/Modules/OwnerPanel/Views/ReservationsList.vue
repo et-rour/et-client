@@ -9,7 +9,7 @@
       </div>
 
       <template v-else>
-        <div class="flex flex-col">
+        <div class="flex flex-col py-4 gap-4">
           <ReservationCard v-for="reservation in reservationsList" :key="reservation.id" :reservation="reservation"></ReservationCard>
         </div>  
       </template>
