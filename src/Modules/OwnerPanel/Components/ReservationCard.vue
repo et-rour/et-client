@@ -89,7 +89,7 @@
 import ModelUploadFiles from '../../../components/ModelUploadFiles.vue';
 import MomentComponent from '../../../components/MomentComponent.vue';
 import { storage, listAll, ref, getDownloadURL, deleteObject } from '../../../Firebase';
-import { CustomErrorToast } from "@/sweetAlert";
+import { CustomErrorToast, CustomConfirmDialog } from "@/sweetAlert";
 import Spiner from '../../../components/Spiner.vue';
 
 export default {
@@ -133,6 +133,10 @@ export default {
       },
       async onClickDeltefile({itemRef}){
         try {
+          const { isConfirmed } = await CustomConfirmDialog.fire({
+            title:this.$t("sweetAlertMessages.confirmTitle"),
+          });
+          if (!isConfirmed) return;
           await deleteObject(itemRef);
           this.getAllFiles()
         } catch (error) {
