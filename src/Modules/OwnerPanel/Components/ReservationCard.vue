@@ -44,7 +44,7 @@
 
           <div class="ml-3 flex-1 w-24">
             <p class="text-sm text-gray-600 truncate">{{ file.name }}</p>
-            <button class="my-btn mt-2 py-0 px-2 text-sm rounded-sm w-auto bg-red-500">{{ $t("general.delete") }}</button>
+            <button class="my-btn mt-2 py-0 px-2 text-sm rounded-sm w-auto bg-red-500" @click="onClickDeltefile(file)">{{ $t("general.delete") }}</button>
           </div>
         </div>
         
@@ -63,11 +63,9 @@
         {{ $t('general.uploadFile') }}
       </p>
     </button>
-    
     <strong
       class="inline-flex items-center gap-1 rounded-tl-xl rounded-br-xl bg-green-600 py-1.5 px-3 text-white"
     >
-
       <font-awesome-icon icon="fa-regular fa-calendar-days" />
       <p class="font-medium sm:text-xs">
         <MomentComponent :date="reservation.start" />
@@ -90,8 +88,8 @@
 <script>
 import ModelUploadFiles from '../../../components/ModelUploadFiles.vue';
 import MomentComponent from '../../../components/MomentComponent.vue';
-import { storage, listAll, ref, getDownloadURL } from '../../../Firebase';
-import { CustomErrorToast } from "@/sweetAlert";
+import { storage, listAll, ref, getDownloadURL, deleteObject } from '../../../Firebase';
+import { CustomErrorToast, CustomConfirmDialog } from "@/sweetAlert";
 import Spiner from '../../../components/Spiner.vue';
 
 export default {
@@ -115,13 +113,13 @@ export default {
           const allItemsRefs = await listAll(listRef)
           allItemsRefs.items.forEach(async (itemRef) => {
             const downloadURL = await getDownloadURL(itemRef);
-            console.log('%cReservationCard.vue line:101 downloadURL', 'color: white; background-color: #007acc;', downloadURL);
             const fileName = itemRef._location.path_.split("/").pop()
             const typeFile = fileName.split(".").pop()
             filesUrls.push({
               type:typeFile,
               name:fileName,
-              src:downloadURL
+              src:downloadURL,
+              itemRef
             });
           });
           this.files = filesUrls;
@@ -133,6 +131,20 @@ export default {
           });
         }
       },
+      async onClickDeltefile({itemRef}){
+        try {
+          const { isConfirmed } = await CustomConfirmDialog.fire({
+            title:this.$t("sweetAlertMessages.confirmTitle"),
+          });
+          if (!isConfirmed) return;
+          await deleteObject(itemRef);
+          this.getAllFiles()
+        } catch (error) {
+          CustomErrorToast.fire({
+            text: error.response?.data.message || error,
+          });
+        }
+      }
     }
 }
 </script>
