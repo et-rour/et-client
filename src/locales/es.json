@@ -621,6 +621,7 @@
       "owner": "Propietario",
       "isActive": "¿La locación esta disponible?",
       "isverified": "¿La locación esta verificada?",
+      "isDaily": "¿La locación es de arriendo por día?",
       "haveVault": "¿La propiedad tiene una bóveda?",
       "haveCleaning": "¿La propiedad cuenta con servicio de Limpieza?",
       "haveWifi": "¿La propiedad tiene Wifi?",

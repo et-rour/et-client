@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { GET_RESERVATIONS_LIST } from "../Services/owner_services" 
+import { GET_RESERVATIONS_LIST } from "@/Services/owner_services" 
 import { CustomErrorToast } from "@/sweetAlert";
 import Spiner from '../../../components/Spiner.vue';
 import ReservationCard from '../Components/ReservationCard.vue';

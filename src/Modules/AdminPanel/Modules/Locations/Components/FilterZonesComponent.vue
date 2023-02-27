@@ -96,6 +96,7 @@
 <script>
 import { CustomErrorToast, CustomToast } from "@/sweetAlert";
 import { mapActions } from 'vuex';
+import { PUT_ADMIN_LOCATION } from "@/Services/Admin/admin_location_services";
 export default {
   props:["idLocation","selectedZoneId","listZones"],
   data(){
@@ -215,14 +216,16 @@ export default {
     async onUpdateZone(){
       try {
         this.isUploadingZone = true;
-        await this.updateZone({
+        await PUT_ADMIN_LOCATION({
           id:this.idLocation,
-          zoneId:this.zoneFilterSelected
+          zone:this.zoneFilterSelected
         });
+
         CustomToast.fire({
           title: this.$t("sweetAlertMessages.saved"),
           icon: "success",
         });
+
         location.reload();
       } catch (error) {
         CustomErrorToast.fire({

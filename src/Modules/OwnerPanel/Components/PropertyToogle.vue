@@ -118,7 +118,7 @@
 <script>
 import ModelGlobalVue from "../../../components/ModelGlobal.vue";
 import { CustomErrorToast,CustomToast } from "@/sweetAlert";
-import { PUT_UPDATE_LEASE_DATES, PUT_UPDATE_LOCATION } from "../Services/owner_services";
+import { PUT_UPDATE_LEASE_DATES, PUT_UPDATE_LOCATION } from "@/Services/owner_services";
 import MomentComponent from "../../../components/MomentComponent.vue";
 
 export default {

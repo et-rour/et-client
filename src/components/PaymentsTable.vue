@@ -21,7 +21,7 @@
 <script>
 import { AgGridVue } from "ag-grid-vue";
 import { CustomErrorToast } from "@/sweetAlert";
-import { GET_PAYMENTS_BY_CLIENT } from "../Modules/OwnerPanel/Services/owner_services";
+import { GET_PAYMENTS_BY_CLIENT } from "@/Services/owner_services";
 import MomentComponent from "@/components/PaymentsTableDateCell.vue";
 import AmountComponent from "@/components/PaymentsTableAmountCell.vue";
 export default {
