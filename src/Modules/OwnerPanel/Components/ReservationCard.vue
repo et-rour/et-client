@@ -20,9 +20,18 @@
         <span class="hidden sm:block" aria-hidden="true">&middot;</span>
 
         <p class="hidden sm:block sm:text-xs sm:text-gray-500">
-          Dueño
-          <span href="#" class="font-medium underline hover:text-gray-700">
-            {{ reservation.owner.firstName }} {{ reservation.owner.lastName }}
+
+          <span v-if="reservation.isOwnerReservations">
+            {{ $t('admin.reservations.owner') }}
+            <span class="font-medium underline hover:text-gray-700">
+              {{ reservation.owner.firstName }} {{ reservation.owner.lastName }}
+            </span>
+          </span>
+          <span v-else>
+            {{ $t('admin.reservations.client') }}
+            <span class="font-medium underline hover:text-gray-700">
+              {{ reservation.client.firstName }} {{ reservation.client.lastName }}
+            </span>
           </span>
         </p>
       </div>

@@ -454,7 +454,9 @@
     "reservations":{
       "notFound": "you don't have reservations",
       "uploadFileHeader":"Upload the files related to this reservation",
-      "myFiles":"My Files"
+      "myFiles":"My Files",
+      "owner":"Owner",
+      "client":"Client"
     },  
     "payments": {
       "title": "payment activity",
@@ -621,11 +623,12 @@
       "zone": "Zone",
       "owner": "Owner",
       "isActive": "Is the location activated?",
+      "isverified": "Is the location verified?",
+      "isDaily": "Is the location for rent per day?",
       "haveVault": "Does the location have a Vault?",
       "haveCleaning": "Does the location have a Cleaning service?",
       "haveWifi": "Does the location have Wifi?",
       "haveSecurity": "Does the location have Security?",
-      "isverified": "Is the location verified?",
       "newVisit": "Schedule technical visit",
       "goToVisit": "go to calendar",
       "value": "property value",

@@ -1,3 +1,5 @@
+import { isAuth } from "../../../Guards/isAuth";
+
 const AdminLayout = () =>
   import(
     /* webpackChunkName: "AdminLayout" */ "../../OwnerPanel/Layouts/AdminLayout.vue"
@@ -20,6 +22,12 @@ export default [
     name: "my-locations",
     path: "/my-locations",
     component: AdminLayout,
+    beforeEnter(to, __, next) {
+      if (isAuth()) {
+        next(true);
+      }
+      next(false);
+    },
     children: [
       {
         name: "locations-list",
