@@ -38,13 +38,19 @@ export default {
 
         this.isLoadingReservations = true;
         const reservations = await GET_RESERVATIONS_LIST(this.user.user.id);
-        this.reservationsList = reservations;
+        console.log('%cReservationsList.vue line:43 reservations', 'color: white; background-color: #007acc;', reservations);
+
+        const ownerReservations = reservations.ownerReservations.map(reservation => {return {...reservation,isOwnerReservations:true}})
+        this.reservationsList = [
+          ...reservations.clientReservations,
+          ...ownerReservations,
+        ];
         this.isLoadingReservations = false
 
       } catch (error) {
         this.isLoadingReservations = false
         CustomErrorToast.fire({
-          text: error.response.data.message || error,
+          text: error.response?.data.message || error,
         });
       }
     }

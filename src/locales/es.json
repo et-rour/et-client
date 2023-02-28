@@ -453,7 +453,9 @@
     "reservations":{
       "notFound": "No tienes ninguna reservación",
       "uploadFileHeader":"Sube los archivos relaciónados a esta reservación",
-      "myFiles":"Mis archivos"
+      "myFiles":"Mis archivos",
+      "owner":"Dueño",
+      "client":"Cliente"
     },  
     "payments": {
       "title": "Historial de pagos",

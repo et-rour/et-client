@@ -6,7 +6,7 @@
         class="underline text-my-blue-primary text-right"
         >{{ $t("adminPanel.locations.title") }}</router-link
       >
-      <div class="flex flex-col gap-2 qw">
+      <div class="flex flex-col gap-2">
           <!-- sugested value -->
           <div class="flex items-center justify-between">
             <label class="mr-2">{{
@@ -65,6 +65,16 @@
               <p>min: ${{ location.suggestedValue.min }}</p>
               <p>max: ${{ location.suggestedValue.max }}</p>
             </div>
+          </div>
+          
+          <!-- propertyType -->
+          <div class="flex justify-between">
+            <label class="mr-2">{{
+              $t("adminPanel.locations.propertyType")
+            }}</label>
+            <p>
+              <span>{{ location.propertyType }}</span>
+            </p>
           </div>
       </div>
       <hr />
@@ -463,24 +473,6 @@
             :editing="true"
             @result-click="setNewCoords"
           ></MapCoordsVue>
-
-          <!-- created by -->
-          <div class="flex justify-between">
-            <label class="mr-2">{{
-              $t("adminPanel.locations.createdBy")
-            }}</label>
-            <div>
-              <p>
-                <span>{{location.createdByAdmin ? $t("adminPanel.locations.admin"):$t("adminPanel.locations.user")}}</span>
-              </p>
-              <select v-model="location.owner.id" class="my-input border block" @click="fetchListUsers">
-                <option v-for="user in allUsersList" :value="user.id" :key="user.id">{{user.id}}.- {{user.firstName}} {{user.lastName}}</option>
-              </select>
-              <font-awesome-icon icon="spinner" class="animate-spin" v-if="isLoadingAllUsersList"/>
-            </div>
-          </div>
-
-          
           <div class="flex justify-between">
             <ValidationProvider
               v-slot='{ errors }'
@@ -510,6 +502,22 @@
               />
               <span class='error'>{{ errors[0] }}</span>
             </ValidationProvider> 
+          </div>
+
+           <!-- created by -->
+           <div class="flex justify-between">
+            <label class="mr-2">{{
+              $t("adminPanel.locations.createdBy")
+            }}</label>
+            <div>
+              <p>
+                <span>{{location.createdByAdmin ? $t("adminPanel.locations.admin"):$t("adminPanel.locations.user")}}</span>
+              </p>
+              <select v-model="location.owner.id" class="my-input border block" @click="fetchListUsers">
+                <option v-for="user in allUsersList" :value="user.id" :key="user.id">{{user.id}}.- {{user.firstName}} {{user.lastName}}</option>
+              </select>
+              <font-awesome-icon icon="spinner" class="animate-spin" v-if="isLoadingAllUsersList"/>
+            </div>
           </div>
         
           <div class="w-full flex justify-center">
@@ -619,7 +627,7 @@ import MapCoordsVue from "../../../../../components/MapCoords.vue";
 import { ValidationObserver } from "vee-validate";
 import FilterZonesComponent from "../Components/FilterZonesComponent.vue";
 import InputNumberMask from '../../../../../components/InputNumberMask.vue';
-import DebugModal from "../../../../../components/DebugModal.vue";
+// import DebugModal from "../../../../../components/DebugModal.vue";
 
 
 export default {
@@ -629,7 +637,7 @@ export default {
     ValidationObserver,
     FilterZonesComponent,
     InputNumberMask,
-    DebugModal
+    // DebugModal
 },
   computed: {
     ...mapGetters("adminPanelStore/locations", ["getLocationDetails", "getAllCurrencies"]),

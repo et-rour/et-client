@@ -310,7 +310,7 @@
           {{ $t("profile.profile.save") }}
         </button>
       </div>
-      <pre>{{ JSON.stringify(currentUser, null, "\t") }}</pre>
+      <!-- <pre>{{ JSON.stringify(currentUser, null, "\t") }}</pre> -->
     </form>
   </div>
 </template>

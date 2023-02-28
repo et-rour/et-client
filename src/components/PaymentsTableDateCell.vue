@@ -11,8 +11,7 @@ export default {
     };
   },
   beforeMount() {
-    this.displayValue = moment
-      .unix(this.params.value)
+    this.displayValue = moment(this.params.value)
       .format("MMMM DD YYYY, hh:mm A");
   },
 };

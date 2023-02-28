@@ -454,7 +454,9 @@
     "reservations":{
       "notFound": "you don't have reservations",
       "uploadFileHeader":"Upload the files related to this reservation",
-      "myFiles":"My Files"
+      "myFiles":"My Files",
+      "owner":"Owner",
+      "client":"Client"
     },  
     "payments": {
       "title": "payment activity",
