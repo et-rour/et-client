@@ -24,7 +24,6 @@
           $
           <!-- <input type="number" class="my-input w-40" v-model="room.value" /> -->
           <InputNumberMask v-model="room.value" @changeValue="updateRoomValue"/>
-          <p>{{room.value}}</p>
         </span>
         <span>
           mts&sup2;

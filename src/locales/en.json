@@ -697,6 +697,7 @@
       "entire": "Whole property",
       "room": "Room",
       "selectOne": "Select option",
+      "dailyValue": "Daily property value",
       "confiramtionMessages": {
         "activateLocation": "Are you sure you want to activate the location?",
         "desactivateLocation": "Are you sure you want to disable location?",

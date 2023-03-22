@@ -696,6 +696,7 @@
       "entire": "Entera",
       "room": "Cuarto",
       "selectOne": "Seleccionar opción",
+      "dailyValue": "Valor de la propiedad diario",
       "confiramtionMessages": {
         "activateLocation": "¿Seguro que quieres activar la locación?",
         "desactivateLocation": "¿Seguro que quieres desactivar la locación?",

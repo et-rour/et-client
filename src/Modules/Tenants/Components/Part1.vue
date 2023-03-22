@@ -4,6 +4,7 @@
       <h3 class="font-black text-2xl my-5">
         {{ $t("tenants.calendar.Paso1") }}
       </h3>
+      <pre>{{ JSON.stringify(getPropertyDetails,null,'\t') }}</pre>
     </template>
     <template v-slot:button>
       <button class="my-btn w-auto rounded-full py-1 px-5" @click="goNextPart">
@@ -12,7 +13,19 @@
     </template>
     <template v-slot:content>
       <div v-if="getPropertyDetails">
+        <CalendarDailyComponent
+          v-if="getPropertyDetails.isDaily"
+          class="bg-white py-8 px-4"
+          @rangeChage="getDateRange"
+          @correctRange="changeisCorrectRange"
+          :range="range"
+          :reservations="calendarData.reservations"
+          :locationLeaseRange="calendarData.leaseRange"
+          :isPopOver="true"
+          :showDetailsCard="false"
+        />
         <CalendarComponent
+          v-else 
           class="bg-white py-8 px-4"
           @rangeChage="getDateRange"
           @correctRange="changeisCorrectRange"
@@ -31,10 +44,11 @@
 import { mapGetters, mapMutations } from "vuex";
 import moment from "moment";
 import CalendarComponent from "./CalendarComponent.vue";
+import CalendarDailyComponent from "./CalendarDailyComponent.vue";
 import PartTemplateVue from "./PartTemplate.vue";
 import { CustomConfirmWarningDialog } from "@/sweetAlert";
 export default {
-  components: { CalendarComponent, PartTemplateVue },
+  components: { CalendarComponent, PartTemplateVue, CalendarDailyComponent },
   props: ["calendarData"],
   data() {
     return {
