@@ -68,6 +68,7 @@ export default {
           locationId: this.$route.params.id,
           roomId: this.$route.params.idRoom,
           range: this.dates,
+          timeQuantity:this.reservationData.timeQuantity,
           ...this.reservationData.contractData,
         });
         

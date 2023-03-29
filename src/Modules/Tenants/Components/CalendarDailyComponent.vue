@@ -3,28 +3,31 @@
     <div class="flex-grow">
       <div class="qw flex flex-col gap-2 items-center">
         <pre>{{ JSON.stringify(date,null,'\t') }}</pre>
+        <pre>{{ isValidHourRange }}</pre>
         <vc-date-picker
-          :masks="masks"
           ref="calendar"
           :disabledDates="disabledDatesForReservations"
           :attributes="attrs"
           :min-date="minDateBetweenNowAndStartLease"
           :max-date="locationLeaseRange.end"
-          @dayclick="dayClick"
           v-model="date"
+          :model-config="modelConfig"
         >
         </vc-date-picker>
       </div>
 
-      <div class="qw flex flex-col gap-2 items-center">
+      <div class="qw flex gap-2 justify-center py-3 flex-wrap" v-show="date">
         <button 
           v-for="(hour, index) in hoursDay" 
-          class="my-btn" 
+          class="my-btn py-1 w-auto px-6 rounded-md"
           :key="`hours_${index}`" 
-          @click="onClickAddSelectHour(hour)"
-            >{{hour}}
+          @click="onClickSelectHour(hour)"
+          :class="!isPosibleToSelect(hour)&&'bg-red-400'"
+            >{{hour.value}}
         </button>
       </div>
+      
+      <pre>{{ JSON.stringify(hoursSelected,null,'\t') }}</pre>
     </div>
   </div>
 </template>
@@ -48,12 +51,15 @@ export default {
     return {
       calendar: null,
       attrs: [],
-      masks: {
-        input: "MMMM DD",
+      modelConfig: {
+        type: 'string',
+        mask: 'YYYY-MM-DD',
+        timeAdjust: '12:00:00',
       },
 
       date: null,
-      hoursSelected:[]
+      hoursSelected:[],
+      isRangeHoursValid:false,
     };
   },
   computed: {
@@ -78,8 +84,31 @@ export default {
       }
       return startLease.toDate();
     },
+    isValidHourRange(){
+      if (this.hoursSelected.length < 2) {
+        return false;
+      }
+
+      let firstIndex = this.hoursSelected[0].index
+      let isValid = true
+      this.hoursSelected.forEach(hoursSelected => {
+        if (hoursSelected.index !== firstIndex) {
+          isValid = false;
+        }
+        firstIndex++;
+      })
+      
+      return isValid
+    }
   },
   methods: {
+    isPosibleToSelect(hour){
+      if (!this.date) return false
+      if (this.hoursSelected.some(hourSelected => hourSelected.index === hour.index)) return false
+
+      // if (this.hoursSelected.pop() + 1 )) return false
+      return true
+    },
     loadReservationDates() {
       this.reservations.forEach((reservation) => {
         this.attrs.push({
@@ -88,7 +117,6 @@ export default {
             fillMode: "light",
             contentClass: "italic line-through",
           },
-
           dates: {
             start: reservation.start,
             end: reservation.end,
@@ -96,9 +124,38 @@ export default {
         });
       });
     },
-    onClickAddSelectHour(hour){
-      alert(hour)
-    }
+    onClickSelectHour(hour){
+      // DELETE HOUR FROM THE ARRAY IF SELECTED
+      if (this.hoursSelected.some(hourSelected => hourSelected.index === hour.index)) {
+        this.hoursSelected = this.hoursSelected.filter(elementHour=> elementHour.index!==hour.index)
+      }else {
+        // ADD HOUR TO THE ARRAY
+        this.hoursSelected.push(hour)
+        this.hourSelected =  [...this.hoursSelected.sort((a,b) => a.index-b.index)]
+      }
+
+      if (!this.isValidHourRange) {
+        this.$emit("correctRange", false);
+        return
+      }
+
+      
+      const firstHour = this.hoursSelected[0]
+      const lastHour = this.hoursSelected[this.hoursSelected.length-1]
+
+      const start = moment(this.date).hours(firstHour.index).format();
+      const end = moment(this.date).hours(lastHour.index).format();
+      
+      console.log('%cCalendarDailyComponent.vue line:149 {start,start}', 'color: #26bfa5;', {start,end});
+      this.$emit("correctRange", true,this.hoursSelected.length);
+      this.$emit("rangeChage", {
+        range: {
+          start: start,
+          end: end
+        },
+      });
+
+    },
   },
 
   mounted() {

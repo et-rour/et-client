@@ -1,13 +1,15 @@
 export const changeReservationDateRange = (
   state,
-  { start, end, correctDate }
+  { start, end, correctDate, timeQuantity }
 ) => {
   state.reservationDateRange = {
     start,
     end,
   };
   state.correctReservationDateRange = correctDate;
+  state.timeQuantity = timeQuantity;
 };
+
 export const initRasarvationStorage = (state, reservationData) => {
   state.reservationValue = reservationData.value;
   state.reservationName = reservationData.name;

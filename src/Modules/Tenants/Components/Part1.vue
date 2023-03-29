@@ -4,7 +4,8 @@
       <h3 class="font-black text-2xl my-5">
         {{ $t("tenants.calendar.Paso1") }}
       </h3>
-      <pre>{{ JSON.stringify(getPropertyDetails,null,'\t') }}</pre>
+      <!-- <pre>{{ JSON.stringify(getPropertyDetails,null,'\t') }}</pre> -->
+      <pre>{{ JSON.stringify(range,null,'\t') }}</pre>
     </template>
     <template v-slot:button>
       <button class="my-btn w-auto rounded-full py-1 px-5" @click="goNextPart">
@@ -75,13 +76,15 @@ export default {
       this.$emit("navigate", "next");
       return;
     },
-    changeisCorrectRange(isCorrect) {
+    changeisCorrectRange(isCorrect,timeQuantity) {
+      console.log('%cPart1.vue line:80 changeisCorrectRange(isCorrect,timeQuantity)', 'color: white; background-color: #007acc;', isCorrect,timeQuantity);
       this.isCorrectRange = isCorrect;
       if (isCorrect) {
         this.changeReservationDateRange({
           start: this.range.start,
           end: this.range.end,
           correctDate: true,
+          timeQuantity,
         });
         return;
       }
@@ -89,6 +92,7 @@ export default {
         start: null,
         end: null,
         correctDate: false,
+        timeQuantity: 0,
       });
     },
     getDateRange({ range }) {
