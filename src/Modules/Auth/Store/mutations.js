@@ -37,9 +37,6 @@ export const logout = (state) => {
   state.isAuth = false;
   state.showWelcomeModal = false;
 };
-export const updateUser = (state, newUser) => {
-  state.user = newUser;
-};
 export const setSiteCountry = (state, country) => {
   state.siteCountry = country;
 };
@@ -49,4 +46,8 @@ export const updateUserExtraData = (state, { companyName, identityCard, represen
   state.user.identityCard = identityCard;
   state.user.representativeName = representativeName;
   state.user.rut = rut;
+};
+
+export const MUTATION_CHANGE_SHOW_COOKIES_BANNER = (state, showBanner) => {
+  state.showCookiesBanner = showBanner;
 };

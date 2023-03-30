@@ -1,119 +1,38 @@
 <template>
   <div class="w-full">
-    <h1 class="my-title-2">{{ $t("admin.locations.payments.title") }}</h1>
-    <table
-      class="w-full flex flex-row flex-no-wrap xs:bg-white rounded-lg overflow-hidden my-5"
-    >
-      <tbody class="flex-1 xs:flex-none">
-        <tr
-          class="flex flex-col flex-no wrap xs:table-row mb-2 xs:mb-0 border-b"
-        >
-          <td
-            class="border-grey-light border-b hover:bg-gray-100 p-3 text-center sm:text-left"
-          >
-            Diciembre
-          </td>
-          <td
-            class="border-grey-light border-b hover:bg-gray-100 p-3 text-center sm:text-left truncate"
-          >
-            Dirección #1
-          </td>
-          <td
-            class="border-grey-light border-b hover:bg-gray-100 p-3 text-center sm:text-left"
-          >
-            <p class="bg-my-blue-primary inline-block text-white p-1 px-3">
-              $500.00
-            </p>
-          </td>
-        </tr>
-        <tr
-          class="flex flex-col flex-no wrap xs:table-row mb-2 xs:mb-0 border-b"
-        >
-          <td
-            class="border-grey-light border-b hover:bg-gray-100 p-3 text-center sm:text-left"
-          >
-            Noviembre
-          </td>
-          <td
-            class="border-grey-light border-b hover:bg-gray-100 p-3 text-center sm:text-left truncate"
-          >
-            Dirección #2
-          </td>
-          <td
-            class="border-grey-light border-b hover:bg-gray-100 p-3 text-center sm:text-left"
-          >
-            <p class="bg-my-blue-primary inline-block text-white p-1 px-3">
-              $500.00
-            </p>
-          </td>
-        </tr>
-        <tr
-          class="flex flex-col flex-no wrap xs:table-row mb-2 xs:mb-0 border-b"
-        >
-          <td
-            class="border-grey-light border-b hover:bg-gray-100 p-3 text-center sm:text-left"
-          >
-            Octubre
-          </td>
-          <td
-            class="border-grey-light border-b hover:bg-gray-100 p-3 text-center sm:text-left truncate"
-          >
-            Dirección #3
-          </td>
-          <td
-            class="border-grey-light border-b hover:bg-gray-100 p-3 text-center sm:text-left"
-          >
-            <p class="bg-my-blue-primary inline-block text-white p-1 px-3">
-              $500.00
-            </p>
-          </td>
-        </tr>
-        <tr
-          class="flex flex-col flex-no wrap xs:table-row mb-2 xs:mb-0 border-b"
-        >
-          <td
-            class="border-grey-light border-b hover:bg-gray-100 p-3 text-center sm:text-left"
-          >
-            Septiembre
-          </td>
-          <td
-            class="border-grey-light border-b hover:bg-gray-100 p-3 text-center sm:text-left truncate"
-          >
-            Dirección #3
-          </td>
-          <td
-            class="border-grey-light border-b hover:bg-gray-100 p-3 text-center sm:text-left"
-          >
-            <p class="bg-my-blue-primary inline-block text-white p-1 px-3">
-              $500.00
-            </p>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <h1 class="my-title-2">{{ $t("admin.payments.title") }}</h1>
+
+    <PaymentsTable />
+    <!-- <div class="flex flex-col" v-else>
+      <div
+        v-for="(payment, index) in paymentsList"
+        :key="`payment_${index}`"
+        class="border shadow-xl qw"
+      >
+        <pre>{{ JSON.stringify(payment.id, null, "\t") }}</pre>
+        <pre>{{ JSON.stringify(payment.amount, null, "\t") }}</pre>
+        <pre>{{ JSON.stringify(payment.currency, null, "\t") }}</pre>
+        <pre>{{ JSON.stringify(payment.charges, null, "\t") }}</pre>
+        <pre>{{ JSON.stringify(payment.created, null, "\t") }}</pre>
+        <pre>{{ JSON.stringify(payment.status, null, "\t") }}</pre>
+      </div>
+    </div>
+    <pre>{{ JSON.stringify(paymentsList, null, "\t") }}</pre> -->
   </div>
 </template>
 
 <script>
-export default {};
+import PaymentsTable from "@/components/PaymentsTable.vue";
+
+export default {
+  components: { PaymentsTable },
+  data() {
+    return {
+      isLoadingpaymentsList: false,
+      paymentsList: [],
+    };
+  },
+  methods: {},
+  mounted() {},
+};
 </script>
-
-<style scoped>
-@media (min-width: 475px) {
-  table {
-    display: inline-table !important;
-  }
-
-  thead tr:not(:first-child) {
-    display: none;
-  }
-}
-
-td:not(:last-child) {
-  border-bottom: 0;
-}
-
-th:not(:last-child) {
-  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
-}
-</style>

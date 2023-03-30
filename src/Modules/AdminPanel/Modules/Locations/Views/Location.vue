@@ -49,13 +49,6 @@
             : $t("general.notAsign")
              }}</p>
           </div>
-          <!-- created by -->
-          <div class="flex justify-between">
-            <label class="mr-2">{{
-              $t("adminPanel.locations.createdBy")
-            }}</label>
-            <p>{{location.createdByAdmin ? $t("adminPanel.locations.admin"):$t("adminPanel.locations.user")}}</p>
-          </div>
           <!-- NEW VISIT -->
           <div class="flex items-center justify-between">
             <label class="mr-3">{{ $t("adminPanel.locations.newVisit") }} </label>
@@ -72,6 +65,16 @@
               <p>min: ${{ location.suggestedValue.min }}</p>
               <p>max: ${{ location.suggestedValue.max }}</p>
             </div>
+          </div>
+          
+          <!-- propertyType -->
+          <div class="flex justify-between">
+            <label class="mr-2">{{
+              $t("adminPanel.locations.propertyType")
+            }}</label>
+            <p>
+              <span>{{ location.propertyType }}</span>
+            </p>
           </div>
       </div>
       <hr />
@@ -500,6 +503,22 @@
               <span class='error'>{{ errors[0] }}</span>
             </ValidationProvider> 
           </div>
+
+           <!-- created by -->
+           <div class="flex justify-between">
+            <label class="mr-2">{{
+              $t("adminPanel.locations.createdBy")
+            }}</label>
+            <div>
+              <p>
+                <span>{{location.createdByAdmin ? $t("adminPanel.locations.admin"):$t("adminPanel.locations.user")}}</span>
+              </p>
+              <select v-model="location.owner.id" class="my-input border block" @click="fetchListUsers">
+                <option v-for="user in allUsersList" :value="user.id" :key="user.id">{{user.id}}.- {{user.firstName}} {{user.lastName}}</option>
+              </select>
+              <font-awesome-icon icon="spinner" class="animate-spin" v-if="isLoadingAllUsersList"/>
+            </div>
+          </div>
         
           <div class="w-full flex justify-center">
             <button
@@ -545,6 +564,17 @@
             :disabled="isVerifyDisabled"
           />
         </div>
+
+        <!-- isDaily -->
+        <div class="flex items-center justify-between">
+          <label class="mr-3"
+            >{{ $t("adminPanel.locations.isDaily") }}
+          </label>
+          <SwitchComponentVue
+            :value="location.isDaily"
+            v-on:toogle="toogleIsDaily"
+          />
+        </div>
         
         <!-- value -->
         <div class="flex items-center justify-between">
@@ -574,11 +604,9 @@
 
 
     <!-- DEBUGGING -->
-    <!-- <div class="fixed top-5 left-5 bg-white border border-black overflow-y-scroll" style="height: 95vh;">
-      <div>
-        <pre>{{JSON.stringify(location,null,"\t")}}</pre>
-      </div>
-    </div> -->
+    <!-- <DebugModal>
+      <pre>{{ JSON.stringify(location,null,'\t') }}</pre>
+    </DebugModal>  -->
     </div>
   </div>
 </template>
@@ -587,7 +615,8 @@
 import { mapActions, mapGetters } from "vuex";
 import SwitchComponentVue from "../../../../../components/SwitchComponent.vue";
 import createPropertyOptions from "@/utils/createFormOptions.js";
-
+import { PUT_ADMIN_LOCATION } from "@/Services/Admin/admin_location_services.js"
+import { GET_ADMIN_USERS } from "@/Services/Admin/admin_users_services.js"
 import {
   CustomErrorToast,
   CustomToast,
@@ -598,6 +627,7 @@ import MapCoordsVue from "../../../../../components/MapCoords.vue";
 import { ValidationObserver } from "vee-validate";
 import FilterZonesComponent from "../Components/FilterZonesComponent.vue";
 import InputNumberMask from '../../../../../components/InputNumberMask.vue';
+// import DebugModal from "../../../../../components/DebugModal.vue";
 
 
 export default {
@@ -606,7 +636,8 @@ export default {
     MapCoordsVue,
     ValidationObserver,
     FilterZonesComponent,
-    InputNumberMask
+    InputNumberMask,
+    // DebugModal
 },
   computed: {
     ...mapGetters("adminPanelStore/locations", ["getLocationDetails", "getAllCurrencies"]),
@@ -633,6 +664,8 @@ export default {
 
       timeUnusedOptions: createPropertyOptions.timeUnused,
       
+      isLoadingAllUsersList:false,
+      allUsersList:[]
     };
   },
   methods: {
@@ -679,65 +712,58 @@ export default {
 
       this.hasDeleted = true;
     },
+
     async submitLocation() {
       const { isConfirmed } = await CustomConfirmDialog.fire();
       if (!isConfirmed) return;
-
-      const {
-        id,
-        name,
-        address,
-        rooms,
-        bathrooms,
-        painting,
-        floor,
-        email,
-        phone,
-        description,
-        garage,
-        lat,
-        long,
-        squareMeters,
-        vault,
-        cleaning,
-        wifi,
-        security,
-        unused,
-        landUse,
-        calendlyLink
-      } = this.location;
+      
+      if (!this.location) return
       try {
-        const updateLocationBody = {
-          id: id,
-          name: name,
-          address: address,
-          rooms: rooms,
-          bathrooms: bathrooms,
-          painting: painting,
-          floor: floor,
-          email: email,
-          phone: phone,
-          description: description,
-          garage: garage,
-          lat: lat,
-          lng: long,
-          meters: squareMeters,
-          vault,
-          cleaning,
-          wifi,
-          security,
-          unused,
-          landUse,
-          calendlyLink
-        };
-
+        
         this.isUploadingLocation = true;
-        await this.modifyLocation(updateLocationBody);
 
+        const updateLocationBody = {
+          id: this.location.id,
+          isVerified: this.location.isVerified,
+          isActive: this.location.isActive,
+          name: this.location.name,
+          address: this.location.address,
+          propertyType: this.location.propertyType,
+          landUse: this.location.landUse,
+          lat: this.location.lat,
+          long: this.location.long,
+          rooms: this.location.rooms,
+          bathrooms: this.location.bathrooms,
+          calendlyLink: this.location.calendlyLink,
+          vault: this.location.vault,
+          cleaning: this.location.cleaning,
+          wifi: this.location.wifi,
+          security: this.location.security,
+          painting: this.location.painting,
+          floor: this.location.floor,
+          garage: this.location.garage,
+          email: this.location.email,
+          phone: this.location.phone,
+          description: this.location.description,
+          unused: this.location.unused,
+          zone: this.location.zone.id,
+          owner: this.location.owner.id,
+          squareMeters: this.location.squareMeters,
+          stripePriceId: this.location.stripePriceId,
+          stripeProductId: this.location.stripeProductId,
+          startLease: this.location.startLease,
+          endLease: this.location.endLease,
+          createdByAdmin: this.location.createdByAdmin,
+          isDaily: this.location.isDaily,
+        }
+        await PUT_ADMIN_LOCATION(updateLocationBody);
+        
+        this.isUploadingLocation = false;
         CustomToast.fire({
           title: this.$t("sweetAlertMessages.saved"),
           icon: "success",
         });
+        
       } catch (error) {
         CustomErrorToast.fire({
           text: error.response.data.message,
@@ -773,6 +799,34 @@ export default {
           });
         }
       });
+    },
+    async toogleIsDaily(value) {
+      const { isConfirmed } = await CustomConfirmDialog.fire({
+        text: this.$t("sweetAlertMessages.confirmTitle"),
+      });
+      if (!isConfirmed) return;
+      console.log('%cLocation.vue line:800 value', 'color: #26bfa5;', value);
+      
+      try {
+        
+        this.isUploadingLocation = true;
+        await PUT_ADMIN_LOCATION({
+          id: this.location.id,
+          isDaily:value
+        });
+        
+        CustomToast.fire({
+          title: this.$t("sweetAlertMessages.saved"),
+          icon: "success",
+        });  
+        this.location.isDaily = value
+        this.isUploadingLocation = false;
+      } catch (error) {
+        this.isUploadingLocation = false;
+        CustomErrorToast.fire({
+          text: error.response.data.message || error,
+        });
+      }
     },
     toogleIsVerified(value) {
       const changeIsVerifyLocationTextAcction = !this.location.isVerified
@@ -841,12 +895,26 @@ export default {
     },
     updateNewValue(val){
       this.newValueProperty = val
+    },
+    async fetchListUsers(){
+      try {
+        this.isLoadingAllUsersList = true
+        const response = await GET_ADMIN_USERS()
+        this.allUsersList = response
+        this.isLoadingAllUsersList = false
+      } catch (error) {
+        this.isLoadingAllUsersList = false
+        CustomErrorToast.fire({
+          text: error.response.data.message || error,
+        });
+      }
     }
   },
   async created() {
     try {
       await this.getCurrenciesList();
       await this.loadLocation();
+      await this.fetchListUsers();
     } catch (error) {
       console.log(error);
     }

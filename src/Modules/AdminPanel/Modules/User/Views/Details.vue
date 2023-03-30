@@ -90,14 +90,36 @@
           user.didReview ? $t("general.yes") : "No"
         }}</span>
       </div>
-      <div class="w-full flex justify-center mt-4">
-        <button
-          class="my-btn mx-2 bg-red-600"
-          @click="sendUserTrash"
-        >
-          {{ $t("sweetAlertMessages.sendToTrash") }}
-        </button>
-      </div>
+
+      <hr />
+      <ValidationObserver v-slot="{ handleSubmit, invalid }">
+        <form @submit.prevent="handleSubmit(submitUserInfo)" class="flex flex-col gap-3">
+          <!-- NAME -->
+          <ValidationProvider
+            v-slot='{ errors }'
+            rules='required'
+            class='my-input-box'
+          >
+              <div>
+                <label class="mr-2 block">Id del empleado</label>
+                <input type="text" class="my-input border" v-model="user.stripeCustomerId">
+              </div>
+              <span class='error my-error relative top-0 left-0'>{{ errors[0] }}</span>
+          </ValidationProvider>
+
+          <div class="w-full flex justify-center">
+            <button
+              class="my-btn mx-2"
+              :disabled="isUpdatingUser"
+              :class="isUpdatingUser || invalid ? 'opacity-25' : ''"
+            >
+              {{ $t("general.update") }}
+            </button>
+          </div>
+        </form>
+      </ValidationObserver>
+
+      <!-- stripeId -->
     </div>
   </div>
 </template>
@@ -110,14 +132,19 @@ import {
   CustomToast,
   CustomConfirmDialog,
 } from "@/sweetAlert";
+import { ValidationObserver } from "vee-validate";
+import { PUT_ADMIN_USER } from "@/Services/Admin/admin_users_services"
+
 export default {
   components: {
     SwitchComponentVue,
+    ValidationObserver,
   },
   data() {
     return {
       hasDeleted: false,
-    }
+      isUpdatingUser:false
+    };
   },
   computed: {
     ...mapGetters("adminPanelStore/users", ["getUserDetails"]),
@@ -130,17 +157,17 @@ export default {
       "changeIsActiveUser",
       "changeIsOwnerStatus",
       "changeIsAdminRol",
-      "deleteUser"
+      "deleteUser",
     ]),
     async sendUserTrash() {
       const { isConfirmed } = await CustomConfirmDialog.fire({
         title: this.$t("sweetAlertMessages.sendToTrash"),
         text: this.$t("sweetAlertMessages.userToTrash"),
-      })
+      });
 
       if (!isConfirmed) return;
 
-      await this.deleteUser({id: this.user.id});
+      await this.deleteUser({ id: this.user.id });
 
       this.hasDeleted = true;
     },
@@ -223,12 +250,38 @@ export default {
         }
       );
     },
+    async submitUserInfo(){
+      const { isConfirmed } = await CustomConfirmDialog.fire({});
+      if (!isConfirmed) return;
+
+      try {
+        const updateUserBody = {
+          id: this.user.id,
+          stripeCustomerId: this.user.stripeCustomerId,
+
+        }
+        this.isUpdatingUser = true;
+        await PUT_ADMIN_USER(updateUserBody)
+        
+        CustomToast.fire({
+          title: this.$t("sweetAlertMessages.saved"),
+          icon: "success",
+        });
+        this.isUpdatingUser = false;
+
+      } catch (error) {
+        this.isUpdatingUser = false;
+        CustomErrorToast.fire({
+          text: error.response.data.message || error,
+        });
+      }
+    }
   },
   watch: {
     hasDeleted(newValue) {
-      if (newValue === true) this.$emit('userDeleted');
-    }
-  }
+      if (newValue === true) this.$emit("userDeleted");
+    },
+  },
 };
 </script>
 

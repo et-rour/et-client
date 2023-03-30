@@ -1,6 +1,3 @@
-export const MUTATION_CHANGE_SHOW_COOKIES_BANNER = (state, showBanner) => {
-  state.showCookiesBanner = showBanner;
-};
 export const changeLastUsedBy = (state, id) => {
   state.id = id;
 };

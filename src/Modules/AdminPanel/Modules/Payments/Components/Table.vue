@@ -2,7 +2,7 @@
   <div class="w-full flex-grow">
     <template>
       <AgGridVue
-        class="ag-theme-alpine h-full"
+        class="ag-theme-alpine-dark h-10"
         :columnDefs="columnDefs"
         :rowData="dataTable"
       >
@@ -15,8 +15,6 @@
 </template>
 
 <script>
-import "ag-grid-community/dist/styles/ag-grid.css";
-import "ag-grid-community/dist/styles/ag-theme-alpine.css";
 import { AgGridVue } from "ag-grid-vue";
 import RecipeLinkPaymentComponent from "./RecipeLinkPayment.vue";
 export default {

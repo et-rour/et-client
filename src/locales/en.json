@@ -58,7 +58,8 @@
     "notAsign": "not assigned",
     "agotada": "sold out",
     "disponible": "Available",
-    "newImage":"New Image"
+    "newImage":"New Image",
+    "uploadFile":"Upload file"
   },
   "navbar": {
     "owner": "PUBLISH YOUR PROPERTY",
@@ -444,12 +445,26 @@
     }
   },
   "admin": {
+    "title": "OWNER",
+    "navbar":{
+      "properties": "My properties",
+      "reservations":"reservations",
+      "payment": "Payments"
+    },
+    "reservations":{
+      "notFound": "you don't have reservations",
+      "uploadFileHeader":"Upload the files related to this reservation",
+      "myFiles":"My Files",
+      "owner":"Owner",
+      "client":"Client"
+    },  
+    "payments": {
+      "title": "payment activity",
+      "loading": "Loading payment history"
+    },
     "locations": {
       "title": "All locations",
       "notFound": "No locations yet",
-      "owner": "OWNER",
-      "properties": "Properties",
-      "payment": "Payments",
       "property": {
         "leaseTerm": "lease term",
         "address": "address",
@@ -457,10 +472,8 @@
         "until": "until",
         "download": "Download contract",
         "extend": "Extend contract",
-        "finish": "End lease period"
-      },
-      "payments": {
-        "title": "payment activity"
+        "disable": "Disable property",
+        "enable": "activate property"
       },
       "calendar": {
         "title": "Extend the term of your lease",
@@ -533,6 +546,7 @@
       "client": "Is the user a customer?",
       "admin": "Is the user an admin?",
       "review": "Has the user completed a review?",
+      "changeStripeId": "Customer ID Stripe",
       "search": "Search",
       "filters": "Filters",
       "isVerified": "Is Verified?",
@@ -609,11 +623,12 @@
       "zone": "Zone",
       "owner": "Owner",
       "isActive": "Is the location activated?",
+      "isverified": "Is the location verified?",
+      "isDaily": "Is the location for rent per day?",
       "haveVault": "Does the location have a Vault?",
       "haveCleaning": "Does the location have a Cleaning service?",
       "haveWifi": "Does the location have Wifi?",
       "haveSecurity": "Does the location have Security?",
-      "isverified": "Is the location verified?",
       "newVisit": "Schedule technical visit",
       "goToVisit": "go to calendar",
       "value": "property value",
