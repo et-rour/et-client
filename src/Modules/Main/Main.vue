@@ -6,19 +6,16 @@
       :idProgressBar="'cover_image_home'"
       :specificDirectory="'/COVER'"
       :defaultImageUrl="'https://firebasestorage.googleapis.com/v0/b/espacio-temporal-prod.appspot.com/o/COVER%2Fhome%2Fhome_min.png?alt=media&token=917d5f3a-d760-4536-9d0a-daf0869cb227'"
-      :defaultText="'BUSCAMOS PROPIEDADES EN DESUSO Y LAS TRANSFORMAMOS EN ESPACIOS DE TRABAJO'"
-    >
+      :defaultText="'BUSCAMOS PROPIEDADES EN DESUSO Y LAS TRANSFORMAMOS EN ESPACIOS DE TRABAJO'">
       <div class="flex gap-8 flex-col sm:flex-row">
         <button
           class="my-btn font-semibold bg-white w-full md:w-70 text-my-blue-primary"
-          @click="$router.push({ name: 'tenants' })"
-        >
+          @click="$router.push({ name: 'tenants' })">
           {{ $t("landing.hero.searchProperty") }}
         </button>
         <button
           class="my-btn font-semibold w-full md:w-70 text-white p-2"
-          @click="$router.push({ name: 'owner' })"
-        >
+          @click="$router.push({ name: 'owner' })">
           {{ $t("landing.hero.openProperty") }}
         </button>
       </div>
@@ -29,28 +26,23 @@
     <!-- find space -->
     <div
       class="my-container mx-auto h-screen rounded-3xl overflow-hidden relative"
-      id="find"
-    >
+      id="find">
       <img
         src="@/assets/images/womanWorking.png"
         alt="Hero image"
-        class="w-full h-full object-cover"
-      />
+        class="w-full h-full object-cover" />
       <!-- MASK -->
       <div
-        class="w-full h-full absolute top-0 left-0 flex flex-col justify-end gap-3 py-4 rounded-b-3xl mask"
-      ></div>
+        class="w-full h-full absolute top-0 left-0 flex flex-col justify-end gap-3 py-4 rounded-b-3xl mask"></div>
 
       <div
-        class="w-full h-full absolute top-0 left-0 flex flex-col justify-end items-center pb-16"
-      >
+        class="w-full h-full absolute top-0 left-0 flex flex-col justify-end items-center pb-16">
         <div class="w-10/12 lg:w-11/12 xl:w-10/12">
           <h1 class="my-title text-3xl md:text-myheader1 text-white mb-4">
             <span class="mr-6">{{ $t("landing.hero_2.title") }}</span>
             <button
               class="my-btn bg-white text-my-blue-primary text-xl w-auto px-6 inline-block align-top"
-              @click="$router.push({ name: 'tenants' })"
-            >
+              @click="$router.push({ name: 'tenants' })">
               {{ $t("landing.hero_2.ver") }}
             </button>
           </h1>
@@ -75,13 +67,11 @@
           name="propertiesData"
           :list="propertiesListFiltered"
           :per="8"
-          class="w-full gap-8 grid grid-cols-1 md:grid-cols-2"
-        >
+          class="w-full gap-8 grid grid-cols-1 md:grid-cols-2">
           <PropertyCard
             v-for="property in paginated('propertiesData')"
             :key="property.id"
-            :property="property"
-          ></PropertyCard>
+            :property="property"></PropertyCard>
         </paginate>
         <paginate-links
           for="propertiesData"
@@ -95,8 +85,7 @@
           :classes="{
             '.next > a': 'next-link',
             '.prev > a': 'prev-link',
-          }"
-        ></paginate-links>
+          }"></paginate-links>
         <div class="w-full flex justify-end">
           <router-link
             :to="{ name: 'tenants' }"
@@ -111,7 +100,6 @@
         {{ $t("landing.spaces.notFound") }}
       </h3>
     </div>
-
   </div>
 </template>
 
@@ -149,13 +137,18 @@ export default {
   methods: {
     ...mapActions("propertiesStore", ["loadProperties", "loadZones"]),
     loadPropertiesFiltered({ zone, city, type, siteCountry }) {
-      
       let listProperties = this.propertiesList;
 
       if (type !== "") {
-        listProperties = listProperties.filter(
-          (property) => property.propertyType === type
-        );
+        if (type === "hours") {
+          listProperties = listProperties.filter(
+            (property) => property.isDaily
+          );
+        } else {
+          listProperties = listProperties.filter(
+            (property) => property.propertyType === type
+          );
+        }
       }
 
       if (zone !== "") {

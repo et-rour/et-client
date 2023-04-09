@@ -9,8 +9,7 @@
       <div class="my-container">
         <h1 class="my-title">{{ property.name }}</h1>
         <div
-          class="w-full flex flex-col md:flex-row md:gap-4 justify-between mb-6 text-center xl::text-left"
-        >
+          class="w-full flex flex-col md:flex-row md:gap-4 justify-between mb-6 text-center xl::text-left">
           <p>
             {{ property.zone.city }} -
             {{ property.zone.state }}
@@ -50,68 +49,63 @@
       </div>
 
       <!-- images -->
-      <div class="my-container grid grid-cols-12 gap-x-4 mb-12 ">
+      <div class="my-container grid grid-cols-12 gap-x-4 mb-12">
         <!-- COVER IMAGE -->
-        <div class="col-span-12 lg:col-span-7 h-96 ">
-            <img
-              :src="image"
-              alt="cover property"
-              class="h-full w-full rounded-t-3xl lg:rounded-l-3xl lg:rounded-t-none"
-              :class="!property.image ? 'object-contain' : 'object-cover'"
-            />
+        <div class="col-span-12 lg:col-span-7 h-96">
+          <img
+            :src="image"
+            alt="cover property"
+            class="h-full w-full rounded-t-3xl lg:rounded-l-3xl lg:rounded-t-none"
+            :class="!property.image ? 'object-contain' : 'object-cover'" />
         </div>
 
         <!-- SIDE IMAGES -->
-        <div class="col-span-12 lg:col-span-5 flex flex-col justify-between ">
-          
-            <div v-if="!sidebarImages.length > 0" class="flex justify-center items-center flex-grow" >
-              <h2 class="font-bold text-2xl text-gray-600 text-center">{{$t('tenants.details.noPictures')}}</h2>
-            </div>
+        <div class="col-span-12 lg:col-span-5 flex flex-col justify-between">
+          <div
+            v-if="!sidebarImages.length > 0"
+            class="flex justify-center items-center flex-grow">
+            <h2 class="font-bold text-2xl text-gray-600 text-center">
+              {{ $t("tenants.details.noPictures") }}
+            </h2>
+          </div>
 
-            <div class="flex-grow grid grid-cols-4 grid-rows-1 lg:grid-cols-2 lg:grid-rows-2 gap-4 my-4 lg:mt-0 " v-else>
-              <div
-                v-for="(image,index) in sidebarImages"
-                :key="image.id"
-                class="relative h-36 w-full"
-              >
+          <div
+            class="flex-grow grid grid-cols-4 grid-rows-1 lg:grid-cols-2 lg:grid-rows-2 gap-4 my-4 lg:mt-0"
+            v-else>
+            <div
+              v-for="(image, index) in sidebarImages"
+              :key="image.id"
+              class="relative h-36 w-full">
+              <img
+                :src="image.image"
+                :alt="`image_extra_${image.id}`"
+                class="h-full w-full object-cover" />
+
+              <button
+                class="py-2 px-3 rounded-md flex items-center absolute bottom-2 right-2 text-xs shadow-xl border bg-white font-bold"
+                @click="toggleShowModalImages"
+                v-if="index === sidebarImages.length - 1">
                 <img
-                  :src="image.image"
-                  :alt="`image_extra_${image.id}`"
-                  class="h-full w-full object-cover "
-                />
-                
-                <button
-                  class="py-2 px-3 rounded-md flex items-center absolute bottom-2 right-2 text-xs shadow-xl border bg-white font-bold"
-                  @click="toggleShowModalImages"
-                  v-if="index === sidebarImages.length-1"
-                >
-                  <img              
-                    src="@/assets/icons/menu-dots-svgrepo-com.svg"
-                    class="w-3 h-3 mr-1"
-                    alt="menu"
-                  />
-                  <p class="truncate">
-                    {{ $t("tenants.details.pictures") }}
-                  </p>
-                </button>
-              </div>    
+                  src="@/assets/icons/menu-dots-svgrepo-com.svg"
+                  class="w-3 h-3 mr-1"
+                  alt="menu" />
+                <p class="truncate">
+                  {{ $t("tenants.details.pictures") }}
+                </p>
+              </button>
             </div>
+          </div>
 
-            
-
-            <button
-              class="my-btn py-3 rounded-none font-black row-span-1 bg-my-green-primary w-full h-12"
-              @click="goToSchedule"
-              :disabled="!property.isActive"
-              :class="!property.isActive&&'my-disabled'"
-            >
-              {{ $t("tenants.details.vistit") }}
-            </button>
-
+          <button
+            class="my-btn py-3 rounded-none font-black row-span-1 bg-my-green-primary w-full h-12"
+            @click="goToSchedule"
+            :disabled="!property.isActive"
+            :class="!property.isActive && 'my-disabled'">
+            {{ $t("tenants.details.vistit") }}
+          </button>
         </div>
-        
       </div>
-      <p class=" my-container mt-12 mb-20">{{ property.description }}</p>
+      <p class="my-container mt-12 mb-20">{{ property.description }}</p>
 
       <!-- INCLUDED SERVICES -->
       <IncludedServices
@@ -122,8 +116,7 @@
           bathrooms: property.bathrooms > 0,
           wifi: property.wifi,
           security: property.security,
-        }"
-      />
+        }" />
       <!-- buttons -->
       <!-- <template>
         <button
@@ -160,20 +153,33 @@
             start: property.startLease,
             end: property.endLease,
           }"
-          :isActive="property.isActive&&room.isActive"
-        ></RoomCard>
+          :isActive="property.isActive && room.isActive"></RoomCard>
       </div>
 
       <!-- Pay -->
-      <div class="my-container mt-10">
+      <div class="my-container mt-10" v-if="property.propertyType === 'entire'">
         <button
           class="w-full bg-green-500 mt-2 text-white font-bold my-btn"
-          @click="goToCalendar"
-          v-if="property.propertyType === 'entire'"
+          @click="goToCalendarMonthly"
           :disabled="!property.isActive"
-          :class="!property.isActive&&'my-disabled'"
-        >
-          {{ $t("tenants.details.pay") }} <span v-if="property.isActive">$ <NumberMaskComponent :number="property.value" /></span>
+          :class="!property.isActive && 'my-disabled'">
+          {{ $t("tenants.details.scheduleByMonth") }}
+          <span v-if="property.isActive"
+            >$ <NumberMaskComponent :number="property.value"
+          /></span>
+          <span></span>
+        </button>
+
+        <button
+          v-if="property.isDaily"
+          class="w-full bg-green-500 mt-2 text-white font-bold my-btn"
+          @click="goToCalendarDaily"
+          :disabled="!property.isActive"
+          :class="!property.isActive && 'my-disabled'">
+          {{ $t("tenants.details.scheduleByHour") }}
+          <span v-if="property.isActive"
+            >$ <NumberMaskComponent :number="property.dailyValue"
+          /></span>
           <span></span>
         </button>
       </div>
@@ -186,11 +192,10 @@
 
     <!-- MODAL EXTRA IMAGES -->
     <SwiperImagesComponent
-      v-if="carouselModalImages.length>0"
+      v-if="carouselModalImages.length > 0"
       :showModal="showModalImages"
       v-on:toogle="toggleShowModalImages"
-      :images="carouselModalImages"
-    />
+      :images="carouselModalImages" />
 
     <!-- MODAL 3D PICTURES -->
     <!-- <ModelGlobal
@@ -228,7 +233,7 @@ import { CustomErrorToast } from "@/sweetAlert.js";
 import Mapa from "../Components/GoogleCustomMap.vue";
 import IncludedServices from "../Components/IncludedServices.vue";
 import SwiperImagesComponent from "../Components/SwiperImagesComponent.vue";
-import NumberMaskComponent from '../../../components/NumberMaskComponent.vue';
+import NumberMaskComponent from "../../../components/NumberMaskComponent.vue";
 export default {
   components: {
     RoomCard,
@@ -254,10 +259,16 @@ export default {
     goToSchedule() {
       this.$router.push({ name: "tenants-schedule" });
     },
-    async goToCalendar() {
+    async goToCalendarDaily() {
       this.$router.push({
         name: "tenants-calendar",
-        params: { idRoom: "entire" },
+        params: { idRoom: "entire", isDaily: "daily" },
+      });
+    },
+    async goToCalendarMonthly() {
+      this.$router.push({
+        name: "tenants-calendar",
+        params: { idRoom: "entire", isDaily: "monthly" },
       });
     },
     closeContactModal() {
@@ -284,13 +295,18 @@ export default {
     ...mapGetters("authStore", ["user", "isAuth"]),
     ...mapGetters("postsStore", ["currencies"]),
     currency() {
-      return this.currencies.filter(currency => currency.country === this.property.zone.country)[0];
+      return this.currencies.filter(
+        (currency) => currency.country === this.property.zone.country
+      )[0];
     },
     zoom() {
       return this.property.lat !== "" && this.property.long !== "" ? 15 : 2;
     },
     image() {
-      return this.property.image ?? require('../../../assets/images/house_placeholder1024.png');
+      return (
+        this.property.image ??
+        require("../../../assets/images/house_placeholder1024.png")
+      );
     },
     markerLatLng() {
       // RANDOM DEVIATION

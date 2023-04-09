@@ -5,6 +5,7 @@
     "saved": "Guardado",
     "error": "Opps.. Algo salio mal",
     "confirmTitle": "¿Estás seguro?",
+    "confirmSubTitle": "¡¡Revisa tu información antes de continuar!!",
     "confirmLeaveRouterMessage": "¿De verdad quieres irte? ¡Tienes cambios no guardados!",
     "confirmWarningTitle": "Antes de continuar",
     "confirmWarningConfirmText": "Entendido!!",
@@ -48,7 +49,7 @@
     "update": "Actualizar",
     "delete": "Eliminar",
     "continue": "Continuar",
-    "change":"Cambiar",
+    "change": "Cambiar",
     "image": "imagen | imagen | {count} imagenes",
     "property": "propiedad",
     "privateSpace": "Espacio privado",
@@ -58,8 +59,8 @@
     "notAsign": "No se asigno",
     "agotada": "Agotada",
     "disponible": "Disponible",
-    "newImage":"Nueva imagen",
-    "uploadFile":"Subir archivo"
+    "newImage": "Nueva imagen",
+    "uploadFile": "Subir archivo"
   },
   "navbar": {
     "owner": "PUBLICA TU PROPIEDAD",
@@ -117,7 +118,7 @@
       "openProperty": "QUIERO ARRENDAR MI PROPIEDAD"
     },
     "video": {
-      "header":"Administramos",
+      "header": "Administramos",
       "title": "todo tipo de inmuebles en desuso",
       "question_1": "¿No has podido arrendar tu propiedad comercial?",
       "response_1": "Nosotros nos encargamos de administrar tu propiedad con contratos flexibles y de corta duración.",
@@ -201,7 +202,7 @@
     "airbnbDescription4": "2.4 Reservas de Experienciasyotros Servicios de Anfitrión.La Reserva de una Experiencia u otro Servicio de Anfitrión te da derecho a participar, asistir o disfrutar de ese Servicio de Anfitrión. Eres responsable de confirmar que tanto tú como cualquier"
   },
   "cookies": {
-    "banner":{
+    "banner": {
       "text": "Este sitio web utiliza cookies para garantizar que obtenga la mejor experiencia en nuestro sitio web.",
       "link": "Aviso de cookies",
       "acept": "Aceptar cookies",
@@ -355,6 +356,8 @@
       "vistit": "Agendar una visita",
       "vistitRoom": "Agendar visita",
       "pay": "Reservar",
+      "scheduleByMonth": "Reservar por mes",
+      "scheduleByHour": "Reservar por hora",
       "payRoom": "Reservar",
       "includedServises": "SERVICIOS INCLUÍDOS",
       "includedServisesDescription": "Al pagar los gastos comunes estos son los servicios que se incluyen",
@@ -420,11 +423,11 @@
     }
   },
   "howItWorks": {
-    "title":"¿CÓMO FUNCIONA?",
-    "subtitle":"CASOS DE ÉXITO",
-    "pdfDescription":"Descarga nuestro PDF con el detalle\nde proyectos y casos de éxito.",
-    "button":"DESCARGAR PDF",
-    "testimonials":"TESTIMONIOS"
+    "title": "¿CÓMO FUNCIONA?",
+    "subtitle": "CASOS DE ÉXITO",
+    "pdfDescription": "Descarga nuestro PDF con el detalle\nde proyectos y casos de éxito.",
+    "button": "DESCARGAR PDF",
+    "testimonials": "TESTIMONIOS"
   },
   "footer": {
     "nav": {
@@ -445,18 +448,18 @@
   },
   "admin": {
     "title": "PANEL",
-    "navbar":{
+    "navbar": {
       "properties": "Mis propiedades",
-      "reservations":"Mis reservaciónes",
+      "reservations": "Mis reservaciónes",
       "payment": "Mis pagos"
     },
-    "reservations":{
+    "reservations": {
       "notFound": "No tienes ninguna reservación",
-      "uploadFileHeader":"Sube los archivos relaciónados a esta reservación",
-      "myFiles":"Mis archivos",
-      "owner":"Dueño",
-      "client":"Cliente"
-    },  
+      "uploadFileHeader": "Sube los archivos relaciónados a esta reservación",
+      "myFiles": "Mis archivos",
+      "owner": "Dueño",
+      "client": "Cliente"
+    },
     "payments": {
       "title": "Historial de pagos",
       "loading": "Cargando historial de pagos"
@@ -631,16 +634,16 @@
       "newVisit": "Agendar visita tecnica",
       "goToVisit": "Ir al calendario",
       "value": "Valor de la propiedad",
-      "landUse":"Uso de la propiedad",
-      "unused":"Tiempo sin uso",
-      "stripeProductId":"Id del producto en stripe",
-      "stripePriceId":"Id del precio en stripe",
-      "startLease":"Inicio del arriendo",
-      "endLease":"Fin del arriendo",
-      "created":"Se creo el",
-      "zoneId":"Zona",
-      "ownerId":"Dueño",
-      "adminsId":"Admin",
+      "landUse": "Uso de la propiedad",
+      "unused": "Tiempo sin uso",
+      "stripeProductId": "Id del producto en stripe",
+      "stripePriceId": "Id del precio en stripe",
+      "startLease": "Inicio del arriendo",
+      "endLease": "Fin del arriendo",
+      "created": "Se creo el",
+      "zoneId": "Zona",
+      "ownerId": "Dueño",
+      "adminsId": "Admin",
       "details": "Detalles",
       "images": "Imagenes",
       "seeRooms": "Cuartos",
@@ -658,6 +661,9 @@
         "noRooms": "Esta propiedad no tiene ningun cuarto registrado",
         "buyLink": "Link de compra",
         "isActive": "¿El cuarto esta disponible?",
+        "isDaily": "¿El cuarto se puede rentar por día?",
+        "monthlyValue": "Valor del cuarto por mes",
+        "dailyValue": "Valor del cuarto por día",
         "create": {
           "meters": "Metros cuadrados",
           "name": "Nombre",
@@ -696,6 +702,7 @@
       "entire": "Entera",
       "room": "Cuarto",
       "selectOne": "Seleccionar opción",
+      "dailyValue": "Valor de la propiedad diario",
       "confiramtionMessages": {
         "activateLocation": "¿Seguro que quieres activar la locación?",
         "desactivateLocation": "¿Seguro que quieres desactivar la locación?",
@@ -760,7 +767,7 @@
         "confirmation": "¿Deseas crear reporte de los 100 ultimos pagos?"
       }
     },
-    "testimonials":{
+    "testimonials": {
       "newTestimonial": "Crear testimonio",
       "urlVideo": "Url del video",
       "name": "Nombre",
