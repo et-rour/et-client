@@ -56,8 +56,7 @@
           <label class="mr-3">{{ $t("adminPanel.locations.newVisit") }} </label>
           <button
             class="w-auto underline text-my-blue-primary"
-            @click="goToSchedule"
-          >
+            @click="goToSchedule">
             {{ $t("adminPanel.locations.goToVisit") }}
           </button>
         </div>
@@ -86,14 +85,12 @@
       <ValidationObserver v-slot="{ handleSubmit, invalid }">
         <form
           @submit.prevent="handleSubmit(submitLocation)"
-          class="flex flex-col gap-3"
-        >
+          class="flex flex-col gap-3">
           <!-- name -->
           <ValidationProvider
             v-slot="{ errors }"
             rules="required"
-            class="my-input-box"
-          >
+            class="my-input-box">
             <div>
               <label for="name" class="mr-3"
                 >{{ $t("adminPanel.locations.name") }}
@@ -103,8 +100,7 @@
                 type="text"
                 class="my-input w-2/3"
                 v-model="location.name"
-                id="name"
-              />
+                id="name" />
             </div>
             <span class="error">{{ errors[0] }}</span>
           </ValidationProvider>
@@ -113,8 +109,7 @@
           <ValidationProvider
             v-slot="{ errors }"
             rules="required"
-            class="my-input-box"
-          >
+            class="my-input-box">
             <div>
               <label for="address" class="mr-3"
                 >{{ $t("adminPanel.locations.address") }}
@@ -123,8 +118,7 @@
                 type="text"
                 class="my-input w-2/3"
                 v-model="location.address"
-                id="address"
-              />
+                id="address" />
             </div>
             <span class="error">{{ errors[0] }}</span>
           </ValidationProvider>
@@ -133,8 +127,7 @@
           <ValidationProvider
             v-slot="{ errors }"
             rules="required"
-            class="my-input-box"
-          >
+            class="my-input-box">
             <div>
               <label for="rooms" class="mr-3"
                 >{{ $t("adminPanel.locations.rooms") }}
@@ -145,8 +138,7 @@
                 min="0"
                 class="my-input"
                 v-model="location.rooms"
-                id="rooms"
-              />
+                id="rooms" />
             </div>
             <span class="error">{{ errors[0] }}</span>
           </ValidationProvider>
@@ -155,8 +147,7 @@
           <ValidationProvider
             v-slot="{ errors }"
             rules="required"
-            class="my-input-box"
-          >
+            class="my-input-box">
             <div>
               <label for="bathrooms" class="mr-3"
                 >{{ $t("adminPanel.locations.bathrooms") }}
@@ -167,8 +158,7 @@
                 min="0"
                 class="my-input"
                 v-model="location.bathrooms"
-                id="bathrooms"
-              />
+                id="bathrooms" />
             </div>
             <span class="error">{{ errors[0] }}</span>
           </ValidationProvider>
@@ -177,8 +167,7 @@
           <ValidationProvider
             v-slot="{ errors }"
             rules="required"
-            class="my-input-box"
-          >
+            class="my-input-box">
             <div>
               <label for="painting" class="mr-3"
                 >{{ $t("adminPanel.locations.painting") }}
@@ -189,8 +178,7 @@
                 min="0"
                 class="my-input"
                 v-model="location.painting"
-                id="painting"
-              />
+                id="painting" />
             </div>
             <span class="error">{{ errors[0] }}</span>
           </ValidationProvider>
@@ -199,8 +187,7 @@
           <ValidationProvider
             v-slot="{ errors }"
             rules="required"
-            class="my-input-box"
-          >
+            class="my-input-box">
             <div>
               <label for="floor" class="mr-3"
                 >{{ $t("adminPanel.locations.floor") }}
@@ -211,8 +198,7 @@
                 min="0"
                 class="my-input"
                 v-model="location.floor"
-                id="floor"
-              />
+                id="floor" />
             </div>
             <span class="error">{{ errors[0] }}</span>
           </ValidationProvider>
@@ -221,8 +207,7 @@
           <ValidationProvider
             v-slot="{ errors }"
             rules="required|email"
-            class="my-input-box"
-          >
+            class="my-input-box">
             <div>
               <label for="email" class="mr-3"
                 >{{ $t("adminPanel.locations.email") }}
@@ -231,8 +216,7 @@
                 type="text"
                 class="my-input w-2/3"
                 v-model="location.email"
-                id="email"
-              />
+                id="email" />
             </div>
             <span class="error">{{ errors[0] }}</span>
           </ValidationProvider>
@@ -241,8 +225,7 @@
           <ValidationProvider
             v-slot="{ errors }"
             rules="required|extPhoneNumber"
-            class="my-input-box"
-          >
+            class="my-input-box">
             <div>
               <label for="phone" class="mr-3"
                 >{{ $t("adminPanel.locations.phone") }}
@@ -251,8 +234,7 @@
                 type="text"
                 class="my-input w-2/3"
                 v-model="location.phone"
-                id="phone"
-              />
+                id="phone" />
             </div>
             <span class="error">{{ errors[0] }}</span>
           </ValidationProvider>
@@ -261,8 +243,7 @@
           <ValidationProvider
             v-slot="{ errors }"
             rules="required"
-            class="my-input-box items-start"
-          >
+            class="my-input-box items-start">
             <div>
               <label for="description" class="mr-3"
                 >{{ $t("adminPanel.locations.description") }}
@@ -271,8 +252,7 @@
                 type="text"
                 class="my-input w-2/3 h-24"
                 v-model="location.description"
-                id="description"
-              ></textarea>
+                id="description"></textarea>
             </div>
             <span class="error">{{ errors[0] }}</span>
           </ValidationProvider>
@@ -281,8 +261,7 @@
           <ValidationProvider
             v-slot="{ errors }"
             rules="required"
-            class="my-input-box"
-          >
+            class="my-input-box">
             <div>
               <label for="garage" class="mr-3"
                 >{{ $t("adminPanel.locations.garage") }}
@@ -293,8 +272,7 @@
                 min="0"
                 class="my-input"
                 v-model="location.garage"
-                id="garage"
-              />
+                id="garage" />
             </div>
             <span class="error">{{ errors[0] }}</span>
           </ValidationProvider>
@@ -303,8 +281,7 @@
           <ValidationProvider
             v-slot="{ errors }"
             rules="required"
-            class="my-input-box"
-          >
+            class="my-input-box">
             <div>
               <label for="area" class="mr-3">
                 <!-- {{ $t("adminPanel.locations.garage") }} -->
@@ -315,8 +292,7 @@
                 min="1"
                 class="my-input"
                 v-model="location.squareMeters"
-                id="area"
-              />
+                id="area" />
             </div>
             <span class="error">{{ errors[0] }}</span>
           </ValidationProvider>
@@ -325,8 +301,7 @@
           <ValidationProvider
             v-slot="{ errors }"
             rules="required"
-            class="my-input-box"
-          >
+            class="my-input-box">
             <div>
               <label for="vault" class="mr-3">
                 {{ $t("adminPanel.locations.haveVault") }}
@@ -335,8 +310,7 @@
                 type="checkbox"
                 class="my-input"
                 name="vault"
-                v-model="location.vault"
-              />
+                v-model="location.vault" />
             </div>
             <span class="error">{{ errors[0] }}</span>
           </ValidationProvider>
@@ -345,8 +319,7 @@
           <ValidationProvider
             v-slot="{ errors }"
             rules="required"
-            class="my-input-box"
-          >
+            class="my-input-box">
             <div>
               <label for="cleaning" class="mr-3">
                 {{ $t("adminPanel.locations.haveCleaning") }}
@@ -355,8 +328,7 @@
                 name="cleaning"
                 type="checkbox"
                 class="my-input"
-                v-model="location.cleaning"
-              />
+                v-model="location.cleaning" />
             </div>
             <span class="error">{{ errors[0] }}</span>
           </ValidationProvider>
@@ -365,8 +337,7 @@
           <ValidationProvider
             v-slot="{ errors }"
             rules="required"
-            class="my-input-box"
-          >
+            class="my-input-box">
             <div>
               <label for="wifi" class="mr-3">
                 {{ $t("adminPanel.locations.haveWifi") }}
@@ -376,8 +347,7 @@
                 type="checkbox"
                 min="1"
                 class="my-input"
-                v-model="location.wifi"
-              />
+                v-model="location.wifi" />
             </div>
             <span class="error">{{ errors[0] }}</span>
           </ValidationProvider>
@@ -386,8 +356,7 @@
           <ValidationProvider
             v-slot="{ errors }"
             rules="required"
-            class="my-input-box"
-          >
+            class="my-input-box">
             <div>
               <label for="security" class="mr-3">
                 {{ $t("adminPanel.locations.haveSecurity") }}
@@ -397,8 +366,7 @@
                 type="checkbox"
                 min="1"
                 class="my-input"
-                v-model="location.security"
-              />
+                v-model="location.security" />
             </div>
             <span class="error">{{ errors[0] }}</span>
           </ValidationProvider>
@@ -407,8 +375,7 @@
           <ValidationProvider
             v-slot="{ errors }"
             rules="required"
-            class="my-input-box items-start"
-          >
+            class="my-input-box items-start">
             <div>
               <label for="landUse" class="mr-3"
                 >{{ $t("adminPanel.locations.landUse") }}
@@ -417,8 +384,7 @@
                 type="text"
                 class="my-input w-2/3 h-24"
                 v-model="location.landUse"
-                id="landUse"
-              ></textarea>
+                id="landUse"></textarea>
             </div>
             <span class="error">{{ errors[0] }}</span>
           </ValidationProvider>
@@ -427,8 +393,7 @@
           <ValidationProvider
             v-slot="{ errors }"
             rules="required"
-            class="my-input-box"
-          >
+            class="my-input-box">
             <div>
               <label for="tiempoUso" class="mr-3"
                 >{{ $t("adminPanel.locations.unused") }}
@@ -436,16 +401,14 @@
               <select
                 class="my-input w-2/3"
                 name="tiempoUso"
-                v-model="location.unused"
-              >
+                v-model="location.unused">
                 <option disabled selected value="">
                   {{ $t("createForm.opcionDefault") }}
                 </option>
                 <option
                   v-for="(item, index) in timeUnusedOptions"
                   :value="item.value"
-                  :key="index + item.name + 'time'"
-                >
+                  :key="index + item.name + 'time'">
                   {{ item.name }}
                 </option>
               </select>
@@ -457,16 +420,14 @@
           <ValidationProvider
             v-slot="{ errors }"
             rules="extCalendlyUrl"
-            class="my-input-box"
-          >
+            class="my-input-box">
             <div>
               <label for="calendly" class="mr-3"> Calendly </label>
               <input
                 type="text"
                 class="my-input w-2/3"
                 v-model="location.calendlyLink"
-                id="calendly"
-              />
+                id="calendly" />
             </div>
             <span class="error">{{ errors[0] }}</span>
           </ValidationProvider>
@@ -476,8 +437,7 @@
             :lat="location.lat"
             :long="location.long"
             :editing="true"
-            @result-click="setNewCoords"
-          ></MapCoordsVue>
+            @result-click="setNewCoords"></MapCoordsVue>
           <div class="flex justify-between">
             <ValidationProvider v-slot="{ errors }" rules="required" class="">
               <label class="block">Lat</label>
@@ -485,8 +445,7 @@
                 disabled
                 type="text"
                 class="my-input"
-                v-model="location.lat"
-              />
+                v-model="location.lat" />
               <span class="error">{{ errors[0] }}</span>
             </ValidationProvider>
             <ValidationProvider v-slot="{ errors }" rules="required" class="">
@@ -495,8 +454,7 @@
                 disabled
                 type="text"
                 class="my-input"
-                v-model="location.long"
-              />
+                v-model="location.long" />
               <span class="error">{{ errors[0] }}</span>
             </ValidationProvider>
           </div>
@@ -517,21 +475,34 @@
               <select
                 v-model="location.owner.id"
                 class="my-input border block"
-                @click="fetchListUsers"
-              >
+                @click="fetchListUsers">
                 <option
                   v-for="user in allUsersList"
                   :value="user.id"
-                  :key="user.id"
-                >
+                  :key="user.id">
                   {{ user.id }}.- {{ user.firstName }} {{ user.lastName }}
                 </option>
               </select>
               <font-awesome-icon
                 icon="spinner"
                 class="animate-spin"
-                v-if="isLoadingAllUsersList"
-              />
+                v-if="isLoadingAllUsersList" />
+            </div>
+          </div>
+
+          <!-- isDailyValue -->
+          <div class="flex items-center justify-between">
+            <label for="value" class="mr-3"
+              >{{ $t("adminPanel.locations.dailyValue") }} ({{
+                currency.symbol
+              }}
+              {{ currency.apiCode }})
+            </label>
+            <div>
+              <input-number-mask
+                class="my-input"
+                v-model="location.dailyValue"
+                @changeValue="onChangeDailyValue" />
             </div>
           </div>
 
@@ -540,16 +511,14 @@
               class="my-btn mx-2 bg-red-600"
               @click="sendToTrash"
               :disabled="isUploadingLocation"
-              :class="isUploadingLocation ? 'bg-gray-500' : ''"
-            >
+              :class="isUploadingLocation ? 'bg-gray-500' : ''">
               <!-- {{ $t("general.update") }} -->
               Eliminar
             </button>
             <button
               class="my-btn mx-2"
               :disabled="isUploadingLocation"
-              :class="isUploadingLocation || invalid ? 'opacity-25' : ''"
-            >
+              :class="isUploadingLocation || invalid ? 'opacity-25' : ''">
               {{ $t("general.update") }}
             </button>
           </div>
@@ -564,8 +533,7 @@
           </label>
           <SwitchComponentVue
             :value="location.isActive"
-            v-on:toogle="toogleIsActive"
-          />
+            v-on:toogle="toogleIsActive" />
         </div>
 
         <!-- isVerified -->
@@ -576,8 +544,7 @@
           <SwitchComponentVue
             :value="location.isVerified"
             v-on:toogle="toogleIsVerified"
-            :disabled="isVerifyDisabled"
-          />
+            :disabled="isVerifyDisabled" />
         </div>
 
         <!-- isDaily -->
@@ -585,8 +552,7 @@
           <label class="mr-3">{{ $t("adminPanel.locations.isDaily") }} </label>
           <SwitchComponentVue
             :value="location.isDaily"
-            v-on:toogle="toogleIsDaily"
-          />
+            v-on:toogle="toogleIsDaily" />
         </div>
 
         <!-- value -->
@@ -599,14 +565,12 @@
             <input-number-mask
               class="my-input"
               v-model="newValueProperty"
-              @changeValue="updateNewValue"
-            />
+              @changeValue="updateNewValue" />
             <!-- {{newValueProperty}} -->
             <button
               class="my-btn w-auto px-4 py-2 ml-4"
               v-if="fistValueLocation != newValueProperty"
-              @click="setNewLocationValue"
-            >
+              @click="setNewLocationValue">
               <font-awesome-icon icon="fa-solid fa-floppy-disk" />
             </button>
           </div>
@@ -616,8 +580,7 @@
         <FilterZonesComponent
           :listZones="getAllZones"
           :selectedZoneId="location.zone.id"
-          :idLocation="this.location.id"
-        />
+          :idLocation="this.location.id" />
       </div>
 
       <!-- DEBUGGING -->
@@ -789,6 +752,7 @@ export default {
           endLease: this.location.endLease,
           createdByAdmin: this.location.createdByAdmin,
           isDaily: this.location.isDaily,
+          dailyValue: this.location.dailyValue,
         };
         await PUT_ADMIN_LOCATION(updateLocationBody);
 
@@ -925,6 +889,9 @@ export default {
     async getZoneAndAdmin() {},
     updateNewValue(val) {
       this.newValueProperty = val;
+    },
+    onChangeDailyValue(val) {
+      this.location.dailyValue = val;
     },
     async fetchListUsers() {
       try {

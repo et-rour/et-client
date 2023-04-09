@@ -5,7 +5,8 @@
         {{ $t("tenants.calendar.Paso1") }}
       </h3>
       <!-- <pre>{{ JSON.stringify(getPropertyDetails,null,'\t') }}</pre> -->
-      <pre>{{ JSON.stringify(range,null,'\t') }}</pre>
+      <!-- <pre>{{ JSON.stringify(calendarData.reservations,null,'\t') }}</pre> -->
+      <!-- <pre>{{ JSON.stringify(range,null,'\t') }}</pre> -->
     </template>
     <template v-slot:button>
       <button class="my-btn w-auto rounded-full py-1 px-5" @click="goNextPart">
@@ -15,7 +16,7 @@
     <template v-slot:content>
       <div v-if="getPropertyDetails">
         <CalendarDailyComponent
-          v-if="getPropertyDetails.isDaily"
+          v-if="isDaily"
           class="bg-white py-8 px-4"
           @rangeChage="getDateRange"
           @correctRange="changeisCorrectRange"
@@ -23,10 +24,9 @@
           :reservations="calendarData.reservations"
           :locationLeaseRange="calendarData.leaseRange"
           :isPopOver="true"
-          :showDetailsCard="false"
-        />
+          :showDetailsCard="false" />
         <CalendarComponent
-          v-else 
+          v-else
           class="bg-white py-8 px-4"
           @rangeChage="getDateRange"
           @correctRange="changeisCorrectRange"
@@ -34,8 +34,7 @@
           :reservations="calendarData.reservations"
           :locationLeaseRange="calendarData.leaseRange"
           :isPopOver="true"
-          :showDetailsCard="false"
-        />
+          :showDetailsCard="false" />
       </div>
     </template>
   </PartTemplateVue>
@@ -50,7 +49,7 @@ import PartTemplateVue from "./PartTemplate.vue";
 import { CustomConfirmWarningDialog } from "@/sweetAlert";
 export default {
   components: { CalendarComponent, PartTemplateVue, CalendarDailyComponent },
-  props: ["calendarData"],
+  props: ["calendarData", "isDaily"],
   data() {
     return {
       range: {
@@ -76,8 +75,13 @@ export default {
       this.$emit("navigate", "next");
       return;
     },
-    changeisCorrectRange(isCorrect,timeQuantity) {
-      console.log('%cPart1.vue line:80 changeisCorrectRange(isCorrect,timeQuantity)', 'color: white; background-color: #007acc;', isCorrect,timeQuantity);
+    changeisCorrectRange(isCorrect, timeQuantity) {
+      console.log(
+        "%cPart1.vue line:80 changeisCorrectRange(isCorrect,timeQuantity)",
+        "color: white; background-color: #007acc;",
+        isCorrect,
+        timeQuantity
+      );
       this.isCorrectRange = isCorrect;
       if (isCorrect) {
         this.changeReservationDateRange({
@@ -92,7 +96,7 @@ export default {
         start: null,
         end: null,
         correctDate: false,
-        timeQuantity: 0,
+        timeQuantity: 1,
       });
     },
     getDateRange({ range }) {

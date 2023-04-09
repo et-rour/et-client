@@ -4,6 +4,6 @@ export default () => ({
   reservationValue: null,
   reservationDateRange: null,
   correctReservationDateRange: false,
-  timeQuantity:0,
+  timeQuantity:1,
   contractData: null,
 });

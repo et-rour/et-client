@@ -12,8 +12,7 @@ export default {
   },
   computed: {
     maskNumber() {
-      return this.number
-        .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      return this.number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     },
   },
 };

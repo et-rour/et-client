@@ -25,7 +25,7 @@
           <span class="bg-yellow-300 p-1">
             TOTAL: $
             <NumberMaskComponent
-              :number="`${reservationData.reservationValue}`"
+              :number="`${reservationData.reservationValue * reservationData.timeQuantity}`"
             />
           </span>
         </p>

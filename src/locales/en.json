@@ -5,6 +5,7 @@
     "saved": "Saved",
     "error": "Oops.. something went wrong",
     "confirmTitle": "Are you sure?",
+    "confirmSubTitle": "Check your information before continuing!!",
     "confirmLeaveRouterMessage": "Do you really want to leave? you have unsaved changes!",
     "confirmWarningTitle": "Before continuing",
     "confirmWarningConfirmText": "Got it!!",
@@ -48,7 +49,7 @@
     "update": "Update",
     "delete": "Delete",
     "continue": "Continue",
-    "change":"Change",
+    "change": "Change",
     "image": "image | image | {count} images",
     "property": "property",
     "privateSpace": "Private space",
@@ -58,8 +59,8 @@
     "notAsign": "not assigned",
     "agotada": "sold out",
     "disponible": "Available",
-    "newImage":"New Image",
-    "uploadFile":"Upload file"
+    "newImage": "New Image",
+    "uploadFile": "Upload file"
   },
   "navbar": {
     "owner": "PUBLISH YOUR PROPERTY",
@@ -201,7 +202,7 @@
     "airbnbDescription4": "2.4 Reservations of Experiences and other Host Services. The Reservation of an Experience or other Host Service entitles you to participate, attend or enjoy that Host Service. You are responsible for confirming that you and any"
   },
   "cookies": {
-    "banner":{
+    "banner": {
       "text": "This website uses cookies to ensure that you get the best experience on our website.",
       "link": "Cookie notice",
       "acept": "Accept cookies",
@@ -355,6 +356,8 @@
       "vistit": "SCHEDULE A TECHNICAL VISIT",
       "vistitRoom": "SCHEDULE VISIT",
       "pay": "Pay",
+      "scheduleByMonth": "Book by month",
+      "scheduleByHour": "Book by the hour",
       "payRoom": "reserve space",
       "includedServises": "Included services",
       "includedServisesDescription": "When paying common expenses these are the services that are included",
@@ -420,11 +423,11 @@
     }
   },
   "howItWorks": {
-    "title":"HOW DOES IT WORK?",
-    "subtitle":"SUCCESS STORIES",
-    "pdfDescription":"Download our PDF with the details\nof projects and success stories",
-    "button":"DOWNLOAD PDF",
-    "testimonials":"TESTIMONIALS"
+    "title": "HOW DOES IT WORK?",
+    "subtitle": "SUCCESS STORIES",
+    "pdfDescription": "Download our PDF with the details\nof projects and success stories",
+    "button": "DOWNLOAD PDF",
+    "testimonials": "TESTIMONIALS"
   },
 
   "footer": {
@@ -446,18 +449,18 @@
   },
   "admin": {
     "title": "OWNER",
-    "navbar":{
+    "navbar": {
       "properties": "My properties",
-      "reservations":"reservations",
+      "reservations": "reservations",
       "payment": "Payments"
     },
-    "reservations":{
+    "reservations": {
       "notFound": "you don't have reservations",
-      "uploadFileHeader":"Upload the files related to this reservation",
-      "myFiles":"My Files",
-      "owner":"Owner",
-      "client":"Client"
-    },  
+      "uploadFileHeader": "Upload the files related to this reservation",
+      "myFiles": "My Files",
+      "owner": "Owner",
+      "client": "Client"
+    },
     "payments": {
       "title": "payment activity",
       "loading": "Loading payment history"
@@ -659,6 +662,9 @@
         "noRooms": "This property doesn't have any room registered",
         "buyLink": "Buy link",
         "isActive": "Is the room sold out?",
+        "isDaily": "Can the room be rented by the day?",
+        "monthlyValue": "Room value per month",
+        "dailyValue": "Room value per day",
         "create": {
           "meters": "Square meter",
           "name": "Name",
@@ -762,8 +768,8 @@
         "confirmation": "Do you want to create a report of the last 100 payments?"
       }
     },
-    "testimonials":{
-      "newTestimonial":"Create new testimonial",
+    "testimonials": {
+      "newTestimonial": "Create new testimonial",
       "urlVideo": "video url",
       "name": "Name",
       "position": "position",

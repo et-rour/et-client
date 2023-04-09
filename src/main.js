@@ -13,8 +13,10 @@ import "./sweetAlert";
 import JsonExcel from "vue-json-excel";
 import "./v-calendar.js";
 import VueMeta from "vue-meta";
+
 import moment from "moment";
 moment.locale("es");
+Vue.prototype.$moment = moment
 
 import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-material.css";

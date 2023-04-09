@@ -28,7 +28,9 @@ export const zonesList = (state) => {
 export const getZonesOrderedByCity = (state) => (countrySelected) => {
   // SORT ZONES
   // const zones = [...state.zones];
-  const zones = state.properties.map(property => property.zone?property.zone:"");
+  const zones = state.properties.map((property) =>
+    property.zone ? property.zone : ""
+  );
   zones.sort((x, y) => {
     if (x.city < y.city) {
       return -1;
@@ -59,7 +61,9 @@ export const getZonesOrderedByCity = (state) => (countrySelected) => {
 export const getZonesOrderedByComuna = (state) => (citySelected) => {
   // SORT ZONES
   // const zones = [...state.zones];
-  const zones = state.properties.map(property => property.zone?property.zone:"");
+  const zones = state.properties.map((property) =>
+    property.zone ? property.zone : ""
+  );
   zones.sort((x, y) => {
     if (x.zone < y.zone) {
       return -1;
@@ -126,7 +130,6 @@ export const getCaledarData = (state) => (idRoom) => {
         end: state.propertyDetails.endLease,
       },
       landUse: state.propertyDetails.landUse,
-
     };
   } else {
     const room = state.propertyDetails.roomsDetails.find(
