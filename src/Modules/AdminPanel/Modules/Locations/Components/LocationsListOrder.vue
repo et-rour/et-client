@@ -7,7 +7,7 @@
     </button>
     <draggable
       :list="list"
-      class="list-group"
+      class="list-group w-full"
       :move="checkMove"
       @start="dragging = true"
       @end="onEnd">
