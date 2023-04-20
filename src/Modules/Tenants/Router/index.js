@@ -32,7 +32,7 @@ export default [
       },
       {
         name: "tenants-calendar",
-        path: "/propietario/:id/calendar/:idRoom",
+        path: "/propietario/:id/calendar/:idRoom/:isDaily",
         component: Calendar,
         props: (route) => {
           return {

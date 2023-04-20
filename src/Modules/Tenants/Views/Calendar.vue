@@ -1,8 +1,7 @@
 <template>
   <div
     class="my-container my-container-mobile min-h-screen"
-    v-if="getPropertyDetails"
-  >
+    v-if="getPropertyDetails">
     <div class="">
       <div class="border-b flex gap-4">
         <span
@@ -16,28 +15,28 @@
       <div>
         <!-- <pre class=" bg-blue-300">{{ JSON.stringify(calendarData, null, "\t") }}</pre> -->
         <!-- <pre class="bg-red-300">{{ JSON.stringify(reservationData, null, "\t") }}</pre> -->
- 
+        <!-- <pre>{{ JSON.stringify(isDaily, null, "\t") }}</pre> -->
       </div>
 
-      <div class="grid grid-cols-3 text-center md:text-left" v-if="calendarData">
+      <div
+        class="grid grid-cols-3 text-center md:text-left"
+        v-if="calendarData">
         <Part1
           class="col-span-3"
+          :isDaily="isDaily"
           :class="partSelected === 1 ? 'order-first' : 'hidden'"
           @navigate="(stepDirection) => navigatePrevNext(stepDirection)"
-          :calendarData="calendarData"
-        />
+          :calendarData="calendarData" />
         <Part2
           class="col-span-3"
           :class="partSelected === 2 ? 'order-first' : 'hidden'"
           @navigate="(stepDirection) => navigatePrevNext(stepDirection)"
-          :calendarData="calendarData"
-        />
+          :calendarData="calendarData" />
         <Part3
           class="col-span-3"
           :class="partSelected === 3 ? 'order-first' : 'hidden'"
           @navigate="(stepDirection) => navigatePrevNext(stepDirection)"
-          :calendarData="calendarData"
-        />
+          :calendarData="calendarData" />
       </div>
     </div>
   </div>
@@ -86,6 +85,9 @@ export default {
   computed: {
     ...mapGetters("propertiesStore", ["getPropertyDetails", "getCaledarData"]),
     ...mapGetters("propertiesStore/reservationStorage", ["reservationData"]),
+    isDaily() {
+      return this.$route.params.isDaily === "daily";
+    },
   },
   mounted() {
     this.loadCalendarData();

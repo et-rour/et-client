@@ -25,7 +25,7 @@
           <span class="bg-yellow-300 p-1">
             TOTAL: $
             <NumberMaskComponent
-              :number="`${reservationData.reservationValue}`"
+              :number="`${reservationData.reservationValue * reservationData.timeQuantity}`"
             />
           </span>
         </p>
@@ -68,6 +68,7 @@ export default {
           locationId: this.$route.params.id,
           roomId: this.$route.params.idRoom,
           range: this.dates,
+          timeQuantity:this.reservationData.timeQuantity,
           ...this.reservationData.contractData,
         });
         

@@ -4,12 +4,10 @@
       <ImageVisibility
         v-for="image in room.imagesRoom"
         :key="image.id"
-        :image="image"
-      />
+        :image="image" />
       <div
         @click="showUploadImagesModal = true"
-        class="w-10 h-10 rounded-full bg-gray-200 absolute right-0 bottom-0 flex justify-center items-center border-4 border-white cursor-pointer text-my-blue-primary"
-      >
+        class="w-10 h-10 rounded-full bg-gray-200 absolute right-0 bottom-0 flex justify-center items-center border-4 border-white cursor-pointer text-my-blue-primary">
         <font-awesome-icon icon="plus" />
       </div>
     </div>
@@ -20,55 +18,65 @@
       <textarea class="my-input h-28" v-model="room.description"></textarea>
 
       <div class="flex justify-between">
-        <span>
-          $
-          <!-- <input type="number" class="my-input w-40" v-model="room.value" /> -->
-          <InputNumberMask v-model="room.value" @changeValue="updateRoomValue"/>
-          <p>{{room.value}}</p>
-        </span>
+        <span> {{ $t("adminPanel.locations.roomsList.monthlyValue") }}</span>
+        <InputNumberMask
+          v-model="room.value"
+          @changeValue="updateRoomMonthlyValue" />
+      </div>
+      <div class="flex justify-between">
+        <span> {{ $t("adminPanel.locations.roomsList.dailyValue") }}</span>
+        <InputNumberMask
+          v-model="room.dailyValue"
+          @changeValue="updateRoomDailyValue" />
+      </div>
+      <div>
         <span>
           mts&sup2;
           <input
             type="number"
             class="my-input w-40"
-            v-model="room.squareMeter"
-          />
+            v-model="room.squareMeter" />
         </span>
       </div>
+
       <div class="flex justify-between items-center">
         <label>
           {{ $t("adminPanel.locations.roomsList.isActive") }}
         </label>
         <SwitchComponent
           :value="room.isActive"
-          @toogle="changeIsActiveRoom"
-        ></SwitchComponent>
+          @toogle="changeIsActiveRoom"></SwitchComponent>
       </div>
-      <div class="flex justify-between ">
-        <button
+
+      <div class="flex justify-between items-center">
+        <label>
+          {{ $t("adminPanel.locations.roomsList.isDaily") }}
+        </label>
+        <SwitchComponent
+          :value="room.isDaily"
+          @toogle="changeIsDailyRoom"></SwitchComponent>
+      </div>
+
+      <div class="flex justify-between">
+        <!-- <button
           class="my-btn w-auto px-4 py-1 self-end"
           @click="goToBuyLink"
           :disabled="!room.stripePriceId"
-          :class="!room.stripePriceId ? 'bg-gray-400' : ''"
-        >
+          :class="!room.stripePriceId ? 'bg-gray-400' : ''">
           {{ $t("adminPanel.locations.roomsList.buyLink") }}
-        </button>
+        </button> -->
         <button
           class="my-btn w-auto px-4 py-1 self-end"
           @click="updateRoomHandler"
           :disabled="isSaving"
-          :class="isSaving ? 'bg-gray-400' : ''"
-        >
+          :class="isSaving ? 'bg-gray-400' : ''">
           {{ $t("general.save") }}
         </button>
-      </div>
-      <div class="flex justify-end">
         <button
           class="my-btn w-auto px-4 py-1 bg-red-600"
           @click="deleteRoomHandler"
           :disabled="isSaving"
-          :class="isSaving ? 'bg-red-400' : ''"
-        >
+          :class="isSaving ? 'bg-red-400' : ''">
           {{ $t("general.delete") }}
         </button>
       </div>
@@ -80,8 +88,7 @@
       :id="room.id"
       :route="`/Location_${getLocationDetails.id}/Room_${room.id}/`"
       :table="'room'"
-      :buttonText="'Close'"
-    >
+      :buttonText="'Close'">
     </ModelUploadImages>
   </div>
 </template>
@@ -96,14 +103,14 @@ import {
 import SwitchComponent from "../../../../../components/SwitchComponent.vue";
 import ModelUploadImages from "../../../../../components/ModelUploadImages.vue";
 import ImageVisibility from "../../../../../components/ImageVisibility.vue";
-import espacioTemporalApi from "@/Api/index"
-import InputNumberMask from '../../../../../components/InputNumberMask.vue';
+import espacioTemporalApi from "@/Api/index";
+import InputNumberMask from "../../../../../components/InputNumberMask.vue";
 export default {
   components: {
     SwitchComponent,
     ModelUploadImages,
     ImageVisibility,
-    InputNumberMask
+    InputNumberMask,
   },
   props: {
     room: {
@@ -115,14 +122,17 @@ export default {
     return {
       isSaving: false,
       showUploadImagesModal: false,
-      hideDeleted:false
+      hideDeleted: false,
     };
   },
   computed: {
     ...mapGetters(["imageUrl", "ImageUploadingState"]),
-    
+
     ...mapGetters("authStore", ["user"]),
-    ...mapGetters("adminPanelStore/locations", ["getLocationDetails","getAllCurrencies"]),
+    ...mapGetters("adminPanelStore/locations", [
+      "getLocationDetails",
+      "getAllCurrencies",
+    ]),
   },
   methods: {
     ...mapActions(["uploadImageTofirebase", "goToRoomCheckoutSession"]),
@@ -178,16 +188,18 @@ export default {
         try {
           await this.updateRoom({
             id: this.room.id,
-            name: this.room.name,
-            image: this.room.image,
-            value: this.room.value,
-            squareMeter: this.room.squareMeter,
-            description: this.room.description,
-            locationId: this.getLocationDetails.id,
+            body: {
+              name: this.room.name,
+              image: this.room.image,
+              value: this.room.value,
+              squareMeter: this.room.squareMeter,
+              description: this.room.description,
+              locationId: this.getLocationDetails.id,
+              dailyValue: this.room.dailyValue,
+            },
           });
 
-          this.$router.go()
-          
+          this.$router.go();
         } catch (error) {
           this.isSaving = false;
           CustomErrorToast.fire({
@@ -205,12 +217,12 @@ export default {
         if (!result.isConfirmed) return;
         this.isSaving = true;
         try {
-          await espacioTemporalApi.put(`/admin/room/${this.room.id}`,{
+          await espacioTemporalApi.put(`/admin/room/${this.room.id}`, {
             locationId: this.getLocationDetails.id,
-            isDeleted:true
+            isDeleted: true,
           });
           this.isSaving = false;
-          this.hideDeleted = true          
+          this.hideDeleted = true;
         } catch (error) {
           this.isSaving = false;
           CustomErrorToast.fire({
@@ -236,11 +248,6 @@ export default {
       }
     },
     async changeIsActiveRoom(toogleValue) {
-      console.log(
-        "%cRoomEditableCard.vue line:200 toogleValue",
-        "color: #007acc;",
-        toogleValue
-      );
       const changeIsActiveRoomTextAlert = toogleValue
         ? this.$t(
             "adminPanel.locations.roomsList.confiramtionMessages.changeToActive"
@@ -265,9 +272,33 @@ export default {
         });
       }
     },
-    updateRoomValue(val){
-      this.room.value = val
-    }
+    async changeIsDailyRoom(toogleValue) {
+      const { isConfirmed } = await CustomConfirmDialog.fire({
+        text: this.$t("sweetAlertMessages.confirmSubTitle"),
+      });
+      if (!isConfirmed) return;
+
+      try {
+        await this.updateRoom({
+          id: this.room.id,
+          body: {
+            isDaily: this.room.isDaily,
+            locationId: this.getLocationDetails.id,
+          },
+        });
+        this.room.isDaily = toogleValue;
+      } catch (error) {
+        CustomErrorToast.fire({
+          text: error.response.data.message || error,
+        });
+      }
+    },
+    updateRoomMonthlyValue(val) {
+      this.room.value = val;
+    },
+    updateRoomDailyValue(val) {
+      this.room.dailyValue = val;
+    },
   },
 };
 </script>

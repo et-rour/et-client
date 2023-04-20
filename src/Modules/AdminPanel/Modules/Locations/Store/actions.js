@@ -102,13 +102,13 @@ export const setLocationValue = async ({ commit }, data) => {
   return value;
 };
 
-export const updateZone = async (_, {id,zoneId}) => {
+export const updateZone = async (_, { id, zoneId }) => {
   const res = await EspacioAPI.put("/admin/modifylocation", {
-    id:id,
-    zone:Number(zoneId),
+    id: id,
+    zone: Number(zoneId),
   });
-  console.log('%cactions.js line:110 res', 'color: #007acc;', res);
-  return true
+  console.log("%cactions.js line:110 res", "color: #007acc;", res);
+  return true;
 };
 /*
 export const changeIsActivePropertyInLocation = async (
@@ -139,18 +139,8 @@ export const createRoom = async (
   const newRoom = res.data;
   commit("createRoom", newRoom);
 };
-export const updateRoom = async (
-  { commit },
-  { id, name, image, squareMeter, locationId, value, description }
-) => {
-  const res = await EspacioAPI.put(`admin/room/${id}`, {
-    name,
-    image,
-    squareMeter,
-    locationId,
-    description,
-    value,
-  });
+export const updateRoom = async ({ commit }, { id, body }) => {
+  const res = await EspacioAPI.put(`admin/room/${id}`, body);
   const newRoom = res.data;
   commit("updateRoom", newRoom);
 };

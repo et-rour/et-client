@@ -17,12 +17,10 @@
         :drag-attribute="selectDragAttribute"
         @drag="dranHandler"
         @dayclick="dayClick"
-        :popover="{ visibility: 'hover-focus' }"
-      >
+        :popover="{ visibility: 'hover-focus' }">
         <template v-slot="{ inputValue, inputEvents }" v-if="isPopOver">
           <div
-            class="flex items-center justify-between sm:justify-center sm:gap-8"
-          >
+            class="flex items-center justify-between sm:justify-center sm:gap-8">
             <div class="relative">
               <label class="mr-2" for="start"
                 >{{ $t("tenants.details.start") }}:
@@ -30,12 +28,10 @@
               <input
                 :value="inputValue.start"
                 v-on="inputEvents.start"
-                class="border px-2 py-1 w-32 focus:outline-none bg-gray-200"
-              />
+                class="border px-2 py-1 w-32 focus:outline-none bg-gray-200" />
               <font-awesome-icon
                 icon="caret-down"
-                class="absolute top-2 right-1"
-              />
+                class="absolute top-2 right-1" />
             </div>
 
             <div class="relative">
@@ -45,12 +41,10 @@
               <input
                 :value="inputValue.end"
                 v-on="inputEvents.end"
-                class="border px-2 py-1 w-32 focus:outline-none bg-gray-200"
-              />
+                class="border px-2 py-1 w-32 focus:outline-none bg-gray-200" />
               <font-awesome-icon
                 icon="caret-down"
-                class="absolute top-2 right-1"
-              />
+                class="absolute top-2 right-1" />
             </div>
           </div>
         </template>
@@ -65,8 +59,7 @@
               <p
                 v-for="date in validEndDates"
                 :key="date"
-                class="text-green-300"
-              >
+                class="text-green-300">
                 {{ date }}
               </p>
             </template>
@@ -77,8 +70,7 @@
 
     <div
       v-if="showDetailsCard"
-      class="my-4 px-6 py-4 rounded-2xl flex-shrink w-full md:w-80 grid grid-cols-2 gap-2"
-    >
+      class="my-4 px-6 py-4 rounded-2xl flex-shrink w-full md:w-80 grid grid-cols-2 gap-2">
       <div class="text-sm">
         <p class="font-bold">{{ $t("tenants.details.start") }}:</p>
         <p v-if="range.start">{{ dateRange.start }}</p>
@@ -96,14 +88,16 @@
           <p
             class="text-green-300 text-sm"
             v-for="(date, index) in validEndDates"
-            :key="`list_valid_date_${index}`"
-          >
+            :key="`list_valid_date_${index}`">
             {{ date }}
           </p>
         </template>
         <p v-else class="text-sm">{{ $t("tenants.details.selectToSee") }}</p>
       </div>
     </div>
+
+    <!-- <pre>{{ JSON.stringify(validEndDates,null,'\t') }}</pre> -->
+    <!-- <pre>{{ JSON.stringify(monthsValidCount,null,'\t') }}</pre> -->
   </div>
 </template>
 
@@ -213,14 +207,17 @@ export default {
       }
 
       const validMonths = [];
-      const startSelectedRangeAux = moment(
-        this.calendar.dragTrackingValue.start
-      );
+
       this.getMonthsValidCount();
+
       for (let index = 0; index < this.monthsValidCount; index++) {
-        validMonths.push(
-          startSelectedRangeAux.add(index + 1, "month").format("Do MMMM YYYY")
+        const startSelectedRangeAux = moment(
+          this.calendar.dragTrackingValue.start
         );
+        const newDate = startSelectedRangeAux
+          .add(index + 1, "months")
+          .format("Do MMMM YYYY");
+        validMonths.push(newDate);
       }
       this.validEndDates = validMonths;
 
@@ -234,10 +231,11 @@ export default {
         },
       });
 
-      if (
-        this.validEndDates.includes(endSelectedRange.format("Do MMMM YYYY"))
-      ) {
-        this.$emit("correctRange", true);
+      const monthsQuantity = this.validEndDates.indexOf(
+        endSelectedRange.format("Do MMMM YYYY")
+      );
+      if (monthsQuantity != -1) {
+        this.$emit("correctRange", true, monthsQuantity + 1);
       } else {
         this.$emit("correctRange", false);
       }
