@@ -6,18 +6,17 @@
       <a
         target="_blank"
         :href="`https://wa.me/+56921811458/?text=Hola, tengo una consulta...`"
-        class="w-16 h-16 fixed bottom-28 right-12 lg:bottom-16 lg:right-16 z-40 cursor-pointer"
-      >
+        class="w-16 h-16 fixed bottom-28 right-12 lg:bottom-16 lg:right-16 z-40 cursor-pointer">
         <img
           src="@/assets/images/WhatsApp.png"
           alt="whatsapp fixed"
-          class="w-full"
-        />
+          class="w-full" />
       </a>
     </div>
     <MovileMenu />
     <Footer></Footer>
     <CookiesBanner />
+    <ChatTab></ChatTab>
   </div>
 </template>
 
@@ -27,17 +26,14 @@ import Footer from "./components/Footer.vue";
 import MovileMenu from "./components/MovileMenu.vue";
 import Navbar from "./components/Navbar.vue";
 import { CustomErrorToast } from "@/sweetAlert";
-import {
-  analytics,
-  setCurrentScreen,
-  logEvent,
-} from "./Firebase/index";
+import { analytics, setCurrentScreen, logEvent } from "./Firebase/index";
 import isPWA from "./utils/isPWA";
 import { version } from "../package.json";
 import CookiesBanner from "./components/CookiesBanner.vue";
+import ChatTab from "./Modules/ChatGPT/Views/ChatTab";
 
 export default {
-  components: { Navbar, MovileMenu, Footer, CookiesBanner },
+  components: { Navbar, MovileMenu, Footer, CookiesBanner, ChatTab },
   data() {
     return {
       loadingApp: true,
@@ -57,16 +53,30 @@ export default {
     this.loadingApp = true;
     try {
       await this.loadSession();
-      console.log('%cApp.vue line:60 this.loadSession()', 'color: white; background-color: #007acc;');
+      console.log(
+        "%cApp.vue line:60 this.loadSession()",
+        "color: white; background-color: #007acc;"
+      );
       await this.loadProperties();
-      console.log('%cApp.vue line:62 this.loadProperties()', 'color: white; background-color: #007acc;');
+      console.log(
+        "%cApp.vue line:62 this.loadProperties()",
+        "color: white; background-color: #007acc;"
+      );
       await this.loadCurrencies();
-      console.log('%cApp.vue line:64 this.loadCurrencies()', 'color: white; background-color: #007acc;');
+      console.log(
+        "%cApp.vue line:64 this.loadCurrencies()",
+        "color: white; background-color: #007acc;"
+      );
       await this.loadZones();
-      console.log('%cApp.vue line:66 this.loadZones()', 'color: white; background-color: #007acc;');
+      console.log(
+        "%cApp.vue line:66 this.loadZones()",
+        "color: white; background-color: #007acc;"
+      );
       await this.fetchCoversData();
-      console.log('%cApp.vue line:68 this.fetchCoversData()', 'color: white; background-color: #007acc;');
-    
+      console.log(
+        "%cApp.vue line:68 this.fetchCoversData()",
+        "color: white; background-color: #007acc;"
+      );
     } catch (error) {
       CustomErrorToast.fire({
         text: error.response.data.message || error,
