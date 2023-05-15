@@ -60,7 +60,7 @@ export default {
       let isRoom = false;
       if (this.property.propertyType === 'room') {
         // [90000,20000]
-        const roomPrices = this.property.roomsDetails.filter(room => room.isActive&&room.value!==0).map(room => room.value)
+        const roomPrices = this.property.roomsDetails.filter(room => room.isActive && room.value!==0&& !room.isDeleted).map(room => room.value)
         if (roomPrices.length === 0){
           return{
             isRoom:false,

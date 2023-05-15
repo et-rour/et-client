@@ -39,7 +39,8 @@ import {
   faFileContract,
   faImages,
   faGear,
-  faDollarSign
+  faDollarSign,
+  faChevronDown,
 } from "@fortawesome/free-solid-svg-icons";
 import {
   faEnvelope,
@@ -47,7 +48,7 @@ import {
   faFileExcel,
   faCalendarDays,
   faFile,
-  faFilePdf
+  faFilePdf,
 } from "@fortawesome/free-regular-svg-icons";
 import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
 
@@ -89,7 +90,7 @@ library.add(
   faArrowRotateLeft,
   faDoorOpen,
   faRestroom,
-  faTrainSubway, 
+  faTrainSubway,
   faCaretDown,
   faFileContract,
   faWhatsapp,
@@ -99,6 +100,7 @@ library.add(
   faCalendarDays,
   faFile,
   faFilePdf,
+  faChevronDown
 );
 
 Vue.config.productionTip = false;
