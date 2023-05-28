@@ -45,12 +45,12 @@
 .global-modal-open {
   height: 100vh;
   overflow-y: hidden;
-    /* padding-right: 15px;  */
+  /* padding-right: 15px;  */
 }
 
 html {
   /* font-family: "Avenir Next", sans-serif; */
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   /* font-family: "Roboto"; */
   scroll-behavior: smooth !important;
   box-sizing: border-box;
@@ -123,8 +123,40 @@ progress::-webkit-progress-value {
   border-radius: 7px;
 }
 
-button:disabled{
-  opacity: 0.5
+button:disabled {
+  opacity: 0.5;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.hide-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+/* width */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 10px;
+  height: 6px;
+}
+
+/* Track */
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
 
 @layer components {

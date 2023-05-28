@@ -38,11 +38,24 @@
         </div>
       </div>
     </div>
-    <div class="w-full flex-grow-0 px-2 py-3 border-2">
+    <div class="w-full flex-grow-0 px-2 pb-3 border-2">
+      <div class="overflow-x-scroll flex gap-3 p-2 custom-scrollbar">
+        <span
+          v-for="(question, index) in [
+            '¿Quién eres?',
+            '¿Qué puedes hacer?',
+            '¿Cuáles son las preguntas frecuentes?',
+            'Dame un tour',
+          ]"
+          :key="`question_${index}`"
+          class="px-2 py-1 text-xs inline-block whitespace-nowrap bg-gray-200 rounded-full border-gray-300 text-black cursor-pointer hover:bg-gray-300"
+          @click="onClickSugestedMessage(question)"
+          >{{ question }}</span
+        >
+      </div>
       <input
         class="my-input border bg-gray-200 w-full h-16"
         v-model="message"
-        :placeholder="'¿Quien eres?'"
         @keypress.enter="onSubmitMessage" />
     </div>
   </div>
@@ -75,6 +88,10 @@ export default {
     },
   },
   methods: {
+    onClickSugestedMessage(message) {
+      this.message = message;
+      this.onSubmitMessage();
+    },
     async onSubmitMessage() {
       try {
         this.isSending = true;
