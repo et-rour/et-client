@@ -39,6 +39,23 @@
         </span>
       </div>
 
+      <!-- startLeaseDate -->
+      <div class="flex items-center justify-between">
+        <label for="value" class="mr-3"
+          >{{ $t("adminPanel.locations.leaseRange") }}
+        </label>
+        <div>
+          <LeaseDatePicker
+            :range="{
+              start: room.startLease,
+              end: room.endLease,
+            }"
+            @changeRage="changeRage" />
+          <!-- <p>startLease: {{ $moment(location.startLease).format("X") }}</p> -->
+          <!-- <p>endLease: {{ $moment(location.endLease).format("X") }}</p> -->
+        </div>
+      </div>
+
       <div class="flex justify-between items-center">
         <label>
           {{ $t("adminPanel.locations.roomsList.isActive") }}
@@ -56,6 +73,8 @@
           :value="room.isDaily"
           @toogle="changeIsDailyRoom"></SwitchComponent>
       </div>
+
+      <!-- <pre>{{ JSON.stringify(room, null, "\t") }}</pre> -->
 
       <div class="flex justify-between">
         <!-- <button
@@ -105,12 +124,15 @@ import ModelUploadImages from "../../../../../components/ModelUploadImages.vue";
 import ImageVisibility from "../../../../../components/ImageVisibility.vue";
 import espacioTemporalApi from "@/Api/index";
 import InputNumberMask from "../../../../../components/InputNumberMask.vue";
+import LeaseDatePicker from "./LeaseDatePicker..vue";
+
 export default {
   components: {
     SwitchComponent,
     ModelUploadImages,
     ImageVisibility,
     InputNumberMask,
+    LeaseDatePicker,
   },
   props: {
     room: {
@@ -196,6 +218,8 @@ export default {
               description: this.room.description,
               locationId: this.getLocationDetails.id,
               dailyValue: this.room.dailyValue,
+              startLease: this.room.startLease,
+              endLease: this.room.endLease,
             },
           });
 
@@ -298,6 +322,10 @@ export default {
     },
     updateRoomDailyValue(val) {
       this.room.dailyValue = val;
+    },
+    changeRage(range) {
+      this.room.startLease = range.start;
+      this.room.endLease = range.end;
     },
   },
 };

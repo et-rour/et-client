@@ -70,7 +70,7 @@ export default {
   },
   data() {
     return {
-      isOpen: true,
+      isOpen: false,
       message: "",
       messages: [
         {

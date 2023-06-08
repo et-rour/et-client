@@ -13,7 +13,7 @@
         <span class="font-semibold">
           {{ isAssistantMessage ? "Clara" : "Yo" }}
         </span>
-        <span class="text-sm text-gray-400 font-normal" v-if="date">
+        <span class="text-sm text-gray-400 font-normal" v-if="message.date">
           · {{ message.date }}
         </span>
       </p>

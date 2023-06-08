@@ -641,6 +641,7 @@
       "stripePriceId": "Price id in stripe",
       "startLease": "Beginning of the lease",
       "endLease": "end of lease",
+      "leaseRange": "Lease dates",
       "created": "I believe the",
       "zoneId": "Zone",
       "ownerId": "Owner",

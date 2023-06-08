@@ -640,6 +640,7 @@
       "stripePriceId": "Id del precio en stripe",
       "startLease": "Inicio del arriendo",
       "endLease": "Fin del arriendo",
+      "leaseRange": "Tiempo del arriendo",
       "created": "Se creo el",
       "zoneId": "Zona",
       "ownerId": "Dueño",
