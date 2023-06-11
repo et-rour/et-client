@@ -6,8 +6,9 @@ async function POST_MESSAGE(messages) {
     content: message.content,
     role: message.role,
   }));
-  const { data } = await EspacioAPI.post(`/general/chatText`, {
+  const request = await EspacioAPI.post(`/general/chatText`, {
     messages: correctMessagesBody,
   });
-  return data;
+  console.log("%cchat_services.js line:12 request", "color: #007acc;", request);
+  return request.data;
 }

@@ -19,24 +19,20 @@
       <font-awesome-icon icon="times" class="text-xl flex-shrink-0" />
     </div>
     <div
-      class="w-full overflow-y-scroll flex-grow flex flex-col gap-4 px-4 pt-6 pb-6">
+      class="w-full overflow-y-scroll flex-grow flex flex-col gap-4 px-4 pt-6 pb-1">
       <ChatBubbleVue
         v-for="(message, index) in messages"
         :key="`message_${index}`"
-        :message="message"
+        :message="message.content"
+        :role="message.role"
         :date="message.date" />
 
-      <div class="text-black text-sm flex gap-2" v-if="isSending">
-        <div
-          class="w-8 h-8 rounded-full flex-shrink-0 flex justify-center items-center bg-red-500">
-          <span class="text-white font-bold">Cl</span>
-        </div>
-
-        <div class="">
-          <p><span class="font-semibold">Clara</span></p>
-          <span>Pensando...</span>
-        </div>
-      </div>
+      <ChatBubbleVue
+        v-if="response"
+        :message="response"
+        :role="'assistant'"
+        id="messageContainer" />
+      <div class="w-0 h-0" id="bottom-anchor"></div>
     </div>
     <div class="w-full flex-grow-0 px-2 pb-3 border-2">
       <div class="overflow-x-scroll flex gap-3 p-2 custom-scrollbar">
@@ -63,7 +59,6 @@
 <script>
 import { CustomErrorToast } from "../../../sweetAlert";
 import ChatBubbleVue from "../Components/ChatBubble.vue";
-import { POST_MESSAGE } from "../Services/chat_services";
 export default {
   components: {
     ChatBubbleVue,
@@ -72,6 +67,7 @@ export default {
     return {
       isOpen: false,
       message: "",
+      response: "",
       messages: [
         {
           role: "assistant",
@@ -93,6 +89,7 @@ export default {
       this.onSubmitMessage();
     },
     async onSubmitMessage() {
+      let objDiv = document.getElementById("bottom-anchor");
       try {
         this.isSending = true;
         this.messages.push({
@@ -100,14 +97,26 @@ export default {
           content: this.message,
           date: this.$moment().format("hh:mm"),
         });
-        const { response } = await POST_MESSAGE(this.messages);
-
-        this.messages.push({
-          ...response.choices[0].message,
-          date: this.$moment().format("hh:mm"),
+        objDiv.scrollIntoView();
+        let context = this;
+        const socket = new WebSocket("ws://localhost:3001");
+        socket.addEventListener("open", () => {
+          socket.send("https://nytimes.com");
         });
-        this.isSending = false;
-        this.message = "";
+        socket.addEventListener("message", function (event) {
+          console.log("Message from server ", event.data);
+          context.response += event.data;
+
+          objDiv.scrollIntoView();
+        });
+        socket.addEventListener("close", function () {
+          context.messages.push({
+            role: "assistant",
+            content: context.response,
+            date: context.$moment().format("hh:mm"),
+          });
+          context.response = "";
+        });
       } catch (error) {
         this.isSending = false;
         CustomErrorToast.fire({ text: error || error });
