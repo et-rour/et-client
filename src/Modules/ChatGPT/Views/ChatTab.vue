@@ -3,8 +3,11 @@
     class="fixed bottom-0 right-12 w-80 z-50 rounded-t-xl overflow-hidden bg-white shadow-xl border flex flex-col text-gray-500"
     :class="isOpenChatTab">
     <div
-      class="w-full flex justify-between px-4 py-3 border items-center flex-grow-0 cursor-pointer"
+      class="w-full flex justify-between pr-2 pl-4 py-3 border items-center flex-grow-0 cursor-pointer"
       @click="isOpen = !isOpen">
+      <div
+        class="w-2 h-2 rounded-full mr-2 flex-shrink-0"
+        :class="isValidsocketConection ? 'bg-green-500' : 'bg-red-500'"></div>
       <div class="flex gap-3">
         <div
           class="w-8 h-8 rounded-full flex-shrink-0 flex justify-center items-center bg-red-500">
@@ -15,7 +18,6 @@
           Clara - Espacio Temporal
         </p>
       </div>
-
       <font-awesome-icon icon="times" class="text-xl flex-shrink-0" />
     </div>
     <div
@@ -32,7 +34,7 @@
         :message="response"
         :role="'assistant'"
         id="messageContainer" />
-      <div class="w-0 h-0" id="bottom-anchor"></div>
+      <div class="w-0 h-0" id="bottomAnchor"></div>
     </div>
     <div class="w-full flex-grow-0 px-2 pb-3 border-2">
       <div class="overflow-x-scroll flex gap-3 p-2 custom-scrollbar">
@@ -57,7 +59,6 @@
   </div>
 </template>
 <script>
-import { CustomErrorToast } from "../../../sweetAlert";
 import ChatBubbleVue from "../Components/ChatBubble.vue";
 export default {
   components: {
@@ -66,6 +67,8 @@ export default {
   data() {
     return {
       isOpen: false,
+      isValidsocketConection: null,
+      socketConection: null,
       message: "",
       response: "",
       messages: [
@@ -75,7 +78,6 @@ export default {
             "Hola, puedes iniciar la conversación preguntándome quien soy.",
         },
       ],
-      isSending: false,
     };
   },
   computed: {
@@ -88,38 +90,63 @@ export default {
       this.message = message;
       this.onSubmitMessage();
     },
-    async onSubmitMessage() {
-      let objDiv = document.getElementById("bottom-anchor");
-      try {
-        this.isSending = true;
-        this.messages.push({
-          role: "user",
-          content: this.message,
-          date: this.$moment().format("hh:mm"),
-        });
-        objDiv.scrollIntoView();
-        let context = this;
-        const socket = new WebSocket("ws://localhost:3001");
-        socket.addEventListener("open", () => {
-          socket.send("https://nytimes.com");
-        });
-        socket.addEventListener("message", function (event) {
-          console.log("Message from server ", event.data);
-          context.response += event.data;
+    onSubmitMessage() {
+      this.messages.push({
+        role: "user",
+        content: this.message,
+        date: this.$moment().format("hh:mm"),
+      });
+      this.message = "";
+      this.socketConection.send(JSON.stringify({ messages: this.messages }));
+      document.getElementById("bottomAnchor").scrollIntoView();
+    },
+  },
+  watch: {
+    isOpen(newValue) {
+      let context = this;
 
-          objDiv.scrollIntoView();
+      if (newValue) {
+        this.socketConection = new WebSocket("ws://localhost:3001");
+        this.socketConection.addEventListener("open", () => {
+          context.isValidsocketConection = true;
         });
-        socket.addEventListener("close", function () {
-          context.messages.push({
-            role: "assistant",
-            content: context.response,
-            date: context.$moment().format("hh:mm"),
-          });
+
+        this.socketConection.addEventListener("message", function (event) {
+          const message = JSON.parse(event.data);
+          switch (message.status) {
+            case "thinking":
+              context.response += message.content;
+              document.getElementById("bottomAnchor").scrollIntoView();
+              break;
+            case "done":
+              context.messages.push({
+                role: "assistant",
+                content: context.response,
+                date: context.$moment().format("hh:mm"),
+              });
+              context.response = "";
+              break;
+            case "error":
+              context.messages.push({
+                role: "assistant",
+                content: message.content,
+                date: context.$moment().format("hh:mm"),
+              });
+              context.response = "";
+              break;
+          }
+        });
+        this.socketConection.addEventListener("close", function () {
+          // context.messages.push({
+          //   role: "assistant",
+          //   content: "Se cerro la conexión con el servidor",
+          //   date: context.$moment().format("hh:mm"),
+          // });
+          context.isValidsocketConection = false;
           context.response = "";
         });
-      } catch (error) {
-        this.isSending = false;
-        CustomErrorToast.fire({ text: error || error });
+      } else {
+        this.socketConection.close();
       }
     },
   },
