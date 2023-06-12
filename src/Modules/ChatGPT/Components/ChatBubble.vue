@@ -14,13 +14,13 @@
           {{ isAssistantMessage ? "Clara" : "Yo" }}
         </span>
         <span class="text-sm text-gray-400 font-normal" v-if="date">
-          · {{ message.date }}
+          · {{ date }}
         </span>
       </p>
       <div
-        class="rounded-md px-2 py-1 rounded-"
+        class="rounded-md px-2 py-1"
         :class="isAssistantMessage ? 'bg-green-200' : 'bg-blue-200'">
-        <span>{{ message.content }}</span>
+        <span>{{ message }}</span>
       </div>
     </div>
   </div>
@@ -29,13 +29,20 @@
 export default {
   props: {
     message: {
-      type: Object,
+      type: String,
       required: true,
+    },
+    role: {
+      type: String,
+      required: true,
+    },
+    date: {
+      type: String,
     },
   },
   computed: {
     isAssistantMessage() {
-      return this.message.role !== "user";
+      return this.role !== "user";
     },
   },
 };

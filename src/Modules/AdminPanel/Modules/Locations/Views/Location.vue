@@ -506,6 +506,24 @@
             </div>
           </div>
 
+          <!-- startLeaseDate -->
+          <div class="flex items-center justify-between">
+            <label for="value" class="mr-3"
+              >{{ $t("adminPanel.locations.leaseRange") }}
+            </label>
+            <div>
+              <LeaseDatePickerVue
+                :range="{
+                  start: location.startLease,
+                  end: location.endLease,
+                }"
+                @changeRage="changeRage" />
+              <!-- <p>startLease: {{ $moment(location.startLease).format("X") }}</p> -->
+              <!-- <p>endLease: {{ $moment(location.endLease).format("X") }}</p> -->
+            </div>
+          </div>
+
+          <!-- Buttons -->
           <div class="w-full flex justify-center">
             <button
               class="my-btn mx-2 bg-red-600"
@@ -608,6 +626,7 @@ import { ValidationObserver } from "vee-validate";
 import FilterZonesComponent from "../Components/FilterZonesComponent.vue";
 import InputNumberMask from "../../../../../components/InputNumberMask.vue";
 // import DebugModal from "../../../../../components/DebugModal.vue";
+import LeaseDatePickerVue from "../Components/LeaseDatePicker..vue";
 
 export default {
   components: {
@@ -617,6 +636,7 @@ export default {
     FilterZonesComponent,
     InputNumberMask,
     // DebugModal,
+    LeaseDatePickerVue,
   },
   computed: {
     ...mapGetters("adminPanelStore/locations", [
@@ -905,6 +925,10 @@ export default {
           text: error.response.data.message || error,
         });
       }
+    },
+    changeRage(range) {
+      this.location.startLease = range.start;
+      this.location.endLease = range.end;
     },
   },
   async created() {

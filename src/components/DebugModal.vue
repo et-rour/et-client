@@ -1,7 +1,7 @@
 <template>
   <div
     :class="isVisibleClass"
-    class="bg-gray-300 w-80 h-5/6 fixed top-20 shadow overflow-y-scroll right-0">
+    class="bg-gray-300 w-80 h-5/6 fixed top-20 shadow overflow-y-scroll left-0">
     <button
       class="bg-red-300 absolute top-0 -right-10 p-2 px-4"
       @click="isVisible = !isVisible">

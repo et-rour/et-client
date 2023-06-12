@@ -3,8 +3,11 @@
     class="fixed bottom-0 right-12 w-80 z-50 rounded-t-xl overflow-hidden bg-white shadow-xl border flex flex-col text-gray-500"
     :class="isOpenChatTab">
     <div
-      class="w-full flex justify-between px-4 py-3 border items-center flex-grow-0 cursor-pointer"
+      class="w-full flex justify-between pr-2 pl-4 py-3 border items-center flex-grow-0 cursor-pointer"
       @click="isOpen = !isOpen">
+      <div
+        class="w-2 h-2 rounded-full mr-2 flex-shrink-0"
+        :class="isValidsocketConection ? 'bg-green-500' : 'bg-red-500'"></div>
       <div class="flex gap-3">
         <div
           class="w-8 h-8 rounded-full flex-shrink-0 flex justify-center items-center bg-red-500">
@@ -12,35 +15,31 @@
         </div>
         <p
           class="text-lg font-semibold text-black whitespace-nowrap flex-grow w-56 overflow-ellipsis overflow-hidden">
+          <!-- {{ user.token }} -->
           Clara - Espacio Temporal
         </p>
       </div>
-
       <font-awesome-icon icon="times" class="text-xl flex-shrink-0" />
     </div>
     <div
-      class="w-full overflow-y-scroll flex-grow flex flex-col gap-4 px-4 pt-6 pb-6">
+      class="w-full overflow-y-scroll flex-grow flex flex-col gap-4 px-4 pt-6 pb-1">
       <ChatBubbleVue
         v-for="(message, index) in messages"
         :key="`message_${index}`"
-        :message="message"
+        :message="message.content"
+        :role="message.role"
         :date="message.date" />
 
-      <div class="text-black text-sm flex gap-2" v-if="isSending">
-        <div
-          class="w-8 h-8 rounded-full flex-shrink-0 flex justify-center items-center bg-red-500">
-          <span class="text-white font-bold">Cl</span>
-        </div>
-
-        <div class="">
-          <p><span class="font-semibold">Clara</span></p>
-          <span>Pensando...</span>
-        </div>
-      </div>
+      <ChatBubbleVue
+        v-if="response"
+        :message="response"
+        :role="'assistant'"
+        id="messageContainer" />
+      <div class="w-0 h-0" id="bottomAnchor"></div>
     </div>
     <div class="w-full flex-grow-0 px-2 pb-3 border-2">
       <div class="overflow-x-scroll flex gap-3 p-2 custom-scrollbar">
-        <span
+        <button
           v-for="(question, index) in [
             '¿Quién eres?',
             '¿Qué puedes hacer?',
@@ -49,29 +48,35 @@
           ]"
           :key="`question_${index}`"
           class="px-2 py-1 text-xs inline-block whitespace-nowrap bg-gray-200 rounded-full border-gray-300 text-black cursor-pointer hover:bg-gray-300"
-          @click="onClickSugestedMessage(question)"
-          >{{ question }}</span
-        >
+          :class="isTinking && 'my-disabled'"
+          :disabled="isTinking"
+          @click="onClickSugestedMessage(question)">
+          {{ question }}
+        </button>
       </div>
       <input
         class="my-input border bg-gray-200 w-full h-16"
         v-model="message"
+        :disabled="isTinking"
         @keypress.enter="onSubmitMessage" />
     </div>
   </div>
 </template>
 <script>
-import { CustomErrorToast } from "../../../sweetAlert";
+import { mapGetters } from "vuex";
 import ChatBubbleVue from "../Components/ChatBubble.vue";
-import { POST_MESSAGE } from "../Services/chat_services";
 export default {
   components: {
     ChatBubbleVue,
   },
   data() {
     return {
-      isOpen: true,
+      isOpen: false,
+      isValidsocketConection: null,
+      socketConection: null,
       message: "",
+      response: "",
+      isTinking: false,
       messages: [
         {
           role: "assistant",
@@ -79,38 +84,83 @@ export default {
             "Hola, puedes iniciar la conversación preguntándome quien soy.",
         },
       ],
-      isSending: false,
     };
   },
   computed: {
     isOpenChatTab() {
       return this.isOpen ? "h-96" : "h-14";
     },
+    ...mapGetters("authStore", ["isAuth", "user"]),
   },
   methods: {
     onClickSugestedMessage(message) {
       this.message = message;
       this.onSubmitMessage();
     },
-    async onSubmitMessage() {
-      try {
-        this.isSending = true;
-        this.messages.push({
-          role: "user",
-          content: this.message,
-          date: this.$moment().format("hh:mm"),
-        });
-        const { response } = await POST_MESSAGE(this.messages);
+    onSubmitMessage() {
+      this.messages.push({
+        role: "user",
+        content: this.message,
+        date: this.$moment().format("hh:mm"),
+      });
+      this.message = "";
+      this.isTinking = true;
+      this.socketConection.send(
+        JSON.stringify({ messages: this.messages, token: this.user.token })
+      );
+      document.getElementById("bottomAnchor").scrollIntoView();
+    },
+  },
+  watch: {
+    isOpen(newValue) {
+      let context = this;
 
-        this.messages.push({
-          ...response.choices[0].message,
-          date: this.$moment().format("hh:mm"),
+      if (newValue) {
+        this.socketConection = new WebSocket(process.env.VUE_APP_WEB_SOCKETS);
+        this.socketConection.addEventListener("open", () => {
+          context.isValidsocketConection = true;
         });
-        this.isSending = false;
-        this.message = "";
-      } catch (error) {
-        this.isSending = false;
-        CustomErrorToast.fire({ text: error || error });
+
+        this.socketConection.addEventListener("message", function (event) {
+          const message = JSON.parse(event.data);
+          switch (message.status) {
+            case "thinking":
+              context.response += message.content;
+              document.getElementById("bottomAnchor").scrollIntoView();
+              break;
+            case "done":
+              context.messages.push({
+                role: "assistant",
+                content: context.response,
+                date: context.$moment().format("hh:mm"),
+              });
+              context.response = "";
+              document.getElementById("bottomAnchor").scrollIntoView();
+              context.isTinking = false;
+              break;
+            case "error":
+              context.messages.push({
+                role: "assistant",
+                content: message.content,
+                date: context.$moment().format("hh:mm"),
+              });
+              context.response = "";
+              document.getElementById("bottomAnchor").scrollIntoView();
+              context.isTinking = false;
+              break;
+          }
+        });
+        this.socketConection.addEventListener("close", function () {
+          // context.messages.push({
+          //   role: "assistant",
+          //   content: "Se cerro la conexión con el servidor",
+          //   date: context.$moment().format("hh:mm"),
+          // });
+          context.isValidsocketConection = false;
+          context.response = "";
+        });
+      } else {
+        this.socketConection.close();
       }
     },
   },
