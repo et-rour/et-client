@@ -1,11 +1,17 @@
 <template>
   <div class="text-black text-sm flex gap-2">
     <div
-      class="w-8 h-8 rounded-full flex-shrink-0 flex justify-center items-center"
-      :class="isAssistantMessage ? 'bg-red-500' : 'bg-blue-500'">
-      <span class="text-white font-bold">{{
-        isAssistantMessage ? "Cl" : "Y"
-      }}</span>
+      v-if="!isAssistantMessage"
+      class="w-8 h-8 rounded-full flex-shrink-0 flex justify-center items-center bg-blue-500">
+      <span class="text-white font-bold">Y</span>
+    </div>
+    <div
+      v-else
+      class="w-8 h-8 rounded-full flex-shrink-0 flex justify-center items-center overflow-hidden">
+      <img
+        src="@/assets/images/elsa_ia.png"
+        alt="clara"
+        class="w-full h-full object-contain" />
     </div>
 
     <div class="">
