@@ -15,6 +15,7 @@
         </div>
         <p
           class="text-lg font-semibold text-black whitespace-nowrap flex-grow w-56 overflow-ellipsis overflow-hidden">
+          <!-- {{ user.token }} -->
           Clara - Espacio Temporal
         </p>
       </div>
@@ -38,7 +39,7 @@
     </div>
     <div class="w-full flex-grow-0 px-2 pb-3 border-2">
       <div class="overflow-x-scroll flex gap-3 p-2 custom-scrollbar">
-        <span
+        <button
           v-for="(question, index) in [
             '¿Quién eres?',
             '¿Qué puedes hacer?',
@@ -47,18 +48,22 @@
           ]"
           :key="`question_${index}`"
           class="px-2 py-1 text-xs inline-block whitespace-nowrap bg-gray-200 rounded-full border-gray-300 text-black cursor-pointer hover:bg-gray-300"
-          @click="onClickSugestedMessage(question)"
-          >{{ question }}</span
-        >
+          :class="isTinking && 'my-disabled'"
+          :disabled="isTinking"
+          @click="onClickSugestedMessage(question)">
+          {{ question }}
+        </button>
       </div>
       <input
         class="my-input border bg-gray-200 w-full h-16"
         v-model="message"
+        :disabled="isTinking"
         @keypress.enter="onSubmitMessage" />
     </div>
   </div>
 </template>
 <script>
+import { mapGetters } from "vuex";
 import ChatBubbleVue from "../Components/ChatBubble.vue";
 export default {
   components: {
@@ -71,6 +76,7 @@ export default {
       socketConection: null,
       message: "",
       response: "",
+      isTinking: false,
       messages: [
         {
           role: "assistant",
@@ -84,6 +90,7 @@ export default {
     isOpenChatTab() {
       return this.isOpen ? "h-96" : "h-14";
     },
+    ...mapGetters("authStore", ["isAuth", "user"]),
   },
   methods: {
     onClickSugestedMessage(message) {
@@ -97,7 +104,10 @@ export default {
         date: this.$moment().format("hh:mm"),
       });
       this.message = "";
-      this.socketConection.send(JSON.stringify({ messages: this.messages }));
+      this.isTinking = true;
+      this.socketConection.send(
+        JSON.stringify({ messages: this.messages, token: this.user.token })
+      );
       document.getElementById("bottomAnchor").scrollIntoView();
     },
   },
@@ -106,7 +116,7 @@ export default {
       let context = this;
 
       if (newValue) {
-        this.socketConection = new WebSocket("ws://localhost:3001");
+        this.socketConection = new WebSocket(process.env.VUE_APP_WEB_SOCKETS);
         this.socketConection.addEventListener("open", () => {
           context.isValidsocketConection = true;
         });
@@ -125,6 +135,8 @@ export default {
                 date: context.$moment().format("hh:mm"),
               });
               context.response = "";
+              document.getElementById("bottomAnchor").scrollIntoView();
+              context.isTinking = false;
               break;
             case "error":
               context.messages.push({
@@ -133,6 +145,8 @@ export default {
                 date: context.$moment().format("hh:mm"),
               });
               context.response = "";
+              document.getElementById("bottomAnchor").scrollIntoView();
+              context.isTinking = false;
               break;
           }
         });
