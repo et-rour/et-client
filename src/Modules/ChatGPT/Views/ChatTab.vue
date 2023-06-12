@@ -5,13 +5,18 @@
     <div
       class="w-full flex justify-between pr-2 pl-4 py-3 border items-center flex-grow-0 cursor-pointer"
       @click="isOpen = !isOpen">
-      <div
-        class="w-2 h-2 rounded-full mr-2 flex-shrink-0"
-        :class="isValidsocketConection ? 'bg-green-500' : 'bg-red-500'"></div>
       <div class="flex gap-3">
         <div
-          class="w-8 h-8 rounded-full flex-shrink-0 flex justify-center items-center bg-red-500">
-          <span class="text-white font-bold">Cl</span>
+          class="w-8 h-8 flex-shrink-0 flex justify-center items-center overflow-hidden relative">
+          <img
+            src="@/assets/images/elsa_ia.png"
+            alt="clara"
+            class="w-full h-full object-contain rounded-full" />
+          <div
+            class="w-3 h-3 rounded-full mr-1 flex-shrink-0 absolute -right-1 bottom-0"
+            :class="
+              isValidsocketConection ? 'bg-green-500' : 'bg-red-500'
+            "></div>
         </div>
         <p
           class="text-lg font-semibold text-black whitespace-nowrap flex-grow w-56 overflow-ellipsis overflow-hidden">
@@ -21,18 +26,32 @@
       </div>
       <font-awesome-icon icon="times" class="text-xl flex-shrink-0" />
     </div>
-    <div
-      class="w-full overflow-y-scroll flex-grow flex flex-col gap-4 px-4 pt-6 pb-1">
+    <div class="w-full overflow-y-scroll flex-grow flex flex-col gap-4">
+      <div class="w-full flex border-b-2 p-3">
+        <img
+          src="@/assets/images/elsa_ia.png"
+          alt="clara"
+          class="w-20 h-20 object-contain rounded-full border" />
+        <div class="flex flex-col justify-center text-sm">
+          <p>
+            <span class="font-bold">Elsa</span> ·&nbsp;
+            <span class="text-gray-400 font-normal">IA</span>
+          </p>
+          <p>Inteligencia Artificial</p>
+        </div>
+      </div>
       <ChatBubbleVue
         v-for="(message, index) in messages"
         :key="`message_${index}`"
         :message="message.content"
         :role="message.role"
+        class="mx-2"
         :date="message.date" />
 
       <ChatBubbleVue
         v-if="response"
         :message="response"
+        class="mx-2"
         :role="'assistant'"
         id="messageContainer" />
       <div class="w-0 h-0" id="bottomAnchor"></div>
