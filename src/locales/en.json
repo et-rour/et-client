@@ -192,14 +192,20 @@
     "send": "Send Message"
   },
   "terms": {
-    "title": "Terms and Conditions",
-    "gestsTitle": "Terms applicable to Guests",
-    "gestDescription": "Airbnb's mission is to build a world where anyone can feel at home wherever they go. There are millions of Listings to satisfy the desires of different travelers: from cabins to castles, even through cooking classes. To learn more about a Listing, you should refer to the description and photos, the Host's profile, and previous Guest reviews. If you have any questions, send the Host a message.",
-    "airbnbTitle": "2. Find and book with Airbnb.",
-    "airbnbDescription": "2.1 Search. Host Services can be searched by applying search parameters, such as Host Service type, destination, dates and number of guests. Filters can also be used to narrow down the search results. Search results are based on matching search parameters and other criteria. Factors such as price, availability, reviews, customer service and cancellation history, popularity, previous trips, Saved Listings, and Host requirements (e.g., minimum or maximum number of Hosts) are taken into account. of nights), among others. For more information about search results, see the Airbnb Help Center.",
-    "airbnbDescription2": "2.2 Reserve. By booking a Listing, you agree to pay all applicable charges, including the price of the Listing, applicable fees such as Airbnb service fee, fees paid offline, taxes, and any other items listed on the Listing. payment page (collectively referred to as<< Total Price>>. You further agree that Airbnb, through Airbnb Payments, may charge the Payment Method (defined in the Payment Terms) used to book the Listing for the purpose of charging the sums corresponding to a Claim for Damages (as defined in these Terms). Upon receipt of the reservation confirmation, a contract for Host Services (a << Reservation >>) is formalized directly between you and the Host. In addition to these Terms, You will be bound by all the terms of the Reservation and will have the obligation to comply with them, including the cancellation policy and any other rule, regulation, policy or requirement identified. stated in the Advertisement or during the payment process that are applicable to the Reservation. It is your responsibility to read and understand these rules, standards, policies and requirements before booking a Listing. Please note that some Hosts work with a co-host or as part of a team when offering their Host Services.",
-    "airbnbDescription3": "2.3 Accommodation Reservations. An Accommodation Reservation constitutes a limited license to access, use and stay in the Accommodation. The Host reserves the right to access the Accommodation during the Guest's stay, provided that: i) it is reasonably necessary, ii) it is permitted by the contract signed between you and the Host, and iii) it is permitted by applicable law. If you remain in the Accommodation past the check-out time, the Host may force you to leave by legal means, including the imposition of reasonable penalties. You may not exceed the maximum number of Guests allowed.",
-    "airbnbDescription4": "2.4 Reservations of Experiences and other Host Services. The Reservation of an Experience or other Host Service entitles you to participate, attend or enjoy that Host Service. You are responsible for confirming that you and any"
+    "title": "Privacy Policy",
+    "parragraph_0": "At Espacio Temporal, we are committed to protecting your privacy and your personal data. This Privacy Policy explains how we collect, use, disclose and protect the information we collect through our website. By using our site, you agree to the terms of this Privacy Policy.",
+    "parragraph_1": "1. Information We Collect",
+    "parragraph_1_1": "a. Personal Information: We may collect your name, email address, phone number and other personal information when you register on our website or contact us.\nb. Usage Information: We collect information about how you use our website, including the pages you visit, the length of your visit, and other usage statistics.\n",
+    "parragraph_2": "2. Use of Information",
+    "parragraph_2_1": "a. We use the information collected to provide you with the services you request, such as responding to your inquiries and scheduling visits to our properties.\nb. We may also use your information to improve our services, personalize your site experience, and send you promotional communications related to our services.\n",
+    "parragraph_3": "3. Disclosure of Information",
+    "parragraph_3_1": "a. We will not share your personal information with third parties, except as necessary to provide you with the services you request.\nb. We may share non-personally identifiable information for statistical and analysis purposes.\n",
+    "parragraph_4": "4. Protection of Information",
+    "parragraph_4_1": "a. We take reasonable steps to protect your personal information from loss, misuse or unauthorized access.\nb. We use physical, technical and administrative security measures to maintain the confidentiality of your data.\n",
+    "parragraph_5": "5. Links to Third Party Sites",
+    "parragraph_5_1": "Our website may contain links to third party websites. We are not responsible for the privacy practices of these sites and we encourage you to review their privacy policies.\n",
+    "parragraph_6": "6. Changes in the Privacy Policy",
+    "parragraph_6_1": "We reserve the right to modify this Privacy Policy at any time. Any changes will be effective from the date of their publication on our website.\nIf you have any questions or concerns about our Privacy Policy, please contact us through our customer service channels."
   },
   "cookies": {
     "banner": {
@@ -641,6 +647,7 @@
       "stripePriceId": "Price id in stripe",
       "startLease": "Beginning of the lease",
       "endLease": "end of lease",
+      "leaseRange": "Lease dates",
       "created": "I believe the",
       "zoneId": "Zone",
       "ownerId": "Owner",
