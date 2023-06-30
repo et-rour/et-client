@@ -192,14 +192,20 @@
     "send": "Enviar mensaje"
   },
   "terms": {
-    "title": "Términos y condiciones",
-    "gestsTitle": "Términos aplicables a los Huéspedes",
-    "gestDescription": "La misión de Airbnb es construir un mundo donde cualquier persona pueda sentirse en casa donde vaya.Hay millones de Anuncios para satisfacer los deseos de los distintos viajeros: desde cabañas hasta castillos,pasando incluso por clases de cocina. Para obtener más información sobre un Anuncio, debes consultar la descripción y las fotos,el perfil del Anfitrión y las evaluaciones de Huéspedes anteriores. Si tienes alguna pregunta, envíale un mensaje al Anfitrión.",
-    "airbnbTitle": "2. Buscar y reservar con Airbnb.",
-    "airbnbDescription": "2.1 Búsqueda. Se pueden buscar Servicios de Anfitrión aplicando parámetros de búsqueda, como el tipo de Servicio de Anfitrión, el destino, las fechas y el número de huéspedes. También se pueden utilizar filtros para acotar los resultados de la búsqueda. Los resultados de la búsqueda se basan en la coincidencia con los parámetros de búsqueda y en otros criterios. Se tienen en cuenta factores como el precio, la disponibilidad, las evaluaciones, el servicio ofrecido al clienteyel historial de cancelaciones, la popularidad, los viajes anteriores, los Anuncios guardados y los requisitos de los Anfitriones (p.ej., número mínimo o máximo de noches), entre otros. Para más información sobre los resultados de la búsqueda, consulta el Centro de ayuda de Airbnb.",
-    "airbnbDescription2": "2.2 Reserva. Al reservar un Anuncio, aceptas pagar todos los cargos correspondientes, incluidos el precio del Anuncio, las comisiones aplicables, como la comisión de servicio de Airbnb, las comisiones abonadas fuera de la plataforma en línea, los impuestos y cualquier otro concepto que figure en la página de pago (denominados, conjuntamente,<< Precio Total >>.Asimismo, aceptas que Airbnb, através de Airbnb Payments, podrá cargar al Método de Pago (definido en los Términos de Pago) utilizado para reservar el Anuncio con el objetivo de cobrar las sumas correspondientesauna Reclamación por Daños y Perjuicios (definida en estos Términos). Al recibir la confirmación de la reserva, queda formalizado un contrato de Servicios de Anfitrión (una << Reserva >>) directamente entre túyel Anfitrión. Además de los presentes Términos, te regirás por todos los términos de la Reserva y tendrás la obligación de cumplirlos, incluida la política de cancelación y cualquier otra regla,norma, política o requisito identificado en el Anuncio o durante el proceso de pago que resulten aplicables a la Reserva. Es tu responsabilidad leer y comprender estas normas, estándares, políticas y requisitos antes de reservar un Anuncio. Ten en cuenta que algunos Anfitriones trabajan con un coanfitrión o como parte de un equipo al ofrecer sus Servicios de Anfitrión.",
-    "airbnbDescription3": "2.3 Reservas de Alojamiento. Una Reserva de Alojamiento constituye una licencia limitada para acceder al Alojamiento,utilizarlo y pernoctar en él. El Anfitrión se reserva el derecho de acceder al Alojamiento durante la estancia del Huésped, siempre que: i)sea razonablemente necesario, ii)esté permitido por el contrato suscrito entre túyel Anfitrión, y iii)lo permita la legislación aplicable. Si permaneces en el Alojamiento una vez transcurrida la hora de salida, el Anfitrión podrá obligarte a salir por medios legales, incluida la imposición de penalizaciones razonables. No podrás exceder el número máximo de Huéspedes permitido.",
-    "airbnbDescription4": "2.4 Reservas de Experienciasyotros Servicios de Anfitrión.La Reserva de una Experiencia u otro Servicio de Anfitrión te da derecho a participar, asistir o disfrutar de ese Servicio de Anfitrión. Eres responsable de confirmar que tanto tú como cualquier"
+    "title": "Política de Privacidad",
+    "parragraph_0": "En Espacio Temporal, nos comprometemos a proteger tu privacidad y tus datos personales. Esta Política de Privacidad explica cómo recopilamos, utilizamos, divulgamos y protegemos la información que recopilamos a través de nuestro sitio web. Al utilizar nuestro sitio, aceptas los términos de esta Política de Privacidad.",
+    "parragraph_1": "1. Información que Recopilamos",
+    "parragraph_1_1": "a. Información Personal: Podemos recopilar tu nombre, dirección de correo electrónico, número de teléfono y otra información personal cuando te registras en nuestro sitio web o nos contactas.\nb. Información de Uso: Recopilamos información sobre cómo utilizas nuestro sitio web, incluyendo las páginas que visitas, la duración de tu visita y otras estadísticas de uso.\n",
+    "parragraph_2": "2. Uso de la Información",
+    "parragraph_2_1": "a. Utilizamos la información recopilada para proporcionarte los servicios que solicitas, como responder a tus consultas y agendar visitas a nuestras propiedades.\nb. También podemos utilizar tu información para mejorar nuestros servicios, personalizar tu experiencia en el sitio y enviarte comunicaciones promocionales relacionadas con nuestros servicios.\n",
+    "parragraph_3": "3. Divulgación de la Información",
+    "parragraph_3_1": "a. No compartiremos tu información personal con terceros, excepto cuando sea necesario para proporcionarte los servicios que solicitas.\nb. Podemos compartir información no identificable de forma personal para fines estadísticos y de análisis.\n",
+    "parragraph_4": "4. Protección de la Información",
+    "parragraph_4_1": "a. Tomamos medidas razonables para proteger tu información personal contra pérdida, uso indebido o acceso no autorizado.\nb. Utilizamos medidas de seguridad físicas, técnicas y administrativas para mantener la confidencialidad de tus datos.\n",
+    "parragraph_5": "5. Enlaces a Sitios de Terceros",
+    "parragraph_5_1": "Nuestro sitio web puede contener enlaces a sitios web de terceros. No somos responsables de las prácticas de privacidad de estos sitios y te recomendamos revisar sus políticas de privacidad.\n",
+    "parragraph_6": "6. Cambios en la Política de Privacidad",
+    "parragraph_6_1": "Nos reservamos el derecho de modificar esta Política de Privacidad en cualquier momento. Cualquier cambio será efectivo desde la fecha de su publicación en nuestro sitio web.\nSi tienes alguna pregunta o inquietud sobre nuestra Política de Privacidad, por favor contáctanos a través de nuestros canales de atención al cliente."
   },
   "cookies": {
     "banner": {
@@ -640,6 +646,7 @@
       "stripePriceId": "Id del precio en stripe",
       "startLease": "Inicio del arriendo",
       "endLease": "Fin del arriendo",
+      "leaseRange": "Tiempo del arriendo",
       "created": "Se creo el",
       "zoneId": "Zona",
       "ownerId": "Dueño",
