@@ -5,7 +5,7 @@
       <router-view v-if="!loadingApp"></router-view>
       <a
         target="_blank"
-        :href="`https://wa.me/+56921811458/?text=Hola, tengo una consulta...`"
+        :href="`https://wa.me/+56957670724/?text=Hola, tengo una consulta...`"
         class="w-16 h-16 fixed bottom-28 right-12 lg:bottom-16 lg:right-16 z-40 cursor-pointer"
       >
         <img
